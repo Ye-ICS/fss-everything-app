@@ -4,8 +4,8 @@ package main.java.com.fss.everythingapp.simulations;
  * encapsulates common vector operations : addition, subtraction, scaling, normalization, dot product and copying.
  */
 public class Vector2D {
-    private double x; // x component
-    private double y; // y component
+    public double x; // x component
+    public double y; // y component
 
 
     // Constructs a new vector with the given x and y components
