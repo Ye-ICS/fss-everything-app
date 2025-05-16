@@ -6,14 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DateManager {
-    ArrayList<DateManager> eventList = new ArrayList<DateManager>();
 
-    public static void main(String[] args) throws FileNotFoundException {
-        loadEvents();
-
-    }
-
-    static void loadEvents() throws FileNotFoundException {
+    static void loadDates() throws FileNotFoundException {
         Scanner scanner = new Scanner("DateList");
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -50,5 +44,15 @@ public class DateManager {
 
         }
         scanner.close();
+    }
+
+    static void createDate() { // Basic date creation, user selects whether to create an event or task
+    }
+
+    static void shareDate() { // User can share dates to other users
+
+    }
+
+    static void saveToList() { // Saves date information to DateList.txt
     }
 }
