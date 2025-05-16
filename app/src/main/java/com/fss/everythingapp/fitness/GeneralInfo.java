@@ -5,7 +5,7 @@ public class GeneralInfo {
     private int age;
     private double height; // in cm
     private double weight; // in kg
-    private boolean gender;
-    private String activityLevel; 
+    private boolean gender; // true is male, female is false
+    private String activityLevel; // not active, active, super active
 
 }

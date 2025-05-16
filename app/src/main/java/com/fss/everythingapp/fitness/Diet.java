@@ -1,11 +1,11 @@
 package com.fss.everythingapp.fitness;
 public class Diet {
-    double calories;
-    double protein;
-    double carbs;
-    double bodyfat;
-    double fats;
-    double cholesterol;
+    private double calories;
+    private double protein;
+    private double carbs;
+    private double bodyfat;
+    private double fats;
+    private double cholesterol;
 
     
 }

@@ -1,7 +1,7 @@
 package com.fss.everythingapp.fitness;
 public class Workout {
-    boolean worksOut;
-    String physique;
-    String desiredPhysique;
+    private boolean worksOut;
+    private String physique;
+    private String desiredPhysique;
     
 }
