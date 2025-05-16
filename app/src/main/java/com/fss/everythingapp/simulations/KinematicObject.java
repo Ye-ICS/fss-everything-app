@@ -13,7 +13,9 @@ public class KinematicObject {
     public boolean isStatic; //wether the object is moving or not
 
 
-    // Constructor to initialize the kinematic object with position, velocity, acceleration, mass and radius
+    /**
+     * Constructor to initialize the kinematic object with position, velocity, acceleration, mass and radius
+     */
     public KinematicObject (double x, double y, double radius, double mass, boolean isStatic) {
         this.position = new Vector2D(x, y);
         this.velocity = new Vector2D(0, 0);
@@ -35,20 +37,22 @@ public class KinematicObject {
 
     // Updates the object's position and velocity based on its current acceleration and time step
     public void update(double dt) {
-        if (!isStatic) {
-            // v = v + a * dt
-            Vector2D dv = acceleration.copy();
-            dv.multiply(dt);
-            velocity.add(dv);
-
-            // p = p + v * dt
-            Vector2D dp = velocity.copy();
-            dp.multiply(dt);
-            position.add(dp);
-
-            // reset acceleration for next frame
-            this.acceleration = new Vector2D(0, 0);
+        if (isStatic) {
+            return;
         }
+
+        // v = v + a * dt
+        Vector2D dv = acceleration.copy();
+        dv.multiply(dt);
+        velocity.add(dv);
+
+        // p = p + v * dt
+        Vector2D dp = velocity.copy();
+        dp.multiply(dt);
+        position.add(dp);
+
+        // reset acceleration for next frame
+        this.acceleration = new Vector2D(0, 0);
     }
 
     // resets the object's acceleration to zero

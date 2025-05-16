@@ -58,8 +58,5 @@ public class CollisionHandler {
     }
 
     
-    @Override
-    public String toString() {
-        return "CollisionHandler[]";
-    }
+
 }
