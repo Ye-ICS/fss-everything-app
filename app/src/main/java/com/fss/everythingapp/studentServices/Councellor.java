@@ -1,5 +1,7 @@
 package com.fss.everythingapp.studentservices;
 
-public class Councellor {
-    
+class Councellor {
+    private String name;
+    private String email;
+
 }

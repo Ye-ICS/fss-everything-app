@@ -1,5 +1,5 @@
 package com.fss.everythingapp.studentservices;
 
-public class AppointmentManager {
+public class AppointmentController {
     
 }
