@@ -1,4 +1,4 @@
-public ProjectileMotion {
+public class ProjectileMotion {
     List<KinematicObject> projectiles;
     Vector2D gravity;
 
