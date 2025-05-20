@@ -1,4 +1,4 @@
-package main.java.com.fss.everythingapp.simulations;
+package com.fss.everythingapp.simulations;
 /**
  * Simple 2d vector class for physics calculations.
  * encapsulates common vector operations : addition, subtraction, scaling, normalization, dot product and copying.
@@ -27,7 +27,7 @@ public class Vector2D {
     }
 
     //Multiplies this vector by a scalar
-    public void scale(double scalar) {
+    public void multiply(double scalar) {
         this.x *= scalar;
         this.y *= scalar;
     }
