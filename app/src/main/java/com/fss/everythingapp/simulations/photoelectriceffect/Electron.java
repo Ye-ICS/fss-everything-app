@@ -1,3 +1,6 @@
+package com.fss.everythingapp.simulations.photoelectriceffect;
+import com.fss.everythingapp.simulations.Vector2D;
+
 public class Electron {
     double kineticEnergy;
     
@@ -5,7 +8,7 @@ public class Electron {
 
     }
 
-    calculateDeBroglieWavelength() {
-        
+    double calculateDeBroglieWavelength() {
+        return -1;    
     }
 }

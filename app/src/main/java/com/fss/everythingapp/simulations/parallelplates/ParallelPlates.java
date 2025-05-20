@@ -1,17 +1,18 @@
+package com.fss.everythingapp.simulations.parallelplates;
+import java.util.List;
+
 public class ParallelPlates {
     double plateSeparation;
     double voltage;
-    List<ChargedParticle> particles;
 
-    setPlateVoltage(double voltage) {
-
-    }
-
-    addChargedParticle(ChargedParticle particle) {
+    void setPlateVoltage(double voltage) {
 
     }
 
-    calculateElectricField() {
-        
+    void addChargedParticle() {
+
+    }
+
+    void calculateElectricField() {
     }
 }

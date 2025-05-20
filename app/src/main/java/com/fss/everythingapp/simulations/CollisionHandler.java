@@ -1,4 +1,4 @@
-package simulations;
+package com.fss.everythingapp.simulations;
 
 /**
  * CollisionHandler manages collision detection and resolution
