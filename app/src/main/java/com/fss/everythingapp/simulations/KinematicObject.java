@@ -1,4 +1,4 @@
-package main.java.com.fss.everythingapp.simulations;
+package com.fss.everythingapp.simulations;
 /**
  * Represents a kinematic object in a 2D space with kinematic properties.
  * Encapsulates position, velocity, acceleration, mass and radius for collisions.
