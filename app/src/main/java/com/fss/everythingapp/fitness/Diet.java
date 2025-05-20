@@ -8,4 +8,8 @@ public class Diet {
     private double cholesterol;
 
     
+
+    
+
+    
 }

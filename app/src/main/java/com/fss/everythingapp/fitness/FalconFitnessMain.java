@@ -1,13 +1,17 @@
 package com.fss.everythingapp.fitness;
 import javafx.application.Application;
+import java.util.Scanner;
 
 public class FalconFitnessMain {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        boolean questionaire = false;
         
-        while (running) {
+        if (questionaire == false) {
+            
+        while (running && questionaire == true) {
             System.out.println("Welcome to Falcon Fitness!");
             System.out.println("1. Workout Manager");
             System.out.println("2. Sleep Manager");
@@ -31,6 +35,8 @@ public class FalconFitnessMain {
             }
         }
     }
+}
+
 
     
 }
