@@ -9,13 +9,15 @@ public class Calendar {
     public static void main(String[] args) throws FileNotFoundException {
     }
 
-    public ArrayList<DateManager> getDateList() {
-        return dateList;
+    static void monthView() {
     }
 
-    public void createDate() {
+    static void weekView() {
     }
 
-    public void editDate() {
+    static void dayView() {
+    }
+
+    static void exit() {
     }
 }
