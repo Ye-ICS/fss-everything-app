@@ -1,17 +1,25 @@
+package com.fss.everythingapp.simulations.momentum;
+
+import java.util.List;
+
+import com.fss.everythingapp.simulations.CollisionHandler;
+import com.fss.everythingapp.simulations.KinematicObject;
+import com.fss.everythingapp.simulations.Vector2D;
+
 public class Momentum {
     List<KinematicObject> objecjts;
     CollisionHandler collisionHandler;
 
-    addObject(KinematicObject obj) {
+     void addObject(KinematicObject obj) {
         
     }
     
-    removeObject(KinematicObject obj) {
+    void removeObject(KinematicObject obj) {
 
     }
 
-    calculateTotalMomentum() {
-        
+    Vector2D calculateVector() {
+        return null;
     }
 
 }

@@ -44,6 +44,12 @@ public class Vector2D {
         }
     }
 
+    public Vector2D multiply(double scalar) {
+        this.x *= scalar;
+        this.y *= scalar;
+        return this;
+    }
+
     //returns magnitude of this vector (length)
     public double magnitude() {
         return Math.sqrt(x * x + y * y);

@@ -1,13 +1,18 @@
+package com.fss.everythingapp.simulations.photoelectriceffect;
+import java.util.List;
+
+
 public class Photoelectric {
     double workFunction;
     double lightIntensity;
     double lightFrequency;
     List<Electron> electrons;
 
-    setLightProperties(double intensity, double frequency) {
+    void setLightProperties(double intensity, double frequency) {
     }
-    calculateElectronEnergy() {
+    double calculateElectronEnergy() {
+        return -1;
     }
-    emitElectrions() {
+    void emitElectrions() {
     }
 }

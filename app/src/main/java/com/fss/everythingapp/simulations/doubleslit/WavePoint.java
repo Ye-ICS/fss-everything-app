@@ -1,12 +1,13 @@
+package com.fss.everythingapp.simulations.doubleslit;
 public class WavePoint {
    double amplitude;
    double phase;
    double frequency;
    
-   update(double deltaTime) {
+   void update(double deltaTime) {
 
    }
-   superposition(WavePoint other) {
+   void superposition(WavePoint other) {
     
    }
 }
