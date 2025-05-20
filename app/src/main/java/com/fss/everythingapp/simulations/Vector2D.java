@@ -1,4 +1,4 @@
-package main.java.com.fss.everythingapp.simulations;
+package com.fss.everythingapp.simulations;
 /**
  * Simple 2d vector class for physics calculations.
  * encapsulates common vector operations : addition, subtraction, scaling, normalization, dot product and copying.
@@ -42,6 +42,12 @@ public class Vector2D {
             System.out.println("Error: Division by zero");
             throw new ArithmeticException("Division by zero");
         }
+    }
+
+    public Vector2D multiply(double scalar) {
+        this.x *= scalar;
+        this.y *= scalar;
+        return this;
     }
 
     //returns magnitude of this vector (length)

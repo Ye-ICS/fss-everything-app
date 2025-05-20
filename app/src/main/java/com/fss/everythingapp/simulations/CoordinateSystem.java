@@ -1,4 +1,4 @@
-package main.java.com.fss.everythingapp.simulations;
+package com.fss.everythingapp.simulations;
 
 /**
  * CoordinateSystem handles conversion between simulation (center-origin) coordinates
