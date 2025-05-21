@@ -1,15 +1,16 @@
-public class Main {
-    public static void main(String[] args) {
-        // Create a new simulation
-        MomentumSimulation simulation = new MomentumSimulation();
 
-        // Set initial conditions
-        simulation.setInitialConditions(5.0, 10.0);
+// public class Main {
+//     public static void main(String[] args) {
+//         // Create a new simulation
+//         MomentumSimulation simulation = new MomentumSimulation();
 
-        // Run the simulation
-        simulation.run();
+//         // Set initial conditions
+//         simulation.setInitialConditions(5.0, 10.0);
 
-        // Display the results
-        simulation.displayResults();
-    }
-}
+//         // Run the simulation
+//         simulation.run();
+
+//         // Display the results
+//         simulation.displayResults();
+//     }
+// }

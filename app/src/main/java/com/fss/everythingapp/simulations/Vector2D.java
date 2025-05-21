@@ -27,7 +27,7 @@ public class Vector2D {
     }
 
     //Multiplies this vector by a scalar
-    public void multiply(double scalar) {
+    public void scale(double scalar) {
         this.x *= scalar;
         this.y *= scalar;
     }
