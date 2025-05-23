@@ -10,7 +10,7 @@ public class FalconFitnessMain {
         boolean questionaire = false;
         
         if (questionaire == false) {
-            
+            // run questionaire with UI when finished
         while (running && questionaire == true) {
             System.out.println("Welcome to Falcon Fitness!");
             System.out.println("1. Workout Manager");
