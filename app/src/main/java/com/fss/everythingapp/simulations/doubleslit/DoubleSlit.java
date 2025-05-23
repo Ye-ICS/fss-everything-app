@@ -23,6 +23,5 @@ public class DoubleSlit {
 
     void calculateInterferencePattern() {
 
-    }
-    
+    }   
 }
