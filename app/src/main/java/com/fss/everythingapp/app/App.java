@@ -4,6 +4,9 @@
 package com.fss.everythingapp.app;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -14,7 +17,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("FSS App");
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/projectile_motion.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("Projectile Motion Visualizer");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

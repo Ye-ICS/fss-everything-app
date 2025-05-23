@@ -82,4 +82,16 @@ public class CoordinateSystem {
             screenWidth, screenHeight, pixelsPerUnit
         );
     }
+
+    public double getScreenWidth() {
+        return screenWidth;
+    }
+
+    public double getScreenHeight() {
+        return screenHeight;
+    }
+
+    public double getPixelsPerUnit() {
+        return pixelsPerUnit;
+    }
 }
