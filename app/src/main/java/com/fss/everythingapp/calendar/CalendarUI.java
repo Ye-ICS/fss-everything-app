@@ -3,7 +3,7 @@ package com.fss.everythingapp.calendar;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class Calendar {
+public class CalendarUI {
     ArrayList<DateManager> dateList = new ArrayList<DateManager>();
 
     public static void main(String[] args) throws FileNotFoundException {
