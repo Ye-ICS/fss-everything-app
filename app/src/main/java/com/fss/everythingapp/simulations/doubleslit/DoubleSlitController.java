@@ -31,6 +31,45 @@ public class DoubleSlitController{
     }
     
     private void setupSliders() {
+       // Wavelength slider (400-750 nm)
+       wavelengthSlider.setMin(400);
+       wavelengthSlider.setMax(750);
+       wavelengthSlider.setValue(400);
+       wavelengthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+           updateWavelengthLabel();
+           updateSimulation();
+       });
+       
+       // Slit separation slider (0-5 mm)
+       separationSlider.setMin(0);
+       separationSlider.setMax(5.0);
+       separationSlider.setValue(0);
+       separationSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+           updateSeparationLabel();
+           updateSimulation();
+       });
+       
+       // Slit width slider (0-1 mm)
+       widthSlider.setMin(0);
+       widthSlider.setMax(1.0);
+       widthSlider.setValue(0);
+       widthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+           updateWidthLabel();
+           updateSimulation();
+       });
+    }
+
+    private void updateWavelengthLabel() {
+        
+    }
+    private void updateSeparationLabel() {
+        
+    }
+    private void updateWidthLabel() {
+        
+    }
+
+    private void updateSimulation() {
        
     }
     
