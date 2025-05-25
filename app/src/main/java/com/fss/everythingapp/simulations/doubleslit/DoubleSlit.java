@@ -4,24 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoubleSlit {
-    private int slitCount;
-    private double slitSeparation;
-    private double slitWidth=0.001; // Default slit width in meters
     private double wavelength;
-    private double screenDistance;
+    private double slitSeparation;
+    private double slitWidth;
+    private double screenDistance = 2.0; // meters
     
     public DoubleSlit() {
-
+        // Default values
+        wavelength = 450e-9; // 500 nm
+        slitSeparation = 1e-3; // 1 mm
+        slitWidth = 0.1e-3; // 0.1 mm
     }
-
-    void setSlitProperties(int count, double separation, double width) {
-
-    }
+    
     void setWavelength(double wavelength) {
-
+        this.wavelength = wavelength;
     }
-
-    void calculateInterferencePattern() {
-
-    }   
+    
+    void setSlitSeparation(double separation) {
+        this.slitSeparation = separation;
+    }
+    
+    void setSlitWidth(double width) {
+        this.slitWidth = width;
+    }
+    
+    public double getWavelength() { return wavelength; }
+    public double getSlitSeparation() { return slitSeparation; }
+    public double getSlitWidth() { return slitWidth; }
 }
