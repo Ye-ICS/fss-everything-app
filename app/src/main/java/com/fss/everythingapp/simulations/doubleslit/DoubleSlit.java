@@ -8,10 +8,12 @@ public class DoubleSlit {
     private double slitSeparation;
     private double slitWidth;
     private double screenDistance = 2.0; // meters
+    private List<Double> interferencePattern;
     
     public DoubleSlit() {
+        interferencePattern = new ArrayList<>();
         // Default values
-        wavelength = 450e-9; // 500 nm
+        wavelength = 450e-9; // 450 nm
         slitSeparation = 1e-3; // 1 mm
         slitWidth = 0.1e-3; // 0.1 mm
     }
@@ -52,6 +54,37 @@ public class DoubleSlit {
     
         // The observed intensity is the product of the single slit area and the double slit pattern
         return (singleSlitFactor * interferencePattern);
+    }
+
+    public void calculateInterferencePattern() {
+
+        // Number of points (samples) across the screen to calculate intensity for
+        int numPoints = 500;
+
+        // Physical width of the screen (meters) where the pattern is observed
+        double screenWidth = 0.02; // 2 cm
+
+        // Distance between each sample point on the screen
+        double distanceBetweenPoints = screenWidth / numPoints;
+
+        // Loop over each point on the screen from left edge (-screenWidth/2)
+        // to right edge (+screenWidth/2)
+        for (int i = 0; i < numPoints; i++) {
+            // Calculate the y-position on the screen for this sample
+            // y = 0 is the center, negative is left, positive is right
+            double y = -screenWidth / 2 + i * distanceBetweenPoints;
+
+            // Calculate the intensity at this y-position using the double slit formula
+            // This includes both diffraction (single slit) and interference (double slit) effects
+            double intensity = calculateDoubleSlitIntensity(y);
+
+            // Store the calculated intensity in the pattern list
+            interferencePattern.add(intensity);
+        }
+    }
+    
+    public List<Double> getInterferencePattern() {
+        return new ArrayList<>(interferencePattern);
     }
 
     public double getWavelength() { return wavelength; }
