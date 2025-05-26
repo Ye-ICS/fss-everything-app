@@ -7,7 +7,6 @@ import com.fss.everythingapp.simulations.Vector2D;
 
 public class ProjectileMotion {
     List<KinematicObject> projectiles;
-    Vector2D gravity;
     private double v0;
     private double angle;
     private double height;
@@ -47,8 +46,12 @@ public class ProjectileMotion {
 
     }
 
-    void launchProjectile(Vector2D position, Vector2D velocity) {
+    Vector2D launchProjectile(double height, double speed, double gravity, double angle, double time) {
+        // Calculate the position of the projectile at a given time
         
+            double x =  + speed * Math.cos(Math.toRadians(angle)) * time;
+            double y =  speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
+        return new Vector2D(x, y);
     }
 
     void setGravity(Vector2D gravity) {

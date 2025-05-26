@@ -66,8 +66,6 @@ public class ProjectileController implements Initializable {
             simulation.setHeight(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
-            
-            drawAxes(); //to clear the canvas before redrawing
 
             //draw the projectile at height
             drawProjectile(50, 470 - 3.8*heightSlider.getValue()); // Initial drawing of the projectile
@@ -137,6 +135,7 @@ public class ProjectileController implements Initializable {
 
     public void drawProjectile(double x, double y) {
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
+        drawAxes(); //to clear the canvas before redrawing
         gc.setFill(Color.RED);
         gc.fillOval(x, y, 30, 30); //Drawing circle at 
     }
@@ -157,6 +156,15 @@ public class ProjectileController implements Initializable {
         System.out.println(projectileName.getText());
         // In progress
     }
+    public void shootProjectile() {
+        for(int i = 0; i < 3; i += 0.1)
+        {
+            double x = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), i).getX();
+            double y = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), i).getY();
+            drawProjectile(50 + x, 470 - y); // Adjusted for canvas origin
+        }
+        }
 }
+
     
    
