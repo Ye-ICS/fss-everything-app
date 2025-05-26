@@ -9,6 +9,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -64,6 +66,11 @@ public class ProjectileController implements Initializable {
             simulation.setHeight(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
+            
+            drawAxes(); //to clear the canvas before redrawing
+
+            //draw the projectile at height
+            drawProjectile(50, 470 - 3.8*heightSlider.getValue()); // Initial drawing of the projectile
             // Update logic later
         });
         accelerationSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -106,11 +113,11 @@ public class ProjectileController implements Initializable {
     gc.setStroke(javafx.scene.paint.Color.BLACK);
     gc.setLineWidth(1.5);
     
-    // Draw X axis
-    gc.strokeLine(50, height - 50, width - 50, height - 50);
+    //Draw X axis
+    gc.strokeLine(50, height - 500, width - 50, height - 500);
     
-    // Draw Y axis
-    gc.strokeLine(50, height - 50, 50, 50);
+    //Draw Y axis
+    gc.strokeLine(50, height - 500, 50, 50);
     
     double arrowSize = 5;
 
@@ -124,6 +131,14 @@ public class ProjectileController implements Initializable {
     double[] yArrowY = {50 + arrowSize, 50 + arrowSize, 50};
     gc.fillPolygon(yArrowX, yArrowY, 3);
 
+
+
+    }
+
+    public void drawProjectile(double x, double y) {
+        GraphicsContext gc = gridCanvas.getGraphicsContext2D();
+        gc.setFill(Color.RED);
+        gc.fillOval(x, y, 30, 30); //Drawing circle at 
     }
 
     public void drawGrid(){
