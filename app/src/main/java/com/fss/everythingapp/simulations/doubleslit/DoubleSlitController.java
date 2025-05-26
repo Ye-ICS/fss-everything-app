@@ -127,7 +127,35 @@ public class DoubleSlitController{
         }
     }
     
-    Color wavelengthToColor(double wavelength, double intensity) {
-        return null;
+    Color wavelengthToColor(double wl, double intensity) {
+        double r = 0;
+        double g = 0;
+        double b = 0;
+        
+        if (wl >= 400 && wl < 440) {
+            r = -(wl - 440) / (440 - 400);
+            b = 1.0;
+        } else if (wl >= 440 && wl < 490) {
+            g = (wl - 440) / (490 - 440);
+            b = 1.0;
+        } else if (wl >= 490 && wl < 510) {
+            g = 1.0;
+            b = -(wl - 510) / (510 - 490);
+        } else if (wl >= 510 && wl < 580) {
+            r = (wl - 510) / (580 - 510);
+            g = 1.0;
+        } else if (wl >= 580 && wl < 645) {
+            r = 1.0;
+            g = -(wl - 645) / (645 - 580);
+        } else if (wl >= 645 && wl <= 700) {
+            r = 1.0;
+        }
+        
+        // Apply intensity
+        r *= intensity;
+        g *= intensity;
+        b *= intensity;
+        
+        return Color.color(r,g,b);
     }
 }

@@ -13,9 +13,9 @@ public class DoubleSlit {
     public DoubleSlit() {
         interferencePattern = new ArrayList<>();
         // Default values
-        wavelength = 450e-9; // 450 nm
-        slitSeparation = 1e-3; // 1 mm
-        slitWidth = 0.1e-3; // 0.1 mm
+        wavelength = 400e-9; // 400 nm
+        slitSeparation = 0.0;
+        slitWidth = 0.0;
     }
 
     public void setSlitProperties(double separation, double width) {
@@ -25,14 +25,6 @@ public class DoubleSlit {
 
     void setWavelength(double wavelength) {
         this.wavelength = wavelength;
-    }
-    
-    void setSlitSeparation(double separation) {
-        this.slitSeparation = separation;
-    }
-    
-    void setSlitWidth(double width) {
-        this.slitWidth = width;
     }
     
     double calculateDoubleSlitIntensity(double y) {
