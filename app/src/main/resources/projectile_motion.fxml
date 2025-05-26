@@ -146,5 +146,6 @@
             </TitledPane>
         </panes>
       </Accordion>
+      <Button fx:id="launch" layoutX="1854.0" layoutY="1041.0" mnemonicParsing="false" text="Button" AnchorPane.bottomAnchor="1054.4" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
