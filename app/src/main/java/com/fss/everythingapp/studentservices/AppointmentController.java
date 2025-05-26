@@ -4,7 +4,9 @@ public class AppointmentController {
     static String time;
     static String name;
     static int grade;
-    private void enterBtn(){
 
+    private void enterBtnPressed() {
+        
     }
+
 }
