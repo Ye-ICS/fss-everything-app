@@ -54,6 +54,7 @@ public class DoubleSlit {
     }
 
     public void calculateInterferencePattern() {
+        interferencePattern.clear();
 
         // Number of points (samples) across the screen to calculate intensity for
         int numPoints = 500;

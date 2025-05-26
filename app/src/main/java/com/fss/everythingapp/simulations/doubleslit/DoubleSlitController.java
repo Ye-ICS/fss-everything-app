@@ -147,7 +147,7 @@ public class DoubleSlitController{
         } else if (wl >= 580 && wl < 645) {
             r = 1.0;
             g = -(wl - 645) / (645 - 580);
-        } else if (wl >= 645 && wl <= 700) {
+        } else if (wl >= 645 && wl <= 750) {
             r = 1.0;
         }
         
