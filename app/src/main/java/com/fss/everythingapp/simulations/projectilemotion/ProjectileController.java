@@ -90,6 +90,7 @@ public class ProjectileController implements Initializable {
         drawAxes();
 
         projectileNameButton.setOnAction(e -> {
+            shootProjectile(); // Call the shoot method when the button is pressed
             if (projectileName != null) {
                 nameProjectile();
             }
@@ -157,13 +158,30 @@ public class ProjectileController implements Initializable {
         // In progress
     }
     public void shootProjectile() {
-        for(int i = 0; i < 3; i += 0.1)
-        {
-            double x = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), i).getX();
-            double y = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), i).getY();
-            drawProjectile(50 + x, 470 - y); // Adjusted for canvas origin
+        /*
+         * Originally we (maxim and masa) were going to use a while loop, then thread.sleep for each thing
+         * for some reason though, it didn't work, so alternatively we are using a timeline
+         * This SHOULD create a smooth animation of the projec motion
+         */
+
+        javafx.animation.Timeline timeline = new javafx.animation.Timeline();
+        double totalTime = simulation.calculateTime(); //Get total time from projectile motion simulation
+        double dt = 0.1; //How often the projectile is updated
+        int frames = (int) (totalTime / dt); //calcs how many frames will be in this animation
+        for (int i = 0; i <= frames; i++) { 
+            double time = i * dt;
+            javafx.animation.KeyFrame keyFrame = new javafx.animation.KeyFrame( //Creates a keyframe for each frame
+                javafx.util.Duration.millis(i * (10 / animationSpeedSlider.getValue())), //Duration of each frame, multiplied by the animation speed slider value
+                event -> { 
+                    double x = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX();
+                    double y = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY();
+                    drawProjectile(50 + x, 470 - y);
+                }
+            );
+            timeline.getKeyFrames().add(keyFrame); // adds the keyframe to the timeline to thenn be plaued
         }
-        }
+        timeline.play(); // Starts the animation timeline
+    }
 }
 
     
