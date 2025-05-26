@@ -1,5 +1,8 @@
 package com.fss.everythingapp.simulations.doubleslit;
 
+import java.util.List;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -27,10 +30,10 @@ public class DoubleSlitController{
         gc = simulationCanvas.getGraphicsContext2D();
 
         setupSliders();
-        updateDisplay();
+        updateSimulation();
     }
     
-    private void setupSliders() {
+    void setupSliders() {
        // Wavelength slider (400-750 nm)
        wavelengthSlider.setMin(400);
        wavelengthSlider.setMax(750);
@@ -59,21 +62,72 @@ public class DoubleSlitController{
        });
     }
 
-    private void updateWavelengthLabel() {
+    void updateWavelengthLabel() {
         
     }
-    private void updateSeparationLabel() {
+    void updateSeparationLabel() {
         
     }
-    private void updateWidthLabel() {
+    void updateWidthLabel() {
         
     }
 
-    private void updateSimulation() {
-       
+    void updateSimulation() {
+        Platform.runLater(() -> {
+            // Set simulation parameters directly
+            simulation.setWavelength(wavelengthSlider.getValue() * 1e-9);
+            simulation.setSlitProperties(
+                separationSlider.getValue() * 1e-3,
+                widthSlider.getValue() * 1e-3
+            );
+            
+            simulation.calculateInterferencePattern();
+            drawInterferencePattern();
+        });
     }
     
-    private void updateDisplay() {
-        simulation.calculateInterferencePattern();
+    void drawInterferencePattern() {
+        double canvasWidth = simulationCanvas.getWidth();
+        double canvasHeight = simulationCanvas.getHeight();
+        
+        // Clear the entire canvas with a black background
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, canvasWidth, canvasHeight);
+        
+        // Retrieve the calculated interference pattern (intensity values)
+        List<Double> pattern = simulation.getInterferencePattern();
+        
+        // Find the maximum intensity value
+        double maxIntensity = 0.0;
+        for (double value : pattern) {
+            if (value > maxIntensity) {
+                maxIntensity = value;
+            }
+        }
+        // Prevent division by zero if all intensities are zero
+        if (maxIntensity == 0) { maxIntensity = 1.0; }
+        
+        // Calculate the width of each vertical bar (pixel) to draw
+        double pixelWidth = canvasWidth / pattern.size();
+        
+        // Loop through each point in the pattern and draw a colored bar
+        for (int i = 0; i < pattern.size(); i++) {
+            // Normalize intensity to a value between 0 and 1
+            double intensity = pattern.get(i) / maxIntensity;
+
+            // Get the color corresponding to the current wavelength and intensity
+            Color color = wavelengthToColor(wavelengthSlider.getValue(), intensity);
+            gc.setFill(color);
+            
+            // Calculate the x position for this bar
+            double x = i * pixelWidth;
+
+            // Draw a vertical rectangle representing the intensity at this point
+            gc.fillRect(x, 0, pixelWidth + 1, canvasHeight);
+        }
+    }
+    
+    Color wavelengthToColor(double wavelength, double intensity) {
+        return null;
     }
 }

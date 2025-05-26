@@ -17,7 +17,12 @@ public class DoubleSlit {
         slitSeparation = 1e-3; // 1 mm
         slitWidth = 0.1e-3; // 0.1 mm
     }
-    
+
+    public void setSlitProperties(double separation, double width) {
+        slitSeparation = separation;
+        slitWidth = width;
+    }
+
     void setWavelength(double wavelength) {
         this.wavelength = wavelength;
     }
@@ -87,7 +92,7 @@ public class DoubleSlit {
         return new ArrayList<>(interferencePattern);
     }
 
-    public double getWavelength() { return wavelength; }
-    public double getSlitSeparation() { return slitSeparation; }
-    public double getSlitWidth() { return slitWidth; }
+    double getWavelength() { return wavelength; }
+    double getSlitSeparation() { return slitSeparation; }
+    double getSlitWidth() { return slitWidth; }
 }
