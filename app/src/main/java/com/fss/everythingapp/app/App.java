@@ -3,7 +3,13 @@
  */
 package com.fss.everythingapp.app;
 
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -14,6 +20,21 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Example.fxml"));
+        MainMenuController controller = new MainMenuController();
+        fxmlLoader.setController(controller);
+        Parent view = null;
+        
+        try {
+            view = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            view = new Label("A fatal error has occurred.");
+        }
+
+        Scene scene = new Scene(view);
+        stage.setScene(scene);
+
         stage.setTitle("FSS App");
         stage.show();
     }
