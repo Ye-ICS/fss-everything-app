@@ -45,6 +45,9 @@ public class MMSigninginController {
     @FXML
     private TextField weightField;
 
+    @FXML
+    private TextField bodyFatField;
+
 
     @FXML
     private void handleActivityChoice(ActionEvent event) {
@@ -64,6 +67,7 @@ public class MMSigninginController {
         String weight = weightField.getText();
         boolean isMale = maleRadio.isSelected();
         boolean isFemale = femaleRadio.isSelected();
+        double bodyFat =  bodyFatField.getText();
         String activityLevel = ((RadioButton) ActivityChoice.getSelectedToggle()).getText();
     }
 

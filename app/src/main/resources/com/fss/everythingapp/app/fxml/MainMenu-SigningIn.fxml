@@ -44,9 +44,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
          <image>
@@ -72,6 +71,7 @@
             </TextField>
             <TextField fx:id="heightField" floatText="Height (cm):" layoutX="30.0" layoutY="226.0" />
             <TextField fx:id="weightField" floatText="Weight (Kg) :" layoutX="10.0" layoutY="231.0" />
+            <TextField fx:id="bodyFatField" floatText="Body Fat (%):" layoutX="30.0" layoutY="208.0" />
             <HBox alignment="CENTER" prefHeight="87.0" prefWidth="299.0">
                <children>
                   <RadioButton fx:id="maleRadio" mnemonicParsing="false" text="Male">
@@ -85,33 +85,6 @@
                      </opaqueInsets>
                   </RadioButton>
                </children>
-            </HBox>
-            <Text fontSmoothingType="LCD" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How active are you?">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <HBox alignment="CENTER" layoutX="30.0" layoutY="266.0" prefHeight="52.0" prefWidth="282.0">
-               <children>
-                  <RadioButton fx:id="notActiveRadio" mnemonicParsing="false" text="Not Active">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="ActivityChoice" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="activeRadio" mnemonicParsing="false" text="Active" toggleGroup="$ActivityChoice">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </RadioButton>
-                  <RadioButton fx:id="veryActiveRadio" layoutX="151.0" layoutY="45.0" mnemonicParsing="false" text="Very Active" toggleGroup="$ActivityChoice">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </RadioButton>
-               </children>
-               <padding>
-                  <Insets top="-10.0" />
-               </padding>
             </HBox>
             <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submitInfo" prefHeight="57.0" prefWidth="154.0" text="Submit">
                <font>
