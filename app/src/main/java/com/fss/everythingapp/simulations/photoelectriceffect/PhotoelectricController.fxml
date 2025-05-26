@@ -8,18 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoelectric.PhotoelectricController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PhotoelectricController">
    <children>
       <Canvas fx:id="simulationCanvas" height="600.0" width="600.0" />
-      <VBox layoutX="600.0" prefHeight="600.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="600.0" prefHeight="600.0" prefWidth="300.0">
          <children>
-            <TitledPane animated="false" prefHeight="150.0" text="Light Properties">
+            <TitledPane animated="false" prefHeight="200.0" text="Light Properties">
                <content>
-                  <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="5.0" layoutY="5.0" prefHeight="100.0" prefWidth="290.0" spacing="10.0">
+                        <VBox layoutX="5.0" layoutY="5.0" prefHeight="170.0" prefWidth="290.0" spacing="10.0">
                            <children>
                               <HBox prefHeight="25.0" prefWidth="270.0">
                                  <children>
@@ -53,7 +52,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" text="Target Material">
+            <TitledPane animated="false" prefHeight="200.0" text="Target Material">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -91,11 +90,11 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" maxHeight="-Infinity" prefHeight="350.0" text="Physics Information">
+            <TitledPane animated="false" prefHeight="200.0" text="Physics Information">
                <content>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="201.0" prefWidth="298.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="5.0" layoutY="5.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="240.0" prefWidth="290.0" spacing="3.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutX="5.0" layoutY="5.0" prefHeight="170.0" prefWidth="290.0" spacing="8.0">
                            <children>
                               <Label text="Einstein's Equation: KE = hf - φ" />
                               <Label text="Materials:" />
@@ -117,10 +116,5 @@
             </TitledPane>
          </children>
       </VBox>
-      <Label layoutX="166.0" layoutY="14.0" text="Photoelectric Effect">
-         <font>
-            <Font name="System Bold" size="33.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
