@@ -5,6 +5,8 @@ public class SleepSchedule {
     private int minutesSlept;
     private int desiredHours;
     private boolean enoughHours;
+    static protected int slept;
+    static protected int woke;
     
     
 }
