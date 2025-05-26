@@ -3,8 +3,15 @@
  */
 package com.fss.everythingapp.app;
 
+import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class App extends Application {
     public static void main(String[] args) {
@@ -14,7 +21,25 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("FSS App");
-        stage.show();
+        try {
+            URL fxmlLocation = getClass().getResource("/projectile_motion.fxml"); //DELETE THIS AFTER
+            if (fxmlLocation == null) {
+                throw new IOException("Cannot find projectile_motion.fxml");
+            }
+            
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            loader.setController(new ProjectileController());
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            
+            stage.setTitle("FSS App");
+            stage.setMaximized(true);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 }
