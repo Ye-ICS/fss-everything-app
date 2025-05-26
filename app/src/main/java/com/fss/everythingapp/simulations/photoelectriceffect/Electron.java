@@ -16,8 +16,6 @@ public class Electron {
         this.kineticEnergy = 0;
         this.active = false;
     }
-        this.active = false;
-    }
     
     public void emit(double photonEnergy, double workFunction, double angle, double velocity) {
         // Calculate kinetic energy using Einstein's photoelectric equation

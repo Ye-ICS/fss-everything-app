@@ -2,7 +2,6 @@ package com.fss.everythingapp.simulations.photoelectriceffect;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -44,6 +43,11 @@ public class PhotoelectricController {
     private static final double[] WORK_FUNCTIONS = {2.3, 4.3, 5.1, 6.35}; // Cs, Cu, Pt, W
     private static final String[] MATERIAL_NAMES = {"Cesium", "Copper", "Platinum", "Tungsten"};
     
+    private double ballX = 300, ballY = 100;
+    private double ballVY = 2;
+    private boolean isElectron = false;
+    private double electronVX = 0, electronVY = 0;
+
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         electrons = new ArrayList<>();
@@ -152,6 +156,15 @@ public class PhotoelectricController {
                 gc.strokeOval(electron.getX() - 3, electron.getY() - 3, 6, 6);
             }
         }
+
+        // Draw the ball/photon or electron
+        if (!isElectron) {
+            gc.setFill(Color.PURPLE);
+            gc.fillOval(ballX - 10, ballY - 10, 20, 20);
+        } else {
+            gc.setFill(Color.BLUE);
+            gc.fillOval(ballX - 6, ballY - 6, 12, 12);
+        }
         
         // Draw title
         gc.setFill(Color.BLACK);
@@ -180,7 +193,45 @@ public class PhotoelectricController {
     }
     
     private void updateSimulation(long now) {
-        double deltaTime = 1.0; // Simplified time step
+        double deltaTime = 1.0;
+
+        // Ball (photon) movement
+        if (!isElectron) {
+            ballY += ballVY * deltaTime;
+
+            // Check for collision with surface (y = 200)
+            if (ballY >= 200) {
+                // Calculate photon energy and work function
+                double wavelength = wavelengthSlider.getValue();
+                int materialIndex = (int) materialSlider.getValue();
+                double photonEnergy = (PLANCK_CONSTANT * LIGHT_SPEED) / (wavelength * 1e-9) * 6.242e18;
+                double workFunction = WORK_FUNCTIONS[materialIndex];
+
+                if (photonEnergy > workFunction) {
+                    // Become electron: bounce off with velocity based on energy
+                    isElectron = true;
+                    double angle = angleSlider.getValue();
+                    double velocity = velocitySlider.getValue();
+                    double kineticEnergy = photonEnergy - workFunction;
+                    double speed = velocity * Math.sqrt(kineticEnergy / 10.0);
+                    electronVX = speed * Math.cos(Math.toRadians(angle));
+                    electronVY = -speed * Math.sin(Math.toRadians(angle));
+                } else {
+                    // No emission, just stop at the surface
+                    ballVY = 0;
+                }
+            }
+        } else {
+            // Electron movement
+            ballX += electronVX * deltaTime;
+            ballY += electronVY * deltaTime;
+            electronVY += 0.1 * deltaTime; // gravity
+
+            // Reset if electron leaves screen
+            if (ballX > 600 || ballY > 600 || ballX < 0) {
+                resetBall();
+            }
+        }
         
         // Update all electrons
         for (Electron electron : electrons) {
@@ -221,6 +272,15 @@ public class PhotoelectricController {
         }
     }
     
+    private void resetBall() {
+        ballX = 300;
+        ballY = 100;
+        ballVY = 2;
+        isElectron = false;
+        electronVX = 0;
+        electronVY = 0;
+    }
+
     public void stopAnimation() {
         if (animationTimer != null) {
             animationTimer.stop();
