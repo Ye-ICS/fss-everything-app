@@ -1,16 +1,17 @@
 package com.fss.everythingapp.studentservices;
 
 class CalendarRetrieval {
-    String calendar; //replace with proper variable when time comes
+    int date;
+    int[] times = new int[7];
 
     private void getCalendarInfo() {
         //access councellor's calendar
         //getApi();
+        //.get(1).dates.get(date).Date(times);
+        
     }
 
-    String getCalendar() {
-        return this.calendar;
-    }
+    
 
     
     private void sendCalendarInfo() {
