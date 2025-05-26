@@ -15,6 +15,13 @@ public class WorkoutManager {
 
     void newRoutine() {
         // create a new routine
+        if (Workout.desiredPhysique == "Skinny" && WorkoutManager.getAverageBuild() || WorkoutManager.getFitBuild()) {
+            System.out.println("Do 30 minutes of cardio like running/jogging everyday.");
+            System.out.println("Do 2-3 sets of things like squats, push-ups, and lunges everyday.");
+            System.out.println("Do 20 minutes of repeated short bursts of things like sprints, burpees, and pull ups.");
+        } else if (Workout.desiredPhysique == "Lean" || Workout.desiredPhysique == "Bulk" && WorkoutManager.getSkinnyBuild() || WorkoutManager.getAverageBuild()) {
+            
+        }
     }
 
     void viewRoutine() {
