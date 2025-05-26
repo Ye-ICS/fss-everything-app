@@ -11,6 +11,12 @@ public class AppointmentController {
     static String time;
     static String name;
     static int grade;
+    static int date;
+    private void enterBtn(){
+
+    }
+}
+
     private BorderPane rootcontainer;
 
     @FXML
