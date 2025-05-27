@@ -3,13 +3,12 @@ import java.applet.Applet;
 import java.util.ArrayList;
 
 class StudentServices {
-    ArrayList<Counsellor> counsellors = new ArrayList<>(4);
+    ArrayList<Counsellor> counsellors = new ArrayList<>();
 
     private ArrayList<Counsellor> fillCounsellors(){
         for(int i = 0; i < counsellors.size(); i++){
-            Counsellor counsellor = new Counsellor("d", "d");
-            Counsellor temp = counsellors.get(i);
-            temp = counsellor;
+            Counsellor counsellor = new Counsellor("temp", "temp");
+            counsellors.add(counsellor);
         }
         return counsellors;
     }
