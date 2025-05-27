@@ -25,11 +25,10 @@ public class ProjectileMotion {
             return 0;
         }
 
-        double t1 = (-vSin + Math.sqrt(discriminant)) / acceleration;
-        double t2 = (-vSin - Math.sqrt(discriminant)) / acceleration;
+        double t1 = (-vSin + Math.sqrt(discriminant)) / 2*acceleration;
+        double t2 = (-vSin - Math.sqrt(discriminant)) / 2*acceleration;
 
         time = Math.max(t1, t2);
-        System.out.println("Time: " + time);
         return time;
     }
     double calculateRange(){
@@ -39,18 +38,14 @@ public class ProjectileMotion {
             System.out.println(0);
             return 0;
         }
-
-        System.out.println("Range: " + x);
         return x;
-        
-
     }
 
     Vector2D launchProjectile(double height, double speed, double gravity, double angle, double time) {
         // Calculate the position of the projectile at a given time
         
             double x =  + speed * Math.cos(Math.toRadians(angle)) * time;
-            double y =  speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
+            double y =  height*3.8 + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
         return new Vector2D(x, y);
     }
 

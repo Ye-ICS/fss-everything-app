@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +35,7 @@ public class ProjectileController implements Initializable {
     @FXML private CheckBox velocityComponents;
     @FXML private TextField projectileName;
     @FXML private Button projectileNameButton;
+    @FXML private Button launch;
 
     private ProjectileMotion simulation = new ProjectileMotion();
 
@@ -90,10 +90,13 @@ public class ProjectileController implements Initializable {
         drawAxes();
 
         projectileNameButton.setOnAction(e -> {
-            shootProjectile(); // Call the shoot method when the button is pressed
             if (projectileName != null) {
                 nameProjectile();
             }
+        });
+
+        launch.setOnAction(e -> {
+            shootProjectile();
         });
 
         if (grid.isSelected()){drawGrid();}
@@ -103,41 +106,38 @@ public class ProjectileController implements Initializable {
     }
 
     public void drawAxes() {
-    GraphicsContext gc = gridCanvas.getGraphicsContext2D();
-    double width = gridCanvas.getWidth();
-    double height = gridCanvas.getHeight();
-    
-    gc.clearRect(0, 0, width, height);
-    
-    gc.setStroke(javafx.scene.paint.Color.BLACK);
-    gc.setLineWidth(1.5);
-    
-    //Draw X axis
-    gc.strokeLine(50, height - 500, width - 50, height - 500);
-    
-    //Draw Y axis
-    gc.strokeLine(50, height - 500, 50, 50);
-    
-    double arrowSize = 5;
+        GraphicsContext gc = gridCanvas.getGraphicsContext2D();
+        double width = gridCanvas.getWidth();
+        double height = gridCanvas.getHeight();
+        
+        gc.clearRect(0, 0, width, height);
+        
+        gc.setStroke(javafx.scene.paint.Color.BLACK);
+        gc.setLineWidth(1.5);
+        
+        //Draw X axis
+        gc.strokeLine(50, height - 500, width - 50, height - 500);
+        
+        //Draw Y axis
+        gc.strokeLine(50, height - 500, 50, 50);
+        
+        double arrowSize = 5;
 
-    // Draw X axis arrow
-    double[] xArrowX = {width - 50, width - 50 - arrowSize, width - 50 - arrowSize};
-    double[] xArrowY = {height - 50, height - 50 - arrowSize, height - 50 + arrowSize};
-    gc.fillPolygon(xArrowX, xArrowY, 3);
-    
-    // Draw Y axis arrow
-    double[] yArrowX = {50 - arrowSize, 50 + arrowSize, 50};
-    double[] yArrowY = {50 + arrowSize, 50 + arrowSize, 50};
-    gc.fillPolygon(yArrowX, yArrowY, 3);
-
-
-
+        // Draw X axis arrow
+        double[] xArrowX = {width - 50, width - 50 - arrowSize, width - 50 - arrowSize};
+        double[] xArrowY = {height - 50, height - 50 - arrowSize, height - 50 + arrowSize};
+        gc.fillPolygon(xArrowX, xArrowY, 3);
+        
+        // Draw Y axis arrow
+        double[] yArrowX = {50 - arrowSize, 50 + arrowSize, 50};
+        double[] yArrowY = {50 + arrowSize, 50 + arrowSize, 50};
+        gc.fillPolygon(yArrowX, yArrowY, 3);
     }
 
     public void drawProjectile(double x, double y) {
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
         drawAxes(); //to clear the canvas before redrawing
-        gc.setFill(Color.RED);
+        gc.setFill(Color.BLACK);
         gc.fillOval(x, y, 30, 30); //Drawing circle at 
     }
 
@@ -175,6 +175,11 @@ public class ProjectileController implements Initializable {
                 event -> { 
                     double x = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX();
                     double y = simulation.launchProjectile(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY();
+                        if (y <= 0 && time > 0) {
+                            timeline.stop();
+                            drawProjectile(50 + x, 470); 
+                            return;
+                        }
                     drawProjectile(50 + x, 470 - y);
                 }
             );
