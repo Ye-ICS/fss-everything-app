@@ -2,11 +2,9 @@ package com.fss.everythingapp.fitness;
 
 
 public class SleepSchedule {
-    private int minutesSlept;
-    private int desiredHours;
-    private boolean enoughHours;
     static protected int slept;
     static protected int woke;
-    
+    static protected int tSlept;
+    static protected int tWoke;
     
 }

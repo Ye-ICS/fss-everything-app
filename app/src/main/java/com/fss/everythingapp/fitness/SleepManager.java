@@ -6,28 +6,41 @@ public class SleepManager {
     Scanner scanner = new Scanner(System.in);
 
     void newSleepRoutine() {
-        System.out.println("What time did you go to bed?"); //24 hour clock
-        SleepSchedule.slept = scanner.nextInt();
-        System.out.println("What time did you wake up?");
-        SleepSchedule.woke = scanner.nextInt();
-        if (SleepSchedule.slept + 8 >= SleepSchedule.woke) {
-            System.out.println("You sleep a healthy amount of hours");
-            if (SleepSchedule.slept >= 20 && SleepSchedule.woke >= 20 && SleepSchedule.slept <= 9 && SleepSchedule.woke <= 9) {
-                System.out.println("\nwe recommend sleeping between the hours of 20:00 and 9:00 to maintain a consistent healthy sleep cycle.");
+        while (SleepSchedule.tSlept > 24 || SleepSchedule.tSlept > 24) {
+            System.out.println("What time do you normally go to bed?"); //24 hour clock
+            int choice = scanner.nextInt();
+            SleepSchedule.tSlept = choice;
+            System.out.println("What time do you normally wake up?");
+            choice = scanner.nextInt();
+            SleepSchedule.tWoke = choice;
+            if (SleepSchedule.tSlept > 24 || SleepSchedule.tSlept > 24) {
+                System.out.println("Invalid time inputed");
                 }
-            else {
+                else if (SleepSchedule.tSlept + 8 >= SleepSchedule.tWoke) {
+                    System.out.println("You sleep a healthy amount of hours");
+                }
+                    else if (SleepSchedule.tSlept >= 20 && SleepSchedule.tWoke >= 20 && SleepSchedule.tSlept <= 9 && SleepSchedule.tWoke <= 9) {
+                        System.out.println("\nwe recommend sleeping between the hours of 20:00 and 9:00 to maintain a consistent healthy sleep cycle. \n Perhaps establishing a routine will help with this.");
+                        }
+                    else {
                 
+                    }
+            if (/* confirm button code */) {
+                SleepSchedule.woke = SleepSchedule.tWoke;
+                SleepSchedule.slept = SleepSchedule.tSlept;
             }
+                
         }           
-        else {
-            System.out.println("You seem to be undersleeping, perhaps adjust your sleep schedule accordingly");
-            System.out.println("\nwe recommend sleeping between the hours of 20:00 and 9:00 to maintain a consistent healthy sleep cycle.");
-        }
+        //else {
+            //System.out.println("You seem to be undersleeping, perhaps adjust your sleep schedule accordingly");
+            //System.out.println("\nwe recommend sleeping between the hours of 20:00 and 9:00 to maintain a consistent healthy sleep cycle.");
+        //}
         
     }
 
     void viewSleepRoutine() {
         // view sleeproutine
+        
     }
 
     void editSleepRoutine() {
