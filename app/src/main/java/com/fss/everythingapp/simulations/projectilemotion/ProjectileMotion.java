@@ -9,13 +9,11 @@ public class ProjectileMotion {
     List<KinematicObject> projectiles;
     Vector2D gravity;
 
-
     void launchProjectile(Vector2D position, Vector2D velocity) {
     }
 
     void setGravity(Vector2D gravity) {
     }
-
     double calculateRange(KinematicObject projectile) {
         return -1;
     }
