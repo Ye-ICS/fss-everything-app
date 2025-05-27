@@ -15,7 +15,6 @@ public class AppointmentController {
     private void enterBtn(){
 
     }
-}
 
     private BorderPane rootcontainer;
 
