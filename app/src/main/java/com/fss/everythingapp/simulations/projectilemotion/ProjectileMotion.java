@@ -13,7 +13,6 @@ public class ProjectileMotion {
     }
 
     void setGravity(Vector2D gravity) {
-
     }
 
     double calculateRange(KinematicObject projectile) {
