@@ -18,16 +18,15 @@ public class MMnsiController {
 
     @FXML
     void signIn(ActionEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu-Signedin.fxml"));
-        Parent signInScreen = loader.load();
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(signInScreen));
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MainMenu-SigningIn.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 }
 
 }

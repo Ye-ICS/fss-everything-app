@@ -8,4 +8,8 @@ public class MainMenuController {
     private void openStudentServices(ActionEvent actionEvent) {
         
     }
+    @FXML
+    private void openFitnessApp (ActionEvent actionEvent) {
+        
+    }
 }

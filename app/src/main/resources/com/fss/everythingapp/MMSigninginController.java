@@ -1,11 +1,20 @@
 package com.fss.everythingapp;
 
+import java.io.IOException;
+
+import com.fss.everythingapp.fitness.GeneralInfo;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 public class MMSigninginController {
 
@@ -49,26 +58,35 @@ public class MMSigninginController {
     private TextField bodyFatField;
 
 
-    @FXML
-    private void handleActivityChoice(ActionEvent event) {
-        RadioButton selectedRadio = (RadioButton) ActivityChoice.getSelectedToggle();
-        String activityLevel = selectedRadio.getText();
-        System.out.println("Selected activity level: " + activityLevel);
-    }
+
     @FXML
     private void handleGenderChoice(ActionEvent event) {
         RadioButton selectedRadio = (RadioButton) genderToggle.getSelectedToggle();
     }
+
     @FXML  
     private void handleTextFieldAction(ActionEvent event) {
-        String name = nameField.getText();
-        String age = ageField.getText();
-        String height = heightField.getText();
-        String weight = weightField.getText();
-        boolean isMale = maleRadio.isSelected();
-        boolean isFemale = femaleRadio.isSelected();
-        double bodyFat =  bodyFatField.getText();
-        String activityLevel = ((RadioButton) ActivityChoice.getSelectedToggle()).getText();
+        GeneralInfo.name = nameField.getText();
+        GeneralInfo.age = Integer.parseInt(ageField.getText());
+        GeneralInfo.height = Integer.parseInt(heightField.getText());
+        GeneralInfo.weight = Integer.parseInt(weightField.getText());
+        GeneralInfo.isMale = maleRadio.isSelected();
+        GeneralInfo.isFemale = femaleRadio.isSelected();
+        GeneralInfo.bodyfat =  Integer.parseInt(bodyFatField.getText());
+       
+    }
+
+    @FXML
+    void submitInfo(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MainMenu-SignedIn.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
