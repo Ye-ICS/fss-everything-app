@@ -1,3 +1,4 @@
+package com.fss.everythingapp.simulations.momentum;
 /**
  * Simple 2D vector class for physics calculations.
  * Encapsulates common vector operations: addition, subtraction, scaling, normalization, dot product, and copying.
