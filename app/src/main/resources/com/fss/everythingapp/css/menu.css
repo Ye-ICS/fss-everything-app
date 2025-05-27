@@ -1,0 +1,65 @@
+.material-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #6750A4; /* Primary color */
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.0, 0, 1);
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Hover (8% overlay) */
+.material-button:hover {
+    -fx-background-color: rgba(103, 80, 164, 0.08);
+}
+
+/* Pressed (12% overlay) */
+
+.material-button:armed {
+    -fx-background-color: rgba(103, 80, 164, 0.16); /* Slightly stronger overlay */
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    }
+    
+
+/* Focused (border ring only) */
+.material-button:focused {
+    -fx-border-color: #6750A4;
+    -fx-background-color: transparent;
+}
+
+/* Default Button (filled style) */
+.material-button:default {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #6750A4;
+}
+
+/* Default Hover (8% overlay on filled) */
+.material-button:default:hover {
+    -fx-background-color: #5B45A0;
+}
+
+/* Default Pressed (12% overlay on filled) */
+.material-button:default:armed {
+    -fx-background-color: #4F3B94;
+}
+
+/* Default Focused */
+.material-button:default:focused {
+    -fx-border-color: #FFFFFF;
+}
+
+/* Disabled */
+.material-button:disabled {
+    -fx-text-fill: rgba(0, 0, 0, 0.38);
+    -fx-background-color: transparent;
+    -fx-effect: none;
+    -fx-cursor: default;
+}

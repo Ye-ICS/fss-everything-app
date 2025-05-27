@@ -4,10 +4,13 @@
 package com.fss.everythingapp.app;
 
 import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,25 +24,22 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Example.fxml"));
+        MainMenuController controller = new MainMenuController();
+        fxmlLoader.setController(controller);
+        Parent view = null;
+        
         try {
-            URL fxmlLocation = getClass().getResource("/projectile_motion.fxml"); //DELETE THIS AFTER
-            if (fxmlLocation == null) {
-                throw new IOException("Cannot find projectile_motion.fxml");
-            }
-            
-            FXMLLoader loader = new FXMLLoader(fxmlLocation);
-            loader.setController(new ProjectileController());
-            Parent root = loader.load();
-            
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            
-            stage.setTitle("FSS App");
-            stage.setMaximized(true);
-            stage.show();
-        } catch (Exception e) {
+            view = fxmlLoader.load();
+        } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
+            view = new Label("A fatal error has occurred.");
         }
+
+        Scene scene = new Scene(view);
+        stage.setScene(scene);
+
+        stage.setTitle("FSS App");
+        stage.show();
     }
 }

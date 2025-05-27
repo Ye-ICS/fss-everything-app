@@ -54,8 +54,6 @@ public class ProjectileMotion {
     }
    
 
-    
-
     double calculateMaxHeight(KinematicObject projectile) {
        return -1;
     }
