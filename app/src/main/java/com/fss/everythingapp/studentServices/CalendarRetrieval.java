@@ -1,17 +1,25 @@
 package com.fss.everythingapp.studentservices;
 
-class CalendarRetrieval {
+class CalendarRetrieval extends Counsellor{
+
+    CalendarRetrieval(String name, String email) {
+        super(name, email);
+        //TODO Auto-generated constructor stub
+    }
+
     int date;
     int[] times = new int[7];
 
     private void getCalendarInfo() {
         //access councellor's calendar
         //getApi();
-        //.get(1).dates.get(date).Date(times);
+        dates.get(date).Date(times);
         
     }
 
-    
+    void sendTimes() {
+        time = times;
+    }
 
     
     private void sendCalendarInfo() {
