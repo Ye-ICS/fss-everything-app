@@ -3,7 +3,7 @@ import java.applet.Applet;
 import java.util.ArrayList;
 
 class StudentServices {
-    ArrayList<Counsellor> counsellors = new ArrayList<>(4);
+    static ArrayList<Counsellor> counsellors = new ArrayList<>(4);
 
     private ArrayList<Counsellor> fillCounsellors(){
         for(int i = 0; i < counsellors.size(); i++){
@@ -14,12 +14,14 @@ class StudentServices {
         return counsellors;
     }
 
+    int grade;
+
     private void userName() {
         String name = AppointmentController.name;
     }
 
-    private void userGrade() {
-        int grade = AppointmentController.grade - 9;
+    void userGrade() {
+        grade = AppointmentController.grade - 9;
         
 
     }
@@ -32,5 +34,9 @@ class StudentServices {
         int date = AppointmentController.date;
     }
 
+    //placeholder method for data being used by the app
+    void finalData() { 
+        int[] counsellorTimes = counsellors.get(grade).getTime();
+    }
 
 }

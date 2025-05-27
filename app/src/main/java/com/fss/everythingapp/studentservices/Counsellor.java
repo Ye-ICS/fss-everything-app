@@ -5,6 +5,7 @@ import java.util.ArrayList;
 class Counsellor {
     private String name;
     private String email;
+    protected int[] time = new int[7];
     private String calendar; //replace with proper variable when time comes
     ArrayList<Date> dates = new ArrayList(30);
 
@@ -14,7 +15,7 @@ class Counsellor {
     }
 
     
-    
+    int[] getTime() {return this.time;}
     
 
     String getName() {
