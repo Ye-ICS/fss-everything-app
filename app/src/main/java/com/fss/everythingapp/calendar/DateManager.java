@@ -7,7 +7,10 @@ import java.util.Scanner;
 
 public class DateManager {
 
-    static void loadDates() throws FileNotFoundException {
+    DateManager(String elementsFile) throws FileNotFoundException {
+    }
+
+    static void loadDate() throws FileNotFoundException {
         Scanner scanner = new Scanner("DateList");
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
