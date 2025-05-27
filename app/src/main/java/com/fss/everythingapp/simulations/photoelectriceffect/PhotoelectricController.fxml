@@ -2,18 +2,35 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PhotoelectricController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PhotoelectricController">
    <children>
-      <Canvas fx:id="simulationCanvas" height="600.0" width="600.0" />
-      <VBox layoutX="600.0" prefHeight="600.0" prefWidth="300.0">
+      <!-- Simulation Area with Canvas and overlayed surface box -->
+      <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="600.0">
          <children>
+            <Canvas fx:id="simulationCanvas" height="600.0" width="600.0" />
+            <!-- Visual overlay for the metal surface (matches controller: x=50, y=300, w=100, h=300) -->
+            <Rectangle fill="#FFD70044" height="64.0" layoutX="-2.0" layoutY="238.0" stroke="black" strokeWidth="2" width="443.0" x="50.0" y="300.0" />
+            <!-- Optional: Label for the surface -->
+            <Label layoutX="215.0" layoutY="561.0" style="-fx-font-weight: bold; -fx-background-color: #fff8;" text="Metal Surface" />
+            <!-- Optional: Label for the simulation area -->
+            <Label layoutX="200.0" layoutY="10.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Photoelectric Effect Simulation" />
+         </children>
+      </AnchorPane>
+      <!-- Controls on the right -->
+      <VBox layoutX="600.0" maxHeight="-Infinity" prefHeight="550.0" prefWidth="300.0" spacing="10.0">
+         <children>
+            <!-- Start Button -->
+            <Button fx:id="startButton" maxHeight="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Start Simulation"  onAction="#handleStartSimulation" />
+            <!-- Light Properties Controls -->
             <TitledPane animated="false" prefHeight="200.0" text="Light Properties">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -32,7 +49,7 @@
                               <HBox prefHeight="25.0" prefWidth="270.0">
                                  <children>
                                     <Label fx:id="angleLabel" prefHeight="25.0" prefWidth="120.0" text="Angle: 45°" />
-                                    <Slider fx:id="angleSlider" max="90.0" prefHeight="19.0" prefWidth="150.0" value="45.0" />
+                                    <Slider fx:id="angleSlider" max="90.0" min="0.0" prefHeight="19.0" prefWidth="150.0" value="45.0" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -52,16 +69,17 @@
                   </AnchorPane>
                </content>
             </TitledPane>
+            <!-- Target Material Controls -->
             <TitledPane animated="false" prefHeight="200.0" text="Target Material">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="5.0" layoutY="5.0" prefHeight="170.0" prefWidth="290.0" spacing="10.0">
+                        <VBox layoutX="5.0" layoutY="5.0" maxHeight="-Infinity" prefHeight="100.0" prefWidth="290.0" spacing="10.0">
                            <children>
                               <HBox prefHeight="25.0" prefWidth="270.0">
                                  <children>
                                     <Label fx:id="materialLabel" prefHeight="25.0" prefWidth="120.0" text="Material: Copper" />
-                                    <Slider fx:id="materialSlider" max="3.0" prefHeight="19.0" prefWidth="150.0" snapToTicks="true" value="1.0" />
+                                    <Slider fx:id="materialSlider" max="3.0" min="0.0" prefHeight="19.0" prefWidth="150.0" snapToTicks="true" value="1.0" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -90,17 +108,17 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="200.0" text="Physics Information">
+            <!-- Physics Info -->
+            <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="236.0" prefWidth="300.0" text="Physics Information">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="298.0">
                      <children>
-                        <VBox layoutX="5.0" layoutY="5.0" prefHeight="170.0" prefWidth="290.0" spacing="8.0">
+                        <VBox layoutX="5.0" layoutY="5.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="290.0" spacing="8.0">
                            <children>
                               <Label text="Einstein's Equation: KE = hf - φ" />
                               <Label text="Materials:" />
                               <Label text="0=Cesium (2.3eV), 1=Copper (4.3eV)" />
                               <Label text="2=Platinum (5.1eV), 3=Tungsten (6.35eV)" />
-                              <Label text="" />
                               <Label text="Instructions:" />
                               <Label text="• Adjust wavelength to change energy" />
                               <Label text="• Try different materials" />

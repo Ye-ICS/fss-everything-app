@@ -1,5 +1,4 @@
 package com.fss.everythingapp.simulations.photoelectriceffect;
-import com.fss.everythingapp.simulations.Vector2D;
 
 public class Electron {
     private double x, y;
@@ -32,21 +31,13 @@ public class Electron {
         }
     }
     
-    public void update(double deltaTime) {
+    public void update() {
         if (!active) return;
-        
-        // Update position
-        x += vx * deltaTime;
-        y += vy * deltaTime;
-        
-        // Apply gravity
-        vy += GRAVITY * deltaTime;
-        
-        // Remove electron if it goes off screen
-        if (x > 600 || y > 600 || x < 0) {
-            reset();
-        }
+        x += vx;
+        y += vy;
+        vy += GRAVITY; // Apply gravity
     }
+
     
     public void reset() {
         this.active = false;
