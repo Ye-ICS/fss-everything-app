@@ -13,24 +13,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Calendar extends Application {
+public class Calendar {
 
     static final String DATE_FILE = "DateList.txt";
 
     public static void main(String[] args) {
-        launch(args);
+    //     launch(args);
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
+    // @Override
+    // public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/MonthView.fxml"));
+    //     Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/MonthView.fxml"));
 
-        Scene scene = new Scene(root);
-        stage.setTitle("FSS Calendar");
-        stage.setScene(scene);
-        stage.show();
-    }
+    //     Scene scene = new Scene(root);
+    //     stage.setTitle("FSS Calendar");
+    //     stage.setScene(scene);
+    //     stage.show();
+    // }
 
     public void createDate() {
     }

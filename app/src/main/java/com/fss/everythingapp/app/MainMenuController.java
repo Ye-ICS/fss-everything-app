@@ -15,7 +15,7 @@ public class MainMenuController {
 
     @FXML
     private void openStudentServices(ActionEvent actionEvent) {
-        
+
     }
 
     @FXML
@@ -23,4 +23,11 @@ public class MainMenuController {
         Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../businfo/List.fxml"));
         rootContainer.getScene().setRoot(mainListLayout);
     }
+
+    @FXML
+    private void openCalendar(ActionEvent actionEvent) throws IOException {
+        Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("../calendar/MonthView.fxml"));
+        rootContainer.getScene().setRoot(monthView);
+    }
+
 }
