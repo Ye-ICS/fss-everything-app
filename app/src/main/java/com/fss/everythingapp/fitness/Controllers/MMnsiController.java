@@ -1,4 +1,4 @@
-package com.fss.everythingapp;
+package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
 

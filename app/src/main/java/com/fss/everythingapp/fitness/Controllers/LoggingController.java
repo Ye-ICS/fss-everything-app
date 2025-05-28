@@ -1,16 +1,8 @@
-package com.fss.everythingapp;
-
-import java.io.IOException;
+package com.fss.everythingapp.fitness.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 
 public class LoggingController {
