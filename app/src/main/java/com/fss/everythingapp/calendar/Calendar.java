@@ -1,16 +1,35 @@
 package com.fss.everythingapp.calendar;
 
-import java.io.FileNotFoundException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Calendar {
-    ArrayList<DateManager> dateList = new ArrayList<DateManager>();
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-    public static void main(String[] args) throws FileNotFoundException {
+public class Calendar extends Application {
+
+    static final String DATE_FILE = "DateList.txt";
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
-    public ArrayList<DateManager> getDateList() {
-        return dateList;
+    @Override
+    public void start(Stage stage) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/MonthView.fxml"));
+
+        Scene scene = new Scene(root);
+        stage.setTitle("FSS Calendar");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void createDate() {

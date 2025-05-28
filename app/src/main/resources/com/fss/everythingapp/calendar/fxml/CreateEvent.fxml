@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreateEventController">
+   <children>
+      <Label alignment="CENTER" text="Create New Event">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="eventNameField" alignment="CENTER" prefHeight="25.0" prefWidth="35.0" promptText="Enter Event Name">
+         <VBox.margin>
+            <Insets bottom="20.0" left="175.0" right="175.0" />
+         </VBox.margin>
+      </TextField>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="175.0" promptText="Start Date">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </DatePicker>
+            <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="175.0" promptText="End Date">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </DatePicker>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="5.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" text="Start Time                                  End Time" />
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0">
+               <children>
+                  <TextField fx:id="startHourField" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="25.0" promptText="0" />
+                  <Label text=":" />
+                  <TextField fx:id="startMinField" prefHeight="25.0" prefWidth="35.0" promptText="00">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="endHourField" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="25.0" promptText="0">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text=":" />
+                  <TextField fx:id="endMinField" prefHeight="25.0" prefWidth="35.0" promptText="00" />
+               </children>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </VBox>
+      <Button fx:id="createEventButton" mnemonicParsing="false" onAction="#createEvent" text="Create Event" />
+   </children>
+</VBox>
