@@ -8,15 +8,15 @@ import javafx.scene.layout.BorderPane;
 
 public class AppointmentController {
     @FXML
-    static String time;
     static String name;
     static int grade;
-    static int date;
     private BorderPane rootcontainer;
 
     @FXML
     private void enterBtnPressed() throws IOException {
         // aquire name and grade
+        name = getName();
+        grade = getGrade();
 
 
         // load to the next layout
