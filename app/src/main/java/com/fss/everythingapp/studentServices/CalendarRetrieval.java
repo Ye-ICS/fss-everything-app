@@ -3,7 +3,7 @@ package com.fss.everythingapp.studentservices;
 class CalendarRetrieval extends Counsellor{
 
     CalendarRetrieval(String name, String email) {
-        super(name, email);
+        super(email);
         //TODO Auto-generated constructor stub
     }
 
@@ -13,7 +13,9 @@ class CalendarRetrieval extends Counsellor{
     private void getCalendarInfo() {
         //access councellor's calendar
         //getApi();
-        dates.get(date).Date(times);
+        for (int i = 0; i < 31; i++) {
+        dates.get(i).Date(times);
+        }
         
     }
 
