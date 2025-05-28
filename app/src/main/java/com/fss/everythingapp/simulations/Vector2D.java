@@ -77,9 +77,17 @@ public class Vector2D {
         return new Vector2D(this.x, this.y);
     }
 
+
     @Override 
     public String toString() {
         return String.format ("Vector2D(%. 3f, %. 3f)", x, y);
+    }
+
+    public double getX() {
+        return x;
+    }
+    public double getY() {
+        return y;
     }
 
 }
