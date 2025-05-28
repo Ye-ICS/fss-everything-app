@@ -63,13 +63,13 @@ public class DoubleSlitController{
     }
 
     void updateWavelengthLabel() {
-        
+        wavelengthLabel.setText(String.format("Wavelength: %.0f nm", wavelengthSlider.getValue()));  
     }
     void updateSeparationLabel() {
-        
+        separationLabel.setText(String.format("Slit Separation: %.2f mm", separationSlider.getValue()));
     }
     void updateWidthLabel() {
-        
+        widthLabel.setText(String.format("Slit Width: %.2f mm", widthSlider.getValue()));
     }
 
     void updateSimulation() {
