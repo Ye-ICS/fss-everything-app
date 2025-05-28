@@ -23,4 +23,10 @@ public class MainMenuController {
         Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../businfo/List.fxml"));
         rootContainer.getScene().setRoot(mainListLayout);
     }
+
+    @FXML
+    private void openSimulations(ActionEvent actionEvent) throws IOException {
+        Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/List.fxml"));
+        rootContainer.getScene().setRoot(mainListLayout);
+    }
 }
