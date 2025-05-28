@@ -12,11 +12,14 @@ import javafx.scene.layout.BorderPane;
 public class MonthViewController {
 
     @FXML
+    private Button createDateButton;
+
+    @FXML
     private BorderPane rootContainer;
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
-        Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("UserMenu.fxlm"));
-        rootContainer.getScene().setRoot(monthView);
+        Parent createDate = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/CreateDate.fxlm"));
+        rootContainer.getScene().setRoot(createDate);
     }
 }

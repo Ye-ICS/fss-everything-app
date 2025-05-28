@@ -19,7 +19,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="eventNameField" alignment="CENTER" prefHeight="25.0" prefWidth="35.0" promptText="Enter Event Title">
+      <TextField fx:id="eventNameField" alignment="CENTER" prefHeight="25.0" prefWidth="35.0" promptText="Enter Event Name">
          <VBox.margin>
             <Insets bottom="20.0" left="175.0" right="175.0" />
          </VBox.margin>

@@ -21,13 +21,13 @@ public class CreateDateController {
 
     @FXML
     void createEvent(ActionEvent event) throws IOException {
-        Parent createEvent = (Parent) FXMLLoader.load(getClass().getResource("CreateEvent.fxlm"));
+        Parent createEvent = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/CreateEvent.fxlm"));
         rootContainer.getScene().setRoot(createEvent);
     }
 
     @FXML
-    void createTask(ActionEvent event) throws IOException { // NOT FUNCTIONAL
-        Parent createTask = (Parent) FXMLLoader.load(getClass().getResource("CreateTask.fxlm"));
+    void createTask(ActionEvent event) throws IOException {
+        Parent createTask = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/CreateTask.fxlm"));
         rootContainer.getScene().setRoot(createTask);
     }
 }

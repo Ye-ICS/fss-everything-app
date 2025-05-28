@@ -14,7 +14,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Calendar extends Application {
-    ArrayList<DateManager> dateList = new ArrayList<DateManager>();
+
+    static final String DATE_FILE = "DateList.txt";
 
     public static void main(String[] args) {
         launch(args);
@@ -22,16 +23,13 @@ public class Calendar extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MonthView.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/MonthView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setTitle("FSS Calendar");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public ArrayList<DateManager> getDateList() {
-        return dateList;
     }
 
     public void createDate() {

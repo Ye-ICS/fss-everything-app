@@ -2,15 +2,13 @@ package com.fss.everythingapp.calendar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DateManager {
-
-    DateManager(String elementsFile) throws FileNotFoundException {
-    }
-
-    static void loadDate() throws FileNotFoundException {
+    void loadDate() throws FileNotFoundException {
         Scanner scanner = new Scanner("DateList");
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -49,13 +47,6 @@ public class DateManager {
         scanner.close();
     }
 
-    static void createDate() { // Basic date creation, user selects whether to create an event or task
-    }
-
     static void shareDate() { // User can share dates to other users
-
-    }
-
-    static void saveToList() { // Saves date information to DateList.txt
     }
 }
