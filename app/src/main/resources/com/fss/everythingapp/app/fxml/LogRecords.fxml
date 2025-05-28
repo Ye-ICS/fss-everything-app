@@ -34,62 +34,35 @@
 
 <?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
 
-<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../logo.png" />
-         </image>
-      </ImageView>
-   </top>
+<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-         <children>
-            <TextField fx:id="caloriesEaten" promptText="Calories">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="proteinEaten" layoutX="30.0" layoutY="50.0" promptText="Protein">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="carbsEaten" layoutX="30.0" layoutY="76.0" promptText="Carbs">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="fatsEaten" layoutX="30.0" layoutY="102.0" promptText="Fats">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="cholesterolEaten" layoutX="30.0" layoutY="128.0" promptText="Cholesterol">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <Button mnemonicParsing="false" onAction="#submitFoodLog" text="Submit Food" />
-            <TextField fx:id="coloriesBurnt" promptText="Calories Burnt" />
-            <Button layoutX="150.0" layoutY="205.0" mnemonicParsing="false" onAction="#submitExcersizeLog" text="Submit Excersize" />
-            <TextField fx:id="timeWentSleep" layoutX="30.0" layoutY="240.0" promptText="Time went to sleep" />
-            <TextField fx:id="timeWokeUp" layoutX="30.0" layoutY="306.0" promptText="Time Woke up" />
-            <Button layoutX="150.0" layoutY="271.0" mnemonicParsing="false" onAction="#submitSleepLog" text="Submit Sleep" />
-         </children>
          <padding>
             <Insets left="20.0" right="20.0" top="40.0" />
          </padding>
+         <children>
+            <TextFlow prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView prefHeight="431.0" prefWidth="287.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="1" />
+                      <TableColumn prefWidth="75.0" text="2" />
+                        <TableColumn prefWidth="75.0" text="3" />
+                        <TableColumn prefWidth="75.0" text="4" />
+                    </columns>
+                  </TableView>
+               </children>
+            </TextFlow>
+         </children>
       </VBox>
    </center>
    <children>
