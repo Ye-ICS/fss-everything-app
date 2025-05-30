@@ -3,6 +3,7 @@
  */
 package com.fss.everythingapp.app;
 
+import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -11,6 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class App extends Application {
     public static void main(String[] args) {
