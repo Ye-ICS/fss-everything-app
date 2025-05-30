@@ -25,10 +25,10 @@ public class SleepManager {
                     else {
                 
                     }
-            if (/* confirm button code */) {
-                SleepSchedule.woke = SleepSchedule.tWoke;
-                SleepSchedule.slept = SleepSchedule.tSlept;
-            }
+            //if (/* confirm button code */) {
+             //   SleepSchedule.woke = SleepSchedule.tWoke;
+             //   SleepSchedule.slept = SleepSchedule.tSlept;
+            //}
                 
         }           
         //else {
