@@ -17,16 +17,17 @@ public class MMnsiController {
     private Button signInButton;
 
     @FXML
-    void signIn(ActionEvent event) {
+    private void signIn (ActionEvent actionEvent) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MainMenu-SigningIn.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Parent root = FXMLLoader.load(MMnsiController.class.getResource("/com/fss/everythingapp/app/fxml/MainMenu-SigningIn.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error loading FXML: " + e.getMessage());
         }
-}
+    }
 
 }

@@ -1,38 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-    Copyright (c) 2017, Gluon and/or its affiliates.
-    All rights reserved. Use is subject to license terms.
-
-    This file is available and licensed under the following license:
-
-    Redistribution and use in source and binary forms, with or without
-    modification, are permitted provided that the following conditions
-    are met:
-
-   - Redistributions of source code must retain the above copyright
-     notice, this list of conditions and the following disclaimer.
-   - Redistributions in binary form must reproduce the above copyright
-     notice, this list of conditions and the following disclaimer in
-     the documentation and/or other materials provided with the distribution.
-   - Neither the name of Oracle Corporation and Gluon nor the names of its
-     contributors may be used to endorse or promote products derived
-     from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-<?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
@@ -41,58 +8,36 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../logo.png" />
-         </image>
-      </ImageView>
-   </top>
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <children>
-            <TextField fx:id="caloriesEaten" promptText="Calories">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="proteinEaten" layoutX="30.0" layoutY="50.0" promptText="Protein">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="carbsEaten" layoutX="30.0" layoutY="76.0" promptText="Carbs">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="fatsEaten" layoutX="30.0" layoutY="102.0" promptText="Fats">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="cholesterolEaten" layoutX="30.0" layoutY="128.0" promptText="Cholesterol">
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </TextField>
-            <Button mnemonicParsing="false" onAction="#submitFoodLog" text="Submit Food" />
-            <TextField fx:id="coloriesBurnt" promptText="Calories Burnt" />
-            <Button layoutX="150.0" layoutY="205.0" mnemonicParsing="false" onAction="#submitExcersizeLog" text="Submit Excersize" />
-            <TextField fx:id="timeWentSleep" layoutX="30.0" layoutY="240.0" promptText="Time went to sleep" />
-            <TextField fx:id="timeWokeUp" layoutX="30.0" layoutY="306.0" promptText="Time Woke up" />
-            <Button layoutX="150.0" layoutY="271.0" mnemonicParsing="false" onAction="#submitSleepLog" text="Submit Sleep" />
-         </children>
-         <padding>
-            <Insets left="20.0" right="20.0" top="40.0" />
-         </padding>
-      </VBox>
-   </center>
-   <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" />
-   </children>
-</View>
+<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            prefHeight="600.0" prefWidth="335.0">
+    
+    <top>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
+            <image>
+                <Image url="@../logo.png" />
+            </image>
+        </ImageView>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="40.0" left="20.0" right="20.0"/>
+            </padding>
+            <children>
+                <TextField fx:id="caloriesEaten" promptText="Calories"/>
+                <TextField fx:id="proteinEaten" promptText="Protein"/>
+                <TextField fx:id="carbsEaten" promptText="Carbs"/>
+                <TextField fx:id="fatsEaten" promptText="Fats"/>
+                <TextField fx:id="cholesterolEaten" promptText="Cholesterol"/>
+                <Button mnemonicParsing="false" onAction="#submitFoodLog" text="Submit Food"/>
+                <TextField fx:id="coloriesBurnt" promptText="Calories Burnt"/>
+                <Button mnemonicParsing="false" onAction="#submitExcersizeLog" text="Submit Excersize"/>
+                <TextField fx:id="timeWentSleep" promptText="Time went to sleep"/>
+                <TextField fx:id="timeWokeUp" promptText="Time Woke up"/>
+                <Button mnemonicParsing="false" onAction="#submitSleepLog" text="Submit Sleep"/>
+            </children>
+        </VBox>
+    </center>
+    
+</BorderPane>
