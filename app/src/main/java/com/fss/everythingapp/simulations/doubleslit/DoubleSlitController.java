@@ -32,6 +32,14 @@ public class DoubleSlitController{
         setupSliders();
         updateSimulation();
     }
+
+    @FXML
+    private void reset() {
+        wavelengthSlider.setValue(400);
+        separationSlider.setValue(0);
+        widthSlider.setValue(0);
+        updateSimulation();
+    }
     
     void setupSliders() {
        // Wavelength slider (400-750 nm)
