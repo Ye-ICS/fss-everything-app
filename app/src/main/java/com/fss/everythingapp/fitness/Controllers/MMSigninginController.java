@@ -124,10 +124,12 @@ public class MMSigninginController {
         int weight = Integer.parseInt(weightField.getText());
         double bodyFat = Double.parseDouble(bodyFatField.getText());
 
+        if (genderToggle.getSelectedToggle() == null) return false;
         if (age < 1 || age > 119) return false;
         if (height < 50 || height > 300) return false;      // Height in cm
         if (weight < 10 || weight > 500) return false;      // Weight in kg
         if (bodyFat < 0 || bodyFat > 100) return false;     // Body fat % range
+
 
         return true;
     } catch (NumberFormatException e) {
@@ -139,7 +141,7 @@ public class MMSigninginController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid Input");
         alert.setHeaderText("Please enter valid numeric values");
-        alert.setContentText("Make sure that:\n- Age is 1-119\n- Height is 50-300 cm\n- Weight is 10-500 kg\n- Body Fat is 0-100%");
+        alert.setContentText("Make sure that:\n- Age is 1-119\n- Height is 50-300 cm\n- Weight is 10-500 kg\n- Body Fat is 0-100% \n- Gender is selected");
         alert.showAndWait();
     }
 }
