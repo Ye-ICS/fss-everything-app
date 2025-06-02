@@ -27,4 +27,10 @@ public class MainMenuController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void openSimulations(ActionEvent actionEvent) throws IOException {
+        Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/List.fxml"));
+        rootContainer.getScene().setRoot(mainListLayout);
+    }
 }
