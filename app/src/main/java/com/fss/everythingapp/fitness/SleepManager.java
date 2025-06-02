@@ -7,11 +7,8 @@ public class SleepManager {
 
     void newSleepRoutine() {
         while (SleepSchedule.tSlept > 24 || SleepSchedule.tSlept > 24) {
-            System.out.println("What time do you normally go to bed?"); //24 hour clock
             int choice = scanner.nextInt();
             SleepSchedule.tSlept = choice;
-            System.out.println("What time do you normally wake up?");
-            choice = scanner.nextInt();
             SleepSchedule.tWoke = choice;
             if (SleepSchedule.tSlept > 24 || SleepSchedule.tSlept > 24) {
                 System.out.println("Invalid time inputed");
@@ -26,8 +23,8 @@ public class SleepManager {
                 
                     }
             //if (/* confirm button code */) {
-             //   SleepSchedule.woke = SleepSchedule.tWoke;
-             //   SleepSchedule.slept = SleepSchedule.tSlept;
+                //SleepSchedule.woke = SleepSchedule.tWoke;
+                //SleepSchedule.slept = SleepSchedule.tSlept;
             //}
                 
         }           
