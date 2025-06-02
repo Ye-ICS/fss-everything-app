@@ -13,10 +13,11 @@ public class OdkApiService {
 
     }
 
-    public void get() throws IOException, InterruptedException {
+    public static void get() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://opendatakingston.cityofkingston.ca/documents/857a76bec55d429497e980a064add76e/explore")).build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.cityofkingston.ca/gtfs-realtime/vehicleupdates.pb")).build();
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
         System.out.println("response body: " + response.body());
+
     }
 }
