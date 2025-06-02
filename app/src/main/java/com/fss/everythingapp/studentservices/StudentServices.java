@@ -10,30 +10,24 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 class StudentServices {
-    static ArrayList<Counsellor> counsellors = new ArrayList<>(4);
+    ArrayList<Counsellor> counsellors = new ArrayList<>(4);
 
     private ArrayList<Counsellor> fillCounsellors(){
         for(int i = 0; i < counsellors.size(); i++){
-            Counsellor counsellor = new Counsellor("temp", "temp");
+            Counsellor counsellor = new Counsellor("temp");
             counsellors.add(counsellor);
         }
         return counsellors;
     }
-
-    int grade;
-
-    private void userName() {
-        String name = AppointmentController.name;
-    }
-
+    
     void userGrade() {
-        grade = AppointmentController.grade - 9;
         
-
     }
 
     //placeholder method for data being used by the app
-    void finalData() { 
+    void Data() { 
+        String name = AppointmentController.name;
+        int grade = AppointmentController.grade - 9;
         int[] counsellorTimes = counsellors.get(grade).getTime();
     }
 

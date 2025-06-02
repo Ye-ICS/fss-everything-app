@@ -1,13 +1,16 @@
 package com.fss.everythingapp.studentservices;
 
-class Date  {
-    int[] times = new int[7];
+import java.util.ArrayList;
+import java.util.List;
 
-    void Date(int[] times) {
+class Date  {
+    List<Timeslot> times = new ArrayList<Timeslot>();
+
+    //TODO fill arraylist with timeslot instances,give each timeslot a designation for the time it represents
+
+    Date(List<Timeslot> times) {
         this.times = times;
     }
 
-    int[] getTimes() {return this.times;}
-
-    
+    List<Timeslot> getTimes() {return this.times;}
 }

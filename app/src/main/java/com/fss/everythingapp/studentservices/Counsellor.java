@@ -3,27 +3,17 @@ package com.fss.everythingapp.studentservices;
 import java.util.ArrayList;
 
 class Counsellor {
-    private String name;
     private String email;
+    private int date;
     protected int[] time = new int[7];
-    private String calendar; //replace with proper variable when time comes
-    ArrayList<Date> dates = new ArrayList(30);
+    ArrayList<Date> dates = new ArrayList(31);
 
-    Counsellor(String name, String email) {
-        this.name = name;
+    Counsellor(String email) {
         this.email = email;
     }
 
     
     int[] getTime() {return this.time;}
-    
-
-    String getName() {
-        return this.name;
-    }
-    String getCalendar() {
-        return this.calendar;
-    }
     
 
 }
