@@ -74,21 +74,6 @@ public class MMSigninginController {
         });
     }
 
-    @FXML
-    private void handleGenderChoice(ActionEvent event) {
-        RadioButton selectedRadio = (RadioButton) genderToggle.getSelectedToggle();
-    }
-
-    @FXML
-    private void handleTextFieldAction(ActionEvent event) {
-        GeneralInfo.name = nameField.getText();
-        GeneralInfo.age = Integer.parseInt(ageField.getText());
-        GeneralInfo.height = Integer.parseInt(heightField.getText());
-        GeneralInfo.weight = Integer.parseInt(weightField.getText());
-        GeneralInfo.isMale = maleRadio.isSelected();
-        GeneralInfo.isFemale = femaleRadio.isSelected();
-        GeneralInfo.bodyfat = Double.parseDouble(bodyFatField.getText());
-    }
 
     @FXML
     void submitInfo(ActionEvent event) {
@@ -137,7 +122,7 @@ public class MMSigninginController {
     }
 
     }
-        private void showValidationAlert() {
+    private void showValidationAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid Input");
         alert.setHeaderText("Please enter valid numeric values");
