@@ -7,20 +7,18 @@ class CalendarRetrieval extends Counsellor{
         //TODO Auto-generated constructor stub
     }
 
-    int date;
-    int[] times = new int[7];
 
     private void getCalendarInfo() {
         //access councellor's calendar
         //getApi();
         for (int i = 0; i < 31; i++) {
-        dates.get(i).Date(times);
+        //dates.get(i).Date();
         }
         
     }
 
     void sendTimes() {
-        time = times;
+        //time = times;
     }
 
     
