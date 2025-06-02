@@ -3,15 +3,6 @@ package com.fss.everythingapp.studentservices;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< Updated upstream
-    void Date(int[] times) {
-        this.times = times;
-    }
-
-    int[] getTimes() {return this.times;}
-
-    
-=======
 class Date  {
     List<Timeslot> times = new ArrayList<Timeslot>();
 
@@ -22,5 +13,4 @@ class Date  {
     }
 
     List<Timeslot> getTimes() {return this.times;}
->>>>>>> Stashed changes
 }
