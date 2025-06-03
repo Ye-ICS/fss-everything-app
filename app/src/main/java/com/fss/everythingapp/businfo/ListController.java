@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
-public class MainListController {
+public class ListController {
 
     @FXML
     BorderPane rootContainer;
