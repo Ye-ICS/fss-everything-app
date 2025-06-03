@@ -12,7 +12,7 @@ public class ListController {
     BorderPane rootContainer;
 
     @FXML
-    private void quit(ActionEvent actionEvent) throws IOException {
-
+    private void quit(ActionEvent actionEvent) throws IOException, InterruptedException {
+        OdkApiService.get();
     }
 }
