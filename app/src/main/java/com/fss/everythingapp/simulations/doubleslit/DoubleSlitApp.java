@@ -14,7 +14,7 @@ public class DoubleSlitApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DoubleSlitSimulation.fxml"));
         Parent root = loader.load();
         
-        Scene scene = new Scene(root, 800, 800);
+        Scene scene = new Scene(root);
         
         primaryStage.setTitle("Double-Slit Interference Simulation");
         primaryStage.setScene(scene);

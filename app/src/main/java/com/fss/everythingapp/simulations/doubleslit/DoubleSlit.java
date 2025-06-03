@@ -29,7 +29,7 @@ public class DoubleSlit {
     }
     
     void setScreenDistance(double distance) {
-        this.screenDistance = distance;
+        screenDistance = distance;
     }
     
     double calculateDoubleSlitIntensity(double y) {
