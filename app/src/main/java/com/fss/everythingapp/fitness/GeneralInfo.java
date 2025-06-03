@@ -19,8 +19,8 @@ public class GeneralInfo {
         } else {
             return true;
         }
-    }
-
+    } 
+ 
     void calculateBodyfat () {
         if (isMale == true) {
             
