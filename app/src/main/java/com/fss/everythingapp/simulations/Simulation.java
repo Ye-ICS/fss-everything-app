@@ -1,6 +1,6 @@
 package com.fss.everythingapp.simulations;
 //~m :)
-public class Simulation extends SimulationManager
+public class Simulation extends SimulationMenuManager
 {
     // Simulation-specific properties and methods
     //
@@ -12,7 +12,7 @@ public class Simulation extends SimulationManager
     }
 
     public double update(double deltaTime) {
-        return super.update(deltaTime);
+      return -1; //this entire thing might be obsolete.
     }
 
     public void render() {

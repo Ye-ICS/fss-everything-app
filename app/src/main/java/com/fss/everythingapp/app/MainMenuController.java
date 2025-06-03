@@ -30,7 +30,8 @@ public class MainMenuController {
 
     @FXML
     private void openSimulations(ActionEvent actionEvent) throws IOException {
-        Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/List.fxml"));
-        rootContainer.getScene().setRoot(mainListLayout);
+            Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml"));
+            rootContainer.getScene().setRoot(simulationsLayout);
+
     }
 }
