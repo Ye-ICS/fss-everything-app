@@ -1,6 +1,18 @@
 package com.fss.everythingapp.studentservices;
 
 import java.util.ArrayList;
+
+
+
+
+
+
+//TODO feed SScalendar, Date, and Timeslot into an AI and aske to have a mock API class with the desired method.
+
+
+
+
+
 import java.util.List;
 
 public class SSCalendar {
