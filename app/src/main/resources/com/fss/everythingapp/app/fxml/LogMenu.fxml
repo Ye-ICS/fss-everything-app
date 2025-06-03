@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            prefHeight="600.0" prefWidth="335.0">
+    
+    <top>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
+            <image>
+                <Image url="@../logo.png" />
+            </image>
+        </ImageView>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="40.0" left="20.0" right="20.0"/>
+            </padding>
+            <children>
+                <TextField fx:id="caloriesEaten" promptText="Calories"/>
+                <TextField fx:id="proteinEaten" promptText="Protein"/>
+                <TextField fx:id="carbsEaten" promptText="Carbs"/>
+                <TextField fx:id="fatsEaten" promptText="Fats"/>
+                <TextField fx:id="cholesterolEaten" promptText="Cholesterol"/>
+                <Button mnemonicParsing="false" onAction="#submitFoodLog" text="Submit Food"/>
+                <TextField fx:id="coloriesBurnt" promptText="Calories Burnt"/>
+                <Button mnemonicParsing="false" onAction="#submitExcersizeLog" text="Submit Excersize"/>
+                <TextField fx:id="timeWentSleep" promptText="Time went to sleep"/>
+                <TextField fx:id="timeWokeUp" promptText="Time Woke up"/>
+                <Button mnemonicParsing="false" onAction="#submitSleepLog" text="Submit Sleep"/>
+            </children>
+        </VBox>
+    </center>
+    
+</BorderPane>

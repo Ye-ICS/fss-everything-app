@@ -1,4 +1,4 @@
-package com.fss.everythingapp.app;
+package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
 
@@ -8,19 +8,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class MainMenuController {
-
+public class MMnsiController {
 
     @FXML
-    private void openStudentServices(ActionEvent actionEvent) {
-        
-    }
+    private Button signInButton;
+
     @FXML
-    private void openFitnessApp (ActionEvent actionEvent) throws IOException {
+    private void signIn (ActionEvent actionEvent) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/MainMenu-NotSignedin.fxml"));
+            Parent root = FXMLLoader.load(MMnsiController.class.getResource("/com/fss/everythingapp/app/fxml/MainMenu-SigningIn.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -30,6 +29,5 @@ public class MainMenuController {
             System.out.println("Error loading FXML: " + e.getMessage());
         }
     }
+
 }
-
-

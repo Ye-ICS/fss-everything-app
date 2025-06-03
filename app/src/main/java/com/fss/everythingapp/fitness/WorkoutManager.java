@@ -15,6 +15,21 @@ public class WorkoutManager {
 
     void newRoutine() {
         // create a new routine
+        if (Workout.desiredPhysique == "Skinny" && WorkoutManager.getAverageBuild() || WorkoutManager.getFitBuild()) {
+            Workout.cardioTarget = 30;
+            Workout.compoundExSets = 2;
+            Workout.compoundExTarget = 10;
+            Workout.fullbodyExTarget = 20;
+            Workout.liftSets = 3;
+            Workout.liftTarget = 10;
+        } else if (Workout.desiredPhysique == "Lean" || Workout.desiredPhysique == "Bulk" && WorkoutManager.getSkinnyBuild() || WorkoutManager.getAverageBuild()) {
+            Workout.compoundExSets = 1;
+            Workout.compoundExTarget = 16;
+            Workout.liftSets = 3;
+            Workout.liftTarget = 16;
+            System.out.println("Gradually increase weight or reps to challenge muscles.");
+            System.out.println("Ensure 48 hours of rest between workouts targeting the same muscle group.");
+        }
     }
 
     void viewRoutine() {
