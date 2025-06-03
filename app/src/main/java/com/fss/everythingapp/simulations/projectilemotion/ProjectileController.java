@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProjectileController implements Initializable {
+public class ProjectileController {
     @FXML
     private Canvas gridCanvas;
     @FXML private Slider speedSlider;
@@ -39,8 +39,7 @@ public class ProjectileController implements Initializable {
 
     private ProjectileMotion simulation = new ProjectileMotion();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         simulation.setInitialVelocity(speedSlider.getValue());
         simulation.setInitialAngle(angleSlider.getValue());
         simulation.setHeight(heightSlider.getValue());
@@ -159,8 +158,6 @@ public class ProjectileController implements Initializable {
     }
     public void shootProjectile() {
         /*
-         * Originally we (maxim and masa) were going to use a while loop, then thread.sleep for each thing
-         * for some reason though, it didn't work, so alternatively we are using a timeline
          * This SHOULD create a smooth animation of the projec motion
          */
 

@@ -2,6 +2,9 @@ package com.fss.everythingapp.simulations;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.app.MainMenuController;
+import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +17,13 @@ public class SimulationMenuManager {
 
     @FXML
     private void openProjectileMotion(ActionEvent actionEvent) throws IOException {
-        Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/projectile_motion.fxml"));
+        Parent simulationsLayout;
+       
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../simulations/projectile_motion.fxml"));
+        ProjectileController controller = new ProjectileController();
+        fxmlLoader.setController(controller);
+        simulationsLayout = fxmlLoader.load();
+        controller.initialize();
         rootContainer.getScene().setRoot(simulationsLayout);
     }
 
@@ -37,7 +46,7 @@ public class SimulationMenuManager {
     }
 
     @FXML
-    private void Back(ActionEvent actionEvent) throws IOException {
+    private void back(ActionEvent actionEvent) throws IOException {
         Parent mainMenuLayout = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml")); //I will make work later... i tried to use Claude, CoPilot, ChatGPT, You name it, it didn't work, losing my mind.
         rootContainer.getScene().setRoot(mainMenuLayout);
     }
