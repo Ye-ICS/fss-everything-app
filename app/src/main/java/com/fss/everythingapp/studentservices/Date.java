@@ -15,6 +15,7 @@ class Date {
 
     Date(Timeslot[] times) {
         this.times = times;
+        fillTimes();
     }
 
     Timeslot[] getTimes() {
