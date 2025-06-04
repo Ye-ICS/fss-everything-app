@@ -20,8 +20,12 @@ public class MainMenuController {
 
     @FXML
     private void openBuses(ActionEvent actionEvent) throws IOException {
-        Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/businfo/List.fxml"));
+        try {
+            Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../businfo/List.fxml"));
         rootContainer.getScene().setRoot(mainListLayout);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
