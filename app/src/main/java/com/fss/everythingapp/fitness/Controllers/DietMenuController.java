@@ -60,8 +60,8 @@ public class DietMenuController {
     public void initialize() {
         DecimalFormat df = new DecimalFormat("#.##");
         DietManager.newDiet();
-        calorieBar.setProgress(Diet.caloriesEaten / Diet.calTarget);
-        calorieGoal.setText("Calories: " + df.format(Diet.caloriesEaten) + " / " + df.format(Diet.calTarget));
+        calorieBar.setProgress(Diet.caloriesEaten / Diet.calorieTarget);
+        calorieGoal.setText("Calories: " + df.format(Diet.caloriesEaten) + " / " + df.format(Diet.calorieTarget));
         carbBar.setProgress(Diet.carbsEaten / Diet.carbsTarget);
         carbsGoal.setText("Carbs: " + df.format(Diet.carbsEaten) + " / " + df.format(Diet.carbsTarget));
         fatsBar.setProgress(Diet.fatsEaten / Diet.fatsTarget);
