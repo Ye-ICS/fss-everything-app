@@ -20,10 +20,6 @@ public class MonthViewController {
     @FXML
     private VBox rootContainer;
 
-    public MonthViewController() {
-        new EventManager("Hey", "1/1/1", "1/1/2");
-    }
-
     @FXML
     void createDate(ActionEvent event) throws IOException {
         Parent createDate = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateDate.fxml"));

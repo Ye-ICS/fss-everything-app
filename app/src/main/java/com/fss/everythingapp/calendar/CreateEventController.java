@@ -48,11 +48,11 @@ public class CreateEventController {
 
         LocalDate localStartDate = startDatePicker.getValue();
         String startDate = localStartDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        startDate = startDate.concat("/" + startHourField.getText() + startMinField.getText());
+        startDate = startDate.concat("/" + startHourField.getText() + ":" + startMinField.getText());
 
         LocalDate localEndDate = startDatePicker.getValue();
         String endDate = localEndDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        endDate = endDate.concat("/" + endHourField.getText() + endMinField.getText());
+        endDate = endDate.concat("/" + endHourField.getText() + ":" + endMinField.getText());
 
         EventManager eventMan = new EventManager(eventName, startDate, endDate);
 

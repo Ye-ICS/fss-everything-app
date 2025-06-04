@@ -1,12 +1,21 @@
 package com.fss.everythingapp.calendar;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class TaskManager extends DateManager {
+    String taskName;
+    String dueDate;
 
     TaskManager(String taskName, String dueDate) throws FileNotFoundException {
+        this.taskName = taskName;
+        this.dueDate = dueDate;
+
         saveTask(taskName, dueDate);
     }
 
@@ -32,9 +41,21 @@ public class TaskManager extends DateManager {
         scanner.close();
     }
 
-    static void saveTask(String taskName, String dueDate) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter("DateList.txt");
-        writer.println("T," + taskName + "," + dueDate);
+    void saveTask(String taskName, String dueDate) throws FileNotFoundException {
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter(new FileWriter(new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
+            // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive - Limestone DSB/Documents/testFile.txt"), true));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return;
+        }
+        writer.println();
+        writer.print("T," + taskName + "," + dueDate);
+        writer.close();
+    }
+
+    static void selectEvent() { // Displays event information
     }
 
 }

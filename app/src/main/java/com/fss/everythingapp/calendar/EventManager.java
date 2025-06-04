@@ -69,15 +69,13 @@ public class EventManager extends DateManager {
 
     void saveEvent(String eventTitle, String startDate, String endDate) {
         PrintWriter writer;
-
         try {
             writer = new PrintWriter(new FileWriter(new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
+            // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive - Limestone DSB/Documents/testFile.txt"), true));
         } catch (IOException | URISyntaxException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return;
         }
-
         writer.println();
         writer.print("E," + eventTitle + "," + startDate + "," + endDate);
         writer.close();
