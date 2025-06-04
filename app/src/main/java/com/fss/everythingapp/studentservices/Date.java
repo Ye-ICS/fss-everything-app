@@ -9,17 +9,18 @@ class Date {
 
     private void fillTimes(){
         for(int i = 0; i < times.size(); i++){
-            Timeslot timeslot = new Timeslot("0", "0");
-            times.get(i) = timeslot;
+            Timeslot timeslot = new Timeslot(0.0, 0.0);
+            Timeslot temp = times.get(i);
+            temp = timeslot;
         }
     }
 
-    Date(Timeslot[] times) {
+    Date(List<Timeslot> times) {
         this.times = times;
         fillTimes();
     }
 
-    Timeslot[] getTimes() {
+    List<Timeslot> getTimes() {
         return this.times;
     }
 }
