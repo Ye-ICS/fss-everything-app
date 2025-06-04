@@ -61,7 +61,7 @@ public class PreferencesController {
     @FXML
     void backToMenu(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(MMSignedInController.class.getResource("/com/fss/everythingapp/app/fxml/MainMenu-Signedin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu-Signedin.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

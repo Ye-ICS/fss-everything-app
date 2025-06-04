@@ -22,7 +22,7 @@ public class MMSignedInController {
     }
     else {
         try {
-            Parent root = FXMLLoader.load(MMSignedInController.class.getResource("/com/fss/everythingapp/app/fxml/DietMenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/DietMenu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -37,7 +37,7 @@ public class MMSignedInController {
     @FXML
     void openLogMenu(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(MMSigninginController.class.getResource("/com/fss/everythingapp/app/fxml/LogMenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/LogMenu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -58,7 +58,7 @@ public class MMSignedInController {
             showValidationAlert();
         } else {
             try {
-                Parent root = FXMLLoader.load(MMSignedInController.class.getResource("/com/fss/everythingapp/app/fxml/SleepMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/SleepMenu.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -76,7 +76,7 @@ public class MMSignedInController {
             showValidationAlert();
         } else {
             try {
-                Parent root = FXMLLoader.load(MMSignedInController.class.getResource("/com/fss/everythingapp/app/fxml/WorkoutMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/WorkoutMenu.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -92,7 +92,7 @@ public class MMSignedInController {
     @FXML
     void openPreferenceMenu(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(MMSignedInController.class.getResource("/com/fss/everythingapp/app/fxml/Preferences.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/Preferences.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

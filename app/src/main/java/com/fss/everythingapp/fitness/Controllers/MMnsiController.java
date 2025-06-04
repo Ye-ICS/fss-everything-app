@@ -19,7 +19,7 @@ public class MMnsiController {
     @FXML
     private void signIn (ActionEvent actionEvent) throws IOException {
         try {
-            Parent root = FXMLLoader.load(MMnsiController.class.getResource("/com/fss/everythingapp/app/fxml/MainMenu-SigningIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu-SigningIn.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

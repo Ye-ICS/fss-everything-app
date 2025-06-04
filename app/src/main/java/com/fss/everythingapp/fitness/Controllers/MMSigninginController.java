@@ -91,7 +91,7 @@ public class MMSigninginController {
         GeneralInfo.isFemale = femaleRadio.isSelected();
 
         try {
-            Parent root = FXMLLoader.load(MMSigninginController.class.getResource("/com/fss/everythingapp/app/fxml/MainMenu-SignedIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu-SignedIn.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
