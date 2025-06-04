@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.fitness.Controllers.PreferencesController">
+<BorderPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.fitness.Controllers.PreferencesController">
 
     <top>
         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
@@ -33,7 +33,17 @@
             </RadioButton>
             <RadioButton fx:id="leanRadio" layoutX="135.0" layoutY="236.0" mnemonicParsing="false" text="Lean" toggleGroup="$physiqueGroup" />
             <RadioButton fx:id="muscularRadio" layoutX="135.0" layoutY="244.0" mnemonicParsing="false" text="Muscular" toggleGroup="$physiqueGroup" />
-            <Button mnemonicParsing="false" onAction="#submitPref" text="Submit" />
+            <VBox alignment="CENTER" prefHeight="156.0" prefWidth="295.0" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="notActiveRadio" mnemonicParsing="false" text="Not Active">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="activityGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="activeRadio" mnemonicParsing="false" text="Active" toggleGroup="$activityGroup" />
+                  <Button mnemonicParsing="false" onAction="#submitActivity" text="Submit" />
+               </children>
+            </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#backToMenu" prefHeight="25.0" prefWidth="43.0" text="Back" />

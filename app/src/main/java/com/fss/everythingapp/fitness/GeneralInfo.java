@@ -13,15 +13,8 @@ static public String name;
     private boolean acceptableFat;
     static private boolean obesityFat;
     public static int bodyFat;
+    public static boolean isActive; //true means person is active, false is opposite
 
-    boolean isActive () {
-        if (Diet.calBurned < 1600) {
-            return false;
-        } else {
-            return true;
-        }
-    } 
- 
     void calculateBodyfat () {
         if (isMale == true) {
             
