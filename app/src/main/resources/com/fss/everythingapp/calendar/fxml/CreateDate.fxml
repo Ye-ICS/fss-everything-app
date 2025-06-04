@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.CreateDateController">
+<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.CreateDateController">
    <children>
       <Label text="Select a Date Type">
          <font>
             <Font size="24.0" />
          </font>
          <VBox.margin>
-            <Insets bottom="20.0" />
+            <Insets bottom="100.0" />
          </VBox.margin>
       </Label>
       <Button mnemonicParsing="false" onAction="#createEvent" text="Create New Event">
@@ -22,6 +22,11 @@
          </VBox.margin>
       </Button>
       <Button mnemonicParsing="false" onAction="#createTask" text="Create New Task">
+         <VBox.margin>
+            <Insets bottom="15.0" top="5.0" />
+         </VBox.margin>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#cancel" text="Cancel">
          <VBox.margin>
             <Insets top="5.0" />
          </VBox.margin>
