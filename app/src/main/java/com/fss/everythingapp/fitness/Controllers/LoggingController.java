@@ -51,15 +51,15 @@ public class LoggingController {
 
     @FXML
     void submitExcersizeLog(ActionEvent event) {
-        Workout.caloriesBurned = Integer.parseInt(coloriesBurnt.getText());
+        Workout.caloriesBurned += Integer.parseInt(coloriesBurnt.getText());
     }
 
     @FXML
     void submitFoodLog(ActionEvent event) {
-        Diet.caloriesEaten = Integer.parseInt(caloriesEaten.getText());
-        Diet.carbsEaten = Integer.parseInt(carbsEaten.getText());
-        Diet.proteinEaten = Integer.parseInt(proteinEaten.getText());
-        Diet.fatsEaten = Integer.parseInt(fatsEaten.getText());
+        Diet.caloriesEaten += Integer.parseInt(caloriesEaten.getText());
+        Diet.carbsEaten += Integer.parseInt(carbsEaten.getText());
+        Diet.proteinEaten += Integer.parseInt(proteinEaten.getText());
+        Diet.fatsEaten += Integer.parseInt(fatsEaten.getText());
     }
 
     @FXML

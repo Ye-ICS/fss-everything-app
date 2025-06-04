@@ -8,6 +8,7 @@ public class Diet {
     static public double proteinTarget;
     static public double carbsTarget;
     static public double fatsTarget;
+    static public double bmr;
 
     
 }

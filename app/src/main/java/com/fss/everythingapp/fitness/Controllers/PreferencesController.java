@@ -2,6 +2,7 @@ package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.fitness.GeneralInfo;
 import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
@@ -20,6 +21,15 @@ public class PreferencesController {
     private ToggleGroup physiqueGroup;
 
     @FXML
+    private RadioButton notActiveRadio;
+    
+    @FXML
+    private ToggleGroup activityGroup;
+
+    @FXML
+    private RadioButton activeRadio;
+
+    @FXML
     private RadioButton wlRadio;
 
     @FXML
@@ -28,18 +38,24 @@ public class PreferencesController {
     @FXML
     private RadioButton leanRadio;
 
+
     @FXML
-    void submitPref(ActionEvent event) {
+    void submitActivity(ActionEvent event) {
+        if (activeRadio.isSelected()) {
+            GeneralInfo.isActive = true;
+        }
+        if (notActiveRadio.isSelected()) {
+            GeneralInfo.isActive = false;
+        }
         if (wlRadio.isSelected()) {
             Workout.desiredPhysique = "skinny";
         }
-        else if (muscularRadio.isSelected()) {
-            Workout.desiredPhysique = "muscular";
+        if (muscularRadio.isSelected()) {
+            Workout.desiredPhysique = "bulk";
         }
-        else if (leanRadio.isSelected()) {
+        if (leanRadio.isSelected()) {
             Workout.desiredPhysique = "lean";
         }
-
     }
 
     @FXML
