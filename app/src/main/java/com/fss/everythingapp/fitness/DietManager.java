@@ -2,7 +2,6 @@ package com.fss.everythingapp.fitness;
 import java.util.Scanner;
 
 public class DietManager {
-    Scanner scanner = new Scanner(System.in);
     
    // boolean isDietHealthy() {
      //   if () {
@@ -24,17 +23,17 @@ public class DietManager {
         bmr();
         //  create a new diet
         if (Workout.desiredPhysique == "skinny") {
-            Diet.calTarget = Diet.bmr - 750;
+            Diet.calorieTarget = Diet.bmr - 750;
             Diet.proteinTarget = GeneralInfo.weight * 1.8;
             Diet.carbsTarget = (Diet.bmr * 0.55) / 4;
             Diet.fatsTarget = (Diet.bmr / 45);
         } else if (Workout.desiredPhysique == "lean") {
-            Diet.calTarget = Diet.bmr * 1.1;
+            Diet.calorieTarget = Diet.bmr * 1.1;
             Diet.proteinTarget = GeneralInfo.weight * 2.4;
             Diet.carbsTarget = (Diet.bmr * 0.45) / 4;
             Diet.fatsTarget = GeneralInfo.weight * 0.8;
         } else if (Workout.desiredPhysique == "bulk") {
-            Diet.calTarget = Diet.bmr * 1.2;
+            Diet.calorieTarget = Diet.bmr * 1.2;
             Diet.proteinTarget = GeneralInfo.weight * 1.8;
             Diet.carbsTarget = Diet.bmr * 1.65;
             Diet.fatsTarget = GeneralInfo.weight * 0.7;
