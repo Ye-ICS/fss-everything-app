@@ -36,7 +36,15 @@ public class MMSignedInController {
 
     @FXML
     void openLogMenu(ActionEvent event) {
-        
+        try {
+            Parent root = FXMLLoader.load(MMSigninginController.class.getResource("/com/fss/everythingapp/app/fxml/LogMenu.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
