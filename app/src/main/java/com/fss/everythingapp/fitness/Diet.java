@@ -1,7 +1,7 @@
 package com.fss.everythingapp.fitness;
 public class Diet {
     static public double caloriesEaten;
-    static public double calTarget;
+    static public double calorieTarget;
     static public double proteinEaten;
     static public double carbsEaten;
     static public double fatsEaten;
