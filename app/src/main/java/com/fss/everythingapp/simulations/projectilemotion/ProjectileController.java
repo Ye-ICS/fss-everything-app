@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProjectileController {
+public class ProjectileController implements Initializable {
     @FXML
     private Canvas gridCanvas;
     @FXML private Slider speedSlider;
@@ -39,7 +39,9 @@ public class ProjectileController {
 
     private ProjectileMotion simulation = new ProjectileMotion();
 
-    public void initialize() {
+    @Override
+    @FXML
+    public void initialize(URL location, ResourceBundle resources) {
         simulation.setInitialVelocity(speedSlider.getValue());
         simulation.setInitialAngle(angleSlider.getValue());
         simulation.setHeight(heightSlider.getValue());
@@ -67,7 +69,7 @@ public class ProjectileController {
             simulation.calculateRange();
 
             //draw the projectile at height
-            drawProjectile(50, 470 - 3.8*heightSlider.getValue()); // Initial drawing of the projectile
+            drawProjectile(50,  470 - 9 *heightSlider.getValue()); // Initial drawing of the projectile
             // Update logic later
         });
         accelerationSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -108,36 +110,27 @@ public class ProjectileController {
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
         double width = gridCanvas.getWidth();
         double height = gridCanvas.getHeight();
-        
+
         gc.clearRect(0, 0, width, height);
         
         gc.setStroke(javafx.scene.paint.Color.BLACK);
         gc.setLineWidth(1.5);
-        
+
+        gc.setFill(Color.LIGHTGREY);
+        gc.fillRect(0, 0, width, gridCanvas.getHeight());
+
         //Draw X axis
-        gc.strokeLine(50, height - 500, width - 50, height - 500);
+        gc.strokeLine(50, height - 100, width - 50, height - 100);
         
         //Draw Y axis
-        gc.strokeLine(50, height - 500, 50, 50);
-        
-        double arrowSize = 5;
-
-        // Draw X axis arrow
-        double[] xArrowX = {width - 50, width - 50 - arrowSize, width - 50 - arrowSize};
-        double[] xArrowY = {height - 50, height - 50 - arrowSize, height - 50 + arrowSize};
-        gc.fillPolygon(xArrowX, xArrowY, 3);
-        
-        // Draw Y axis arrow
-        double[] yArrowX = {50 - arrowSize, 50 + arrowSize, 50};
-        double[] yArrowY = {50 + arrowSize, 50 + arrowSize, 50};
-        gc.fillPolygon(yArrowX, yArrowY, 3);
+        gc.strokeLine(50, height - 100, 50, 50);
     }
 
     public void drawProjectile(double x, double y) {
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
         drawAxes(); //to clear the canvas before redrawing
         gc.setFill(Color.BLACK);
-        gc.fillOval(x, y, 30, 30); //Drawing circle at 
+        gc.fillOval(x, y + 483, 30, 30); //Drawing circle at 
     }
 
     public void drawGrid(){
@@ -147,7 +140,8 @@ public class ProjectileController {
         // In progress
     }
     public void drawVelocityVectors(){
-        // In progress
+        // In progressP
+
     }
     public void drawVelocityComponents(){
         // In progress
@@ -158,6 +152,8 @@ public class ProjectileController {
     }
     public void shootProjectile() {
         /*
+         * Originally we (maxim and masa) were going to use a while loop, then thread.sleep for each thing
+         * for some reason though, it didn't work, so alternatively we are using a timeline
          * This SHOULD create a smooth animation of the projec motion
          */
 

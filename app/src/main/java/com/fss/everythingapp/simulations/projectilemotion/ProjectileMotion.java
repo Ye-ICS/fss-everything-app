@@ -44,7 +44,7 @@ public class ProjectileMotion {
     Vector2D launchProjectile(double height, double speed, double gravity, double angle, double time) {        
             System.out.println("Launching projectile with height: " + height + ", speed: " + speed + ", gravity: " + gravity + ", angle: " + angle + ", time: " + time);
             double x =  + speed * Math.cos(Math.toRadians(angle)) * time;
-            double y =  height*3.8 + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
+            double y =  height*9 + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
         return new Vector2D(x, y);
     }
 
