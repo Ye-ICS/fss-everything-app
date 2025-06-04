@@ -1,6 +1,6 @@
 package com.fss.everythingapp.simulations;
 //~m :)
-public class Simulation extends SimulationMenuManager
+public class Simulation extends SimulationMenuController
 {
     // Simulation-specific properties and methods
     //

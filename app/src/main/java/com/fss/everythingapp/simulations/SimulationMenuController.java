@@ -10,7 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-public class SimulationMenuManager {
+
+public class SimulationMenuController {
     
     @FXML
     BorderPane rootContainer;
