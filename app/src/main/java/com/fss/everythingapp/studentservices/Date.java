@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Date {
-    Timeslot[] times = new Timeslot[6];
+    String date;
+    List<Timeslot> times = new ArrayList<Timeslot>();
 
     private void fillTimes(){
-        for(int i = 0; i < times.length; i++){
-            Timeslot timeslot = new Timeslot();
-            times[i] = timeslot;
+        for(int i = 0; i < times.size(); i++){
+            Timeslot timeslot = new Timeslot("0", "0");
+            times.get(i) = timeslot;
         }
     }
 
