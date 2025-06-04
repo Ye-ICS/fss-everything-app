@@ -1,3 +1,5 @@
+package com.fss.everythingapp.simulations.photoelectriceffect;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

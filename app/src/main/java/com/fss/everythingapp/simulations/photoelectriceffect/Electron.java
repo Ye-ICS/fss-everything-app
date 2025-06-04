@@ -1,3 +1,7 @@
+package com.fss.everythingapp.simulations.photoelectriceffect;
+
+import com.fss.everythingapp.simulations.Vector2D;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 

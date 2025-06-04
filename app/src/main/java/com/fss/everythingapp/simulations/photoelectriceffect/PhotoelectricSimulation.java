@@ -1,8 +1,13 @@
+package com.fss.everythingapp.simulations.photoelectriceffect;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fss.everythingapp.simulations.Vector2D;
+
 import java.util.Iterator;
 
 /**
@@ -23,7 +28,6 @@ public class PhotoelectricSimulation {
     // Emission statistics
     private int totalPhotonsEmitted = 0;
     private int totalElectronsEjected = 0;
-    private double lastPhotonTime = 0;
     private Rectangle metalSurface;
     
     public PhotoelectricSimulation(double width, double height) {

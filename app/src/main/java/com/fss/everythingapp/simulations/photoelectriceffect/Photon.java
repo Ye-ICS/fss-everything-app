@@ -1,3 +1,7 @@
+package com.fss.everythingapp.simulations.photoelectriceffect;
+
+import com.fss.everythingapp.simulations.Vector2D;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -63,7 +67,8 @@ public class Photon extends Circle {
     
     public void setVelocity(Vector2D v) {
         // Normalize to maintain speed of light
-        Vector2D normalized = v.normalize();
+        Vector2D normalized = v.copy();
+        normalized.normalize(); // Normalize the copied vector
         double speed = 200.0; // Scaled speed
         this.velocity = normalized.multiply(speed);
     }
