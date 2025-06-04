@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Canvas fx:id="gridCanvas" height="1000.0" layoutX="16.0" layoutY="25.0" width="1900.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0" />
+      <Canvas fx:id="gridCanvas" height="1082.0" layoutX="16.0" layoutY="25.0" width="1464.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="456.0" AnchorPane.topAnchor="0.0" />
       <Accordion layoutX="1200.0" prefHeight="232.0" prefWidth="430.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
         <panes>
           <TitledPane animated="false" prefHeight="312.0" prefWidth="430.0" text="Controls">
@@ -146,6 +146,6 @@
             </TitledPane>
         </panes>
       </Accordion>
-      <Button fx:id="launch" mnemonicParsing="false" prefHeight="46.0" prefWidth="215.0" text="Launch" />
+      <Button fx:id="launch" layoutX="1590.0" layoutY="856.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="215.0" text="Launch" />
    </children>
 </AnchorPane>
