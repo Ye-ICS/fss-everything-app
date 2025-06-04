@@ -20,24 +20,27 @@ public class DietManager {
         // edit diet
     }
 
-    void newDiet() {
+    static public void newDiet() {
         //  create a new diet
-        if (Workout.desiredPhysique == "skinny" && WorkoutManager.getAverageBuild() || WorkoutManager.getBigBuild() || WorkoutManager.getFitBuild()) {
-            System.out.println("Protein intake daily: around" + GeneralInfo.weight * 1.8 + ".");
-            System.out.println("Carbs intake daily: 45-55% of total daily calories should be carbs.");
-            System.out.println("Fats intake daily: 20-30 % of total daily calories should be fats.");
-        } else if (Workout.desiredPhysique == "lean" || Workout.desiredPhysique == "bulk" && WorkoutManager.getSkinnyBuild() || WorkoutManager.getAverageBuild()) {
-            System.out.println("Add 250-500 daily calorie intake.");
-            System.out.println("Protein intake daily: around " + GeneralInfo.weight * 2.4 + ".");
-            System.out.println("Carbs intake daily: around " + GeneralInfo.weight * 6.6 + ".");
-            System.out.println("Fats intake daily: around " + GeneralInfo.weight * 0.8 + ".");
+        if (Workout.desiredPhysique == "skinny") {
+            Diet.calTarget = (GeneralInfo.weight * 15) - 750;
+            Diet.proteinTarget = GeneralInfo.weight * 1.8;
+            Diet.carbsTarget = (Diet.calTarget * 0.55) / 4; 
+            Diet.fatsTarget = (Diet.calTarget / 45);
+        } else if (Workout.desiredPhysique == "lean") {
+            Diet.calTarget = (GeneralInfo.weight * 15) + (GeneralInfo.weight * 15) * 0.1;
+            Diet.proteinTarget = GeneralInfo.weight * 2.4;
+            Diet.carbsTarget = GeneralInfo.weight * 6.6;
+            Diet.fatsTarget = GeneralInfo.weight * 0.8;
+        } else if (Workout.desiredPhysique == "bulk") {
+            Diet.calTarget = (GeneralInfo.weight * 15) + (GeneralInfo.weight * 15) * 0.2;
+            Diet.proteinTarget = GeneralInfo.weight * 1.8;
+            Diet.carbsTarget = GeneralInfo.weight * 5;
+            Diet.fatsTarget = GeneralInfo.weight * 0.7;
         }
             
         }
-        
-        
     }
-
-    
+        
 
 

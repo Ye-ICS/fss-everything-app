@@ -1,6 +1,10 @@
 package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+
+import com.fss.everythingapp.fitness.DietManager;
+import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +17,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WorkoutMenuController {
+
+    @FXML
+    public void initialize() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        DietManager.newDiet();
+        calorieBurntBar.setProgress(Workout.caloriesBurned / 500.0);
+        calorieBurntGoal.setText("Calories Burned: " + df.format(Workout.caloriesBurned) + " / 500");
+    }
 
     @FXML
     private ProgressBar calorieBurntBar;

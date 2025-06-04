@@ -1,6 +1,10 @@
 package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+
+import com.fss.everythingapp.fitness.Diet;
+import com.fss.everythingapp.fitness.DietManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,6 +54,20 @@ public class DietMenuController {
             e.printStackTrace();
             System.out.println("Error loading FXML: " + e.getMessage());
         }
+    }
+
+    @FXML
+    public void initialize() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        DietManager.newDiet();
+        calorieBar.setProgress(Diet.caloriesEaten / Diet.calTarget);
+        calorieGoal.setText("Calories: " + df.format(Diet.caloriesEaten) + " / " + df.format(Diet.calTarget));
+        carbBar.setProgress(Diet.carbsEaten / Diet.carbsTarget);
+        carbsGoal.setText("Carbs: " + df.format(Diet.carbsEaten) + " / " + df.format(Diet.carbsTarget));
+        fatsBar.setProgress(Diet.fatsEaten / Diet.fatsTarget);
+        fatsGoal.setText("Fats: " + df.format(Diet.fatsEaten) + " / " + df.format(Diet.fatsTarget));
+        proteinBar.setProgress(Diet.proteinEaten / Diet.proteinTarget);
+        protienGoal.setText("Protein: " + df.format(Diet.proteinEaten) + " / " + df.format(Diet.proteinTarget));
     }
 
 }

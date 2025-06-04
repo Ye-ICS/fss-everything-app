@@ -15,7 +15,7 @@ static public String name;
     public static int bodyFat;
 
     boolean isActive () {
-        if (Diet.calBurned < 1600) {
+        if (Workout.caloriesBurned < 1600) {
             return false;
         } else {
             return true;
