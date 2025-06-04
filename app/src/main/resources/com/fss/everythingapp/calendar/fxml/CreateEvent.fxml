@@ -21,15 +21,15 @@
       </Label>
       <TextField fx:id="eventNameField" alignment="CENTER" prefHeight="25.0" prefWidth="35.0" promptText="Enter Event Name">
          <VBox.margin>
-            <Insets bottom="20.0" left="75.0" right="75.0" />
+            <Insets bottom="20.0" left="35.0" right="35.0" />
          </VBox.margin>
       </TextField>
-      <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="175.0" promptText="Start Date">
+      <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="125.0" promptText="Start Date">
          <VBox.margin>
             <Insets bottom="15.0" />
          </VBox.margin>
       </DatePicker>
-      <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="175.0" promptText="End Date">
+      <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="125.0" promptText="End Date">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
@@ -63,6 +63,19 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#createEvent" text="Create Event" />
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="335.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#cancel" text="Cancel">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#createEvent" text="Create Event">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </VBox>

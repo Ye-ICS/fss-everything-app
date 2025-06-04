@@ -56,7 +56,15 @@ public class CreateEventController {
 
         EventManager eventMan = new EventManager(eventName, startDate, endDate);
 
-        Parent openCalendar = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
+        Parent openCalendar = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(openCalendar);
+    }
+
+    @FXML
+    void cancel(ActionEvent event) throws IOException {
+        Parent home = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
+        rootContainer.getScene().setRoot(home);
     }
 }

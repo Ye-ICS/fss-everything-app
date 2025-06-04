@@ -22,13 +22,15 @@ public class MonthViewController {
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
-        Parent createDate = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateDate.fxml"));
+        Parent createDate = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateDate.fxml"));
         rootContainer.getScene().setRoot(createDate);
     }
 
     @FXML
     void exit(ActionEvent event) throws IOException {
-        Parent mainMenu = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/Example.fxml"));
+        Parent mainMenu = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
 
         rootContainer.getScene().setRoot(mainMenu);
     }
