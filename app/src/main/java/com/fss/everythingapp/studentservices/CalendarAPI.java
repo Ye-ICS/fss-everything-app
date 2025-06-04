@@ -19,10 +19,11 @@ public class CalendarAPI {
      * @return an instance of SSCalendar or null (40% of the time)
      */
     public SSCalendar getCounsellorCalendar(long id) {
-        if (random.nextDouble() < 0.6) {
-            // Creating a mock SSCalendar with dummy data
-            List<Date> dates = new ArrayList<Date>();
 
+            // Creating a mock SSCalendar with dummy data
+        List<Date> dates = new ArrayList<Date>();
+
+        if (random.nextDouble() < 0.6) {
             // Example: Adding a few sample dates with timeslots
             Timeslot timeslot1 = new Timeslot(9.0, 10.0);
             Timeslot timeslot2 = new Timeslot(10.3, 11.3);
@@ -32,11 +33,12 @@ public class CalendarAPI {
 
             Date date1 = new Date(slotsDay1);
             dates.add(date1);
-
-            return new SSCalendar(id, dates);
         } else {
             // Return null to indicate failure to retrieve calendar
-            return null;
+            Date date1 = new Date(null);
+            dates.add(date1);
         }
+            return new SSCalendar(id, dates);
+        
     }
 }
