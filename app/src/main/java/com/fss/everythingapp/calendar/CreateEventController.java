@@ -48,15 +48,15 @@ public class CreateEventController {
 
         LocalDate localStartDate = startDatePicker.getValue();
         String startDate = localStartDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        startDate.concat("/" + startHourField.getText() + startMinField.getText());
+        startDate = startDate.concat("/" + startHourField.getText() + startMinField.getText());
 
         LocalDate localEndDate = startDatePicker.getValue();
         String endDate = localEndDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        endDate.concat("/" + endHourField.getText() + endMinField.getText());
+        endDate = endDate.concat("/" + endHourField.getText() + endMinField.getText());
 
         EventManager eventMan = new EventManager(eventName, startDate, endDate);
 
-        Parent openCalendar = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/MonthView.fxlm"));
+        Parent openCalendar = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(openCalendar);
     }
 }

@@ -11,23 +11,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class CreateDateController {
+    
+    @FXML
     private VBox rootContainer;
 
     @FXML
-    private Button createEventButton;
-
-    @FXML
-    private Button createTaskButton;
-
-    @FXML
     void createEvent(ActionEvent event) throws IOException {
-        Parent createEvent = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/CreateEvent.fxlm"));
+        Parent createEvent = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateEvent.fxml"));
         rootContainer.getScene().setRoot(createEvent);
     }
 
     @FXML
     void createTask(ActionEvent event) throws IOException {
-        Parent createTask = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/CreateTask.fxlm"));
+        Parent createTask = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateTask.fxml"));
         rootContainer.getScene().setRoot(createTask);
     }
 }

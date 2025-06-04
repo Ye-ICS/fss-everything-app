@@ -20,14 +20,13 @@ public class MainMenuController {
 
     @FXML
     private void openBuses(ActionEvent actionEvent) throws IOException {
-        Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../businfo/List.fxml"));
+        Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/businfo/List.fxml"));
         rootContainer.getScene().setRoot(mainListLayout);
     }
 
     @FXML
     private void openCalendar(ActionEvent actionEvent) throws IOException {
-        Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("../calendar/MonthView.fxml"));
+        Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(monthView);
     }
-
 }

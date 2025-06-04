@@ -7,19 +7,33 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 public class MonthViewController {
+
+    @FXML
+    private Button exitButton;
 
     @FXML
     private Button createDateButton;
 
     @FXML
-    private BorderPane rootContainer;
+    private VBox rootContainer;
+
+    public MonthViewController() {
+        new EventManager("Hey", "1/1/1", "1/1/2");
+    }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
-        Parent createDate = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/CreateDate.fxlm"));
+        Parent createDate = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateDate.fxml"));
         rootContainer.getScene().setRoot(createDate);
+    }
+
+    @FXML
+    void exit(ActionEvent event) throws IOException {
+        Parent mainMenu = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/Example.fxml"));
+
+        rootContainer.getScene().setRoot(mainMenu);
     }
 }

@@ -1,14 +1,26 @@
 package com.fss.everythingapp.calendar;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EventManager extends DateManager {
     ArrayList<Event> events = new ArrayList<Event>();
+    String eventTitle;
+    String startDate;
+    String endDate;
 
-    EventManager(String eventTitle, String startDate, String endDate) throws FileNotFoundException {
+
+    EventManager(String eventTitle, String startDate, String endDate) {
+        this.eventTitle = eventTitle;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        
         saveEvent(eventTitle, startDate, endDate);
     }
 
@@ -55,11 +67,19 @@ public class EventManager extends DateManager {
         return newEvent;
     }
 
-    PrintWriter writer = new PrintWriter("DateList.txt");
+    void saveEvent(String eventTitle, String startDate, String endDate) {
+        PrintWriter writer;
 
-    static void saveEvent(String eventTitle, String startDate, String endDate) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter("DateList.txt");
-        writer.println("E," + eventTitle + "," + startDate + "," + endDate);
+        try {
+            writer = new PrintWriter(new FileWriter(new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
+        } catch (IOException | URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return;
+        }
+
+        writer.println();
+        writer.print("E," + eventTitle + "," + startDate + "," + endDate);
         writer.close();
     }
 

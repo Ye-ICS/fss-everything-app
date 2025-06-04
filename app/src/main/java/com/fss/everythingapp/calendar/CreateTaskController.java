@@ -39,11 +39,11 @@ public class CreateTaskController {
 
         LocalDate localDueDate = dueDatePicker.getValue();
         String dueDate = localDueDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        dueDate.concat("/" + dueHourField.getText() + dueMinField.getText());
+        dueDate = dueDate.concat("/" + dueHourField.getText() + dueMinField.getText());
 
         TaskManager taskMan = new TaskManager(taskName, dueDate);
 
-        Parent openCalendar = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/MonthView.fxlm"));
+        Parent openCalendar = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(openCalendar);
     }
 
