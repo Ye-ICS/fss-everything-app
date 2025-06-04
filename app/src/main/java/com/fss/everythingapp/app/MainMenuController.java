@@ -27,4 +27,11 @@ public class MainMenuController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void openSimulations(ActionEvent actionEvent) throws IOException {
+            Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml"));
+            rootContainer.getScene().setRoot(simulationsLayout);
+
+    }
 }
