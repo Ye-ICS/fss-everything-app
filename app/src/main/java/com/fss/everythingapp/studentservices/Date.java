@@ -3,14 +3,24 @@ package com.fss.everythingapp.studentservices;
 import java.util.ArrayList;
 import java.util.List;
 
-class Date  {
-    Timeslot[] times = new Timeslot[6];
+class Date {
+    String date;
+    List<Timeslot> times = new ArrayList<Timeslot>();
 
-    //TODO fill arraylist with timeslot instances,give each timeslot a designation for the time it represents
-
-    Date(Timeslot[] times) {
-        this.times = times;
+    private void fillTimes(){
+        for(int i = 0; i < times.size(); i++){
+            Timeslot timeslot = new Timeslot(0.0, 0.0);
+            Timeslot temp = times.get(i);
+            temp = timeslot;
+        }
     }
 
-    Timeslot[] getTimes() {return this.times;}
+    Date(List<Timeslot> times) {
+        this.times = times;
+        fillTimes();
+    }
+
+    List<Timeslot> getTimes() {
+        return this.times;
+    }
 }
