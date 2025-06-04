@@ -2,8 +2,8 @@ package com.fss.everythingapp.studentservices;
 
 public class Timeslot {
     boolean available = true;
-    Double startTime;
-    Double endTime;
+    double startTime;
+    double endTime;
 
     Timeslot(Double startTime, Double endTime) {
         this.startTime = startTime;
