@@ -7,13 +7,13 @@ import com.fss.everythingapp.simulations.Vector2D;
 
 public class ProjectileMotion {
     List<KinematicObject> projectiles;
-    private double v0;
-    private double angle;
-    private double height;
-    private double acceleration;
-    private double time;
+    static private double v0;
+    static private double angle;
+    static private double height;
+    static private double acceleration;
+    static private double time;
 
-    double calculateTime(){
+    static double calculateTime(){
 
         if (acceleration == 0.0 || v0 == 0.0){
             return 0;
@@ -42,15 +42,22 @@ public class ProjectileMotion {
     }
 
     Vector2D launchProjectile(double height, double speed, double gravity, double angle, double time) {        
-            System.out.println("Launching projectile with height: " + height + ", speed: " + speed + ", gravity: " + gravity + ", angle: " + angle + ", time: " + time);
             double x =  + speed * Math.cos(Math.toRadians(angle)) * time;
-            double y =  height*3.8 + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
+            double y =  height + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
         return new Vector2D(x, y);
     }
 
     void setGravity(Vector2D gravity) {
 
     }
+
+    static Vector2D getVelocity(double height, double speed, double gravity, double angle, double time) {
+
+        double vy = speed * Math.sin(Math.toRadians(angle)) + gravity*time;
+        double vx = speed * Math.cos(Math.toRadians(angle)); 
+        return new Vector2D(vx,vy);
+    }
+    
    
 
     double calculateMaxHeight(KinematicObject projectile) {
