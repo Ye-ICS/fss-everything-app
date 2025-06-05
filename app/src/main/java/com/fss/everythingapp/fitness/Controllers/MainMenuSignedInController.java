@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-public class MMSignedInController {
+public class MainMenuSignedInController {
 
     @FXML
     void openDietMenu(ActionEvent event) {

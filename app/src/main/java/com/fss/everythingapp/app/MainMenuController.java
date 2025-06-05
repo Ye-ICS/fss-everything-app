@@ -18,7 +18,7 @@ public class MainMenuController {
         
     }
     @FXML
-    private void openFitnessApp (ActionEvent actionEvent) throws IOException {
+    private void openFitnessApp (ActionEvent actionEvent) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("fxml/MainMenu-NotSignedin.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
