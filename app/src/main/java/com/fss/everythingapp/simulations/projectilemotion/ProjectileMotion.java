@@ -20,7 +20,7 @@ public class ProjectileMotion {
         }
 
         double vSin = v0 * Math.sin(angle);
-        double discriminant = Math.pow(vSin, 2) - 2 * acceleration * height;
+        double discriminant = Math.pow(vSin, 2) - 4 * acceleration * height;
         if (discriminant < 0){
             return 0;
         }

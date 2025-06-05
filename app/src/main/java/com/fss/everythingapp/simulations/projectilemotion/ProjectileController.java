@@ -79,7 +79,7 @@ public class ProjectileController implements Initializable {
             simulation.setHeight(height);
             simulation.calculateTime();
             simulation.calculateRange();
-            height = 9*heightSlider.getValue(); 
+            height = (9*heightSlider.getValue());
             System.out.println(height);
             
 
@@ -106,7 +106,7 @@ public class ProjectileController implements Initializable {
         ballSlider.valueProperty().addListener((abs, oldVal, newVal ) -> {
             ballSizeLabel.setText(String.format("%.1f u", newVal.doubleValue()));
             ballSize = ballSlider.getValue();
-            drawProjectile(50, height);
+            drawProjectile(50, 470 - height);
     });
 
         //xVeloLabel.setText("Vₓ = " + ProjectileMotion.getVelocity(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), ProjectileMotion.calculateTime()).getX());
@@ -193,9 +193,9 @@ public class ProjectileController implements Initializable {
                 event -> { 
                     double x = simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX();
                     double y = simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY();
-                        if (y <= 0 && time > 0) {
+                        if (y - ballSize + 30 <= 0 && time > 0) {
                             timeline.stop();
-                            drawProjectile(50 + x, 470); 
+                            drawProjectile(50 + x, 470 - ballSize + 30); 
                             return;
                         }
                     drawProjectile(50 + x, 470 - y);
