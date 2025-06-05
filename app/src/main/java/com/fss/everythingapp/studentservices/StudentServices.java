@@ -1,4 +1,5 @@
 package com.fss.everythingapp.studentservices;
+
 import java.applet.Applet;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,26 +13,23 @@ import javafx.stage.Stage;
 class StudentServices {
     ArrayList<Counsellor> counsellors = new ArrayList<>(4);
 
-    private ArrayList<Counsellor> fillCounsellors(){
-        for(int i = 0; i < counsellors.size(); i++){
-            Counsellor counsellor = new Counsellor("temp");
+    private ArrayList<Counsellor> fillCounsellors() {
+        for (int i = 0; i < counsellors.size(); i++) {
+            Counsellor counsellor = new Counsellor(i);
             counsellors.add(counsellor);
         }
         return counsellors;
     }
-    
-    void userGrade() {
-        
-    }
 
-    //placeholder method for data being used by the app
-    void Data() { 
+    // placeholder method for data being used by the app
+    void Data() {
         String name = AppointmentController.name;
-        int grade = AppointmentController.grade - 9;
-        int[] counsellorTimes = counsellors.get(grade).getTime();
+        int id = AppointmentController.grade - 9;
+        SSCalendar calendar = counsellors.get(id).getCalendar();
+
     }
 
-    public void layoutLauncher(Stage stage){
+    public void layoutLauncher(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/AppointmentLayout.fxml"));
         AppointmentController apointcontroller = new AppointmentController();
         fxmlLoader.setController(apointcontroller);
