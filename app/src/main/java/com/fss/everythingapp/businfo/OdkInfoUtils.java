@@ -1,5 +1,5 @@
 package com.fss.everythingapp.businfo;
 
-public class RealData {
+public class OdkInfoUtils {
     
 }
