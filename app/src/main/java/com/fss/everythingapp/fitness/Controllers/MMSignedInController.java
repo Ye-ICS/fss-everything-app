@@ -2,6 +2,7 @@ package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.fitness.GeneralInfo;
 import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
@@ -111,10 +112,13 @@ public class MMSignedInController {
     }
 
     private boolean checkIfPreferencesSelected() {
-        if (Workout.desiredPhysique == null || Workout.desiredPhysique.isEmpty()) {
+        if (Workout.desiredPhysique == null  && GeneralInfo.isActive == null) {
             return false;
-        }
-        else {
+        }else if (Workout.desiredPhysique != null && GeneralInfo.isActive == null) {
+            return false;
+        } else if (Workout.desiredPhysique == null && GeneralInfo.isActive != null) {
+            return false;
+        }else {
             return true;
         }
     }
