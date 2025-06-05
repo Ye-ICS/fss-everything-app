@@ -24,7 +24,6 @@ public class SimulationMenuController {
         ProjectileController controller = new ProjectileController();
         fxmlLoader.setController(controller);
         simulationsLayout = fxmlLoader.load();
-        controller.initialize();
         rootContainer.getScene().setRoot(simulationsLayout);
     }
 

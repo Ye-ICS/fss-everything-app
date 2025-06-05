@@ -24,10 +24,12 @@ public class Puck extends Circle {
     }
 
     public void setMass(double mass) {
-        this.mass = mass;
-        double radius = 10 + Math.sqrt(mass) * 2;
-        setRadius(radius);
-    }
+    this.mass = mass;
+    double radius = 10 + Math.sqrt(mass) * 2;
+    setRadius(radius);
+    applyImage(); // re-apply the image with updated radius
+}
+
 
     public void setVelocity(Vector2D v) {
         this.velocity = v;
@@ -58,9 +60,17 @@ public class Puck extends Circle {
     }
 
     public void setImage(Image image) {
-        this.image = image;
-        setFill(new ImagePattern(image));
+    this.image = image;
+    applyImage();
+}
+
+    private void applyImage() {
+        if (this.image != null) {
+            // Adjust the viewport to keep the image centered & scaled
+            setFill(new ImagePattern(this.image, 0, 0, 1, 1, true));
+        }
     }
+
 
     public Image getImage() {
         return image;
