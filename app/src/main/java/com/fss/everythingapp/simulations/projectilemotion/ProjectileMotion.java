@@ -35,7 +35,7 @@ public class ProjectileMotion {
         double x;
         x = v0*Math.cos(angle)*time;
         if (x == 0 && height == 0|| acceleration == 0){
-            System.out.println(0);
+            //System.out.println(0);
             return 0;
         }
         return x;
@@ -43,7 +43,7 @@ public class ProjectileMotion {
 
     Vector2D launchProjectile(double height, double speed, double gravity, double angle, double time) {        
             double x =  + speed * Math.cos(Math.toRadians(angle)) * time;
-            double y =  height*9 + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
+            double y =  height + speed * Math.sin(Math.toRadians(angle)) * time + 0.5 * gravity * time * time;
         return new Vector2D(x, y);
     }
 
@@ -80,7 +80,7 @@ public class ProjectileMotion {
     double calculateRange(KinematicObject projectile) {
         double x;
         x = v0*Math.cos(angle)*time;
-        System.out.println(x);
+        //System.out.println(x);
         return x;
     }
 

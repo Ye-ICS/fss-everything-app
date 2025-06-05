@@ -79,12 +79,12 @@ public class ProjectileController implements Initializable {
             simulation.setHeight(height);
             simulation.calculateTime();
             simulation.calculateRange();
-            height = 470 - 3.8*heightSlider.getValue() - ballSize; 
+            height = 9*heightSlider.getValue(); 
             System.out.println(height);
             
 
             //draw the projectile at height
-            drawProjectile(50,  470 - 9 *heightSlider.getValue()); // Initial drawing of the projectile
+            drawProjectile(50,  470 - height); // Initial drawing of the projectile
             // Update logic later
         });
         accelerationSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -155,6 +155,7 @@ public class ProjectileController implements Initializable {
         drawAxes(); //to clear the canvas before redrawing
         gc.setFill(Color.BLACK);
         gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
+        System.out.println(height);
     }
 
     public void drawGrid(){
@@ -171,7 +172,7 @@ public class ProjectileController implements Initializable {
         // In progress
     }
     public void nameProjectile(){
-        System.out.println(projectileName.getText());
+        //System.out.println(projectileName.getText());
         // In progress
     }
     public void shootProjectile() {
