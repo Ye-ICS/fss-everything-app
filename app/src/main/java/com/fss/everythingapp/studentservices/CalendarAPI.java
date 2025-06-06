@@ -1,6 +1,6 @@
 package com.fss.everythingapp.studentservices;
 
-// AI MADE MOCK API CLASS
+// THIS IS MOSTLY AI GENERATED
 
 import java.util.Random;
 import java.sql.Time;
@@ -44,7 +44,7 @@ public class CalendarAPI {
 
                 for (double j = 0; j < 8; j++) {
                     if (random.nextDouble() < 0.6) {
-                        Timeslot timeslot = new Timeslot(j + 9, j + 9.3);
+                        Timeslot timeslot = new Timeslot(j + 9 - (j * 0.5), j + 9.5 - (j * 0.5));
                         timeslots.add(timeslot);
                     } else {
                         Timeslot timeslot = new Timeslot(null, null);
@@ -59,4 +59,6 @@ public class CalendarAPI {
         return new SSCalendar(id, dates);
 
     }
+
+    
 }

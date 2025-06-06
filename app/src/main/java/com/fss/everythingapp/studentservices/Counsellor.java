@@ -8,9 +8,13 @@ class Counsellor {
     Counsellor(int id) {
         this.id = id;
     }
-
+    
     private SSCalendar calendar = CalendarAPI.getCounsellorCalendar(id);
 
     SSCalendar getCalendar() {return this.calendar;}
+
+    void updateCalendar(SSCalendar calendar) {
+        this.calendar = calendar;
+    }
     
 }
