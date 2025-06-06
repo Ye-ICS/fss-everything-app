@@ -25,7 +25,12 @@ class StudentServices {
     void Data() {
         String name = AppointmentController.name;
         int id = AppointmentController.grade - 9;
+
+        //method for getting a counsellor's calendar
         SSCalendar calendar = counsellors.get(id).getCalendar();
+
+        //method for updating counsellor's calendar
+        counsellors.get(id).updateCalendar(calendar);
 
     }
 
