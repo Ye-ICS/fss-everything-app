@@ -54,4 +54,9 @@ public class CreateTaskController {
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(home);
     }
+
+    @FXML
+    void createTaskLabel(ActionEvent event) throws IOException {
+        
+    }
 }
