@@ -1,16 +1,21 @@
 package com.fss.everythingapp.calendar;
 
-import java.io.FileNotFoundException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+
 public class Calendar {
-    ArrayList<DateManager> dateList = new ArrayList<DateManager>();
 
-    public static void main(String[] args) throws FileNotFoundException {
-    }
+    
 
-    public ArrayList<DateManager> getDateList() {
-        return dateList;
+    static final String DATE_FILE = "DateList.txt";
+
+    public static void main(String[] args) {
     }
 
     public void createDate() {
