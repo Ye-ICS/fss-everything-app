@@ -1,5 +1,4 @@
 package com.fss.everythingapp.fitness;
-import java.util.Scanner;
 
 public class DietManager {
     
@@ -20,19 +19,19 @@ public class DietManager {
     }
 
     public static void newDiet() {
-        bmr();
+        bmrCalculation();
         //  create a new diet
-        if (Workout.desiredPhysique == "skinny") {
+        if (Workout.desiredPhysique.equals("skinny")) {
             Diet.calorieTarget = Diet.bmr - 750;
             Diet.proteinTarget = GeneralInfo.weight * 1.8;
             Diet.carbsTarget = (Diet.bmr * 0.55) / 4;
             Diet.fatsTarget = (Diet.bmr / 45);
-        } else if (Workout.desiredPhysique == "lean") {
+        } else if (Workout.desiredPhysique.equals("lean")) {
             Diet.calorieTarget = Diet.bmr * 1.1;
             Diet.proteinTarget = GeneralInfo.weight * 2.4;
             Diet.carbsTarget = (Diet.bmr * 0.45) / 4;
             Diet.fatsTarget = GeneralInfo.weight * 0.8;
-        } else if (Workout.desiredPhysique == "bulk") {
+        } else if (Workout.desiredPhysique.equals("bulk")) {
             Diet.calorieTarget = Diet.bmr * 1.2;
             Diet.proteinTarget = GeneralInfo.weight * 1.8;
             Diet.carbsTarget = Diet.bmr * 1.65;
@@ -42,7 +41,7 @@ public class DietManager {
         }
 
 
-        static void bmr() {
+        static void bmrCalculation() {
             if (GeneralInfo.isFemale) {
                 if (GeneralInfo.isActive) {
                 Diet.bmr = (10 * GeneralInfo.weight + 6.25 * GeneralInfo.height - 5 * GeneralInfo.age - 161) * 1.7;
