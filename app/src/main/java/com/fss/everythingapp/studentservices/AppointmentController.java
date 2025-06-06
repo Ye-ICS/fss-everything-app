@@ -20,7 +20,7 @@ public class AppointmentController {
 
 
         // load to the next layout
-        Parent timeslotsLayout = FXMLLoader.load(getClass().getResource("Timeslots.fxml"));
+        Parent timeslotsLayout = FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/Timeslots.fxml"));
         rootcontainer.getScene().setRoot(timeslotsLayout);
     }
 
@@ -34,6 +34,12 @@ public class AppointmentController {
     private int getGrade() {
         //TODO get grade from choicebox
         return grade;
+    }
+
+    @FXML
+    private void onExitBtnPressed() throws IOException {
+        Parent returnLayout = FXMLLoader.load(getClass().getResource("../app/MainMenuLayout.fxml"));
+        rootcontainer.getScene().setRoot(returnLayout);
     }
 
 }
