@@ -24,35 +24,14 @@ class StudentServices {
     // placeholder method for data being used by the app
     void Data() {
         String name = AppointmentController.name;
-        int id = AppointmentController.grade - 9;
-
-        //method for getting a counsellor's calendar
-        SSCalendar calendar = counsellors.get(id).getCalendar();
-
-        //method for updating counsellor's calendar
-        counsellors.get(id).updateCalendar(calendar);
-
     }
 
-    public void layoutLauncher(Stage stage) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/AppointmentLayout.fxml"));
-        AppointmentController apointcontroller = new AppointmentController();
-        fxmlLoader.setController(apointcontroller);
-        Parent view = null;
-
+    public void programRunner() {
         counsellors = fillCounsellors();
+        int id = AppointmentController.grade - 9;
+        SSCalendar calendar = counsellors.get(id).getCalendar();
 
-        try {
-            view = fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            view = new Label("A fatal error has occurred.");
-        }
-
-        Scene scene = new Scene(view);
-        stage.setScene(scene);
-
-        stage.setTitle("Student Services Apointments");
-        stage.show();
+        // happens later in the program
+        counsellors.get(id).updateCalendar(calendar);
     }
 }

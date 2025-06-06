@@ -18,6 +18,9 @@ public class AppointmentController {
         name = getName();
         grade = getGrade();
 
+        StudentServices studentServices = new StudentServices();
+        studentServices.programRunner();
+
 
         // load to the next layout
         Parent timeslotsLayout = FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/Timeslots.fxml"));

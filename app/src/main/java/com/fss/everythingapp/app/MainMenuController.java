@@ -17,6 +17,7 @@ public class MainMenuController {
         try {
             Parent appointmentLayout = (Parent) FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/AppointmentLayout.fxml"));
             rootContainer.getScene().setRoot(appointmentLayout);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
