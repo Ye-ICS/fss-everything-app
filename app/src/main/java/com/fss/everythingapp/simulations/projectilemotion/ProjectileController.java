@@ -79,12 +79,12 @@ public class ProjectileController implements Initializable {
             simulation.setHeight(height);
             simulation.calculateTime();
             simulation.calculateRange();
-            height = (9*heightSlider.getValue());
+            height = (9 * heightSlider.getValue()) + ballSize;
             System.out.println(height);
             
 
             //draw the projectile at height
-            drawProjectile(50,  470 - height); // Initial drawing of the projectile
+            drawProjectile(50,  500 - height); // Initial drawing of the projectile
             // Update logic later
         });
         accelerationSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -177,8 +177,6 @@ public class ProjectileController implements Initializable {
     }
     public void shootProjectile() {
         /*
-         * Originally we (maxim and masa) were going to use a while loop, then thread.sleep for each thing
-         * for some reason though, it didn't work, so alternatively we are using a timeline
          * This SHOULD create a smooth animation of the projec motion
          */
 
