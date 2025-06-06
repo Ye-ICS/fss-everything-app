@@ -10,14 +10,14 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="9:00 am - 9:30 am" />
-            <Button mnemonicParsing="false" text="9:30 am - 10:00 am" />
-            <Button mnemonicParsing="false" text="10:00 am - 10:30 am" />
-            <Button mnemonicParsing="false" text="10:30 am - 11:00 am" />
-            <Button mnemonicParsing="false" text="11:00 am - 11:30 am" />
-            <Button mnemonicParsing="false" text="11:30 am - 12:00 pm" />
-            <Button mnemonicParsing="false" text="12:00 am - 12:30 pm" />
-            <Button mnemonicParsing="false" text="12:30 pm - 1:00 pm" />
+            <Button mnemonicParsing="false" onAction="#buttonOnePressed" text="9:00 am - 9:30 am" />
+            <Button mnemonicParsing="false" onAction="#buttonTwoPressed" text="9:30 am - 10:00 am" />
+            <Button mnemonicParsing="false" onAction="#buttonThreePressed" text="10:00 am - 10:30 am" />
+            <Button mnemonicParsing="false" onAction="#buttonFourPressed" text="10:30 am - 11:00 am" />
+            <Button mnemonicParsing="false" onAction="#buttonFivePressed" text="11:00 am - 11:30 am" />
+            <Button mnemonicParsing="false" onAction="#buttonSixPressed" text="11:30 am - 12:00 pm" />
+            <Button mnemonicParsing="false" onAction="#buttonSevenPressed" text="12:00 am - 12:30 pm" />
+            <Button mnemonicParsing="false" onAction="#buttonEightPressed" text="12:30 pm - 1:00 pm" />
          </children>
       </VBox>
    </center>
