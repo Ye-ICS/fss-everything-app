@@ -49,6 +49,7 @@ public class ProjectileController implements Initializable {
     private ProjectileMotion simulation = new ProjectileMotion();
     private double ballSize = 30;
     private double height = 0;
+    private boolean veloVectorShown = false;
 
     @Override
     @FXML
@@ -72,6 +73,7 @@ public class ProjectileController implements Initializable {
             simulation.setInitialAngle(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
+            drawVelocityVectors(50, 500 - height, 0);
 
         });
         heightSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -106,8 +108,13 @@ public class ProjectileController implements Initializable {
         ballSlider.valueProperty().addListener((abs, oldVal, newVal ) -> {
             ballSizeLabel.setText(String.format("%.1f u", newVal.doubleValue()));
             ballSize = ballSlider.getValue();
-            drawProjectile(50, 470 - height);
+            height = (9 * heightSlider.getValue()) + ballSize;
+            drawProjectile(50, 500 - height);
     });
+
+        velocityVectors.setOnAction(e -> {
+    
+        });
 
         //xVeloLabel.setText("Vₓ = " + ProjectileMotion.getVelocity(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), ProjectileMotion.calculateTime()).getX());
        // yVeloLabel.setText("Vᵧ = " + ProjectileMotion.getVelocity(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), ProjectileMotion.calculateTime()).getY());
@@ -125,8 +132,6 @@ public class ProjectileController implements Initializable {
         });
 
         if (grid.isSelected()){drawGrid();}
-        if (positionVectors.isSelected()){drawPositionVectors();}
-        if (velocityVectors.isSelected()){drawVelocityVectors();}
         if (velocityComponents.isSelected()){drawVelocityComponents();}
     }
 
@@ -135,7 +140,7 @@ public class ProjectileController implements Initializable {
         double width = gridCanvas.getWidth();
         double height = gridCanvas.getHeight();
 
-        gc.clearRect(0, 0, width, height);
+        gc.clearRect(0, 0, width, height); // Clears the canvas
         
         gc.setStroke(javafx.scene.paint.Color.BLACK);
         gc.setLineWidth(1.5);
@@ -161,11 +166,24 @@ public class ProjectileController implements Initializable {
     public void drawGrid(){
         // In progress
     }
-    public void drawPositionVectors(){
-        // In progress
-    }
-    public void drawVelocityVectors(){
-        // In progressP
+    public void drawVelocityVectors(double x, double y, double time){
+        GraphicsContext gc = gridCanvas.getGraphicsContext2D();
+ 
+
+        //OverallVelocity
+        gc.setStroke(javafx.scene.paint.Color.RED);
+        gc.setLineWidth(3);
+        gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+
+        //YVelocity
+        gc.setStroke(javafx.scene.paint.Color.BLUE);
+        gc.setLineWidth(3);
+        gc.strokeLine(x + 65, 970 - y, x + 65 , 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+
+        //XVelocity
+        gc.setStroke(javafx.scene.paint.Color.GREEN);
+        gc.setLineWidth(3);
+        gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 970 - y);
 
     }
     public void drawVelocityComponents(){
@@ -197,6 +215,10 @@ public class ProjectileController implements Initializable {
                             return;
                         }
                     drawProjectile(50 + x, 470 - y);
+                            if(velocityVectors.isSelected())
+                            {
+                                drawVelocityVectors(x, y, time);
+                            }
                     xVeloLabel.setText("Vₓ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX()));
                     yVeloLabel.setText("Vᵧ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY()));
                     xLabel.setText("X = " + String.format("%.2f" , x));
