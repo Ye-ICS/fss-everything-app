@@ -9,6 +9,7 @@ import javafx.scene.control.Slider;
 
 public class DoubleSlitController{
     @FXML private Canvas simulationCanvas;
+    @FXML private Canvas explanationCanvas;
 
     @FXML private Slider wavelengthSlider;
     @FXML private Slider separationSlider;
@@ -20,13 +21,16 @@ public class DoubleSlitController{
     @FXML private Label widthLabel;
     @FXML private Label screenDistanceLabel;
     
-    private DoubleSlit simulation;
-    private CanvasDisplay canvasDisplay;
+    private DoubleSlit doubleSlitSimulation;
+    private LightCanvas lightCanvasDisplay;
+    private ExplanationCanvas explanationCanvasDisplay;
     
     @FXML
     private void initialize() {
-        simulation = new DoubleSlit();
-        canvasDisplay = new CanvasDisplay(simulationCanvas);
+        doubleSlitSimulation = new DoubleSlit();
+        lightCanvasDisplay = new LightCanvas(simulationCanvas);
+
+        explanationCanvasDisplay = new ExplanationCanvas(explanationCanvas);
 
         setupSliders();
         updateSimulation();
@@ -97,17 +101,20 @@ public class DoubleSlitController{
 
     void updateSimulation() {
         // Set simulation parameters - convert micrometers to meters
-        simulation.setWavelength(wavelengthSlider.getValue() * 1e-9); // nm to m
-        simulation.setSlitProperties(
+        doubleSlitSimulation.setWavelength(wavelengthSlider.getValue() * 1e-9); // nm to m
+        doubleSlitSimulation.setSlitProperties(
             separationSlider.getValue() * 1e-6, // μm to m
             widthSlider.getValue() * 1e-6       // μm to m
         );
-        simulation.setScreenDistance(screenDistanceSlider.getValue()); // already in meters
+        doubleSlitSimulation.setScreenDistance(screenDistanceSlider.getValue()); // already in meters
         
-        simulation.calculateInterferencePattern();
+        doubleSlitSimulation.calculateInterferencePattern();
         
         // Get the interference pattern and draw it
-        List<Double> pattern = simulation.getInterferencePattern();
-        canvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
+        List<Double> pattern = doubleSlitSimulation.getInterferencePattern();
+        lightCanvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
+        
+        // Draw the explanation canvas
+        explanationCanvasDisplay.drawExplanation(wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
     }
 }

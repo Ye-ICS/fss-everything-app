@@ -5,11 +5,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class CanvasDisplay {
+public class LightCanvas {
     private Canvas canvas;
     private GraphicsContext gc;
     
-    public CanvasDisplay(Canvas canvas) {
+    public LightCanvas(Canvas canvas) {
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
     }
