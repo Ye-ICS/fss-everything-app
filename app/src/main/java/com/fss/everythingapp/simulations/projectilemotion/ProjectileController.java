@@ -1,5 +1,7 @@
 package com.fss.everythingapp.simulations.projectilemotion;
 
+import java.io.File;
+
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,7 +10,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.stage.FileChooser;
 
 
 public class ProjectileController {
@@ -27,7 +32,7 @@ public class ProjectileController {
     @FXML private Slider animationSpeedSlider;
     @FXML private Label animationSpeedLabel;
     @FXML private CheckBox grid;
-    @FXML private CheckBox positionVectors;
+    @FXML private CheckBox showTragectory;
     @FXML private CheckBox velocityVectors;
     @FXML private CheckBox velocityComponents;
     @FXML private TextField projectileName;
@@ -41,11 +46,13 @@ public class ProjectileController {
     @FXML private Label veloLabel;
     @FXML private Label ballSizeLabel;
     @FXML private Slider ballSlider;
+    @FXML private Button changeProjectileImage;
 
 
     private ProjectileMotion simulation = new ProjectileMotion();
     private double ballSize = 30;
     private double height = 0;
+    private Image projectileImg = null;
 
     @FXML
     public void initialize() {
@@ -103,14 +110,7 @@ public class ProjectileController {
             ballSize = ballSlider.getValue();
             height = (9 * heightSlider.getValue()) + ballSize;
             drawProjectile(50, 500 - height);
-    });
-
-        velocityVectors.setOnAction(e -> {
-    
         });
-
-        //xVeloLabel.setText("Vₓ = " + ProjectileMotion.getVelocity(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), ProjectileMotion.calculateTime()).getX());
-       // yVeloLabel.setText("Vᵧ = " + ProjectileMotion.getVelocity(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), ProjectileMotion.calculateTime()).getY());
 
         drawAxes();
 
@@ -121,12 +121,31 @@ public class ProjectileController {
         });
 
         launch.setOnAction(e -> {
-
-
             shootProjectile();
         });
 
+        if (showTragectory.isSelected()){
+            drawTragectory();
+        }
 
+        changeProjectileImage.setOnAction(e -> { // I copied this code from Yamen's "ControlPanel.java"
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select Image for projectile");
+            fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+            );
+            File selectedFile = fileChooser.showOpenDialog(gridCanvas.getScene().getWindow());
+            if (selectedFile != null) {
+                projectileImg = new Image(selectedFile.toURI().toString());
+                drawProjectile(50, 500 - height);
+            }
+        });
+    }
+
+    
+
+    public void drawTragectory(){
+        // Add functionality
     }
 
     public void drawAxes() {
@@ -160,8 +179,14 @@ public class ProjectileController {
     public void drawProjectile(double x, double y) {
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
         drawAxes(); //to clear the canvas before redrawing
-        gc.setFill(Color.BLACK);
-        gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
+
+        if (projectileImg != null) { // Also borrowed this code from Yamen's "Puck.java"
+            gc.setFill(new ImagePattern(this.projectileImg, 0, 0, 1, 1, true));
+            gc.fillOval(x, y + 483, ballSize, ballSize);
+        } else {
+            gc.setFill(Color.BLACK);
+            gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
+        }
     }
 
     public void drawVelocityVectors(double x, double y, double time){
