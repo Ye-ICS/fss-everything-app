@@ -1,7 +1,6 @@
 package com.fss.everythingapp.simulations.projectilemotion;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -11,10 +10,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class ProjectileController implements Initializable {
+public class ProjectileController {
     @FXML
     private Canvas gridCanvas;
     @FXML private Slider speedSlider;
@@ -49,11 +46,9 @@ public class ProjectileController implements Initializable {
     private ProjectileMotion simulation = new ProjectileMotion();
     private double ballSize = 30;
     private double height = 0;
-    private boolean veloVectorShown = false;
 
-    @Override
     @FXML
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         simulation.setInitialVelocity(speedSlider.getValue());
         simulation.setInitialAngle(angleSlider.getValue());
         simulation.setHeight(height);
@@ -82,8 +77,6 @@ public class ProjectileController implements Initializable {
             simulation.calculateTime();
             simulation.calculateRange();
             height = (9 * heightSlider.getValue()) + ballSize;
-            System.out.println(height);
-            
 
             //draw the projectile at height
             drawProjectile(50,  500 - height); // Initial drawing of the projectile
@@ -128,11 +121,12 @@ public class ProjectileController implements Initializable {
         });
 
         launch.setOnAction(e -> {
+
+
             shootProjectile();
         });
 
-        if (grid.isSelected()){drawGrid();}
-        if (velocityComponents.isSelected()){drawVelocityComponents();}
+
     }
 
     public void drawAxes() {
@@ -153,6 +147,14 @@ public class ProjectileController implements Initializable {
         
         //Draw Y axis
         gc.strokeLine(50, height - 100, 50, 50);
+
+        for (int i = 50; i < width - 100; i += 50){ //draws x axis ticks
+            gc.strokeLine(i, height - 105, i, height - 95);
+        }
+
+        for (int i = 50; i < height - 100; i += 50){
+            gc.strokeLine(45, i, 55, i );
+        }
     }
 
     public void drawProjectile(double x, double y) {
@@ -160,12 +162,8 @@ public class ProjectileController implements Initializable {
         drawAxes(); //to clear the canvas before redrawing
         gc.setFill(Color.BLACK);
         gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
-        System.out.println(height);
     }
 
-    public void drawGrid(){
-        // In progress
-    }
     public void drawVelocityVectors(double x, double y, double time){
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
  
@@ -186,12 +184,10 @@ public class ProjectileController implements Initializable {
         gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 970 - y);
 
     }
-    public void drawVelocityComponents(){
-        // In progress
-    }
+
     public void nameProjectile(){
-        //System.out.println(projectileName.getText());
-        // In progress
+        launch.setText("Launch " + projectileName.getText());
+        // Add name that follows the projectile 
     }
     public void shootProjectile() {
         /*
@@ -219,12 +215,12 @@ public class ProjectileController implements Initializable {
                             {
                                 drawVelocityVectors(x, y, time);
                             }
-                    xVeloLabel.setText("Vₓ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX()));
+                    xVeloLabel.setText("Vₓ = " + String.format("%.2f" , speedSlider.getValue() * Math.cos(Math.toRadians(angleSlider.getValue()))));
                     yVeloLabel.setText("Vᵧ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY()));
                     xLabel.setText("X = " + String.format("%.2f" , x));
                     yLabel.setText("Y = " + String.format("%.2f", y));
                     timeLabel.setText("t = " + String.format("%.1f", time));
-                    veloLabel.setText("V = " + String.format("%.2f", Math.sqrt(Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX() , 2)) + Math.pow(ProjectileMotion.getVelocity(heightSlider.getValue(), speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY() , 2)));
+                    veloLabel.setText("V = " + String.format("%.2f", Math.sqrt(Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX() , 2) + Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY() , 2))));
                 }
             );
             timeline.getKeyFrames().add(keyFrame); // adds the keyframe to the timeline to thenn be plaued
