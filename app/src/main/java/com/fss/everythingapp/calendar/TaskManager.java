@@ -6,12 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TaskManager extends DateManager {
     String taskName;
     String dueDate;
 
+    //ArrayList<Task> taskList = new ArrayList();
     TaskManager(String taskName, String dueDate) throws FileNotFoundException {
         this.taskName = taskName;
         this.dueDate = dueDate;

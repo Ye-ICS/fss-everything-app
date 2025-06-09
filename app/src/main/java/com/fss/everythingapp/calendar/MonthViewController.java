@@ -48,4 +48,8 @@ public class MonthViewController {
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/WeekView.fxml"));
         rootContainer.getScene().setRoot(weekView);
     }
+
+    void showTasks(){
+        
+    }
 }
