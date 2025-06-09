@@ -109,11 +109,6 @@ public class ProjectileController {
             animationSpeedLabel.setText(String.format("x %.1f", newVal.doubleValue()))
 
             );
-        
-        vectorSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
-            vectorLabel.setText(String.format("%.1f", newVal.doubleValue()));
-            
-        });
 
         ballSlider.valueProperty().addListener((abs, oldVal, newVal ) -> {
             ballSizeLabel.setText(String.format("%.1f u", newVal.doubleValue()));
@@ -218,7 +213,7 @@ public class ProjectileController {
         //OverallVelocity
         gc.setStroke(javafx.scene.paint.Color.RED);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
         }
 
@@ -227,12 +222,12 @@ public class ProjectileController {
         //YVelocity
         gc.setStroke(javafx.scene.paint.Color.BLUE);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 65, 970 - y, x + 65 , 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2,x + 50 + ballSize/2, 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
         //XVelocity
         gc.setStroke(javafx.scene.paint.Color.GREEN);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 970 - y);
+        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 985 - y - ballSize/2);
         }
     }
 
@@ -256,15 +251,15 @@ public class ProjectileController {
                 event -> { 
                     double x = simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX();
                     double y = simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY();
-                        if (y - ballSize + 30 <= 0 && time > 0) {
+                        if (y - ballSize <= 0 && time > 0) {
                             timeline.stop();
-                            drawProjectile(50 + x, 470 - ballSize + 30); 
+                            drawProjectile(50 + x, 500 - ballSize ); 
                             return;
                         }
-                    drawProjectile(50 + x, 470 - y);
+                    drawProjectile(50 + x, 500 - y);
                             if(velocityVectors.isSelected())
                             {
-                                drawVelocityVectors(x, y, time);
+                                drawVelocityVectors(x, y - ballSize, time);
                             }
                     xVeloLabel.setText("Vₓ = " + String.format("%.2f" , speedSlider.getValue() * Math.cos(Math.toRadians(angleSlider.getValue()))));
                     yVeloLabel.setText("Vᵧ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY()));
