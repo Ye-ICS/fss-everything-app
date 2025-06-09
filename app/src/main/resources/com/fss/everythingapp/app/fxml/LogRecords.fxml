@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            prefHeight="600.0" prefWidth="335.0">
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets left="20.0" right="20.0" top="40.0" />
+            </padding>
+            <children>
+                <TextFlow prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <TableView prefHeight="431.0" prefWidth="287.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="1" />
+                                <TableColumn prefWidth="75.0" text="2" />
+                                <TableColumn prefWidth="75.0" text="3" />
+                                <TableColumn prefWidth="75.0" text="4" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </TextFlow>
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>
