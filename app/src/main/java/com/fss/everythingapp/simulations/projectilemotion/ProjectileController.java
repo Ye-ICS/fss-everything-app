@@ -53,6 +53,8 @@ public class ProjectileController {
     private double ballSize = 30;
     private double height = 0;
     private Image projectileImg = null;
+    private double vectorLength = 1;
+    private boolean veloVectorShown = false;
 
     @FXML
     public void initialize() {
@@ -68,6 +70,7 @@ public class ProjectileController {
             simulation.setInitialVelocity(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
+            drawProjectile(50, 500-height);
             // Update logic later
         });
         angleSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -75,7 +78,8 @@ public class ProjectileController {
             simulation.setInitialAngle(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
-            drawVelocityVectors(50, 500 - height, 0);
+            drawAxes();
+            drawProjectile(50, 500 - height);
 
         });
         heightSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -87,29 +91,39 @@ public class ProjectileController {
 
             //draw the projectile at height
             drawProjectile(50,  500 - height); // Initial drawing of the projectile
-            // Update logic later
         });
         accelerationSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
             accelerationLabel.setText(String.format("%.1f m/s²", newVal.doubleValue()));
             simulation.setAcceleration(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
-            // Update logic later
+            drawProjectile(50, 500 - height);
         });
         vectorSlider.valueProperty().addListener((abs, oldVal, newVal) -> { //Visual
             vectorLabel.setText(String.format("%.1f ", newVal.doubleValue()));
-            // Update logic later
+            
+            vectorLength = newVal.doubleValue();
+            // no function yet
         });
         animationSpeedSlider.valueProperty().addListener((abs, oldVal, newVal) -> //Visual
             animationSpeedLabel.setText(String.format("x %.1f", newVal.doubleValue()))
-            // Update logic later
+
             );
+        
+        vectorSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
+            vectorLabel.setText(String.format("%.1f", newVal.doubleValue()));
+            
+        });
 
         ballSlider.valueProperty().addListener((abs, oldVal, newVal ) -> {
             ballSizeLabel.setText(String.format("%.1f u", newVal.doubleValue()));
             ballSize = ballSlider.getValue();
             height = (9 * heightSlider.getValue()) + ballSize;
             drawProjectile(50, 500 - height);
+    });
+
+        velocityVectors.setOnAction(e -> {
+            drawProjectile(50, 500-height);
         });
 
         drawAxes();
@@ -187,6 +201,10 @@ public class ProjectileController {
             gc.setFill(Color.BLACK);
             gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
         }
+        if(velocityVectors.isSelected())
+            {
+                drawVelocityVectors(0, height - ballSize, 0);
+            }
     }
 
     public void drawVelocityVectors(double x, double y, double time){
