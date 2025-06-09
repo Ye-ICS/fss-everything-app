@@ -20,6 +20,9 @@ public class SleepMenuController {
     private Text date;
 
     @FXML
+    private Text sleepGoal;
+
+    @FXML
     private ProgressBar sleepGoalBar;
 
     private void initialize() {
