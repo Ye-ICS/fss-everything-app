@@ -67,8 +67,7 @@ public class Photon extends Circle {
     
     public void setVelocity(Vector2D v) {
         // Normalize to maintain speed of light
-        Vector2D normalized = v.copy();
-        normalized.normalize(); // Normalize the copied vector
+        Vector2D normalized = v.normalize();
         double speed = 200.0; // Scaled speed
         this.velocity = normalized.multiply(speed);
     }

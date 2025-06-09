@@ -1,6 +1,7 @@
 package com.fss.everythingapp.simulations.photoelectriceffect;
 
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +18,8 @@ import javafx.scene.text.Text;
 public class PhotoelectricMainApp extends Application {
     private PhotoelectricSimulation simulation;
     private Pane simPane;
+    private Text titleText;
+    private Text instructionText;
     
     @Override
     public void start(Stage primaryStage) {
@@ -32,11 +35,11 @@ public class PhotoelectricMainApp extends Application {
         simPane.setPrefSize(600, 600);
 
         // Add title to simulation pane
-        Text titleText = new Text(20, 30, "Photoelectric Effect Simulation");
+        titleText = new Text(20, 30, "Photoelectric Effect Simulation");
         titleText.setFont(Font.font("System", FontWeight.BOLD, 16));
         titleText.setFill(Color.DARKBLUE);
         
-        Text instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
+        instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
         instructionText.setFont(Font.font("System", 12));
         instructionText.setFill(Color.DARKBLUE);
         
@@ -52,12 +55,46 @@ public class PhotoelectricMainApp extends Application {
         // Set up dynamic addition/removal of photons and electrons
         setupDynamicElements();
         
+        // Set up resize listeners
+        setupResizeListeners();
+        
         // Create scene
         Scene scene = new Scene(root, 900, 600);
         primaryStage.setTitle("Photoelectric Effect Simulation");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
         primaryStage.show();
+    }
+    
+    /**
+     * Set up listeners to handle window resizing
+     */
+    private void setupResizeListeners() {
+        // Listen for changes in the simulation pane size
+        InvalidationListener resizeListener = observable -> {
+            double newWidth = simPane.getWidth();
+            double newHeight = simPane.getHeight();
+            
+            if (newWidth > 0 && newHeight > 0) {
+                // Update simulation dimensions
+                simulation.updateDimensions(newWidth, newHeight);
+                
+                // Reposition instruction text if needed
+                double textY = Math.min(50, newHeight - 20);
+                if (instructionText != null) {
+                    instructionText.setY(textY);
+                    // Wrap text if window is too narrow
+                    if (newWidth < 500) {
+                        instructionText.setText("Photons interact with electrons\non the metal surface");
+                    } else {
+                        instructionText.setText("Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
+                    }
+                }
+            }
+        };
+        
+        simPane.widthProperty().addListener(resizeListener);
+        simPane.heightProperty().addListener(resizeListener);
     }
     
     /**

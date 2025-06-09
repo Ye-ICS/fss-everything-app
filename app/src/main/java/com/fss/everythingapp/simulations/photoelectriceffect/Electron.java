@@ -45,7 +45,7 @@ public class Electron extends Circle {
         setCenterY(position.y);
         
         // Apply gravity effect (electrons fall down when ejected)
-        Vector2D gravity = new Vector2D(100, -200); // Downward Initial Velocity
+        Vector2D gravity = new Vector2D(100, -200); // Upward Initial Velocity
         velocity.add(gravity.multiply(dt));
         
     }
