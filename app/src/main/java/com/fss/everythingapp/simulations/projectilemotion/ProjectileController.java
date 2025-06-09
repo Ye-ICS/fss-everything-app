@@ -51,10 +51,10 @@ public class ProjectileController {
 
     private ProjectileMotion simulation = new ProjectileMotion();
     private double ballSize = 30;
-    private double height = 0;
+    private double height = 30;
     private Image projectileImg = null;
     private double vectorLength = 1;
-    private boolean veloVectorShown = false;
+
 
     @FXML
     public void initialize() {
@@ -125,8 +125,11 @@ public class ProjectileController {
         velocityVectors.setOnAction(e -> {
             drawProjectile(50, 500-height);
         });
+        velocityComponents.setOnAction(e -> {
+            drawProjectile(50, 500-height);
+        });
 
-        drawAxes();
+
 
         projectileNameButton.setOnAction(e -> {
             if (projectileName != null) {
@@ -154,6 +157,8 @@ public class ProjectileController {
                 drawProjectile(50, 500 - height);
             }
         });
+
+                drawProjectile(50, 500 - height); //initial drawing 
     }
 
     
@@ -201,21 +206,24 @@ public class ProjectileController {
             gc.setFill(Color.BLACK);
             gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
         }
-        if(velocityVectors.isSelected())
-            {
+
                 drawVelocityVectors(0, height - ballSize, 0);
-            }
     }
 
     public void drawVelocityVectors(double x, double y, double time){
         GraphicsContext gc = gridCanvas.getGraphicsContext2D();
  
-
+        if(velocityVectors.isSelected())
+        {
         //OverallVelocity
         gc.setStroke(javafx.scene.paint.Color.RED);
         gc.setLineWidth(3);
         gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
+        }
+
+        if(velocityComponents.isSelected())
+        {
         //YVelocity
         gc.setStroke(javafx.scene.paint.Color.BLUE);
         gc.setLineWidth(3);
@@ -225,7 +233,7 @@ public class ProjectileController {
         gc.setStroke(javafx.scene.paint.Color.GREEN);
         gc.setLineWidth(3);
         gc.strokeLine(x + 65, 970 - y, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 970 - y);
-
+        }
     }
 
     public void nameProjectile(){
