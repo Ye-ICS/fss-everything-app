@@ -31,11 +31,17 @@ public class DateManager {
     protected int endHour;
     protected int endMins;
 
-    DateManager() { // Blank constructor
+    private ArrayList<DateManager> dateList;
+
+    DateManager() {
+        loadDates();
+    }
+
+    DateManager(ArrayList<DateManager> dateList) { // Blank constructor
     }
 
     protected ArrayList loadDates() { // Loads all dates
-        ArrayList<DateManager> dateList = new ArrayList<DateManager>();
+        dateList = new ArrayList<DateManager>();
         Scanner scanner;
 
         try {
@@ -48,7 +54,7 @@ public class DateManager {
 
         while (scanner.hasNextLine()) {
 
-            DateManager loadedDate = new DateManager();
+            DateManager loadedDate = new DateManager(dateList);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
@@ -92,70 +98,74 @@ public class DateManager {
         return dateList;
     }
 
-    static void shareDate() { // User can share dates to other users
+    void shareDate() { // User can share dates to other users
     }
 
-    protected String getDateName() {
+    String getDateName() {
         return this.dateName;
     }
 
-    protected int getDueYear() {
+    int getDueYear() {
         return this.dueYear;
     }
 
-    protected int getDueMonth() {
+    int getDueMonth() {
         return this.dueMonth;
     }
 
-    protected int getdueDay() {
+    int getdueDay() {
         return this.dueDay;
     }
 
-    protected int getDueHour() {
+    int getDueHour() {
         return this.dueHour;
     }
 
-    protected int getDueMins() {
+    int getDueMins() {
         return this.dueMins;
     }
 
-    protected int getStartYear() {
+    int getStartYear() {
         return this.startYear;
     }
 
-    protected int getStartMonth() {
+    int getStartMonth() {
         return this.startMonth;
     }
 
-    protected int getStartDay() {
+    int getStartDay() {
         return this.startDay;
     }
 
-    protected int getStartHour() {
+    int getStartHour() {
         return this.startHour;
     }
 
-    protected int getStartMins() {
+    int getStartMins() {
         return this.startMins;
     }
 
-    protected int getEndYear() {
+    int getEndYear() {
         return this.endYear;
     }
 
-    protected int getEndMonth() {
+    int getEndMonth() {
         return this.endMonth;
     }
 
-    protected int getEndDay() {
+    int getEndDay() {
         return this.endDay;
     }
 
-    protected int getEndHour() {
+    int getEndHour() {
         return this.endHour;
     }
 
-    protected int getEndMins() {
+    int getEndMins() {
         return this.endMins;
+    }
+
+    ArrayList<DateManager> getDateList() {
+        return this.dateList;
     }
 }
