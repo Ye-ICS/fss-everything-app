@@ -4,6 +4,8 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class AppointmentController {
@@ -29,13 +31,16 @@ public class AppointmentController {
 
     @FXML
     private String getName() {
-        //TODO get name from textfield
+        TextField nameField = new TextField();
+        name = nameField.getText();
         return name;
     }
 
     @FXML
     private int getGrade() {
-        //TODO get grade from choicebox
+        ChoiceBox<Integer> gradeBox = new ChoiceBox<>();
+        gradeBox.getItems().addAll(9, 10, 11, 12);
+        grade = gradeBox.getValue();
         return grade;
     }
 
