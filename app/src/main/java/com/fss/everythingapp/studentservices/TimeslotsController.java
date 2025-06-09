@@ -1,36 +1,33 @@
 package com.fss.everythingapp.studentservices;
 
+import java.util.List;
+
+import org.checkerframework.checker.units.qual.C;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
+
 public class TimeslotsController {
+    private static Date date;
+    private static Timeslot timeslot;
+    private static ChoiceBox<Date> dateBox = new ChoiceBox<>();
+    private static ChoiceBox<Timeslot> timeBox = new ChoiceBox<>();
 
-    private Integer buttonOnePressed() {
-        return 0;
+    @FXML
+    void initialize() {
+        //dateBox.getItems().addAll(SSCalendar.dates);
+
+
+        
+        //timeBox.getItems().addAll(Date.getTimes());
     }
 
-    private Integer buttonTwoPressed() {
-        return 1;
-    }
+    @FXML
+    private void enterBtnPressed() {
+        date = dateBox.getValue();
+        timeslot = timeBox.getValue();
 
-    private Integer buttonThreePressed() {
-        return 2;
-    }
-
-    private Integer buttonFourPressed() {
-        return 3;
-    }
-
-    private Integer buttonFivePressed() {
-        return 4;
-    }
-
-    private Integer buttonSixPressed() {
-        return 5;
-    }
-
-    private Integer buttonSevenPressed() {
-        return 6;
-    }
-
-    private Integer buttonEightPressed() {
-        return 7;
+        // send updated info to student services
     }
 }

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 class StudentServices {
     ArrayList<Counsellor> counsellors = new ArrayList<>(4);
+    SSCalendar calendar;
 
     private ArrayList<Counsellor> fillCounsellors() {
         for (int i = 0; i < counsellors.size(); i++) {
@@ -29,7 +30,7 @@ class StudentServices {
     public void programRunner() {
         counsellors = fillCounsellors();
         int id = AppointmentController.grade - 9;
-        SSCalendar calendar = counsellors.get(id).getCalendar();
+        calendar = counsellors.get(id).getCalendar();
 
         // happens later in the program
         counsellors.get(id).updateCalendar(calendar);
