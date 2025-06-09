@@ -28,7 +28,7 @@ public class MainMenuController {
             mainListLoader.setController(listController);
             Parent mainListLayout = mainListLoader.load();
             rootContainer.getScene().setRoot(mainListLayout);
-            listController.initialize();
+            listController.init();
         } catch (Exception e) {
             e.printStackTrace();
         }
