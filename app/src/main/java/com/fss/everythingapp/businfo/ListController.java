@@ -25,7 +25,7 @@ public class ListController {
     @FXML
     private void quit(ActionEvent actionEvent) {
         try {
-            OdkApiService.get();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
