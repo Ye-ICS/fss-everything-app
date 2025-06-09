@@ -19,12 +19,12 @@ public class DietManager {
     }
 
     public static void newDiet() {
-        bmrCalculation();
         //  create a new diet
+        getBasalMetabloicRate();
         if (Workout.desiredPhysique.equals("skinny")) {
             Diet.calorieTarget = Diet.basalMetabolicRate - 750;
             Diet.proteinTarget = GeneralInfo.weight * 1.8;
-            Diet.carbsTarget = (Diet.basalMetabolicRate * 0.55) / 4;
+            Diet.carbsTarget = (Diet.basalMetabolicRate * 0.35) / 4;
             Diet.fatsTarget = (Diet.basalMetabolicRate / 45);
         } else if (Workout.desiredPhysique.equals("lean")) {
             Diet.calorieTarget = Diet.basalMetabolicRate * 1.1;
@@ -34,14 +34,14 @@ public class DietManager {
         } else if (Workout.desiredPhysique.equals("bulk")) {
             Diet.calorieTarget = Diet.basalMetabolicRate * 1.2;
             Diet.proteinTarget = GeneralInfo.weight * 1.8;
-            Diet.carbsTarget = Diet.basalMetabolicRate * 1.65;
+            Diet.carbsTarget = (Diet.basalMetabolicRate * 0.5) / 4;
             Diet.fatsTarget = GeneralInfo.weight * 0.7;
         }
            
         }
 
 
-        static void bmrCalculation() {
+        static double getBasalMetabloicRate() {
             if (GeneralInfo.isFemale) {
                 if (GeneralInfo.isPhysicallyActive) {
                 Diet.basalMetabolicRate = (10 * GeneralInfo.weight + 6.25 * GeneralInfo.height - 5 * GeneralInfo.age - 161) * 1.7;
@@ -54,8 +54,9 @@ public class DietManager {
             } else {
                 Diet.basalMetabolicRate = (10 * GeneralInfo.weight + 6.25 * GeneralInfo.height - 5 * GeneralInfo.age + 5) * 1.35;
             }
+            }
+            return Diet.basalMetabolicRate;
         }
-    }
 }
 
 
