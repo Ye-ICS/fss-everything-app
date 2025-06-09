@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PreferencesController {
@@ -38,14 +39,17 @@ public class PreferencesController {
     @FXML
     private RadioButton leanRadio;
 
+    @FXML
+    private Text submitErrorPrompt;
+
 
     @FXML
     void submitActivity(ActionEvent event) {
         if (activeRadio.isSelected()) {
-            GeneralInfo.isActive = true;
+            GeneralInfo.isPhysicallyActive = true;
         }
         if (notActiveRadio.isSelected()) {
-            GeneralInfo.isActive = false;
+            GeneralInfo.isPhysicallyActive = false;
         }
         if (wlRadio.isSelected()) {
             Workout.desiredPhysique = "skinny";
@@ -56,21 +60,23 @@ public class PreferencesController {
         if (leanRadio.isSelected()) {
             Workout.desiredPhysique = "lean";
         }
-    }
-
-    @FXML
-    void backToMenu(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu-Signedin.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading FXML: " + e.getMessage());
+        if ((activeRadio.isSelected() || notActiveRadio.isSelected()) && (wlRadio.isSelected() || muscularRadio.isSelected() || leanRadio.isSelected())) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error loading FXML: " + e.getMessage());
+            } 
+        } else {
+            submitErrorPrompt.setVisible(true);
         }
+    }
+
+
 
     }
-}
 

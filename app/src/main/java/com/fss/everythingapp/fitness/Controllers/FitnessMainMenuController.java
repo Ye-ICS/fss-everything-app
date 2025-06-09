@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-public class MainMenuSignedInController {
+public class FitnessMainMenuController {
 
     @FXML
     void openDietMenu(ActionEvent event) {
@@ -112,14 +112,10 @@ public class MainMenuSignedInController {
     }
 
     private boolean checkIfPreferencesSelected() {
-        if (Workout.desiredPhysique == null  && GeneralInfo.isActive == null) {
-            return false;
-        }else if (Workout.desiredPhysique != null && GeneralInfo.isActive == null) {
-            return false;
-        } else if (Workout.desiredPhysique == null && GeneralInfo.isActive != null) {
-            return false;
-        }else {
+        if (Workout.desiredPhysique != null  && (GeneralInfo.isPhysicallyActive == true || GeneralInfo.isPhysicallyActive == false)) {
             return true;
+        } else {
+            return false;
         }
     }
 }

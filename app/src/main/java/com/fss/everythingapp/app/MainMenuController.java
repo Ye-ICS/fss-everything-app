@@ -20,7 +20,7 @@ public class MainMenuController {
     @FXML
     private void openFitnessApp (ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/MainMenu-NotSignedin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("fxml/NotSignedin.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
