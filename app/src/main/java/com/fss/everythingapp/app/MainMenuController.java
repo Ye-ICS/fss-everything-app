@@ -2,6 +2,8 @@ package com.fss.everythingapp.app;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.businfo.ListController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +23,12 @@ public class MainMenuController {
     @FXML
     private void openBuses(ActionEvent actionEvent) throws IOException {
         try {
-            Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../businfo/List.fxml"));
-        rootContainer.getScene().setRoot(mainListLayout);
+            FXMLLoader mainListLoader = new FXMLLoader(getClass().getResource("../businfo/List.fxml"));
+            ListController listController = new ListController();
+            mainListLoader.setController(listController);
+            Parent mainListLayout = mainListLoader.load();
+            rootContainer.getScene().setRoot(mainListLayout);
+            listController.init();
         } catch (Exception e) {
             e.printStackTrace();
         }
