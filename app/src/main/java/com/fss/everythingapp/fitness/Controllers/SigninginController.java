@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class MMSigninginController {
+public class SigninginController {
 
     @FXML
     private ToggleGroup ActivityChoice;
@@ -91,7 +91,7 @@ public class MMSigninginController {
         GeneralInfo.isFemale = femaleRadio.isSelected();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu-SignedIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

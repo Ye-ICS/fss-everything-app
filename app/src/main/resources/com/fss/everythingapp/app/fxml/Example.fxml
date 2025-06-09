@@ -15,8 +15,11 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#openStudentServices" styleClass="material-button" text="Student&#10;Services" textAlignment="CENTER" />
                   <Button mnemonicParsing="false" styleClass="material-button" text="Calendar" textAlignment="CENTER" />
+
                   <Button mnemonicParsing="false" styleClass="material-button" text="Buses" textAlignment="CENTER" />
                   <Button layoutX="224.0" layoutY="29.0" mnemonicParsing="false" onAction="#openFitnessApp" styleClass="material-button" text="Fitness" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#openBuses" styleClass="material-button" text="Buses" textAlignment="CENTER" />
+
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

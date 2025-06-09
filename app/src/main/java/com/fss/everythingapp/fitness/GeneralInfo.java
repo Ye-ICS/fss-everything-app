@@ -13,7 +13,7 @@ static public String name;
     private boolean acceptableFat;
     static private boolean obesityFat;
     public static int bodyFat;
-    public static Boolean isActive; //true means person is active, false is opposite
+    public static boolean isPhysicallyActive = false; //true means person is active, false is opposite
 
     void calculateBodyfat () {
         if (isMale == true) {

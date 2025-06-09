@@ -9,18 +9,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 
 public class MainMenuController {
+
+
+
+    @FXML
+    BorderPane rootContainer;
 
 
     @FXML
     private void openStudentServices(ActionEvent actionEvent) {
         
     }
+
     @FXML
     private void openFitnessApp (ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/MainMenu-NotSignedin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("fxml/NotSignedin.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -30,6 +38,19 @@ public class MainMenuController {
             System.out.println("Error loading FXML: " + e.getMessage());
         }
     }
+
+    @FXML
+    private void openBuses(ActionEvent actionEvent) throws IOException {
+        try {
+            Parent mainListLayout = (Parent) FXMLLoader.load(getClass().getResource("../businfo/List.fxml"));
+        rootContainer.getScene().setRoot(mainListLayout);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+    
+
 
 
