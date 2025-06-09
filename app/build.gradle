@@ -34,6 +34,8 @@ dependencies {
 
     // Add OneBusAway GTFS module
     implementation 'org.onebusaway:onebusaway-gtfs:1.3.4'
+    implementation 'org.slf4j:slf4j-simple:2.0.7'
+    implementation group: 'org.mobilitydata', name: 'gtfs-realtime-bindings', version: '0.0.8'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
