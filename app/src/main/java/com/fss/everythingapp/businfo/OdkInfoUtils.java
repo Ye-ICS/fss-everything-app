@@ -27,10 +27,7 @@ public class OdkInfoUtils {
     }
 
     public String getColour(String routeId){
-        Route route = getRouteById(routeId);
-        System.out.println(route.getColor());
-
-        return null;
+        return getRouteById(routeId).getColor();
     }
 
     public Route getRouteById(String routeId) {
@@ -39,7 +36,7 @@ public class OdkInfoUtils {
                 return route;
             }
         }
-        return null; // or throw an exception if preferred
+        return null;
     }
 
     public ArrayList<String> getRouteNames() {
