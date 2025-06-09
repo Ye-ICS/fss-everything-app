@@ -23,8 +23,8 @@ public class AppointmentController {
 
 
         // load to the next layout
-        Parent timeslotsLayout = FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/Timeslots.fxml"));
-        rootcontainer.getScene().setRoot(timeslotsLayout);
+        Parent datesLayout = FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/DatesLayout.fxml"));
+        rootcontainer.getScene().setRoot(datesLayout);
     }
 
     @FXML
