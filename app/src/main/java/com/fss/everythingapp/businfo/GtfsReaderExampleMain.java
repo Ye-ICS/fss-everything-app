@@ -13,7 +13,7 @@ public class GtfsReaderExampleMain {
     System.out.println("test2");
     
     for (FeedEntity entity : feed.getEntityList()) {
-      if (entity.hasVehicle() && entity.getVehicle().getVehicle().getId().equals("3490100053")) {
+      if (entity.hasVehicle() && entity.getTripUpdate().getTrip().getRouteId().equals(id)) {
       System.out.println("Vehicle ID: " + entity.getVehicle().getVehicle().getId());
       System.out.println("Position: " + entity.getVehicle().getPosition());
       }
