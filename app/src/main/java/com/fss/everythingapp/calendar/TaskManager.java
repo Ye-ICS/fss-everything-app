@@ -14,6 +14,7 @@ public class TaskManager extends DateManager {
     String taskName;
     String dueDate;
 
+    //For some reason task isnt recognized
     //ArrayList<Task> taskList = new ArrayList();
     TaskManager(String taskName, String dueDate) throws FileNotFoundException {
         this.taskName = taskName;
@@ -61,4 +62,9 @@ public class TaskManager extends DateManager {
     static void selectEvent() { // Displays event information
     }
 
+    /*
+    private static ArrayList<Task> loadTasks(){
+    //load tasks from DateList using fileReader
+    }
+    */
 }
