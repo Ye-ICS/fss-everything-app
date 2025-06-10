@@ -31,7 +31,7 @@ class StudentServices {
         counsellors = fillCounsellors();
         int id = AppointmentController.grade - 9;
         calendar = counsellors.get(id).getCalendar();
-        TimeslotsController.TimeslotsController(calendar.getAvailableDates());
+        TimeslotsController.timeslotController(calendar.getAvailableDates());
 
         // happens later in the program
         counsellors.get(id).updateCalendar(calendar);
