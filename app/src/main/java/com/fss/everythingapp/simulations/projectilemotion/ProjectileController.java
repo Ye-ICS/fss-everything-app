@@ -54,6 +54,8 @@ public class ProjectileController {
     private double height = 30;
     private Image projectileImg = null;
     private double vectorLength = 1;
+    private double XOffset = 50;
+    private double YOffset = 500;
 
 
     @FXML
@@ -213,7 +215,7 @@ public class ProjectileController {
         //OverallVelocity
         gc.setStroke(javafx.scene.paint.Color.RED);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, XOffset + ballSize/2 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - ballSize/2 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
         }
 
@@ -222,12 +224,12 @@ public class ProjectileController {
         //YVelocity
         gc.setStroke(javafx.scene.paint.Color.BLUE);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2,x + 50 + ballSize/2, 970 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2,x + 50 + ballSize/2, 985 - ballSize/2 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
         //XVelocity
         gc.setStroke(javafx.scene.paint.Color.GREEN);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, 65 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 985 - y - ballSize/2);
+        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, 65 + ballSize/2 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 985 - y - ballSize/2);
         }
     }
 
@@ -253,10 +255,10 @@ public class ProjectileController {
                     double y = simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY();
                         if (y - ballSize <= 0 && time > 0) {
                             timeline.stop();
-                            drawProjectile(50 + x, 500 - ballSize ); 
+                            drawProjectile(XOffset + x, YOffset - ballSize ); 
                             return;
                         }
-                    drawProjectile(50 + x, 500 - y);
+                    drawProjectile(XOffset + x, YOffset - y);
                             if(velocityVectors.isSelected())
                             {
                                 drawVelocityVectors(x, y - ballSize, time);
@@ -264,7 +266,7 @@ public class ProjectileController {
                     xVeloLabel.setText("Vₓ = " + String.format("%.2f" , speedSlider.getValue() * Math.cos(Math.toRadians(angleSlider.getValue()))));
                     yVeloLabel.setText("Vᵧ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY()));
                     xLabel.setText("X = " + String.format("%.2f" , x));
-                    yLabel.setText("Y = " + String.format("%.2f", y));
+                    yLabel.setText("Y = " + String.format("%.2f", y - ballSize));
                     timeLabel.setText("t = " + String.format("%.1f", time));
                     veloLabel.setText("V = " + String.format("%.2f", Math.sqrt(Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX() , 2) + Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY() , 2))));
                 }
@@ -274,6 +276,3 @@ public class ProjectileController {
         timeline.play(); // Starts the animation timeline
     }
 }
-
-    
-   

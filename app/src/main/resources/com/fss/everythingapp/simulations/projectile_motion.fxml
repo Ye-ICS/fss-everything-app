@@ -70,13 +70,13 @@
             </HBox>
             <HBox prefHeight="33.0" prefWidth="408.0">
                <children>
-                  <CheckBox fx:id="showTragectory" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Show Tragectory" />
+                  <CheckBox fx:id="velocityComponents" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Show Velocity Components" />
                   <CheckBox fx:id="velocityVectors" mnemonicParsing="false" prefHeight="31.0" prefWidth="193.0" selected="true" text="Show Velocity Vector" />
                </children>
             </HBox>
             <HBox prefHeight="44.0" prefWidth="408.0">
                <children>
-                  <CheckBox fx:id="velocityComponents" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Show Velocity Components" />
+                  <CheckBox fx:id="showTragectory" mnemonicParsing="false" prefHeight="30.0" prefWidth="216.0" text="Show Tragectory" />
                   <CheckBox fx:id="grid" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" selected="true" text="Show Grid" />
                </children>
             </HBox>
