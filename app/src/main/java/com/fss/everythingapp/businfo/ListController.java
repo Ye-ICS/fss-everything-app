@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -13,6 +14,9 @@ public class ListController {
 
     @FXML
     BorderPane rootContainer;
+
+    @FXML
+    TextField searchBox;
 
     @FXML
     VBox listVBox;
@@ -26,6 +30,27 @@ public class ListController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void updateSearch(ActionEvent actionEvent) {
+        String searchText = searchBox.getText().toLowerCase();
+        System.out.println(searchText);
+        for (ToolBar toolBar : toolBars) {
+            Button button = (Button) toolBar.getItems().get(0);
+            String buttonText = button.getText().toLowerCase();
+            if (buttonText.contains(searchText)) {
+                toolBar.setVisible(true);
+            } else {
+                toolBar.setVisible(false);
+            }
+        }
+
+    }
+
+    @FXML
+    private void debug(ActionEvent actionEvent) {
+
     }
 
     public void init() {
