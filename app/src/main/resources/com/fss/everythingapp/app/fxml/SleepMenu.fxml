@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.fitness.Controllers.DietMenuController">
+<BorderPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.fitness.Controllers.SleepMenuController">
 
    <top>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" BorderPane.alignment="CENTER">
@@ -21,11 +21,12 @@
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="calorieGoal" strokeType="OUTSIDE" strokeWidth="0.0" text="Sleep Goal" />
+            <Text fx:id="sleepGoal" strokeType="OUTSIDE" strokeWidth="0.0" text="Sleep Goal" />
             <ProgressBar fx:id="sleepGoalBar" prefWidth="200.0" progress="0.0" />
             <Text fx:id="date" strokeType="OUTSIDE" strokeWidth="0.0" />
             <VBox alignment="BOTTOM_CENTER" prefHeight="204.0" prefWidth="335.0">
                <children>
+                  <Button fx:id="dateButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#setDate" text="Initialize Date" />
                   <VBox alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#backToMM" text="Back" />
