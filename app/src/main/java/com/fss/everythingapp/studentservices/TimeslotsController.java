@@ -1,5 +1,6 @@
 package com.fss.everythingapp.studentservices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.checkerframework.checker.units.qual.C;
@@ -13,14 +14,20 @@ public class TimeslotsController {
     private static Timeslot timeslot;
     private static ChoiceBox<Date> dateBox = new ChoiceBox<>();
     private static ChoiceBox<Timeslot> timeBox = new ChoiceBox<>();
+    private static List<Date> dates = new ArrayList<>();
+    private List<Timeslot> times = new ArrayList<>();
+
+    static void TimeslotsController(List<Date> date) {
+        dates = date;
+    }
 
     @FXML
     void initialize() {
-        //dateBox.getItems().addAll(SSCalendar.dates);
+        dateBox.getItems().addAll(dates);
 
 
         
-        //timeBox.getItems().addAll(Date.getTimes());
+        timeBox.getItems().addAll(times);
     }
 
     @FXML
@@ -30,4 +37,5 @@ public class TimeslotsController {
 
         // send updated info to student services
     }
+
 }
