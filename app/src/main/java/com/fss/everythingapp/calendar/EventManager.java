@@ -15,6 +15,10 @@ public class EventManager extends DateManager {
     String startDate;
     String endDate;
 
+    EventManager() {
+        loadDates();
+    }
+
     EventManager(String eventTitle, String startDate, String endDate) {
         this.eventTitle = eventTitle;
         this.startDate = startDate;
@@ -23,7 +27,7 @@ public class EventManager extends DateManager {
         saveEvent(eventTitle, startDate, endDate);
     }
 
-    EventManager() { // Blank constructor
+    EventManager(ArrayList<EventManager> eventList) { // Blank constructor
     }
 
     @Override
@@ -51,21 +55,23 @@ public class EventManager extends DateManager {
                 String startDate = parts[2];
                 String endDate = parts[3];
 
+                startDateInfo = new int[5];
+                endDateInfo = new int[5];
                 String[] startDateParts = startDate.split("/");
-                startYear = Integer.parseInt(startDateParts[0]);
-                startMonth = Integer.parseInt(startDateParts[1]);
-                startDay = Integer.parseInt(startDateParts[2]);
+                startDateInfo[0] = Integer.parseInt(startDateParts[0]);
+                startDateInfo[1] = Integer.parseInt(startDateParts[1]);
+                startDateInfo[2] = Integer.parseInt(startDateParts[2]);
                 String[] startTimeParts = (startDateParts[3]).split(":");
-                startHour = Integer.parseInt(startTimeParts[0]);
-                startMins = Integer.parseInt(startTimeParts[1]);
+                startDateInfo[3] = Integer.parseInt(startTimeParts[0]);
+                startDateInfo[4] = Integer.parseInt(startTimeParts[1]);
 
                 String[] endDateParts = endDate.split("/");
-                endYear = Integer.parseInt(endDateParts[0]);
-                endMonth = Integer.parseInt(endDateParts[1]);
-                endDay = Integer.parseInt(endDateParts[2]);
+                endDateInfo[0] = Integer.parseInt(endDateParts[0]);
+                endDateInfo[1] = Integer.parseInt(endDateParts[1]);
+                endDateInfo[2] = Integer.parseInt(endDateParts[2]);
                 String[] endTimeParts = (endDateParts[3]).split(":");
-                endHour = Integer.parseInt(endTimeParts[0]);
-                endMins = Integer.parseInt(endTimeParts[1]);
+                endDateInfo[3] = Integer.parseInt(endTimeParts[0]);
+                endDateInfo[4] = Integer.parseInt(endTimeParts[1]);
 
             }
             eventList.add(loadedEvent);

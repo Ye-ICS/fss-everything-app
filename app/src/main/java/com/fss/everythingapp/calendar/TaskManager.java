@@ -13,14 +13,18 @@ public class TaskManager extends DateManager {
     String taskName;
     String dueDate;
 
-    TaskManager(String taskName, String dueDate) throws FileNotFoundException {
+    TaskManager() {
+        loadDates();
+    }
+
+    TaskManager(String taskName, String dueDate) {
         this.taskName = taskName;
         this.dueDate = dueDate;
 
         saveTask(taskName, dueDate);
     }
 
-    TaskManager() { // Blank constructor
+    TaskManager(ArrayList<TaskManager> taskList) { // Blank constructor
     }
 
     @Override
@@ -38,7 +42,7 @@ public class TaskManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            TaskManager loadedTask = new TaskManager();
+            TaskManager loadedTask = new TaskManager(taskList);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
@@ -48,12 +52,13 @@ public class TaskManager extends DateManager {
                 String dueDate = parts[2];
 
                 String[] dueDateParts = dueDate.split("/");
-                dueYear = Integer.parseInt(dueDateParts[0]);
-                dueMonth = Integer.parseInt(dueDateParts[1]);
-                dueDay = Integer.parseInt(dueDateParts[2]);
+                dueDateInfo = new int[5];
+                dueDateInfo[0] = Integer.parseInt(dueDateParts[0]);
+                dueDateInfo[1] = Integer.parseInt(dueDateParts[1]);
+                dueDateInfo[2] = Integer.parseInt(dueDateParts[2]);
                 String[] dueTimeParts = (dueDateParts[3]).split(":");
-                dueHour = Integer.parseInt(dueTimeParts[0]);
-                dueMins = Integer.parseInt(dueTimeParts[1]);
+                dueDateInfo[3] = Integer.parseInt(dueTimeParts[0]);
+                dueDateInfo[4] = Integer.parseInt(dueTimeParts[1]);
 
             }
 

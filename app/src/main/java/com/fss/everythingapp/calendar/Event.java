@@ -9,17 +9,19 @@ import java.util.Scanner;
 
 public class Event extends Date {
 
+    private ArrayList<Event> eventList;
+
     Event(char paramType, String paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
 
     }
 
-    Event() {
+    Event(ArrayList<Event> eventList) { // Blank constructor
     }
 
     @Override
     protected ArrayList loadAptDates(char paramType, String paramDate) {
         // loads all dates with a specific parameter
-        ArrayList<Event> eventList = new ArrayList<Event>();
+        eventList = new ArrayList<Event>();
         String[] paramParts = paramDate.split("/");
         Scanner scanner;
 
@@ -32,7 +34,7 @@ public class Event extends Date {
         }
 
         while (scanner.hasNextLine()) {
-            Event loadedEvent = new Event();
+            Event loadedEvent = new Event(eventList);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
@@ -42,38 +44,47 @@ public class Event extends Date {
                 String startDate = parts[2];
                 String endDate = parts[3];
 
+                startDateInfo = new int[5];
+                endDateInfo = new int[5];
                 String[] startDateParts = startDate.split("/");
-                startYear = Integer.parseInt(startDateParts[0]);
-                startMonth = Integer.parseInt(startDateParts[1]);
-                startDay = Integer.parseInt(startDateParts[2]);
+                startDateInfo[0] = Integer.parseInt(startDateParts[0]);
+                startDateInfo[1] = Integer.parseInt(startDateParts[1]);
+                startDateInfo[2] = Integer.parseInt(startDateParts[2]);
                 String[] startTimeParts = (startDateParts[3]).split(":");
-                startHour = Integer.parseInt(startTimeParts[0]);
-                startMins = Integer.parseInt(startTimeParts[1]);
+                startDateInfo[3] = Integer.parseInt(startTimeParts[0]);
+                startDateInfo[4] = Integer.parseInt(startTimeParts[1]);
 
                 String[] endDateParts = endDate.split("/");
-                endYear = Integer.parseInt(endDateParts[0]);
-                endMonth = Integer.parseInt(endDateParts[1]);
-                endDay = Integer.parseInt(endDateParts[2]);
+                endDateInfo[0] = Integer.parseInt(endDateParts[0]);
+                endDateInfo[1] = Integer.parseInt(endDateParts[1]);
+                endDateInfo[2] = Integer.parseInt(endDateParts[2]);
                 String[] endTimeParts = (endDateParts[3]).split(":");
-                endHour = Integer.parseInt(endTimeParts[0]);
-                endMins = Integer.parseInt(endTimeParts[1]);
+                endDateInfo[3] = Integer.parseInt(endTimeParts[0]);
+                endDateInfo[4] = Integer.parseInt(endTimeParts[1]);
 
                 if (paramType == 'M'
-                        && (Integer.parseInt(paramParts[0]) <= startYear && Integer.parseInt(paramParts[0]) >= endYear)
-                        && (Integer.parseInt(paramParts[1]) <= startMonth
-                                && Integer.parseInt(paramParts[1]) >= endMonth)) {
+                        && (Integer.parseInt(paramParts[0]) <= startDateInfo[0]
+                                && Integer.parseInt(paramParts[0]) >= endDateInfo[0])
+                        && (Integer.parseInt(paramParts[1]) <= startDateInfo[1]
+                                && Integer.parseInt(paramParts[1]) >= endDateInfo[1])) {
                     eventList.add(loadedEvent);
                 } else if (paramType == 'D'
-                        && (Integer.parseInt(paramParts[0]) <= startYear && Integer.parseInt(paramParts[0]) >= endYear)
-                        && (Integer.parseInt(paramParts[1]) <= startMonth
-                                && Integer.parseInt(paramParts[1]) >= endMonth)
-                        && (Integer.parseInt(paramParts[2]) <= startDay && Integer.parseInt(paramParts[2]) >= endDay)) {
+                        && (Integer.parseInt(paramParts[0]) <= startDateInfo[0]
+                                && Integer.parseInt(paramParts[0]) >= endDateInfo[0])
+                        && (Integer.parseInt(paramParts[1]) <= startDateInfo[1]
+                                && Integer.parseInt(paramParts[1]) >= endDateInfo[1])
+                        && (Integer.parseInt(paramParts[2]) <= startDateInfo[2]
+                                && Integer.parseInt(paramParts[2]) >= endDateInfo[2])) {
                     eventList.add(loadedEvent);
                 }
             }
         }
         scanner.close();
         return eventList;
+    }
+
+    ArrayList<Event> getEventList() {
+        return this.eventList;
     }
 
 }
