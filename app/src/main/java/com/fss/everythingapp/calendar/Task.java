@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Task extends Date {
+    protected int[] dueDateInfo;
 
     Task(char paramType, String paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
 

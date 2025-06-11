@@ -9,10 +9,6 @@ import java.util.Scanner;
 
 public class Event extends Date {
 
-    Event(char paramType, String paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
-
-    }
-
     Event() {
     }
 
