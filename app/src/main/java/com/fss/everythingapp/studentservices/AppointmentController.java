@@ -25,8 +25,11 @@ public class AppointmentController {
 
 
         // load to the next layout
-        Parent timeslotsLayout = FXMLLoader.load(getClass().getResource("/com/fss/everthingapp/studentservicesappointment/fxml/TimeslotsLayout.fxml"));
-        rootcontainer.getScene().setRoot(timeslotsLayout);
+        FXMLLoader timeslotsLayout = new FXMLLoader(getClass().getResource("/com/fss/everthingapp/studentservicesappointment/fxml/TimeslotsLayout.fxml"));
+        TimeslotsController timeslotsController = new TimeslotsController();
+        timeslotsLayout.setController(timeslotsController);
+        Parent show = timeslotsLayout.load();
+        rootcontainer.getScene().setRoot(show);
     }
 
     @FXML
@@ -46,7 +49,7 @@ public class AppointmentController {
 
     @FXML
     private void onExitBtnPressed() throws IOException {
-        Parent returnLayout = FXMLLoader.load(getClass().getResource("../app/MainMenuLayout.fxml"));
+        Parent returnLayout = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
         rootcontainer.getScene().setRoot(returnLayout);
     }
 
