@@ -10,7 +10,7 @@ public class Timeslot {
         this.endTime = endTime;
     }
 
-    boolean setAvailable(boolean available) {
+    boolean setAvailable() {
         available = false;
         return available;
     }
