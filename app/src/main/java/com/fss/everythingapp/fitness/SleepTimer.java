@@ -8,7 +8,7 @@ public class SleepTimer {
 
      public static String formattedDate;
 
-     public static void main(String[] args) {
+     public static void getDate(String[] args) {
       LocalDateTime myDateObj = LocalDateTime.now();
     System.out.println("Before formatting: " + myDateObj);
     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");

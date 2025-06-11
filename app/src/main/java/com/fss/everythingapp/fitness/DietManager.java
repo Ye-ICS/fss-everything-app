@@ -2,13 +2,7 @@ package com.fss.everythingapp.fitness;
 
 public class DietManager {
     
-   // boolean isDietHealthy() {
-     //   if () {
-       //     return false;
-        //} else if ()
-        //return true;
-        // check if diet is healthy
-    //}
+
 
     void viewDiet() {
         //  view diet

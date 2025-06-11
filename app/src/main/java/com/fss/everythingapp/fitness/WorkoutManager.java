@@ -13,24 +13,44 @@ public class WorkoutManager {
     static private boolean obesityFat;
     private double bmiIndex;
 
-    void newRoutine() {
+    public static void calculateExcersizeGoals() {
         // create a new routine
-        if (Workout.desiredPhysique == "Skinny" && WorkoutManager.getAverageBuild() || WorkoutManager.getFitBuild()) {
-            Workout.cardioTarget = 30;
-            Workout.compoundExSets = 2;
-            Workout.compoundExTarget = 10;
-            Workout.fullbodyExTarget = 20;
-            Workout.liftSets = 3;
-            Workout.liftTarget = 10;
-        } else if (Workout.desiredPhysique == "Lean" || Workout.desiredPhysique == "Bulk" && WorkoutManager.getSkinnyBuild() || WorkoutManager.getAverageBuild()) {
-            Workout.compoundExSets = 1;
-            Workout.compoundExTarget = 16;
-            Workout.liftSets = 3;
-            Workout.liftTarget = 16;
-            System.out.println("Gradually increase weight or reps to challenge muscles.");
-            System.out.println("Ensure 48 hours of rest between workouts targeting the same muscle group.");
+        if (Workout.desiredPhysique.equals("skinny")) {
+            Workout.compoundExGoal = 45;
+            Workout.fullbodyExTarget = 30;
+
+        } else if (Workout.desiredPhysique.equals("lean")) {
+            Workout.compoundExGoal = 30;
+            Workout.fullbodyExTarget = 45;
+
+        } else if (Workout.desiredPhysique.equals("bulk")){
+            Workout.compoundExGoal = 45;
+            Workout.fullbodyExTarget = 60;
         }
     }
+
+    public static void calculateCaloriesBurntTarget(){
+        if (Workout.desiredPhysique.equals("skinny")){
+            if (GeneralInfo.isPhysicallyActive) {
+                Workout.caloriesBurntTarget = 600;
+            }else {
+               Workout.caloriesBurntTarget = 150;
+            }
+        } else if (Workout.desiredPhysique.equals("lean")){
+            if (GeneralInfo.isPhysicallyActive){
+                Workout.caloriesBurntTarget = 450;
+            } else {
+                Workout.caloriesBurntTarget = 100;
+            }
+        } else if (Workout.desiredPhysique.equals("bulk")){
+            if (GeneralInfo.isPhysicallyActive) {
+                Workout.caloriesBurntTarget = 400;
+            }else {
+                Workout.caloriesBurntTarget = 100;
+            }
+        }
+    }
+
 
     void viewRoutine() {
         // view routine

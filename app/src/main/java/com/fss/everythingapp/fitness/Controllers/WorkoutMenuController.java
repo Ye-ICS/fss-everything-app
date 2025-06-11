@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 
 import com.fss.everythingapp.fitness.DietManager;
 import com.fss.everythingapp.fitness.Workout;
+import com.fss.everythingapp.fitness.WorkoutManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,18 +20,37 @@ import javafx.stage.Stage;
 public class WorkoutMenuController {
 
     @FXML
-    public void initialize() {
-        DecimalFormat df = new DecimalFormat("#.##");
-        DietManager.newDiet();
-        calorieBurntBar.setProgress(Workout.caloriesBurned / 500.0);
-        calorieBurntGoal.setText("Calories Burned: " + df.format(Workout.caloriesBurned) + " / 500");
-    }
-
-    @FXML
     private ProgressBar calorieBurntBar;
 
     @FXML
     private Text calorieBurntGoal;
+    
+    @FXML
+    private ProgressBar compoundExBar;
+
+    @FXML
+    private Text compundExText;
+
+    @FXML
+    private ProgressBar fullBodyExBar;
+
+    @FXML
+    private Text fullBodyExText;
+
+    @FXML
+    public void initialize() {
+        WorkoutManager.calculateCaloriesBurntTarget();
+        WorkoutManager.calculateExcersizeGoals();
+        DecimalFormat df = new DecimalFormat("#.##");
+        calorieBurntBar.setProgress(Workout.caloriesBurned / 500.0);
+        calorieBurntGoal.setText("Calories Burned: " + df.format(Workout.caloriesBurned) + " / " + df.format(Workout.caloriesBurntTarget));
+        compoundExBar.setProgress(Workout.compoundExDone / Workout.compoundExGoal);
+        compundExText.setText("Compound Excersizes Goal (In minutes): " + Workout.compoundExDone + " / " + Workout.compoundExGoal);
+        fullBodyExBar.setProgress(Workout.fullbodyExDone / Workout.fullbodyExTarget);
+        fullBodyExText.setText("Full Body Excersizes Goal (In minutes): " + Workout.fullbodyExDone + " / " + Workout.fullbodyExTarget);
+
+    }
+
 
     @FXML
     void backToMM(ActionEvent event) {

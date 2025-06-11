@@ -23,6 +23,10 @@
          <children>
             <Text fx:id="calorieBurntGoal" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories Burnt Goal" />
             <ProgressBar fx:id="calorieBurntBar" prefWidth="200.0" progress="0.0" />
+            <Text fx:id="compundExText" layoutX="127.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Compound Excersizes Goal (minutes)" />
+            <ProgressBar fx:id="compoundExBar" layoutX="78.0" layoutY="72.0" prefWidth="200.0" progress="0.0" />
+            <Text fx:id="fullBodyExText" layoutX="127.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Body excersizes goal (minutes)" />
+            <ProgressBar fx:id="fullBodyExBar" layoutX="78.0" layoutY="117.0" prefWidth="200.0" progress="0.0" />
             <VBox alignment="BOTTOM_CENTER" prefHeight="204.0" prefWidth="335.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#backToMM" text="Back" />
