@@ -14,8 +14,8 @@ public class TaskManager extends DateManager {
     String taskName;
     String dueDate;
 
-    //For some reason task isnt recognized
-    //ArrayList<Task> taskList = new ArrayList();
+    // For some reason task isnt recognized
+    // ArrayList<Task> taskList = new ArrayList();
     TaskManager(String taskName, String dueDate) throws FileNotFoundException {
         this.taskName = taskName;
         this.dueDate = dueDate;
@@ -41,7 +41,7 @@ public class TaskManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            Task loadedTask = new Task();
+            // Task loadedTask = new Task();
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
@@ -60,7 +60,7 @@ public class TaskManager extends DateManager {
 
             }
 
-            taskList.add(loadedTask);
+            // taskList.add(loadedTask);
         }
         scanner.close();
         return taskList;
@@ -86,8 +86,8 @@ public class TaskManager extends DateManager {
     }
 
     /*
-    private static ArrayList<Task> loadTasks(){
-    //load tasks from DateList using fileReader
-    }
-    */
+     * private static ArrayList<Task> loadTasks(){
+     * //load tasks from DateList using fileReader
+     * }
+     */
 }
