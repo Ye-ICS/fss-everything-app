@@ -7,32 +7,24 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Date extends DateManager {
+public class Date {
     protected String dateName;
+    protected char dateType;
 
-    protected int dueYear;
-    protected int dueMonth;
-    protected int dueDay;
-    protected int dueHour;
-    protected int dueMins;
+    protected int[] dueDateInfo;
+    protected int[] startDateInfo;
+    protected int[] endDateInfo;
 
-    protected int startYear;
-    protected int startMonth;
-    protected int startDay;
-    protected int startHour;
-    protected int startMins;
+    private ArrayList<Date> dateList;
 
-    protected int endYear;
-    protected int endMonth;
-    protected int endDay;
-    protected int endHour;
-    protected int endMins;
+    Date() { // Not sure why we need this, but our code is broken without it ¯\_(ツ)_/¯
+    }
 
     Date(char paramType, String paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
 
     }
 
-    Date() { // Blank constructor
+    Date(ArrayList<Date> dateList) { // Blank constructor
     }
 
     // loads all dates with a specific parameter
@@ -50,60 +42,67 @@ public class Date extends DateManager {
         }
 
         while (scanner.hasNextLine()) {
-            Date loadedDate = new Date();
+            Date loadedDate = new Date(dateList);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
             dateName = parts[1];
 
-            if (parts[0].charAt(0) == 'T') { // If the current date is a task
+            if (dateType == 'T') { // If the current date is a task
                 String dueDate = parts[2];
 
                 String[] dueDateParts = dueDate.split("/");
-                dueYear = Integer.parseInt(dueDateParts[0]);
-                dueMonth = Integer.parseInt(dueDateParts[1]);
-                dueDay = Integer.parseInt(dueDateParts[2]);
+                dueDateInfo = new int[5];
+                dueDateInfo[0] = Integer.parseInt(dueDateParts[0]);
+                dueDateInfo[1] = Integer.parseInt(dueDateParts[1]);
+                dueDateInfo[2] = Integer.parseInt(dueDateParts[2]);
                 String[] dueTimeParts = (dueDateParts[3]).split(":");
-                dueHour = Integer.parseInt(dueTimeParts[0]);
-                dueMins = Integer.parseInt(dueTimeParts[1]);
+                dueDateInfo[3] = Integer.parseInt(dueTimeParts[0]);
+                dueDateInfo[4] = Integer.parseInt(dueTimeParts[1]);
 
-                if (paramType == 'M' && Integer.parseInt(paramParts[0]) == dueYear
-                        && Integer.parseInt(paramParts[1]) == dueMonth) {
+                if (paramType == 'M' && Integer.parseInt(paramParts[0]) == dueDateInfo[0]
+                        && Integer.parseInt(paramParts[1]) == dueDateInfo[1]) {
                     dateList.add(loadedDate);
-                } else if (paramType == 'D' && Integer.parseInt(paramParts[0]) == dueYear
-                        && Integer.parseInt(paramParts[1]) == dueMonth && Integer.parseInt(paramParts[1]) == dueDay) {
+                } else if (paramType == 'D' && Integer.parseInt(paramParts[0]) == dueDateInfo[0]
+                        && Integer.parseInt(paramParts[1]) == dueDateInfo[1]
+                        && Integer.parseInt(paramParts[1]) == dueDateInfo[2]) {
                     dateList.add(loadedDate);
                 }
             } else { // If the current date is an event
                 String startDate = parts[2];
                 String endDate = parts[3];
 
+                startDateInfo = new int[5];
+                endDateInfo = new int[5];
                 String[] startDateParts = startDate.split("/");
-                startYear = Integer.parseInt(startDateParts[0]);
-                startMonth = Integer.parseInt(startDateParts[1]);
-                startDay = Integer.parseInt(startDateParts[2]);
+                startDateInfo[0] = Integer.parseInt(startDateParts[0]);
+                startDateInfo[1] = Integer.parseInt(startDateParts[1]);
+                startDateInfo[2] = Integer.parseInt(startDateParts[2]);
                 String[] startTimeParts = (startDateParts[3]).split(":");
-                startHour = Integer.parseInt(startTimeParts[0]);
-                startMins = Integer.parseInt(startTimeParts[1]);
+                startDateInfo[3] = Integer.parseInt(startTimeParts[0]);
+                startDateInfo[4] = Integer.parseInt(startTimeParts[1]);
 
                 String[] endDateParts = endDate.split("/");
-                endYear = Integer.parseInt(endDateParts[0]);
-                endMonth = Integer.parseInt(endDateParts[1]);
-                endDay = Integer.parseInt(endDateParts[2]);
+                endDateInfo[0] = Integer.parseInt(endDateParts[0]);
+                endDateInfo[1] = Integer.parseInt(endDateParts[1]);
+                endDateInfo[2] = Integer.parseInt(endDateParts[2]);
                 String[] endTimeParts = (endDateParts[3]).split(":");
-                endHour = Integer.parseInt(endTimeParts[0]);
-                endMins = Integer.parseInt(endTimeParts[1]);
+                endDateInfo[3] = Integer.parseInt(endTimeParts[0]);
+                endDateInfo[4] = Integer.parseInt(endTimeParts[1]);
 
                 if (paramType == 'M'
-                        && (Integer.parseInt(paramParts[0]) <= startYear && Integer.parseInt(paramParts[0]) >= endYear)
-                        && (Integer.parseInt(paramParts[1]) <= startMonth
-                                && Integer.parseInt(paramParts[1]) >= endMonth)) {
+                        && (Integer.parseInt(paramParts[0]) <= startDateInfo[0]
+                                && Integer.parseInt(paramParts[0]) >= endDateInfo[0])
+                        && (Integer.parseInt(paramParts[1]) <= startDateInfo[1]
+                                && Integer.parseInt(paramParts[1]) >= endDateInfo[1])) {
                     dateList.add(loadedDate);
                 } else if (paramType == 'D'
-                        && (Integer.parseInt(paramParts[0]) <= startYear && Integer.parseInt(paramParts[0]) >= endYear)
-                        && (Integer.parseInt(paramParts[1]) <= startMonth
-                                && Integer.parseInt(paramParts[1]) >= endMonth)
-                        && (Integer.parseInt(paramParts[2]) <= startDay && Integer.parseInt(paramParts[2]) >= endDay)) {
+                        && (Integer.parseInt(paramParts[0]) <= startDateInfo[0]
+                                && Integer.parseInt(paramParts[0]) >= endDateInfo[0])
+                        && (Integer.parseInt(paramParts[1]) <= startDateInfo[1]
+                                && Integer.parseInt(paramParts[1]) >= endDateInfo[1])
+                        && (Integer.parseInt(paramParts[2]) <= startDateInfo[2]
+                                && Integer.parseInt(paramParts[2]) >= endDateInfo[2])) {
                     dateList.add(loadedDate);
                 }
             }
@@ -116,64 +115,24 @@ public class Date extends DateManager {
         return this.dateName;
     }
 
-    int getDueYear() {
-        return this.dueYear;
+    char getDateType() {
+        return this.dateType;
     }
 
-    int getDueMonth() {
-        return this.dueMonth;
+    int[] getDueDateInfo() {
+        return this.dueDateInfo;
     }
 
-    int getdueDay() {
-        return this.dueDay;
+    int[] getStartDateInfo() {
+        return this.startDateInfo;
     }
 
-    int getDueHour() {
-        return this.dueHour;
+    int[] getEndDateInfo() {
+        return this.endDateInfo;
     }
 
-    int getDueMins() {
-        return this.dueMins;
-    }
-
-    int getStartYear() {
-        return this.startYear;
-    }
-
-    int getStartMonth() {
-        return this.startMonth;
-    }
-
-    int getStartDay() {
-        return this.startDay;
-    }
-
-    int getStartHour() {
-        return this.startHour;
-    }
-
-    int getStartMins() {
-        return this.startMins;
-    }
-
-    int getEndYear() {
-        return this.endYear;
-    }
-
-    int getEndMonth() {
-        return this.endMonth;
-    }
-
-    int getEndDay() {
-        return this.endDay;
-    }
-
-    int getEndHour() {
-        return this.endHour;
-    }
-
-    int getEndMins() {
-        return this.endMins;
+    ArrayList<Date> getDateList() {
+        return this.dateList;
     }
 
 }
