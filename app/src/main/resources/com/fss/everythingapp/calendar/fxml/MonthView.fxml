@@ -68,5 +68,6 @@
             </Button>
          </children>
       </HBox>
+      <Button mnemonicParsing="false" onAction="#showDates" text="Show Dates" />
    </children>
 </VBox>
