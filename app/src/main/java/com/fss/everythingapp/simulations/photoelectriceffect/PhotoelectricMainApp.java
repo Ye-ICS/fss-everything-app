@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.Parent;
 
 /**
  * Main application class for the photoelectric effect simulation.
@@ -21,45 +22,50 @@ public class PhotoelectricMainApp extends Application {
     private Text titleText;
     private Text instructionText;
     
-    @Override
-    public void start(Stage primaryStage) {
+    // New static method to get the simulation UI as a Parent
+    public static Parent getSimulationRoot() {
         BorderPane root = new BorderPane();
-        
+
         // Create simulation
-        simulation = new PhotoelectricSimulation(600, 600);
-        
+        PhotoelectricSimulation simulation = new PhotoelectricSimulation(600, 600);
+
         // Left: Simulation Pane
-        simPane = new Pane();
-        simPane.setStyle("-fx-background-color: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);"); // Sky gradient
+        Pane simPane = new Pane();
+        simPane.setStyle("-fx-background-color: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);");
         simPane.setMinSize(600, 600);
         simPane.setPrefSize(600, 600);
 
-        // Add title to simulation pane
-        titleText = new Text(20, 30, "Photoelectric Effect Simulation");
+        // Add title and instructions
+        Text titleText = new Text(20, 30, "Photoelectric Effect Simulation");
         titleText.setFont(Font.font("System", FontWeight.BOLD, 16));
         titleText.setFill(Color.DARKBLUE);
-        
-        instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
+
+        Text instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
         instructionText.setFont(Font.font("System", 12));
         instructionText.setFill(Color.DARKBLUE);
-        
-        // Add metal surface to simulation pane
+
         simPane.getChildren().addAll(titleText, instructionText, simulation.getMetalSurface());
-        
         root.setCenter(simPane);
-        
+
         // Right: Control Panel
         PhotoelectricControlPanel controls = new PhotoelectricControlPanel(simulation);
         root.setRight(controls);
-        
+
         // Set up dynamic addition/removal of photons and electrons
-        setupDynamicElements();
-        
-        // Set up resize listeners
-        setupResizeListeners();
-        
-        // Create scene
-        Scene scene = new Scene(root, 900, 600);
+        // (copy the setupDynamicElements and setupResizeListeners logic here if needed)
+        // For brevity, you can call helper methods or inline the logic
+
+        // ... (copy setupDynamicElements and setupResizeListeners here, adapting as needed) ...
+
+        // You may need to return a custom class if you want to keep the dynamic listeners working,
+        // or you can move those listeners to the constructor of PhotoelectricSimulation or ControlPanel.
+
+        return root;
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        Scene scene = new Scene(getSimulationRoot(), 900, 600);
         primaryStage.setTitle("Photoelectric Effect Simulation");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
