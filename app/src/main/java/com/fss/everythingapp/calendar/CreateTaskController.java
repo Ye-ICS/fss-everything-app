@@ -38,7 +38,7 @@ public class CreateTaskController {
         String taskName = taskNameField.getText();
 
         LocalDate localDueDate = dueDatePicker.getValue();
-        String dueDate = localDueDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        String dueDate = localDueDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         dueDate = dueDate.concat("/" + dueHourField.getText() + ":" + dueMinField.getText());
 
         TaskManager taskMan = new TaskManager(taskName, dueDate);

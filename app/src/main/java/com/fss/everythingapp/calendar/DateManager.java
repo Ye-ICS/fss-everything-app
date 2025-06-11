@@ -84,6 +84,7 @@ public class DateManager {
 
             }
             dateList.add(loadedDate);
+            System.out.println(dateList.size());
         }
         scanner.close();
         return dateList;

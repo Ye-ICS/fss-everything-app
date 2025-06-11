@@ -1,7 +1,6 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,11 +9,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskManager extends DateManager {
-    String taskName;
-    String dueDate;
+    private String taskName;
+    private String dueDate;
 
     TaskManager() {
-        loadDates();
     }
 
     TaskManager(String taskName, String dueDate) {
@@ -71,8 +69,7 @@ public class TaskManager extends DateManager {
     void saveTask(String taskName, String dueDate) {
         PrintWriter writer;
         try {
-            writer = new PrintWriter(new FileWriter(
-                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
+            writer = new PrintWriter(new FileWriter(new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
             // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive -
             // Limestone DSB/Documents/testFile.txt"), true));
         } catch (IOException | URISyntaxException e) {
