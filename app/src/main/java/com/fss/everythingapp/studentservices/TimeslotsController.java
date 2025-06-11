@@ -2,9 +2,7 @@ package com.fss.everythingapp.studentservices;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.checkerframework.checker.units.qual.C;
-
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -31,7 +29,7 @@ public class TimeslotsController {
     }
 
     private static ObservableList<Integer> dateNums() {
-        ObservableList<Integer> dateNums = new ObservableList<Integer>();
+        ObservableList<Integer> dateNums = FXCollections.observableArrayList();
         for (int i = 0; i < 30; i++) {
             dateNums.add(i + 1);
         }

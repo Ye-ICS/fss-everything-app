@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<BorderPane fx:id="rootContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" stylesheets="@/com/fss/everythingapp/css/menu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" stylesheets="@/com/fss/everythingapp/css/menu.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenuController">
    <center>
       <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
             <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefWrapLength="0.0" vgap="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#openStudentServices" styleClass="material-button" text="Student&#10;Services" textAlignment="CENTER" />
+                  <Button fx:id="openStudentServices" mnemonicParsing="false" styleClass="material-button" text="Student&#10;Services" textAlignment="CENTER" />
                   <Button mnemonicParsing="false" styleClass="material-button" text="Calendar" textAlignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#openBuses" styleClass="material-button" text="Buses" textAlignment="CENTER" />
                </children>

@@ -13,7 +13,7 @@ public class MainMenuController {
     BorderPane rootContainer;
 
     @FXML
-    private void openStudentServices(ActionEvent actionEvent) {
+    private void openStudentServices(ActionEvent actionEvent) throws IOException {
         try {
             Parent appointmentLayout = (Parent) FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/AppointmentLayout.fxml"));
             rootContainer.getScene().setRoot(appointmentLayout);
