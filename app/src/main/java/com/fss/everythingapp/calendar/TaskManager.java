@@ -25,7 +25,7 @@ public class TaskManager extends DateManager {
 
     @Override
     protected ArrayList loadDates() { // Loads all tasks
-        ArrayList<TaskManager> taskList = new ArrayList<TaskManager>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
         Scanner scanner;
 
         try {
@@ -38,7 +38,7 @@ public class TaskManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            TaskManager loadedTask = new TaskManager();
+            Task loadedTask = new Task();
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
