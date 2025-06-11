@@ -27,12 +27,10 @@ public class ProjectileController {
     @FXML private Label heightLabel;
     @FXML private Slider accelerationSlider;
     @FXML private Label accelerationLabel;
-    @FXML private Slider vectorSlider;
     @FXML private Label vectorLabel;
     @FXML private Slider animationSpeedSlider;
     @FXML private Label animationSpeedLabel;
     @FXML private CheckBox grid;
-    @FXML private CheckBox showTragectory;
     @FXML private CheckBox velocityVectors;
     @FXML private CheckBox velocityComponents;
     @FXML private TextField projectileName;
@@ -53,9 +51,11 @@ public class ProjectileController {
     private double ballSize = 30;
     private double height = 30;
     private Image projectileImg = null;
-    private double vectorLength = 1;
     private double XOffset = 50;
     private double YOffset = 500;
+    private double offSet = 485;
+    private double tickLength = 5;
+
 
 
     @FXML
@@ -72,8 +72,7 @@ public class ProjectileController {
             simulation.setInitialVelocity(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
-            drawProjectile(50, 500-height);
-            // Update logic later
+            drawProjectile(XOffset, YOffset-height);
         });
         angleSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
             angleLabel.setText(String.format("%.1f°", newVal.doubleValue()));
@@ -81,7 +80,7 @@ public class ProjectileController {
             simulation.calculateTime();
             simulation.calculateRange();
             drawAxes();
-            drawProjectile(50, 500 - height);
+            drawProjectile(XOffset, YOffset - height);
 
         });
         heightSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
@@ -92,20 +91,14 @@ public class ProjectileController {
             height = (9 * heightSlider.getValue()) + ballSize;
 
             //draw the projectile at height
-            drawProjectile(50,  500 - height); // Initial drawing of the projectile
+            drawProjectile(XOffset,  YOffset - height); // Initial drawing of the projectile
         });
         accelerationSlider.valueProperty().addListener((abs, oldVal, newVal) -> {
             accelerationLabel.setText(String.format("%.1f m/s²", newVal.doubleValue()));
             simulation.setAcceleration(newVal.doubleValue());
             simulation.calculateTime();
             simulation.calculateRange();
-            drawProjectile(50, 500 - height);
-        });
-        vectorSlider.valueProperty().addListener((abs, oldVal, newVal) -> { //Visual
-            vectorLabel.setText(String.format("%.1f ", newVal.doubleValue()));
-            
-            vectorLength = newVal.doubleValue();
-            // no function yet
+            drawProjectile(XOffset, YOffset - height);
         });
         animationSpeedSlider.valueProperty().addListener((abs, oldVal, newVal) -> //Visual
             animationSpeedLabel.setText(String.format("x %.1f", newVal.doubleValue()))
@@ -116,14 +109,14 @@ public class ProjectileController {
             ballSizeLabel.setText(String.format("%.1f u", newVal.doubleValue()));
             ballSize = ballSlider.getValue();
             height = (9 * heightSlider.getValue()) + ballSize;
-            drawProjectile(50, 500 - height);
+            drawProjectile(XOffset, YOffset - height);
     });
 
         velocityVectors.setOnAction(e -> {
-            drawProjectile(50, 500-height);
+            drawProjectile(XOffset, YOffset-height);
         });
         velocityComponents.setOnAction(e -> {
-            drawProjectile(50, 500-height);
+            drawProjectile(XOffset, YOffset-height);
         });
 
 
@@ -138,9 +131,6 @@ public class ProjectileController {
             shootProjectile();
         });
 
-        if (showTragectory.isSelected()){
-            drawTragectory();
-        }
 
         changeProjectileImage.setOnAction(e -> { // I copied this code from Yamen's "ControlPanel.java"
             FileChooser fileChooser = new FileChooser();
@@ -151,17 +141,11 @@ public class ProjectileController {
             File selectedFile = fileChooser.showOpenDialog(gridCanvas.getScene().getWindow());
             if (selectedFile != null) {
                 projectileImg = new Image(selectedFile.toURI().toString());
-                drawProjectile(50, 500 - height);
+                drawProjectile(XOffset, YOffset - height);
             }
         });
 
-                drawProjectile(50, 500 - height); //initial drawing 
-    }
-
-    
-
-    public void drawTragectory(){
-        // Add functionality
+                drawProjectile(XOffset, YOffset - height); //initial drawing 
     }
 
     public void drawAxes() {
@@ -178,17 +162,17 @@ public class ProjectileController {
         gc.fillRect(0, 0, width, gridCanvas.getHeight());
 
         //Draw X axis
-        gc.strokeLine(50, height - 100, width - 50, height - 100);
+        gc.strokeLine(XOffset, height - XOffset * 2, width - XOffset, height - XOffset * 2);
         
         //Draw Y axis
-        gc.strokeLine(50, height - 100, 50, 50);
+        gc.strokeLine(XOffset, height - XOffset * 2, XOffset, XOffset);
 
-        for (int i = 50; i < width - 100; i += 50){ //draws x axis ticks
-            gc.strokeLine(i, height - 105, i, height - 95);
+        for (int i = (int)XOffset; i < width - XOffset * 2; i += XOffset){ //draws x axis ticks
+            gc.strokeLine(i, height - XOffset*2 + tickLength, i, height - XOffset*2 - tickLength); //draws ticks, ticklength to left, ticklength to right
         }
 
-        for (int i = 50; i < height - 100; i += 50){
-            gc.strokeLine(45, i, 55, i );
+        for (int i = (int)XOffset; i < height - XOffset * 2; i += XOffset){  //draws y axis ticks
+            gc.strokeLine(XOffset - tickLength, i, XOffset + tickLength, i );
         }
     }
 
@@ -198,10 +182,10 @@ public class ProjectileController {
 
         if (projectileImg != null) { // Also borrowed this code from Yamen's "Puck.java"
             gc.setFill(new ImagePattern(this.projectileImg, 0, 0, 1, 1, true));
-            gc.fillOval(x, y + 483, ballSize, ballSize);
+            gc.fillOval(x, y + offSet, ballSize, ballSize);
         } else {
             gc.setFill(Color.BLACK);
-            gc.fillOval(x, y + 483, ballSize, ballSize); //Drawing circle at 
+            gc.fillOval(x, y + offSet, ballSize, ballSize); //Drawing circle at 
         }
 
                 drawVelocityVectors(0, height - ballSize, 0);
@@ -215,7 +199,7 @@ public class ProjectileController {
         //OverallVelocity
         gc.setStroke(javafx.scene.paint.Color.RED);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, XOffset + ballSize/2 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), 970 - ballSize/2 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+        gc.strokeLine(x + XOffset + ballSize/2, offSet + YOffset - y - ballSize/2, XOffset + ballSize/2 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX(), offSet + YOffset - ballSize/2 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
         }
 
@@ -224,12 +208,12 @@ public class ProjectileController {
         //YVelocity
         gc.setStroke(javafx.scene.paint.Color.BLUE);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2,x + 50 + ballSize/2, 985 - ballSize/2 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
+        gc.strokeLine(x + XOffset + ballSize/2, offSet + YOffset - y - ballSize/2,x + XOffset + ballSize/2, offSet + YOffset - ballSize/2 - simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getY());
 
         //XVelocity
         gc.setStroke(javafx.scene.paint.Color.GREEN);
         gc.setLineWidth(3);
-        gc.strokeLine(x + 50 + ballSize/2, 985 - y - ballSize/2, 65 + ballSize/2 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , 985 - y - ballSize/2);
+        gc.strokeLine(x + XOffset + ballSize/2, offSet + YOffset - y - ballSize/2, 65 + ballSize/2 + simulation.launchProjectile(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time + 3).getX() , offSet + YOffset - y - ballSize/2);
         }
     }
 
