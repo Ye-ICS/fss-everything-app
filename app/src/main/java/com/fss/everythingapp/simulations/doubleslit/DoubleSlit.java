@@ -7,24 +7,29 @@ public class DoubleSlit {
     private double wavelength;
     private double slitSeparation;
     private double slitWidth;
-    private double screenDistance = 2.0; // meters
+    private double screenDistance;
     private List<Double> interferencePattern;
     
     public DoubleSlit() {
         interferencePattern = new ArrayList<>();
         // Default values
         wavelength = 400e-9; // 400 nm
-        slitSeparation = 0.0;
-        slitWidth = 0.0;
+        slitSeparation = 0.0; // micrometers
+        slitWidth = 0.0; // micrometers
+        screenDistance = 0.0; // meters
     }
 
-    public void setSlitProperties(double separation, double width) {
+    void setSlitProperties(double separation, double width) {
         slitSeparation = separation;
         slitWidth = width;
     }
 
     void setWavelength(double wavelength) {
         this.wavelength = wavelength;
+    }
+    
+    void setScreenDistance(double distance) {
+        screenDistance = distance;
     }
     
     double calculateDoubleSlitIntensity(double y) {
@@ -88,4 +93,5 @@ public class DoubleSlit {
     double getWavelength() { return wavelength; }
     double getSlitSeparation() { return slitSeparation; }
     double getSlitWidth() { return slitWidth; }
+    double getScreenDistance() { return screenDistance; }
 }

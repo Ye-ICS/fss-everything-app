@@ -1,8 +1,15 @@
 package com.fss.everythingapp.simulations.momentum;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -14,17 +21,25 @@ public class MainApp extends Application {
 
         // Left: Simulation Pane
         Pane simPane = new Pane();
-        simPane.setStyle("-fx-background-color: lightgray;");
+        // Update simulation width and height dynamically
+        simPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            simulation.setWidth(newVal.doubleValue());
+        });
+        simPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            simulation.setHeight(newVal.doubleValue());
+        });
+
+        simPane.setStyle("-fx-background-color: aquamarine;");
         simPane.setMinSize(600, 600);
+        simPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         root.setCenter(simPane);
-
-        // Right: Controls (placeholder for now)
-        ControlPanel controls = new ControlPanel(simulation);
-        root.setRight(controls);
-
         // Create two pucks
         Puck p1 = new Puck(200, 300, 10);
         Puck p2 = new Puck(400, 300, 50);
+
+        // Right: Controls
+        ControlPanel controls = new ControlPanel(simulation,p1,p2);
+        root.setRight(controls);
 
         simPane.getChildren().addAll(p1, p2);
         simulation.addPuck(p1);
@@ -32,12 +47,11 @@ public class MainApp extends Application {
         simulation.setupPuckDrag(p1, p1);
         simulation.setupPuckDrag(p2, p2);
 
-        p1.setVelocity(new Vector2D(230, 100)); // move right at 50 units/second //For testing purposes
-        p2.setVelocity(new Vector2D(-370, 200)); // move left at 30 units/second // For testing purposes
+        // for testing purposes
+        p1.setVelocity(new Vector2D(230, 100));
+        p2.setVelocity(new Vector2D(-370, 200));
 
-
-
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root, 1200, 600);
         primaryStage.setTitle("2D Momentum Simulation");
         primaryStage.setScene(scene);
         primaryStage.show();
