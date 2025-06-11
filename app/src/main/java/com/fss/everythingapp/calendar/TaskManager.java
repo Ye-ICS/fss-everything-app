@@ -23,33 +23,56 @@ public class TaskManager extends DateManager {
         saveTask(taskName, dueDate);
     }
 
-    static void selectTask() { // Displays task information
+    TaskManager() { // Blank constructor
     }
 
     @Override
-    protected void loadDate() throws FileNotFoundException {
-        Scanner scanner = new Scanner("DateList");
+    protected ArrayList loadDates() { // Loads all tasks
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        Scanner scanner;
+
+        try {
+            scanner = new Scanner(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return taskList;
+        }
+
         while (scanner.hasNextLine()) {
+
+            Task loadedTask = new Task();
+
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            if (parts[0].charAt(0) == 'T') {
+            taskName = parts[1];
+
+            if (parts[0].charAt(0) == 'T') { // If the current event is a task
                 String dueDate = parts[2];
 
-                String[] times = dueDate.split("/");
-                int dueYear = Integer.parseInt(times[0]);
-                int dueMonth = Integer.parseInt(times[1]);
-                int dueDay = Integer.parseInt(times[2]);
-                int dueTime = Integer.parseInt(times[3]);
+                String[] dueDateParts = dueDate.split("/");
+                dueYear = Integer.parseInt(dueDateParts[0]);
+                dueMonth = Integer.parseInt(dueDateParts[1]);
+                dueDay = Integer.parseInt(dueDateParts[2]);
+                String[] dueTimeParts = (dueDateParts[3]).split(":");
+                dueHour = Integer.parseInt(dueTimeParts[0]);
+                dueMins = Integer.parseInt(dueTimeParts[1]);
+
             }
+
+            taskList.add(loadedTask);
         }
         scanner.close();
+        return taskList;
     }
 
-    void saveTask(String taskName, String dueDate) throws FileNotFoundException {
+    void saveTask(String taskName, String dueDate) {
         PrintWriter writer;
         try {
-            writer = new PrintWriter(new FileWriter(new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
-            // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive - Limestone DSB/Documents/testFile.txt"), true));
+            writer = new PrintWriter(new FileWriter(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
+            // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive -
+            // Limestone DSB/Documents/testFile.txt"), true));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             return;
