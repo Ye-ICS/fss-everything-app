@@ -28,8 +28,11 @@ public class Photon extends Circle {
         this.absorbed = false;
         
         // Set photon speed (always speed of light)
-        double speed = 200.0; // Scaled speed for visualization
-        this.velocity = new Vector2D(speed, speed/1.8); // Initially moving right
+        double speed = 1000.0; // Scaled speed for visualization
+        double minY = speed / 1.7;
+        double maxY = speed / 1.2;
+        double randomY = minY + Math.random() * (maxY - minY);
+        this.velocity = new Vector2D(speed, randomY); // Initially moving right with random Y velocity
         
         // Visual properties
         setRadius(3);

@@ -30,6 +30,7 @@ public class PhotoelectricSimulation {
     private int totalPhotonsEmitted = 0;
     private int totalElectronsEjected = 0;
     private Rectangle metalSurface;
+    private double animationSpeed = 1.0; // Default speed multiplier
     
     public PhotoelectricSimulation(double width, double height) {
         this.width = width;
@@ -108,10 +109,10 @@ public class PhotoelectricSimulation {
     private void initializeElectrons() {
         electrons.clear();
         int numElectrons = Math.max(15, (int)(width / 30)); // Scale with width
-        double spacing = width / numElectrons;
-        
+        double spacing = width / (numElectrons + 1);
+
         for (int i = 0; i < numElectrons; i++) {
-            double x = spacing * i + spacing / 2;
+            double x = spacing * (i + 1); // Start at spacing, end at width - spacing
             double y = height - SURFACE_HEIGHT - 5; // Just above the metal surface
             electrons.add(new Electron(x, y));
         }
@@ -167,7 +168,7 @@ public class PhotoelectricSimulation {
      */
     private boolean shouldEmitPhoton(long currentTime, long lastEmission) {
         double timeSinceLastEmission = (currentTime - lastEmission) / 1e9;
-        double emissionInterval = 1.0 / intensity; // seconds between photons
+        double emissionInterval = 0.1 / intensity; // seconds between photons
         return timeSinceLastEmission >= emissionInterval;
     }
     
@@ -182,6 +183,7 @@ public class PhotoelectricSimulation {
     }
     
     public void update(double dt) {
+        dt *= animationSpeed; // Scale time step by animation speed
         // Update photon positions
         Iterator<Photon> photonIter = photons.iterator();
         while (photonIter.hasNext()) {
@@ -277,14 +279,33 @@ public class PhotoelectricSimulation {
         long electronsOnSurface = electrons.stream()
             .filter(e -> !e.isEjected())
             .count();
-        
-        // Maintain at least 15 electrons on the surface, scaled by width
+
         int minElectrons = Math.max(15, (int)(width / 40));
+        double electronRadius = 5;
+        double minSpacing = electronRadius * 2 + 2;
+
         while (electronsOnSurface < minElectrons) {
-            double x = Math.random() * (width - 20) + 10;
-            double y = height - SURFACE_HEIGHT - 5;
-            electrons.add(new Electron(x, y));
-            electronsOnSurface++;
+            // Try to find a non-overlapping position
+            boolean placed = false;
+            for (int attempt = 0; attempt < 20 && !placed; attempt++) {
+                double x = Math.random() * (width - 20) + 10;
+                double y = height - SURFACE_HEIGHT - 5;
+
+                boolean overlaps = false;
+                for (Electron e : electrons) {
+                    if (!e.isEjected() && Math.abs(e.getPosition().x - x) < minSpacing) {
+                        overlaps = true;
+                        break;
+                    }
+                }
+                if (!overlaps) {
+                    electrons.add(new Electron(x, y));
+                    electronsOnSurface++;
+                    placed = true;
+                }
+            }
+            // If couldn't find a spot after 20 tries, just skip this electron
+            if (!placed) break;
         }
     }
     
@@ -344,5 +365,13 @@ public class PhotoelectricSimulation {
     
     public double getHeight() {
         return height;
+    }
+    
+    public double getAnimationSpeed() {
+        return animationSpeed;
+    }
+
+    public void setAnimationSpeed(double animationSpeed) {
+        this.animationSpeed = animationSpeed;
     }
 }

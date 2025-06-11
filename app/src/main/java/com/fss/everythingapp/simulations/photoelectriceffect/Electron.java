@@ -15,10 +15,12 @@ public class Electron extends Circle {
     private double mass; // Electron rest mass
     private boolean ejected; // Whether this electron has been ejected
     private double kineticEnergy; // Current kinetic energy in eV
+    private static final double velocityScale = 200; // Scale factor for visualization
     
     // Physical constants
     public static final double ELECTRON_MASS = 9.109e-31; // kg (for physics calculations)
     public static final double ELECTRON_CHARGE = 1.602e-19; // C
+    
     
     public Electron(double x, double y) {
         super();
@@ -45,8 +47,8 @@ public class Electron extends Circle {
         setCenterY(position.y);
         
         // Apply gravity effect (electrons fall down when ejected)
-        Vector2D gravity = new Vector2D(100, -200); // Upward Initial Velocity
-        velocity.add(gravity.multiply(dt));
+        // Vector2D gravity = new Vector2D(100, -200); // Upward Initial Velocity
+        // velocity.add(gravity.multiply(dt));
         
     }
     
@@ -58,36 +60,38 @@ public class Electron extends Circle {
      */
     public boolean absorbPhoton(Photon photon, double workFunction) {
         if (ejected || photon.isAbsorbed()) return false;
-        
+
         double photonEnergy = photon.getEnergy();
-        
+
         // Check if photon has enough energy to eject electron
         if (photonEnergy >= workFunction) {
             // Calculate kinetic energy of ejected electron
             kineticEnergy = photonEnergy - workFunction;
-            
+
             // Convert kinetic energy to velocity (classical approximation)
-            // KE = 1/2 * m * v^2, so v = sqrt(2*KE/m)
-            double speed = Math.sqrt(2 * kineticEnergy * 100); // Scaled for visualization
-            
-            // Set velocity in direction away from surface (upward and slightly random)
-            double angle = Math.toRadians(-90 + (Math.random() - 0.5) * 60); // -120° to -60°
-            double vx = speed * Math.cos(angle);
-            double vy = speed * Math.sin(angle);
-            
-            setVelocity(new Vector2D(vx, vy));
-            
+            double speed = velocityScale * kineticEnergy; // Scaled for visualization
+
+            // Get photon's velocity vector and compute a perpendicular direction
+            Vector2D photonVelocity = photon.getVelocity().normalize();
+            // Perpendicular vector in 2D: (-y, x)
+            Vector2D perp = new Vector2D(photonVelocity.x,-photonVelocity.y);
+
+            // Set electron velocity in the perpendicular direction (choose one direction)
+            Vector2D electronVelocity = perp.multiply(speed);
+
+            setVelocity(electronVelocity);
+
             // Mark as ejected and change appearance
             ejected = true;
             setFill(Color.YELLOW); // Ejected electrons are yellow
             setStroke(Color.ORANGE);
-            
+
             // Absorb the photon
             photon.absorb();
-            
+
             return true;
         }
-        
+
         return false;
     }
     

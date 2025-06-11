@@ -1,5 +1,3 @@
-package com.fss.everythingapp.simulations.photoelectriceffect;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -110,10 +108,30 @@ public class PhotoelectricControlPanel extends VBox {
             workFunctionValueLabel.setText(String.format("%.2f eV", newVal.doubleValue()));
         });
         
+        // Animation Speed Control
+        Label speedLabel = new Label("Animation Speed:");
+        speedLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
+        
+        Slider speedSlider = new Slider(0.1, 3.0, sim.getAnimationSpeed());
+        speedSlider.setShowTickLabels(true);
+        speedSlider.setShowTickMarks(true);
+        speedSlider.setMajorTickUnit(0.5);
+        speedSlider.setMinorTickCount(4);
+        speedSlider.setBlockIncrement(0.1);
+        
+        Label speedValueLabel = new Label(String.format("%.1fx", sim.getAnimationSpeed()));
+        speedValueLabel.setFont(Font.font("System", 11));
+        
+        speedSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            sim.setAnimationSpeed(newVal.doubleValue());
+            speedValueLabel.setText(String.format("%.1fx", newVal.doubleValue()));
+        });
+        
         controlsBox.getChildren().addAll(
             energyLabel, energySlider, energyValueLabel,
             intensityLabel, intensitySlider, intensityValueLabel,
-            workFunctionLabel, workFunctionSlider, workFunctionValueLabel
+            workFunctionLabel, workFunctionSlider, workFunctionValueLabel,
+            speedLabel, speedSlider, speedValueLabel
         );
         
         return controlsBox;
