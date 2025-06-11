@@ -1,14 +1,6 @@
 package com.fss.everythingapp.studentservices;
 
-import java.applet.Applet;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 class StudentServices {
     ArrayList<Counsellor> counsellors = new ArrayList<>(4);

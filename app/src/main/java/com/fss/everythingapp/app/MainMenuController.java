@@ -1,6 +1,9 @@
 package com.fss.everythingapp.app;
 
 import java.io.IOException;
+
+import com.fss.everythingapp.studentservices.AppointmentController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +18,12 @@ public class MainMenuController {
     @FXML
     private void openStudentServices(ActionEvent actionEvent) throws IOException {
         try {
-            Parent appointmentLayout = (Parent) FXMLLoader.load(getClass().getResource("../studentservicesappointment/fxml/AppointmentLayout.fxml"));
-            rootContainer.getScene().setRoot(appointmentLayout);
-            
+            FXMLLoader appointmentLayout = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/studentservicesappointment/fxml/AppointmentLayout.fxml"));
+            AppointmentController appointmentController = new AppointmentController();
+            appointmentLayout.setController(appointmentController);
+            Parent show = appointmentLayout.load();
+            rootContainer.getScene().setRoot(show);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

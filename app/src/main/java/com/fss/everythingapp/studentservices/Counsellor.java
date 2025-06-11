@@ -1,6 +1,5 @@
 package com.fss.everythingapp.studentservices;
 
-import java.util.ArrayList;
 
 class Counsellor {
     private int id;
