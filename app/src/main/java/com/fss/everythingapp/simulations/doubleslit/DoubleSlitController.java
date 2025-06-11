@@ -47,36 +47,24 @@ public class DoubleSlitController{
     
     void setupSliders() {
        // Wavelength slider (400-750 nm)
-       wavelengthSlider.setMin(400);
-       wavelengthSlider.setMax(750);
-       wavelengthSlider.setValue(400);
        wavelengthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateWavelengthLabel();
            updateSimulation();
        });
        
        // Slit separation slider (0-500 micrometers)
-       separationSlider.setMin(0);
-       separationSlider.setMax(500.0);
-       separationSlider.setValue(0);
        separationSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateSeparationLabel();
            updateSimulation();
        });
        
        // Slit width slider (0-100 micrometers)
-       widthSlider.setMin(0);
-       widthSlider.setMax(100.0);
-       widthSlider.setValue(0);
        widthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateWidthLabel();
            updateSimulation();
        });
        
        // Screen distance slider (0-2 meters)
-       screenDistanceSlider.setMin(0);
-       screenDistanceSlider.setMax(2.0);
-       screenDistanceSlider.setValue(0);
        screenDistanceSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateScreenDistanceLabel();
            updateSimulation();
@@ -115,6 +103,6 @@ public class DoubleSlitController{
         lightCanvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
         
         // Draw the explanation canvas
-        explanationCanvasDisplay.drawExplanation(wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
+        explanationCanvasDisplay.drawExplanation(wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue(), separationSlider.getValue());
     }
 }
