@@ -13,7 +13,7 @@ public class DoubleSlit {
     public DoubleSlit() {
         interferencePattern = new ArrayList<>();
         // Default values
-        wavelength = 400e-9; // 400 nm
+        wavelength = 400; // 400 nm
         slitSeparation = 0.0; // micrometers
         slitWidth = 0.0; // micrometers
         screenDistance = 0.0; // meters
@@ -32,6 +32,11 @@ public class DoubleSlit {
         screenDistance = distance;
     }
     
+    /**
+     * Calculates the intensity of the double slit interference pattern at a given point y on the screen.
+     * @param y
+     * @return
+     */
     double calculateDoubleSlitIntensity(double y) {
         // Calculate the angle θ from the center of the slits to the point y on the screen
         double angleFromCenter = Math.atan(y / screenDistance);

@@ -9,6 +9,7 @@ import javafx.scene.control.Slider;
 
 public class DoubleSlitController{
     @FXML private Canvas simulationCanvas;
+    @FXML private Canvas explanationCanvas;
 
     @FXML private Slider wavelengthSlider;
     @FXML private Slider separationSlider;
@@ -20,13 +21,16 @@ public class DoubleSlitController{
     @FXML private Label widthLabel;
     @FXML private Label screenDistanceLabel;
     
-    private DoubleSlit simulation;
-    private CanvasDisplay canvasDisplay;
+    private DoubleSlit doubleSlitSimulation;
+    private LightCanvas lightCanvasDisplay;
+    private ExplanationCanvas explanationCanvasDisplay;
     
     @FXML
     private void initialize() {
-        simulation = new DoubleSlit();
-        canvasDisplay = new CanvasDisplay(simulationCanvas);
+        doubleSlitSimulation = new DoubleSlit();
+        lightCanvasDisplay = new LightCanvas(simulationCanvas);
+
+        explanationCanvasDisplay = new ExplanationCanvas(explanationCanvas);
 
         setupSliders();
         updateSimulation();
@@ -43,36 +47,24 @@ public class DoubleSlitController{
     
     void setupSliders() {
        // Wavelength slider (400-750 nm)
-       wavelengthSlider.setMin(400);
-       wavelengthSlider.setMax(750);
-       wavelengthSlider.setValue(400);
        wavelengthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateWavelengthLabel();
            updateSimulation();
        });
        
        // Slit separation slider (0-500 micrometers)
-       separationSlider.setMin(0);
-       separationSlider.setMax(500.0);
-       separationSlider.setValue(0);
        separationSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateSeparationLabel();
            updateSimulation();
        });
        
        // Slit width slider (0-100 micrometers)
-       widthSlider.setMin(0);
-       widthSlider.setMax(100.0);
-       widthSlider.setValue(0);
        widthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateWidthLabel();
            updateSimulation();
        });
        
        // Screen distance slider (0-2 meters)
-       screenDistanceSlider.setMin(0);
-       screenDistanceSlider.setMax(2.0);
-       screenDistanceSlider.setValue(0);
        screenDistanceSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateScreenDistanceLabel();
            updateSimulation();
@@ -97,17 +89,20 @@ public class DoubleSlitController{
 
     void updateSimulation() {
         // Set simulation parameters - convert micrometers to meters
-        simulation.setWavelength(wavelengthSlider.getValue() * 1e-9); // nm to m
-        simulation.setSlitProperties(
+        doubleSlitSimulation.setWavelength(wavelengthSlider.getValue() * 1e-9); // nm to m
+        doubleSlitSimulation.setSlitProperties(
             separationSlider.getValue() * 1e-6, // μm to m
             widthSlider.getValue() * 1e-6       // μm to m
         );
-        simulation.setScreenDistance(screenDistanceSlider.getValue()); // already in meters
+        doubleSlitSimulation.setScreenDistance(screenDistanceSlider.getValue()); // already in meters
         
-        simulation.calculateInterferencePattern();
+        doubleSlitSimulation.calculateInterferencePattern();
         
         // Get the interference pattern and draw it
-        List<Double> pattern = simulation.getInterferencePattern();
-        canvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
+        List<Double> pattern = doubleSlitSimulation.getInterferencePattern();
+        lightCanvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
+        
+        // Draw the explanation canvas
+        explanationCanvasDisplay.drawExplanation(wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue(), separationSlider.getValue());
     }
 }
