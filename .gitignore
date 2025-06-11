@@ -8,3 +8,6 @@ bin
 .vscode
 app/src/main/java/com/fss/everythingapp/calendar/DateList.txt
 app/src/main/java/com/fss/everythingapp/calendar/UserList.txt
+bin
+.vscode
+app/src/main/java/com/fss/everythingapp/calendar/UserList.txt

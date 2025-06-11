@@ -15,7 +15,7 @@ public class MainMenuController {
 
     @FXML
     private void openStudentServices(ActionEvent actionEvent) {
-        
+
     }
 
     @FXML
@@ -26,5 +26,11 @@ public class MainMenuController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void openCalendar(ActionEvent actionEvent) throws IOException {
+        Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
+        rootContainer.getScene().setRoot(monthView);
     }
 }
