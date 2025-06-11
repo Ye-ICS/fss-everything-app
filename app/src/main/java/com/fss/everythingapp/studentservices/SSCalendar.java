@@ -15,4 +15,8 @@ public class SSCalendar {
     public List<Date> getAvailableDates() {
         return dates;
     }
+
+    void updateDate(List<Date> dates) {
+        this.dates = dates;
+    }
 }

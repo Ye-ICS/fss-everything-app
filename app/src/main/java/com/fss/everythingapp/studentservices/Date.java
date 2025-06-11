@@ -23,4 +23,9 @@ class Date {
     List<Timeslot> getTimes() {
         return this.times;
     }
+
+    void updateTimes(List<Timeslot> times) {
+        this.times = times;
+    }
+
 }
