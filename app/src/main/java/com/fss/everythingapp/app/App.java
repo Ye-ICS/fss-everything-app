@@ -20,7 +20,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Example.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/MainMenu.fxml"));
         MainMenuController controller = new MainMenuController();
         fxmlLoader.setController(controller);
         Parent view = null;
