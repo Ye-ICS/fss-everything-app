@@ -41,7 +41,7 @@ public class TaskManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            // Task loadedTask = new Task();
+            Task loadedTask;
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
@@ -85,9 +85,8 @@ public class TaskManager extends DateManager {
     static void selectEvent() { // Displays event information
     }
 
-    /*
-     * private static ArrayList<Task> loadTasks(){
-     * //load tasks from DateList using fileReader
-     * }
-     */
+    // private static ArrayList<Task> loadTasks() {
+    // // load tasks from DateList using fileReader
+    // }
+
 }

@@ -8,7 +8,7 @@ public class Date extends DateManager {
     protected int[] startDateInfo;
     protected int[] endDateInfo;
 
-    Date(String dateName, char dateType, int[] dueDateInfo, int[] startDateInfo, int[] endDateInfo) { // Blank
+    Date(String dateName, char dateType, int[] dueDateInfo) { // Blank
         this.dateName = dateName;
         this.dateType = dateType;
         this.dueDateInfo = dueDateInfo;

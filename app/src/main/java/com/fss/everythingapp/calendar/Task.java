@@ -11,7 +11,7 @@ public class Task extends Date {
     protected int[] dueDateInfo;
 
     Task(String dateName, char dateType, int[] dueDateInfo, int[] startDateInfo, int[] endDateInfo) {
-        super(dateName, dateType, dueDateInfo, startDateInfo, endDateInfo);
+        super(dateName, dateType, dueDateInfo);
     }
 
     // @Override
