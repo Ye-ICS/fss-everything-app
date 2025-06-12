@@ -1,8 +1,11 @@
 package com.fss.everythingapp.simulations.projectilemotion;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -17,6 +20,8 @@ import javafx.stage.FileChooser;
 
 
 public class ProjectileController {
+    @FXML
+    private Parent rootContainer;
     @FXML
     private Canvas gridCanvas;
     @FXML private Slider speedSlider;
@@ -45,6 +50,7 @@ public class ProjectileController {
     @FXML private Label ballSizeLabel;
     @FXML private Slider ballSlider;
     @FXML private Button changeProjectileImage;
+    @FXML private Button backToSim;
 
 
     private ProjectileMotion simulation = new ProjectileMotion();
@@ -132,6 +138,7 @@ public class ProjectileController {
         });
 
 
+
         changeProjectileImage.setOnAction(e -> { // I copied this code from Yamen's "ControlPanel.java"
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Image for projectile");
@@ -187,8 +194,11 @@ public class ProjectileController {
             gc.setFill(Color.BLACK);
             gc.fillOval(x, y + offSet, ballSize, ballSize); //Drawing circle at 
         }
-
+                if(velocityVectors.isSelected() && x == 50){ //if ball is on left wall then draw vectors (if selecgted)
                 drawVelocityVectors(0, height - ballSize, 0);
+
+                }
+                System.out.println(x);
     }
 
     public void drawVelocityVectors(double x, double y, double time){
@@ -247,12 +257,12 @@ public class ProjectileController {
                             {
                                 drawVelocityVectors(x, y - ballSize, time);
                             }
-                    xVeloLabel.setText("Vₓ = " + String.format("%.2f" , speedSlider.getValue() * Math.cos(Math.toRadians(angleSlider.getValue()))));
-                    yVeloLabel.setText("Vᵧ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY()));
-                    xLabel.setText("X = " + String.format("%.2f" , x));
-                    yLabel.setText("Y = " + String.format("%.2f", y - ballSize));
-                    timeLabel.setText("t = " + String.format("%.1f", time));
-                    veloLabel.setText("V = " + String.format("%.2f", Math.sqrt(Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX() , 2) + Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY() , 2))));
+                    xVeloLabel.setText("Vₓ = " + String.format("%.2f" , speedSlider.getValue() * Math.cos(Math.toRadians(angleSlider.getValue())))+ " m/s");
+                    yVeloLabel.setText("Vᵧ = " + String.format("%.2f" , ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY()) + " m/s");
+                    xLabel.setText("X = " + String.format("%.2f" , x) + " m");
+                    yLabel.setText("Y = " + String.format("%.2f", y - ballSize) + " m");
+                    timeLabel.setText("t = " + String.format("%.1f", time) + " s");
+                    veloLabel.setText("V = " + String.format("%.2f", Math.sqrt(Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getX() , 2) + Math.pow(ProjectileMotion.getVelocity(height, speedSlider.getValue(), accelerationSlider.getValue(), angleSlider.getValue(), time).getY() , 2))) + " m/s");
                 }
             );
             timeline.getKeyFrames().add(keyFrame); // adds the keyframe to the timeline to thenn be plaued
