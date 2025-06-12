@@ -58,8 +58,8 @@ public class InfoController {
                 GtfsReaderExampleMain reader = new GtfsReaderExampleMain();
                 ArrayList<RealStop> stops = reader.getUpdate(routeId);
                 buttons = new ArrayList<Button>();
-                for(RealStop stop : stops){
-                    Button button = new Button(busInfo.getStopById(stop.id).getName());
+                for (RealStop stop : stops) {
+                    Button button = new Button(busInfo.getStopById(stop.id).getName() + " - Arrival: " + unixToString(stop.predictedTime));
                     buttons.add(button);
                     listView.getItems().add(button);
                 }
@@ -72,9 +72,10 @@ public class InfoController {
         initThread.start();
 
     }
-    public static String unixToString(long unix){
-    SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-    String date = sdf.format(unix);
+
+    public static String unixToString(long unix) {
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+        String date = sdf.format(unix * 1000);
         return date;
     }
 

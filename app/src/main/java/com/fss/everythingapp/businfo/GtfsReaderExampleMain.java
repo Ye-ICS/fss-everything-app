@@ -1,6 +1,5 @@
 package com.fss.everythingapp.businfo;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -12,7 +11,6 @@ import com.google.transit.realtime.GtfsRealtime.TripUpdate;
 public class GtfsReaderExampleMain {
   private int first;
   private int tracker;
-  private int innerTracker;
   public ArrayList<RealStop> getUpdate(String id) throws Exception {
     first = 0;
     tracker = 0;
