@@ -1,6 +1,9 @@
 package com.fss.everythingapp.studentservices;
 
 import java.io.IOException;
+
+import com.fss.everythingapp.app.App;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,9 +26,9 @@ public class AppointmentController {
         StudentServices studentServices = new StudentServices();
         studentServices.programRunner();
 
-
         // load to the next layout
-        FXMLLoader timeslotsLayout = new FXMLLoader(getClass().getResource("/com/fss/everthingapp/studentservicesappointment/fxml/TimeslotsLayout.fxml"));
+        FXMLLoader timeslotsLayout = new FXMLLoader(
+                getClass().getResource("/com/fss/everthingapp/studentservicesappointment/fxml/TimeslotsLayout.fxml"));
         TimeslotsController timeslotsController = new TimeslotsController();
         timeslotsLayout.setController(timeslotsController);
         Parent show = timeslotsLayout.load();
@@ -48,9 +51,8 @@ public class AppointmentController {
     }
 
     @FXML
-    private void onExitBtnPressed() throws IOException {
-        Parent returnLayout = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
-        rootcontainer.getScene().setRoot(returnLayout);
+    private void onExitBtnPressed(){
+        App.backToMainMenu();
     }
 
 }
