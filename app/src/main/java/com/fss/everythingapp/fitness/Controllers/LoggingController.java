@@ -3,6 +3,8 @@ package com.fss.everythingapp.fitness.Controllers;
 import java.io.IOException;
 
 import com.fss.everythingapp.fitness.Diet;
+import com.fss.everythingapp.fitness.SleepSchedule;
+import com.fss.everythingapp.fitness.SleepTimer;
 import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
@@ -64,11 +66,11 @@ public class LoggingController {
 
     @FXML
     void submitSleepLog(ActionEvent event) {
-
+        SleepSchedule.timeWentToSleep += Integer.parseInt(timeWentSleep.getText());
+        SleepSchedule.wokeUpTime += Integer.parseInt(timeWokeUp.getText());
     }
 
     @FXML
-
     void backToMM(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu.fxml"));
