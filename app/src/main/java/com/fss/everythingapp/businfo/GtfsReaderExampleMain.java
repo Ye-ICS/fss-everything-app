@@ -1,5 +1,6 @@
 package com.fss.everythingapp.businfo;
 
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class GtfsReaderExampleMain {
   
     
     
-    URL url = new URL("https://api.cityofkingston.ca/gtfs-realtime/tripupdates.pb");
+    URL url = new URI("https://api.cityofkingston.ca/gtfs-realtime/tripupdates.pb").toURL();
     FeedMessage feed = FeedMessage.parseFrom(url.openStream());
   
     

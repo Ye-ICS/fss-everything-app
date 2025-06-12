@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -25,6 +26,14 @@
                </content>
             </ScrollPane>
          </center>
+         <top>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <items>
+                  <TextField fx:id="searchBox" />
+                  <Button mnemonicParsing="false" onAction="#updateSearch" text="Search" />
+               </items>
+            </ToolBar>
+         </top>
       </BorderPane>
       <ProgressIndicator fx:id="progressIndicator" />
    </children>

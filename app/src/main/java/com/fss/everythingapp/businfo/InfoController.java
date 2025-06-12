@@ -1,9 +1,9 @@
 package com.fss.everythingapp.businfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-import java.text.SimpleDateFormat;
-
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -28,6 +29,9 @@ public class InfoController {
     @FXML
     ProgressIndicator progressIndicator;
 
+    @FXML
+    TextField searchBox;
+
     ListController listController;
 
     String routeId;
@@ -35,6 +39,12 @@ public class InfoController {
     ArrayList<Button> buttons;
 
     OdkInfoUtils busInfo;
+
+    ArrayList<RealStop> stops;
+
+    GtfsReaderExampleMain reader;
+
+    Thread updateThread;
 
     @FXML
     private void quit(ActionEvent actionEvent) {
@@ -44,26 +54,88 @@ public class InfoController {
             Parent listLayout = mainListLoader.load();
             rootContainer.getScene().setRoot(listLayout);
             listController.init();
+            updateThread.interrupt();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void init() {
+    @FXML
+    private void updateSearch(ActionEvent actionEvent) {
+        listView.setVisible(false);
+        progressIndicator.setProgress(-1);
+        progressIndicator.setVisible(true);
 
+        updateSearchBackground();
+    }
+
+    private void updateSearchBackground() {
+        Platform.runLater(() -> progressIndicator.setVisible(true));
+
+        Thread search = new Thread(() -> {
+            String searchText = searchBox.getText().toLowerCase();
+            ArrayList<Button> searchResults = new ArrayList<>();
+            for (Button button : buttons) {
+                String buttonText = button.getText().toLowerCase();
+                if (buttonText.contains(searchText)) {
+                    searchResults.add(button);
+                }
+            }
+
+            Platform.runLater(() -> {
+                listView.getItems().clear();
+                listView.getItems().addAll(searchResults);
+                progressIndicator.setVisible(false);
+                listView.setVisible(true);
+            });
+        });
+
+        search.start();
+    }
+
+    public void startUpdates() {
+        updateThread = new Thread(() -> {
+            try {
+                while (true) {
+                    ArrayList<RealStop> newList = reader.getUpdate(routeId);
+                    if (newList != stops) {
+                        Collections.copy(stops, newList);
+                        newList.clear();
+                        buttons.clear();
+                        for (RealStop stop : stops) {
+                            Button button = new Button();
+                            String text = busInfo.getStopById(stop.id).getName() + " - Arrival: "
+                                    + timeToString(busInfo.getStopTimeById(stop.id) + stop.delay);
+                            if (stop.delay != 0) {
+                                button.setText("! " + text);
+                            } else {
+                                button.setText(text);
+                            }
+                            buttons.add(button);
+                        }
+                        updateSearchBackground();
+                    }
+                    Thread.sleep(60000);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        updateThread.start();
+    }
+
+    public void init() {
+        listView.setVisible(false);
+        progressIndicator.setProgress(-1);
         progressIndicator.setVisible(true);
 
         Thread initThread = new Thread(() -> {
             try {
-                GtfsReaderExampleMain reader = new GtfsReaderExampleMain();
-                ArrayList<RealStop> stops = reader.getUpdate(routeId);
+                reader = new GtfsReaderExampleMain();
+                stops = reader.getUpdate(routeId);
                 buttons = new ArrayList<Button>();
-                for (RealStop stop : stops) {
-                    Button button = new Button(busInfo.getStopById(stop.id).getName() + " - Arrival: " + unixToString(stop.predictedTime));
-                    buttons.add(button);
-                    listView.getItems().add(button);
-                }
-                progressIndicator.setVisible(false);
+                startUpdates();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -73,10 +145,10 @@ public class InfoController {
 
     }
 
-    public static String unixToString(long unix) {
-        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-        String date = sdf.format(unix * 1000);
-        return date;
+    public static String timeToString(int time) {
+        int hours = time / 3600;
+        int minutes = (time % 3600) / 60;
+        return String.format("%02d:%02d", hours, minutes);
     }
 
 }

@@ -101,7 +101,6 @@ public class ListController {
     }
 
     public void init() {
-        System.out.println("Initializing");
         Thread initThread = new Thread(() -> {
             try {
                 if (routeIds == null) {

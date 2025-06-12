@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.onebusaway.gtfs.impl.GtfsDaoImpl;
 import org.onebusaway.gtfs.model.Route;
 import org.onebusaway.gtfs.model.Stop;
+import org.onebusaway.gtfs.model.StopTime;
 import org.onebusaway.gtfs.serialization.GtfsReader;
 
 public class OdkInfoUtils {
@@ -47,6 +48,15 @@ public class OdkInfoUtils {
             }
         }
         return null;
+    }
+
+    public int getStopTimeById(String stopId){
+        for (StopTime stopTime : store.getAllStopTimes()) {
+            if (stopTime.getStop().getId().getId().equals(stopId)) {
+                return stopTime.getArrivalTime();
+            }
+        }
+        return -1; // Return -1 if no StopTime found for the given stopId
     }
 
     public ArrayList<String> getRouteNames() {
