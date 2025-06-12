@@ -3,7 +3,7 @@ package com.fss.everythingapp.studentservices;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.C;
+import com.fss.everythingapp.app.App;
 
 import com.fss.everythingapp.app.App;
 
@@ -27,7 +27,6 @@ public class TimeslotsController {
     @FXML
     void initialize() {
         dateBox.setItems(dateNums());
-
     }
 
     private ObservableList<Integer> dateNums() {
@@ -66,12 +65,10 @@ public class TimeslotsController {
         int choice = Integer.parseInt(selection);
         times.get(choice).setAvailable();
         dates.get(date).updateTimes(times);
-
     }
 
     @FXML
     private void onExitBtnPressed() {
         App.backToMainMenu();
     }
-
 }

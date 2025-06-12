@@ -8,7 +8,7 @@ class Date {
     List<Timeslot> times = new ArrayList<Timeslot>();
 
     private void fillTimes(){
-        for(int i = 0; i < times.size(); i++){
+        for(int i = 0; i < 8; i++){
             Timeslot timeslot = new Timeslot(0.0, 0.0);
             Timeslot temp = times.get(i);
             temp = timeslot;
