@@ -3,8 +3,6 @@ package com.fss.everythingapp.fitness.Controllers;
 import java.io.IOException;
 
 import com.fss.everythingapp.fitness.Diet;
-import com.fss.everythingapp.fitness.SleepSchedule;
-import com.fss.everythingapp.fitness.SleepTimer;
 import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
@@ -13,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -53,27 +52,31 @@ public class LoggingController {
         restrictToNumbers(carbsEaten, true);
         restrictToNumbers(fatsEaten, true);
         restrictToNumbers(coloriesBurnt, true);
+        restrictToNumbers(fullBodyExTxt, false);
+        restrictToNumbers(compExTxt, false);
         restrictToNumbers(timeWentSleep, false);
         restrictToNumbers(timeWokeUp, false);
     }
 
     @FXML
     void submitExcersizeLog(ActionEvent event) {
-        Workout.caloriesBurned += Integer.parseInt(coloriesBurnt.getText());
+        if (coloriesBurnt.getText() == null || compound.getText() == null || fullBodyExTxt.getText())
+        Workout.caloriesBurned += Double.parseDouble(coloriesBurnt.getText());
+        Workout.compoundExDone += Double.parseDouble(compExTxt.getText());
+        Workout.fullbodyExDone += Double.parseDouble(fullBodyExTxt.getText());
     }
 
     @FXML
     void submitFoodLog(ActionEvent event) {
-        Diet.caloriesEaten += Integer.parseInt(caloriesEaten.getText());
-        Diet.carbsEaten += Integer.parseInt(carbsEaten.getText());
-        Diet.proteinEaten += Integer.parseInt(proteinEaten.getText());
-        Diet.fatsEaten += Integer.parseInt(fatsEaten.getText());
+        Diet.caloriesEaten += Double.parseDouble(caloriesEaten.getText());
+        Diet.carbsEaten += Double.parseDouble(carbsEaten.getText());
+        Diet.proteinEaten += Double.parseDouble(proteinEaten.getText());
+        Diet.fatsEaten += Double.parseDouble(fatsEaten.getText());
     }
 
     @FXML
     void submitSleepLog(ActionEvent event) {
-        SleepSchedule.timeWentToSleep += Integer.parseInt(timeWentSleep.getText());
-        SleepSchedule.wokeUpTime += Integer.parseInt(timeWokeUp.getText());
+        
     }
 
     @FXML
@@ -95,6 +98,13 @@ public class LoggingController {
                 field.setText(oldValue);
             }
         });
+    }
+
+        private void showValidationAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Input");
+        alert.setHeaderText("Place a value for all fields (0 is valid)");
+        alert.showAndWait();
     }
 
 }
