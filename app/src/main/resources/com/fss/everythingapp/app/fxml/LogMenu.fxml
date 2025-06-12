@@ -30,6 +30,8 @@
                 <TextField fx:id="fatsEaten" promptText="Fats" />
                 <Button mnemonicParsing="false" onAction="#submitFoodLog" text="Submit Food" />
                 <TextField fx:id="coloriesBurnt" promptText="Calories Burnt" />
+            <TextField fx:id="compExTxt" layoutX="30.0" layoutY="200.0" promptText="Compound Excersize (Minutes)" />
+            <TextField fx:id="fullBodyExTxt" layoutX="30.0" layoutY="230.0" promptText="Full Body Excersize (Minutes)" />
                 <Button mnemonicParsing="false" onAction="#submitExcersizeLog" text="Submit Excersize" />
                 <TextField fx:id="timeWentSleep" promptText="Time went to sleep" />
                 <TextField fx:id="timeWokeUp" promptText="Time Woke up" />

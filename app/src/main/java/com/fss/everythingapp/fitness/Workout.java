@@ -7,10 +7,10 @@ public class Workout {
     static public double cardioTarget; // mins
     static public double liftTarget;
     static public double liftSets;
-    static public int compoundExGoal; //in minutes
-    static public int compoundExDone; //in minutes, what the user has done
-    static public int fullbodyExTarget; // minutes
-    static public int fullbodyExDone; // what the user has done, minutes
+    static public double compoundExGoal; //in minutes
+    static public double compoundExDone; //in minutes, what the user has done
+    static public double fullbodyExTarget; // minutes
+    static public double fullbodyExDone; // what the user has done, minutes
 
 
 }

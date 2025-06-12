@@ -3,7 +3,6 @@ package com.fss.everythingapp.fitness.Controllers;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import com.fss.everythingapp.fitness.DietManager;
 import com.fss.everythingapp.fitness.Workout;
 import com.fss.everythingapp.fitness.WorkoutManager;
 
@@ -42,7 +41,7 @@ public class WorkoutMenuController {
         WorkoutManager.calculateCaloriesBurntTarget();
         WorkoutManager.calculateExcersizeGoals();
         DecimalFormat df = new DecimalFormat("#.##");
-        calorieBurntBar.setProgress(Workout.caloriesBurned / 500.0);
+        calorieBurntBar.setProgress(Workout.caloriesBurned / Workout.caloriesBurntTarget);
         calorieBurntGoal.setText("Calories Burned: " + df.format(Workout.caloriesBurned) + " / " + df.format(Workout.caloriesBurntTarget));
         compoundExBar.setProgress(Workout.compoundExDone / Workout.compoundExGoal);
         compundExText.setText("Compound Excersizes Goal (In minutes): " + Workout.compoundExDone + " / " + Workout.compoundExGoal);

@@ -27,6 +27,12 @@ public class LoggingController {
     private TextField coloriesBurnt;
 
     @FXML
+    private TextField fullBodyExTxt;
+
+    @FXML
+    private TextField compExTxt;
+
+    @FXML
     private TextField fatsEaten;
 
     @FXML
@@ -45,6 +51,8 @@ public class LoggingController {
         restrictToNumbers(carbsEaten, true);
         restrictToNumbers(fatsEaten, true);
         restrictToNumbers(coloriesBurnt, true);
+        restrictToNumbers(fullBodyExTxt, false);
+        restrictToNumbers(compExTxt, false);
         restrictToNumbers(timeWentSleep, false);
         restrictToNumbers(timeWokeUp, false);
     }
@@ -52,6 +60,8 @@ public class LoggingController {
     @FXML
     void submitExcersizeLog(ActionEvent event) {
         Workout.caloriesBurned += Integer.parseInt(coloriesBurnt.getText());
+        Workout.compoundExDone += Integer.parseInt(compExTxt.getText());
+        Workout.fullbodyExDone += Integer.parseInt(fullBodyExTxt.getText());
     }
 
     @FXML

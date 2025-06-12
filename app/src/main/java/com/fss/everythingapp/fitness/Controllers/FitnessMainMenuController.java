@@ -37,14 +37,18 @@ public class FitnessMainMenuController {
 
     @FXML
     void openLogMenu(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/LogMenu.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (checkIfPreferencesSelected() == false) {
+            showValidationAlert();
+        } else {
+            try {
+               Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/LogMenu.fxml"));
+               Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+               Scene scene = new Scene(root);
+               stage.setScene(scene);
+              stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
