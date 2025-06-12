@@ -1,5 +1,7 @@
 package com.fss.everythingapp.businfo;
 
+import java.text.SimpleDateFormat;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,4 +65,10 @@ public class InfoController {
         initThread.start();
 
     }
+    public static String unixToString(long unix){
+    SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+    String date = sdf.format(unix);
+        return date;
+    }
+
 }

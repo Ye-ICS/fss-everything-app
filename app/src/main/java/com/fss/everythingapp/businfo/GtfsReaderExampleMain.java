@@ -41,11 +41,6 @@ public class GtfsReaderExampleMain {
           if(innerTracker == first && tracker == 1){
             break;
           }
-   
-          
-          
-          
-         
           int delay = 0;
 
           if (stopTimeUpdate.hasArrival() && stopTimeUpdate.getArrival().hasDelay()) {
@@ -70,19 +65,6 @@ public class GtfsReaderExampleMain {
       }
     }
     return stops;
-  }
-  private void getService() throws IOException{
-    
-    URL url = new URL("https://api.cityofkingston.ca/gtfs-realtime/alerts.pb");
-    
-    FeedMessage feed = FeedMessage.parseFrom(url.openStream());
-
-
-    for(FeedEntity entity : feed.getEntityList()){
-      System.out.println(entity.getAllFieldsRaw());
-    }
-    
-
   }
    
   

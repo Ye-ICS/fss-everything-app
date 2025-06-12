@@ -12,5 +12,6 @@ public class RealStop {
         this.predictedTime = predictedTime;
         this.delay = delay;
     }
+    
 
 }
