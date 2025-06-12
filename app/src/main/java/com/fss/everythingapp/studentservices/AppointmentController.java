@@ -16,6 +16,15 @@ public class AppointmentController {
     static String name;
     static int grade;
     private BorderPane rootcontainer;
+    private static TextField nameField;
+    private static ChoiceBox<Integer> gradeBox = new ChoiceBox<>();
+    StudentServices studentServices = new StudentServices();
+
+    @FXML
+    public static void init() {
+        nameField = new TextField();
+        gradeBox.getItems().addAll(9, 10, 11, 12);
+    }
 
     @FXML
     private void enterBtnPressed() throws IOException {
@@ -23,7 +32,7 @@ public class AppointmentController {
         name = getName();
         grade = getGrade();
 
-        StudentServices studentServices = new StudentServices();
+        
         studentServices.programRunner();
 
         // load to the next layout
@@ -32,20 +41,18 @@ public class AppointmentController {
         TimeslotsController timeslotsController = new TimeslotsController();
         timeslotsLayout.setController(timeslotsController);
         Parent show = timeslotsLayout.load();
+        timeslotsController.initialize();
         rootcontainer.getScene().setRoot(show);
     }
 
     @FXML
     private String getName() {
-        TextField nameField = new TextField();
         name = nameField.getText();
         return name;
     }
 
     @FXML
     private int getGrade() {
-        ChoiceBox<Integer> gradeBox = new ChoiceBox<>();
-        gradeBox.getItems().addAll(9, 10, 11, 12);
         grade = gradeBox.getValue();
         return grade;
     }

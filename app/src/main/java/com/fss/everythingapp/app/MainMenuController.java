@@ -22,6 +22,7 @@ public class MainMenuController {
             AppointmentController appointmentController = new AppointmentController();
             appointmentLayout.setController(appointmentController);
             Parent show = appointmentLayout.load();
+            appointmentController.init();
             rootContainer.getScene().setRoot(show);
 
         } catch (Exception e) {

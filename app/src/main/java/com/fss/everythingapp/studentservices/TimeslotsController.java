@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.checkerframework.checker.units.qual.C;
 
+import com.fss.everythingapp.app.App;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,18 +29,7 @@ public class TimeslotsController {
     void initialize() {
         dateBox.setItems(dateNums());
         timeBox.setItems(timeFiller());
-        date = dateBox.getValue();
         times = dates.get(date).getTimes();
-
-        if (times == null) {
-            //say something like "date unavailable"
-        } else {
-            timeslot = timeBox.getValue();
-            String selection = timeslot.substring(0,1);
-            int choice = Integer.parseInt(selection);
-            times.get(choice).setAvailable();
-            dates.get(date).updateTimes(times);
-        }
 
     }
 
@@ -60,11 +51,33 @@ public class TimeslotsController {
     }
 
     @FXML
-    private void enterBtnPressed() {
+    private void enterBtnPressed1() {
+        date = dateBox.getValue();
         //StudentServices.update(dates);
         
 
         // send updated info to student services
     }
 
+     @FXML
+    private void enterBtnPressed2() {
+        if (times == null) {
+            //say something like "date unavailable"
+        } else {
+            timeslot = timeBox.getValue();
+            String selection = timeslot.substring(0,1);
+            int choice = Integer.parseInt(selection);
+            times.get(choice).setAvailable();
+            dates.get(date).updateTimes(times);
+        }
+        //StudentServices.update(dates);
+        
+
+        // send updated info to student services
+    }
+
+    @FXML
+    private void onExitBtnPressed(){
+        App.backToMainMenu();
+    }
 }
