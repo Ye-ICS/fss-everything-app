@@ -59,22 +59,22 @@ public class LoggingController {
 
     @FXML
     void submitExcersizeLog(ActionEvent event) {
-        Workout.caloriesBurned += Integer.parseInt(coloriesBurnt.getText());
-        Workout.compoundExDone += Integer.parseInt(compExTxt.getText());
-        Workout.fullbodyExDone += Integer.parseInt(fullBodyExTxt.getText());
+        Workout.caloriesBurned += Double.parseDouble(coloriesBurnt.getText());
+        Workout.compoundExDone += Double.parseDouble(compExTxt.getText());
+        Workout.fullbodyExDone += Double.parseDouble(fullBodyExTxt.getText());
     }
 
     @FXML
     void submitFoodLog(ActionEvent event) {
-        Diet.caloriesEaten += Integer.parseInt(caloriesEaten.getText());
-        Diet.carbsEaten += Integer.parseInt(carbsEaten.getText());
-        Diet.proteinEaten += Integer.parseInt(proteinEaten.getText());
-        Diet.fatsEaten += Integer.parseInt(fatsEaten.getText());
+        Diet.caloriesEaten += Double.parseDouble(caloriesEaten.getText());
+        Diet.carbsEaten += Double.parseDouble(carbsEaten.getText());
+        Diet.proteinEaten += Double.parseDouble(proteinEaten.getText());
+        Diet.fatsEaten += Double.parseDouble(fatsEaten.getText());
     }
 
     @FXML
     void submitSleepLog(ActionEvent event) {
-
+        
     }
 
     @FXML
