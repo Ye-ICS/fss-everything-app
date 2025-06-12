@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.onebusaway.gtfs.impl.GtfsDaoImpl;
 import org.onebusaway.gtfs.model.Route;
+import org.onebusaway.gtfs.model.Stop;
 import org.onebusaway.gtfs.serialization.GtfsReader;
 
 public class OdkInfoUtils {
@@ -34,6 +35,15 @@ public class OdkInfoUtils {
         for (Route route : store.getAllRoutes()) {
             if (route.getId().getId().equals(routeId)) {
                 return route;
+            }
+        }
+        return null;
+    }
+
+    public Stop getStopById(String stopId){
+        for (Stop stop : store.getAllStops()) {
+            if (stop.getId().getId().equals(stopId)) {
+                return stop;
             }
         }
         return null;

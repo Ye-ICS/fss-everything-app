@@ -90,6 +90,7 @@ public class ListController {
             InfoController infoController = new InfoController();
             infoController.listController = this;
             infoController.routeId = routeId;
+            infoController.busInfo = busInfo;
             infoLoader.setController(infoController);
             Parent infoLayout = infoLoader.load();
             rootContainer.getScene().setRoot(infoLayout);
