@@ -1,7 +1,6 @@
 package com.fss.everythingapp.simulations.photoelectriceffect;
 
 import javafx.application.Application;
-import javafx.beans.InvalidationListener;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -17,9 +16,6 @@ import javafx.scene.Parent;
  * Sets up the UI layout with simulation pane on the left and controls on the right.
  */
 public class PhotoelectricMainApp extends Application {
-    private PhotoelectricSimulation simulation;
-    private Pane simPane;
-    private Text instructionText;
     
     // New static method to get the simulation UI as a Parent
     public static Parent getSimulationRoot() {
@@ -59,94 +55,6 @@ public class PhotoelectricMainApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
         primaryStage.show();
-    }
-    
-    /**
-     * Set up listeners to handle window resizing
-     */
-    private void setupResizeListeners() {
-        // Listen for changes in the simulation pane size
-        InvalidationListener resizeListener = observable -> {
-            double newWidth = simPane.getWidth();
-            double newHeight = simPane.getHeight();
-            
-            if (newWidth > 0 && newHeight > 0) {
-                // Update simulation dimensions
-                simulation.updateDimensions(newWidth, newHeight);
-                
-                // Reposition instruction text if needed
-                double textY = Math.min(50, newHeight - 20);
-                if (instructionText != null) {
-                    instructionText.setY(textY);
-                    // Wrap text if window is too narrow
-                    if (newWidth < 500) {
-                        instructionText.setText("Photons interact with electrons\non the metal surface");
-                    } else {
-                        instructionText.setText("Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
-                    }
-                }
-            }
-        };
-        
-        simPane.widthProperty().addListener(resizeListener);
-        simPane.heightProperty().addListener(resizeListener);
-    }
-    
-    /**
-     * Set up dynamic addition and removal of visual elements (photons and electrons)
-     * as they are created and destroyed in the simulation
-     */
-    private void setupDynamicElements() {
-        // Timeline to periodically check for new elements to add/remove
-        javafx.animation.Timeline elementUpdateTimeline = new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
-                javafx.util.Duration.millis(50), // Update every 50ms
-                e -> updateVisualElements()
-            )
-        );
-        elementUpdateTimeline.setCycleCount(javafx.animation.Timeline.INDEFINITE);
-        elementUpdateTimeline.play();
-    }
-    
-    /**
-     * Update visual elements in the simulation pane based on current simulation state
-     */
-    private void updateVisualElements() {
-        // Get current photons and electrons from simulation
-        var currentPhotons = simulation.getPhotons();
-        var currentElectrons = simulation.getElectrons();
-        
-        // Remove photons that are no longer in the simulation
-        simPane.getChildren().removeIf(node -> {
-            if (node instanceof Photon) {
-                Photon photon = (Photon) node;
-                return !currentPhotons.contains(photon) || photon.isAbsorbed();
-            }
-            return false;
-        });
-        
-        // Remove electrons that are no longer in the simulation
-        simPane.getChildren().removeIf(node -> {
-            if (node instanceof Electron) {
-                Electron electron = (Electron) node;
-                return !currentElectrons.contains(electron);
-            }
-            return false;
-        });
-        
-        // Add new photons that aren't already in the pane
-        for (Photon photon : currentPhotons) {
-            if (!simPane.getChildren().contains(photon) && !photon.isAbsorbed()) {
-                simPane.getChildren().add(photon);
-            }
-        }
-        
-        // Add new electrons that aren't already in the pane
-        for (Electron electron : currentElectrons) {
-            if (!simPane.getChildren().contains(electron)) {
-                simPane.getChildren().add(electron);
-            }
-        }
     }
     
     public static void main(String[] args) {
