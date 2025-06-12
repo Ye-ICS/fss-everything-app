@@ -17,9 +17,6 @@ class StudentServices {
     }
 
     // placeholder method for data being used by the app
-    void Data() {
-        String name = AppointmentController.name;
-    }
 
     public void programRunner() {
         counsellors = fillCounsellors();

@@ -29,7 +29,7 @@
             <SplitPane dividerPositions="0.4178082191780822" maxWidth="-Infinity" translateX="120.0">
               <items>
                   <TextField promptText="Name" />
-                  <ChoiceBox />
+                  <ChoiceBox fx:id="gradeBox" />
               </items>
             </SplitPane>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterBtnPressed" text="Enter" textAlignment="CENTER" />

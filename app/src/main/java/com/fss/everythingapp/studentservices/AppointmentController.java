@@ -1,9 +1,12 @@
 package com.fss.everythingapp.studentservices;
 
 import java.io.IOException;
+import java.util.Observable;
 
 import com.fss.everythingapp.app.App;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,14 +19,15 @@ public class AppointmentController {
     static String name;
     static int grade;
     private BorderPane rootcontainer;
-    private static TextField nameField;
-    private static ChoiceBox<Integer> gradeBox = new ChoiceBox<>();
+    private TextField nameField;
+    @FXML
+    private ChoiceBox<Integer> gradeBox;
     StudentServices studentServices = new StudentServices();
 
-    @FXML
-    public static void init() {
+    public void init() {
         nameField = new TextField();
-        gradeBox.getItems().addAll(9, 10, 11, 12);
+        ObservableList<Integer> grades = FXCollections.observableArrayList(9, 10, 11, 12);
+        gradeBox.setItems(grades);
     }
 
     @FXML
