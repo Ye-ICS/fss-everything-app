@@ -1,7 +1,29 @@
 package com.fss.everythingapp.fitness;
 
+import java.util.List;
+import java.util.Scanner;
+
+import java.nio.file.Files;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
 public class GeneralInfo {
-static public String name;
+    Scanner scanner = new Scanner("UserInfo.txt");
+
+
+    public static void main () throws IOException{
+        String filePath = "UserInfo.txt";
+
+    File file = new File("UserInfo.txt");
+
+                 List<String> lines = Files.readAllLines(Paths.get(filePath));
+        
+
+    }
+
+    static public String name;
     static public int age;
     static public double height; // in cm
     static public double weight; // in kg
@@ -14,6 +36,8 @@ static public String name;
     static private boolean obesityFat;
     public static int bodyFat;
     public static boolean isPhysicallyActive = false; //true means person is active, false is opposite
+
+
 
     void calculateBodyfat () {
         if (isMale == true) {

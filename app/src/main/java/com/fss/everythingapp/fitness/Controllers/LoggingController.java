@@ -3,6 +3,8 @@ package com.fss.everythingapp.fitness.Controllers;
 import java.io.IOException;
 
 import com.fss.everythingapp.fitness.Diet;
+import com.fss.everythingapp.fitness.SleepSchedule;
+import com.fss.everythingapp.fitness.SleepTimer;
 import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
@@ -51,34 +53,30 @@ public class LoggingController {
         restrictToNumbers(carbsEaten, true);
         restrictToNumbers(fatsEaten, true);
         restrictToNumbers(coloriesBurnt, true);
-        restrictToNumbers(fullBodyExTxt, false);
-        restrictToNumbers(compExTxt, false);
         restrictToNumbers(timeWentSleep, false);
         restrictToNumbers(timeWokeUp, false);
     }
 
     @FXML
     void submitExcersizeLog(ActionEvent event) {
-        Workout.caloriesBurned += Double.parseDouble(coloriesBurnt.getText());
-        Workout.compoundExDone += Double.parseDouble(compExTxt.getText());
-        Workout.fullbodyExDone += Double.parseDouble(fullBodyExTxt.getText());
+        Workout.caloriesBurned += Integer.parseInt(coloriesBurnt.getText());
     }
 
     @FXML
     void submitFoodLog(ActionEvent event) {
-        Diet.caloriesEaten += Double.parseDouble(caloriesEaten.getText());
-        Diet.carbsEaten += Double.parseDouble(carbsEaten.getText());
-        Diet.proteinEaten += Double.parseDouble(proteinEaten.getText());
-        Diet.fatsEaten += Double.parseDouble(fatsEaten.getText());
+        Diet.caloriesEaten += Integer.parseInt(caloriesEaten.getText());
+        Diet.carbsEaten += Integer.parseInt(carbsEaten.getText());
+        Diet.proteinEaten += Integer.parseInt(proteinEaten.getText());
+        Diet.fatsEaten += Integer.parseInt(fatsEaten.getText());
     }
 
     @FXML
     void submitSleepLog(ActionEvent event) {
-        
+        SleepSchedule.timeWentToSleep += Integer.parseInt(timeWentSleep.getText());
+        SleepSchedule.wokeUpTime += Integer.parseInt(timeWokeUp.getText());
     }
 
     @FXML
-
     void backToMM(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu.fxml"));

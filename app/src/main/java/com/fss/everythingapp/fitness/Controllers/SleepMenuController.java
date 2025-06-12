@@ -1,8 +1,13 @@
 package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
+import com.fss.everythingapp.fitness.DietManager;
+import com.fss.everythingapp.fitness.SleepManager;
+import com.fss.everythingapp.fitness.SleepSchedule;
 import com.fss.everythingapp.fitness.SleepTimer;
+import com.fss.everythingapp.fitness.Workout;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -30,19 +36,15 @@ public class SleepMenuController {
     private Button dateButton;
 
     @FXML
-    public void setDate(ActionEvent event) throws IOException {
+    public void setDate(ActionEvent event) throws IOException, InterruptedException {
     SleepTimer.getDate(null);
     date.setText(SleepTimer.formattedDate);
     }
 
-    
     @FXML
-    boolean sleepMenuOpen(Parent root) throws IOException {
-        if (root == FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/SleepMenu.fxml"))) {
-            return true;
-        } else {
-            return false;
-        }
+     public void initialize(ProgressIndicator sleepGoalBar) {
+        SleepManager.newSleepRoutine();
+        sleepGoalBar.setProgress(SleepSchedule.hoursSlept / SleepSchedule.hoursSleptTarget);
     }
 
     @FXML

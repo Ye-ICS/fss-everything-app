@@ -58,7 +58,8 @@ public class FitnessMainMenuController {
     }
 
     @FXML
-    void openSleepMenu(ActionEvent event) {
+    void openSleepMenu(ActionEvent event)  {
+
         if (checkIfPreferencesSelected() == false) {
             showValidationAlert();
         } else {
@@ -73,6 +74,8 @@ public class FitnessMainMenuController {
                 System.out.println("Error loading FXML: " + e.getMessage());
             }
         }
+
+        
     }
 
     @FXML
