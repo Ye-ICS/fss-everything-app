@@ -24,21 +24,20 @@ public class PhotoelectricSimulation {
     private AnimationTimer timer;
     private double width;
     private double height;
+    private static final double SURFACE_HEIGHT = 50; // Height of metal surface
     
     // Emission statistics
     private int totalPhotonsEmitted = 0;
     private int totalElectronsEjected = 0;
     private Rectangle metalSurface;
+    private double animationSpeed = 1.0; // Default speed multiplier
     
     public PhotoelectricSimulation(double width, double height) {
-        
         this.width = width;
-
         this.height = height;
         
-        
         // Create metal surface
-        metalSurface = new Rectangle(0, height - 50, width, 50);
+        metalSurface = new Rectangle(0, height - SURFACE_HEIGHT, width, SURFACE_HEIGHT);
         metalSurface.setFill(Color.SILVER);
         metalSurface.setStroke(Color.DARKGRAY);
         metalSurface.setStrokeWidth(2);
@@ -48,16 +47,73 @@ public class PhotoelectricSimulation {
     }
     
     /**
+     * Update simulation dimensions when window is resized
+     */
+    public void updateDimensions(double newWidth, double newHeight) {
+        if (newWidth <= 0 || newHeight <= 0) return;
+        
+        this.width = newWidth;
+        this.height = newHeight;
+        
+        // Update metal surface dimensions and position
+        metalSurface.setWidth(newWidth);
+        metalSurface.setHeight(SURFACE_HEIGHT);
+        metalSurface.setY(newHeight - SURFACE_HEIGHT);
+        
+        // Reposition existing electrons to new surface
+        repositionElectronsToSurface();
+        
+        // Remove any photons or electrons that are now out of bounds
+        cleanupOutOfBoundsElements();
+    }
+    
+    /**
+     * Reposition electrons to the new surface location
+     */
+    private void repositionElectronsToSurface() {
+        for (Electron electron : electrons) {
+            if (!electron.isEjected()) {
+                Vector2D pos = electron.getPosition();
+                // Keep x position but move to new surface level
+                electron.setPosition(new Vector2D(
+                    Math.min(pos.x, width - 20), // Ensure within bounds
+                    height - SURFACE_HEIGHT - 5  // Just above surface
+                ));
+            }
+        }
+    }
+    
+    /**
+     * Remove elements that are now outside the simulation bounds
+     */
+    private void cleanupOutOfBoundsElements() {
+        photons.removeIf(photon -> 
+            photon.getPosition().x < 0 || 
+            photon.getPosition().x > width ||
+            photon.getPosition().y < 0 ||
+            photon.getPosition().y > height
+        );
+        
+        electrons.removeIf(electron -> 
+            electron.isEjected() && (
+                electron.getPosition().x < -50 || 
+                electron.getPosition().x > width + 50 ||
+                electron.getPosition().y > height + 50
+            )
+        );
+    }
+    
+    /**
      * Initialize electrons distributed along the metal surface
      */
     private void initializeElectrons() {
         electrons.clear();
-        int numElectrons = 20;
-        double spacing = width / numElectrons;
-        
+        int numElectrons = Math.max(15, (int)(width / 30)); // Scale with width
+        double spacing = width / (numElectrons + 1);
+
         for (int i = 0; i < numElectrons; i++) {
-            double x = spacing * i + spacing / 2;
-            double y = height - 55; // Just above the metal surface
+            double x = spacing * (i + 1); // Start at spacing, end at width - spacing
+            double y = height - SURFACE_HEIGHT - 5; // Just above the metal surface
             electrons.add(new Electron(x, y));
         }
     }
@@ -112,7 +168,7 @@ public class PhotoelectricSimulation {
      */
     private boolean shouldEmitPhoton(long currentTime, long lastEmission) {
         double timeSinceLastEmission = (currentTime - lastEmission) / 1e9;
-        double emissionInterval = 1.0 / intensity; // seconds between photons
+        double emissionInterval = 0.1 / intensity; // seconds between photons
         return timeSinceLastEmission >= emissionInterval;
     }
     
@@ -120,13 +176,14 @@ public class PhotoelectricSimulation {
      * Emit a new photon from the left side of the screen
      */
     private void emitPhoton() {
-        double y = Math.random() * (height - 100) + 50; // Random height
+        double y = Math.random() * (height - SURFACE_HEIGHT - 100) + 50; // Random height above surface
         Photon photon = new Photon(0, y, photonEnergy);
         photons.add(photon);
         totalPhotonsEmitted++;
     }
     
     public void update(double dt) {
+        dt *= animationSpeed; // Scale time step by animation speed
         // Update photon positions
         Iterator<Photon> photonIter = photons.iterator();
         while (photonIter.hasNext()) {
@@ -138,11 +195,37 @@ public class PhotoelectricSimulation {
             }
             
             photon.updatePosition(dt);
+            Vector2D photonPos = photon.getPosition();
             
-            // Remove photons that have left the screen
-            if (photon.getPosition().x > width) {
+            // Remove photons that have left the screen bounds
+            if (photonPos.x > width || photonPos.x < -10 || 
+                photonPos.y > height || photonPos.y < -10) {
                 photonIter.remove();
                 continue;
+            }
+            
+            // Check if photon hits the metal surface (without hitting an electron)
+            if (photonPos.y >= height - SURFACE_HEIGHT - photon.getRadius()) {
+                // Check if it would collide with any electron first
+                boolean willHitElectron = false;
+                for (Electron electron : electrons) {
+                    if (!electron.isEjected()) {
+                        Vector2D electronPos = electron.getPosition();
+                        double distance = photonPos.distanceTo(electronPos);
+                        double collisionDistance = photon.getRadius() + electron.getRadius() + 5; // Slightly larger detection
+                        
+                        if (distance <= collisionDistance) {
+                            willHitElectron = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // If photon hits surface without hitting electron, remove it
+                if (!willHitElectron) {
+                    photonIter.remove();
+                    continue;
+                }
             }
             
             // Check for collisions with electrons
@@ -193,17 +276,36 @@ public class PhotoelectricSimulation {
      * Add new electrons to replace ejected ones
      */
     private void replenishElectrons() {
-        int electronsOnSurface = 0;
-        for (Electron e : electrons) {
-            if (!e.isEjected()) electronsOnSurface++;
-        }
-        
-        // Maintain at least 15 electrons on the surface
-        while (electronsOnSurface < 15) {
-            double x = Math.random() * (width - 20) + 10;
-            double y = height - 55;
-            electrons.add(new Electron(x, y));
-            electronsOnSurface++;
+        long electronsOnSurface = electrons.stream()
+            .filter(e -> !e.isEjected())
+            .count();
+
+        int minElectrons = Math.max(15, (int)(width / 40));
+        double electronRadius = 5;
+        double minSpacing = electronRadius * 2 + 2;
+
+        while (electronsOnSurface < minElectrons) {
+            // Try to find a non-overlapping position
+            boolean placed = false;
+            for (int attempt = 0; attempt < 20 && !placed; attempt++) {
+                double x = Math.random() * (width - 20) + 10;
+                double y = height - SURFACE_HEIGHT - 5;
+
+                boolean overlaps = false;
+                for (Electron e : electrons) {
+                    if (!e.isEjected() && Math.abs(e.getPosition().x - x) < minSpacing) {
+                        overlaps = true;
+                        break;
+                    }
+                }
+                if (!overlaps) {
+                    electrons.add(new Electron(x, y));
+                    electronsOnSurface++;
+                    placed = true;
+                }
+            }
+            // If couldn't find a spot after 20 tries, just skip this electron
+            if (!placed) break;
         }
     }
     
@@ -256,6 +358,20 @@ public class PhotoelectricSimulation {
         if (totalPhotonsEmitted == 0) return 0;
         return (double) totalElectronsEjected / totalPhotonsEmitted;
     }
-
     
+    public double getWidth() {
+        return width;
+    }
+    
+    public double getHeight() {
+        return height;
+    }
+    
+    public double getAnimationSpeed() {
+        return animationSpeed;
+    }
+
+    public void setAnimationSpeed(double animationSpeed) {
+        this.animationSpeed = animationSpeed;
+    }
 }

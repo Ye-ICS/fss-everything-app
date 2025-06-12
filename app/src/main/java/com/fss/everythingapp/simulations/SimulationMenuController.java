@@ -3,7 +3,9 @@ package com.fss.everythingapp.simulations;
 import java.io.IOException;
 
 import com.fss.everythingapp.app.MainMenuController;
+import com.fss.everythingapp.simulations.doubleslit.DoubleSlitController;
 import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
+import com.fss.everythingapp.simulations.photoelectriceffect.PhotoelectricRoot;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +31,10 @@ public class SimulationMenuController {
 
     @FXML
     private void openDoubleSlit(ActionEvent actionEvent) throws IOException {
-        Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/double_slit.fxml"));
+        Parent simulationsLayout;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../simulations/DoubleSlitSimulation.fxml"));
+        //Rad already put a controller in the FXML, so theres no need to load a controller.
+        simulationsLayout = fxmlLoader.load();
         rootContainer.getScene().setRoot(simulationsLayout);
     }
 
@@ -40,9 +45,9 @@ public class SimulationMenuController {
     }
 
     @FXML
-    private void openPhotoElectric(ActionEvent actionEvent) throws IOException {
-        Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/photoelectric.fxml"));
-        rootContainer.getScene().setRoot(simulationsLayout);
+    private void openPhotoElectric(ActionEvent actionEvent) {
+        com.fss.everythingapp.simulations.photoelectriceffect.PhotoelectricRoot photoelectricRoot = new com.fss.everythingapp.simulations.photoelectriceffect.PhotoelectricRoot();
+        rootContainer.getScene().setRoot(photoelectricRoot.getRootNode());
     }
 
     @FXML

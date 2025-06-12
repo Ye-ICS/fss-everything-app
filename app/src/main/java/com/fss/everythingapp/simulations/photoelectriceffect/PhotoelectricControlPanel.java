@@ -110,10 +110,30 @@ public class PhotoelectricControlPanel extends VBox {
             workFunctionValueLabel.setText(String.format("%.2f eV", newVal.doubleValue()));
         });
         
+        // Animation Speed Control
+        Label speedLabel = new Label("Animation Speed:");
+        speedLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
+        
+        Slider speedSlider = new Slider(0.1, 3.0, sim.getAnimationSpeed());
+        speedSlider.setShowTickLabels(true);
+        speedSlider.setShowTickMarks(true);
+        speedSlider.setMajorTickUnit(0.5);
+        speedSlider.setMinorTickCount(4);
+        speedSlider.setBlockIncrement(0.1);
+        
+        Label speedValueLabel = new Label(String.format("%.1fx", sim.getAnimationSpeed()));
+        speedValueLabel.setFont(Font.font("System", 11));
+        
+        speedSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            sim.setAnimationSpeed(newVal.doubleValue());
+            speedValueLabel.setText(String.format("%.1fx", newVal.doubleValue()));
+        });
+        
         controlsBox.getChildren().addAll(
             energyLabel, energySlider, energyValueLabel,
             intensityLabel, intensitySlider, intensityValueLabel,
-            workFunctionLabel, workFunctionSlider, workFunctionValueLabel
+            workFunctionLabel, workFunctionSlider, workFunctionValueLabel,
+            speedLabel, speedSlider, speedValueLabel
         );
         
         return controlsBox;
@@ -157,20 +177,39 @@ public class PhotoelectricControlPanel extends VBox {
     private HBox createButtonSection() {
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
-        
+
         Button startBtn = new Button("Start");
         Button stopBtn = new Button("Stop");
         Button resetBtn = new Button("Reset");
-        
+        Button backBtn = new Button("Back"); // <-- Add this line
+
         startBtn.setPrefWidth(70);
         stopBtn.setPrefWidth(70);
         resetBtn.setPrefWidth(70);
-        
+        backBtn.setPrefWidth(70); // <-- Add this line
+
         startBtn.setOnAction(e -> sim.start());
         stopBtn.setOnAction(e -> sim.stop());
         resetBtn.setOnAction(e -> sim.reset());
-        
-        buttonBox.getChildren().addAll(startBtn, stopBtn, resetBtn);
+
+        // --- Add this block for the back button ---
+        backBtn.setOnAction(e -> {
+            // Go back to the simulations menu
+            // Find the scene and set the root to the simulations menu FXML
+            try {
+                javafx.scene.Scene scene = backBtn.getScene();
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                    getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml")
+                );
+                javafx.scene.Parent menuRoot = loader.load();
+                scene.setRoot(menuRoot);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        // --- End back button block ---
+
+        buttonBox.getChildren().addAll(startBtn, stopBtn, resetBtn, backBtn); // <-- Add backBtn here
         return buttonBox;
     }
     
