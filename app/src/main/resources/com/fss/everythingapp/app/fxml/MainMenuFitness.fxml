@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-   
+
 <BorderPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.fitness.Controllers.FitnessMainMenuController">
 
    <top>
@@ -21,9 +21,17 @@
    <center>
       <VBox alignment="BOTTOM_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <padding>
-            <Insets bottom="40.0" />
+            <Insets bottom="60.0" />
          </padding>
          <children>
+            <VBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#exitFitnessApp" text="Exit App" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
             <Button mnemonicParsing="false" onAction="#openPreferenceMenu" prefHeight="36.0" prefWidth="105.0" text="Preferences" />
             <Button mnemonicParsing="false" onAction="#openDietMenu" prefHeight="47.0" prefWidth="219.0" text="Diet">
                <font>
@@ -42,7 +50,6 @@
             </Button>
             <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#openLogRecords" prefHeight="25.0" prefWidth="84.0" text="Log" />
       
                   <Button mnemonicParsing="false" onAction="#openLogMenu" prefHeight="62.0" prefWidth="172.0" text="+">
                      <font>

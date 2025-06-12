@@ -16,6 +16,12 @@ import javafx.stage.Stage;
 
 public class FitnessMainMenuController {
 
+
+    @FXML
+    void exitFitnessApp(ActionEvent event) {
+        App.backToMainMenu;
+    }
+
     @FXML
     void openDietMenu(ActionEvent event) {
     if (checkIfPreferencesSelected() == false) {

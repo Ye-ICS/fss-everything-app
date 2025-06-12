@@ -60,7 +60,6 @@ public class LoggingController {
 
     @FXML
     void submitExcersizeLog(ActionEvent event) {
-        if (coloriesBurnt.getText() == null || compound.getText() == null || fullBodyExTxt.getText())
         Workout.caloriesBurned += Double.parseDouble(coloriesBurnt.getText());
         Workout.compoundExDone += Double.parseDouble(compExTxt.getText());
         Workout.fullbodyExDone += Double.parseDouble(fullBodyExTxt.getText());
@@ -82,7 +81,7 @@ public class LoggingController {
     @FXML
     void backToMM(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenuFitness.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
