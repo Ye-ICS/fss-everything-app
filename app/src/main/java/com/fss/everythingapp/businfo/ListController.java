@@ -42,7 +42,7 @@ public class ListController {
     @FXML
     private void quit(ActionEvent actionEvent) {
         try {
-            FXMLLoader mainListLoader = new FXMLLoader(getClass().getResource("../app/fxml/Example.fxml"));
+            FXMLLoader mainListLoader = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
             MainMenuController controller = new MainMenuController();
             mainListLoader.setController(controller);
             Parent mainListLayout = mainListLoader.load();
