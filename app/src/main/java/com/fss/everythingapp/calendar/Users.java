@@ -1,6 +1,6 @@
 package com.fss.everythingapp.calendar;
 
-public class UserManager {
+public class Users {
 
     static void checkUser() { // Checks what permissions the current user possesses
     }
