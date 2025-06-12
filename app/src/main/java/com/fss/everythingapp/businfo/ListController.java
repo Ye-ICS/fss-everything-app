@@ -2,7 +2,7 @@ package com.fss.everythingapp.businfo;
 
 import java.util.ArrayList;
 
-import com.fss.everythingapp.app.MainMenuController;
+import com.fss.everythingapp.app.App;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -41,15 +41,7 @@ public class ListController {
 
     @FXML
     private void quit(ActionEvent actionEvent) {
-        try {
-            FXMLLoader mainListLoader = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
-            MainMenuController controller = new MainMenuController();
-            mainListLoader.setController(controller);
-            Parent mainListLayout = mainListLoader.load();
-            rootContainer.getScene().setRoot(mainListLayout);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        App.backToMainMenu();
     }
 
     @FXML
