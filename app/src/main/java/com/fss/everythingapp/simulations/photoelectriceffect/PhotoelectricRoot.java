@@ -13,7 +13,7 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 
-public class PhotoelectricRoot extends SplitPane {
+public class PhotoelectricRoot extends BorderPane {
     private PhotoelectricSimulation simulation;
     private Pane simPane;
     private Text instructionText;
