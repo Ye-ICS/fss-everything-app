@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.fss.everythingapp.app.MainMenuController;
 import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
+import com.fss.everythingapp.simulations.photoelectriceffect.PhotoelectricRoot;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,9 +41,9 @@ public class SimulationMenuController {
     }
 
     @FXML
-    private void openPhotoElectric(ActionEvent actionEvent) throws IOException {
-        Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/photoelectric.fxml"));
-        rootContainer.getScene().setRoot(simulationsLayout);
+    private void openPhotoElectric(ActionEvent actionEvent) {
+        com.fss.everythingapp.simulations.photoelectriceffect.PhotoelectricRoot photoelectricRoot = new com.fss.everythingapp.simulations.photoelectriceffect.PhotoelectricRoot();
+        rootContainer.getScene().setRoot(photoelectricRoot.getRootNode());
     }
 
     @FXML

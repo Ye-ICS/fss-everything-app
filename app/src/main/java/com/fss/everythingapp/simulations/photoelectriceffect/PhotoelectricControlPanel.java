@@ -177,20 +177,39 @@ public class PhotoelectricControlPanel extends VBox {
     private HBox createButtonSection() {
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
-        
+
         Button startBtn = new Button("Start");
         Button stopBtn = new Button("Stop");
         Button resetBtn = new Button("Reset");
-        
+        Button backBtn = new Button("Back"); // <-- Add this line
+
         startBtn.setPrefWidth(70);
         stopBtn.setPrefWidth(70);
         resetBtn.setPrefWidth(70);
-        
+        backBtn.setPrefWidth(70); // <-- Add this line
+
         startBtn.setOnAction(e -> sim.start());
         stopBtn.setOnAction(e -> sim.stop());
         resetBtn.setOnAction(e -> sim.reset());
-        
-        buttonBox.getChildren().addAll(startBtn, stopBtn, resetBtn);
+
+        // --- Add this block for the back button ---
+        backBtn.setOnAction(e -> {
+            // Go back to the simulations menu
+            // Find the scene and set the root to the simulations menu FXML
+            try {
+                javafx.scene.Scene scene = backBtn.getScene();
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                    getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml")
+                );
+                javafx.scene.Parent menuRoot = loader.load();
+                scene.setRoot(menuRoot);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        // --- End back button block ---
+
+        buttonBox.getChildren().addAll(startBtn, stopBtn, resetBtn, backBtn); // <-- Add backBtn here
         return buttonBox;
     }
     

@@ -1,35 +1,28 @@
 package com.fss.everythingapp.simulations.photoelectriceffect;
 
-import javafx.application.Application;
-import javafx.beans.InvalidationListener;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.Parent;
+import javafx.scene.paint.Color;
+import javafx.beans.InvalidationListener;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
 
-/**
- * Main application class for the photoelectric effect simulation.
- * Sets up the UI layout with simulation pane on the left and controls on the right.
- */
-public class PhotoelectricMainApp extends Application {
+public class PhotoelectricRoot extends BorderPane {
     private PhotoelectricSimulation simulation;
     private Pane simPane;
     private Text instructionText;
-    
-    // New static method to get the simulation UI as a Parent
-    public static Parent getSimulationRoot() {
-        BorderPane root = new BorderPane();
 
+    public PhotoelectricRoot() {
         // Create simulation
-        PhotoelectricSimulation simulation = new PhotoelectricSimulation(600, 600);
+        simulation = new PhotoelectricSimulation(600, 600);
 
         // Left: Simulation Pane
-        Pane simPane = new Pane();
+        simPane = new Pane();
         simPane.setStyle("-fx-background-color: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);");
         simPane.setMinSize(600, 600);
         simPane.setPrefSize(600, 600);
@@ -39,46 +32,33 @@ public class PhotoelectricMainApp extends Application {
         titleText.setFont(Font.font("System", FontWeight.BOLD, 16));
         titleText.setFill(Color.DARKBLUE);
 
-        Text instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
+        instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
         instructionText.setFont(Font.font("System", 12));
         instructionText.setFill(Color.DARKBLUE);
 
         simPane.getChildren().addAll(titleText, instructionText, simulation.getMetalSurface());
-        root.setCenter(simPane);
+        setCenter(simPane);
 
         // Right: Control Panel
         PhotoelectricControlPanel controls = new PhotoelectricControlPanel(simulation);
-        root.setRight(controls);
-        return root;
+        setRight(controls);
+
+        // --- Call the setup methods here ---
+        setupResizeListeners();
+        setupDynamicElements();
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        Scene scene = new Scene(getSimulationRoot(), 900, 600);
-        primaryStage.setTitle("Photoelectric Effect Simulation");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(true);
-        primaryStage.show();
-    }
-    
-    /**
-     * Set up listeners to handle window resizing
-     */
     private void setupResizeListeners() {
-        // Listen for changes in the simulation pane size
         InvalidationListener resizeListener = observable -> {
             double newWidth = simPane.getWidth();
             double newHeight = simPane.getHeight();
-            
+
             if (newWidth > 0 && newHeight > 0) {
-                // Update simulation dimensions
                 simulation.updateDimensions(newWidth, newHeight);
-                
-                // Reposition instruction text if needed
+
                 double textY = Math.min(50, newHeight - 20);
                 if (instructionText != null) {
                     instructionText.setY(textY);
-                    // Wrap text if window is too narrow
                     if (newWidth < 500) {
                         instructionText.setText("Photons interact with electrons\non the metal surface");
                     } else {
@@ -87,35 +67,26 @@ public class PhotoelectricMainApp extends Application {
                 }
             }
         };
-        
+
         simPane.widthProperty().addListener(resizeListener);
         simPane.heightProperty().addListener(resizeListener);
     }
-    
-    /**
-     * Set up dynamic addition and removal of visual elements (photons and electrons)
-     * as they are created and destroyed in the simulation
-     */
+
     private void setupDynamicElements() {
-        // Timeline to periodically check for new elements to add/remove
-        javafx.animation.Timeline elementUpdateTimeline = new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
-                javafx.util.Duration.millis(50), // Update every 50ms
+        Timeline elementUpdateTimeline = new Timeline(
+            new KeyFrame(
+                Duration.millis(50),
                 e -> updateVisualElements()
             )
         );
-        elementUpdateTimeline.setCycleCount(javafx.animation.Timeline.INDEFINITE);
+        elementUpdateTimeline.setCycleCount(Timeline.INDEFINITE);
         elementUpdateTimeline.play();
     }
-    
-    /**
-     * Update visual elements in the simulation pane based on current simulation state
-     */
+
     private void updateVisualElements() {
-        // Get current photons and electrons from simulation
         var currentPhotons = simulation.getPhotons();
         var currentElectrons = simulation.getElectrons();
-        
+
         // Remove photons that are no longer in the simulation
         simPane.getChildren().removeIf(node -> {
             if (node instanceof Photon) {
@@ -124,7 +95,7 @@ public class PhotoelectricMainApp extends Application {
             }
             return false;
         });
-        
+
         // Remove electrons that are no longer in the simulation
         simPane.getChildren().removeIf(node -> {
             if (node instanceof Electron) {
@@ -133,14 +104,14 @@ public class PhotoelectricMainApp extends Application {
             }
             return false;
         });
-        
+
         // Add new photons that aren't already in the pane
         for (Photon photon : currentPhotons) {
             if (!simPane.getChildren().contains(photon) && !photon.isAbsorbed()) {
                 simPane.getChildren().add(photon);
             }
         }
-        
+
         // Add new electrons that aren't already in the pane
         for (Electron electron : currentElectrons) {
             if (!simPane.getChildren().contains(electron)) {
@@ -148,8 +119,8 @@ public class PhotoelectricMainApp extends Application {
             }
         }
     }
-    
-    public static void main(String[] args) {
-        launch(args);
+
+    public Parent getRootNode() {
+        return this;
     }
 }
