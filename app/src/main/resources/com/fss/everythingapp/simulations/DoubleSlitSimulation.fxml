@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.simulations.doubleslit/DoubleSlitController">
+<BorderPane xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.simulations.doubleslit.DoubleSlitController">
    <top>
       <VBox alignment="CENTER" prefHeight="51.0" prefWidth="620.0" spacing="10.0">
          <padding>
