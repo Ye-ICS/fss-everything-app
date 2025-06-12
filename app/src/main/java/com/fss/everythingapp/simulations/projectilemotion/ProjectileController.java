@@ -131,6 +131,24 @@ public class ProjectileController {
             shootProjectile();
         });
 
+        backToSim.setOnAction(e -> {
+
+           
+            // Go back to the simulations menu
+            // Find the scene and set the root to the simulations menu FXML
+            try {
+                javafx.scene.Scene scene = backToSim.getScene();
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                    getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml")
+                );
+                javafx.scene.Parent menuRoot = loader.load();
+                scene.setRoot(menuRoot);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+   
+        });
+
 
         changeProjectileImage.setOnAction(e -> { // I copied this code from Yamen's "ControlPanel.java"
             FileChooser fileChooser = new FileChooser();
