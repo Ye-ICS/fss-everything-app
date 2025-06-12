@@ -4,99 +4,82 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoubleSlit {
-    private double wavelength;
-    private double slitSeparation;
-    private double slitWidth;
+    private double wavelengthNano;
+    private double slitSeparationMicro;
+    private double slitWidthMicro;
     private double screenDistance;
-    private List<Double> interferencePattern;
-    
-    public DoubleSlit() {
-        interferencePattern = new ArrayList<>();
-        // Default values
-        wavelength = 400; // 400 nm
-        slitSeparation = 0.0; // micrometers
-        slitWidth = 0.0; // micrometers
-        screenDistance = 0.0; // meters
+    private List<Double> interferencePattern = new ArrayList<>();
+
+    /**
+     * Calculates the interference pattern for a double-slit experiment based on the given parameters.
+     *
+     * @param separation The distance between the two slits (recieved in micrometers).
+     * @param width The width of each slit (recievd in micrometers).
+     * @param wavelength The wavelength of the light used (recieved in nanometers).
+     * @param distance The distance from the slits to the screen (in meters).
+     * @return A list of intensity values representing the interference pattern across the screen.
+     *         Each value corresponds to a point on the screen, calculated at regular intervals.
+     * 
+     * The method assumes:
+     * - The screen is centered at y = 0 and spans a width of 2 cm.
+     * - The interference pattern is calculated for 500 evenly spaced points across the screen.
+     * - The intensity at each point is determined using the `calculateIntensity` method.
+     *
+     * - Ensure the `calculateIntensity` method is implemented to compute the intensity at a given position.
+     * - The method clears any existing interference pattern before calculating a new one.
+     */
+    List<Double> calculateInterferencePattern(double separation, double width, double wavelength, double distance) {
+        this.wavelengthNano = wavelength;
+        this.slitSeparationMicro = separation;
+        this.slitWidthMicro = width;
+        this.screenDistance = distance;
+
+        interferencePattern.clear(); // Clear any existing pattern
+        
+        int numPoints = 500; // Number of points to calculate on the screen
+        double screenWidth = 0.02; // Total width of the screen (2 cm)
+        double step = screenWidth / numPoints; // Step size between points
+        double startY = -screenWidth / 2; // Start position (leftmost point on the screen)
+        
+        // Loop through each point on the screen
+        for (int i = 0; i < numPoints; i++) {
+            double y = startY + i * step; // Current position on the screen
+            double intensity = calculateIntensity(y); // Calculate intensity at this position
+            interferencePattern.add(intensity); // Add intensity to the pattern list
+        }
+
+        return new ArrayList<>(interferencePattern); // Return the calculated pattern
     }
 
-    void setSlitProperties(double separation, double width) {
-        slitSeparation = separation;
-        slitWidth = width;
-    }
-
-    void setWavelength(double wavelength) {
-        this.wavelength = wavelength;
-    }
-    
-    void setScreenDistance(double distance) {
-        screenDistance = distance;
-    }
-    
     /**
      * Calculates the intensity of the double slit interference pattern at a given point y on the screen.
-     * @param y
-     * @return
+     * This method combines single slit diffraction and double slit interference effects.
+     * wavelength is getting converted in nanometers, slit width and separation are in micrometers.
+     * @param y position on the screen (distance from the center)
+     * @return intensity at the given position
      */
-    double calculateDoubleSlitIntensity(double y) {
-        // Calculate the angle θ from the center of the slits to the point y on the screen
-        double angleFromCenter = Math.atan(y / screenDistance);
-    
-        // Single slit diffraction area
-        // This phase term accounts for the spreading of light due to the finite slit width
-        double diffractionPhase = (Math.PI * slitWidth * Math.sin(angleFromCenter)) / wavelength;
-        double singleSlitFactor = 1.0;
-        if (Math.abs(diffractionPhase) > 1e-10) {
-            // sinc(a) = sin(a) / a
-            // The intensity envelope is proportional to sinc^2(β)
-            double sinc = Math.sin(diffractionPhase) / diffractionPhase;
-            singleSlitFactor = sinc * sinc;
+    private double calculateIntensity(double y) {
+        // Small angle approximation: sin(θ) ≈ y / L, where L is the screen distance
+        double sinTheta = y / screenDistance;
+        
+        // Single slit diffraction factor:
+        // beta = π * slitWidth * sin(θ) / wavelength
+        // Intensity due to single slit diffraction is proportional to (sin(beta) / beta)^2
+        double beta = Math.PI * (slitWidthMicro * 1e-6) * sinTheta / (wavelengthNano* 1e-9);
+        double singleSlitFactor = 1.0; // Default intensity factor for single slit diffraction
+        if (Math.abs(beta) > 1e-10) { // Avoid division by zero
+            double sinc = Math.sin(beta) / beta; // sinc function
+            singleSlitFactor = sinc * sinc; // Square of sinc gives intensity
         }
-    
-        //Double slit interference pattern
-        // This phase term accounts for the path difference between the two slits
-        double interferencePhase = (2 * Math.PI * slitSeparation * Math.sin(angleFromCenter)) / wavelength;
-        // The intensity pattern is proportional to cos^2(b/2)
-        double interferencePattern = Math.cos(interferencePhase / 2);
-        interferencePattern *= interferencePattern;
-    
-        // The observed intensity is the product of the single slit area and the double slit pattern
-        return (singleSlitFactor * interferencePattern);
+        
+        // Double slit interference factor:
+        // alpha = π * slitSeparation * sin(θ) / wavelength
+        // Intensity due to double slit interference is proportional to cos^2(alpha)
+        double alpha = Math.PI * (slitSeparationMicro * 1e-6) * sinTheta / (wavelengthNano* 1e-9);
+        double doubleSlitFactor = Math.cos(alpha); // Cosine of alpha
+        doubleSlitFactor *= doubleSlitFactor; // Square of cosine gives intensity
+        
+        // Combined intensity is the product of single slit diffraction and double slit interference factors
+        return singleSlitFactor * doubleSlitFactor;
     }
-
-    public void calculateInterferencePattern() {
-        interferencePattern.clear();
-
-        // Number of points (samples) across the screen to calculate intensity for
-        int numPoints = 500;
-
-        // Physical width of the screen (meters) where the pattern is observed
-        double screenWidth = 0.02; // 2 cm
-
-        // Distance between each sample point on the screen
-        double distanceBetweenPoints = screenWidth / numPoints;
-
-        // Loop over each point on the screen from left edge (-screenWidth/2)
-        // to right edge (+screenWidth/2)
-        for (int i = 0; i < numPoints; i++) {
-            // Calculate the y-position on the screen for this sample
-            // y = 0 is the center, negative is left, positive is right
-            double y = -screenWidth / 2 + i * distanceBetweenPoints;
-
-            // Calculate the intensity at this y-position using the double slit formula
-            // This includes both diffraction (single slit) and interference (double slit) effects
-            double intensity = calculateDoubleSlitIntensity(y);
-
-            // Store the calculated intensity in the pattern list
-            interferencePattern.add(intensity);
-        }
-    }
-    
-    public List<Double> getInterferencePattern() {
-        return new ArrayList<>(interferencePattern);
-    }
-
-    double getWavelength() { return wavelength; }
-    double getSlitSeparation() { return slitSeparation; }
-    double getSlitWidth() { return slitWidth; }
-    double getScreenDistance() { return screenDistance; }
 }
