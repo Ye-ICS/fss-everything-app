@@ -25,6 +25,16 @@ public class DoubleSlitController{
     private LightCanvas lightCanvasDisplay;
     private ExplanationCanvas explanationCanvasDisplay;
     
+    /**
+     * Initializes the DoubleSlitController by setting up the simulation components,
+     * configuring the sliders, and updating the simulation display.
+     * This method is automatically called after the FXML file has been loaded.
+     * It performs the following tasks:
+     * - Initializes the DoubleSlit simulation object.
+     * - Sets up the LightCanvas and ExplanationCanvas displays.
+     * - Configures slider listeners to update the simulation dynamically.
+     * - Calls the updateSimulation method to render the initial state.
+     */
     @FXML
     private void initialize() {
         doubleSlitSimulation = new DoubleSlit();
@@ -36,6 +46,15 @@ public class DoubleSlitController{
         updateSimulation();
     }
 
+    /**
+     * Resets the simulation parameters to their default values and updates the simulation display.
+     * This method sets the sliders to predefined values:
+     * - Wavelength: 400 nm
+     * - Slit separation: 0 μm
+     * - Slit width: 0 μm
+     * - Screen distance: 0 meters
+     * After resetting the sliders, it calls the updateSimulation method to reflect the changes.
+     */
     @FXML
     private void reset() {
         wavelengthSlider.setValue(400);
@@ -45,7 +64,7 @@ public class DoubleSlitController{
         updateSimulation();
     }
     
-    void setupSliders() {
+    private void setupSliders() {
        // Wavelength slider (400-750 nm)
        wavelengthSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
            updateWavelengthLabel();
@@ -71,35 +90,43 @@ public class DoubleSlitController{
        });
     }
 
-    void updateWavelengthLabel() {
+    private void updateWavelengthLabel() {
         wavelengthLabel.setText(String.format("Wavelength: %.0f nm", wavelengthSlider.getValue()));  
     }
     
-    void updateSeparationLabel() {
+    private void updateSeparationLabel() {
         separationLabel.setText(String.format("Slit Separation: %.0f μm", separationSlider.getValue()));
     }
     
-    void updateWidthLabel() {
+    private void updateWidthLabel() {
         widthLabel.setText(String.format("Slit Width: %.0f μm", widthSlider.getValue()));
     }
     
-    void updateScreenDistanceLabel() {
+    private void updateScreenDistanceLabel() {
         screenDistanceLabel.setText(String.format("Screen Distance: %.2f m", screenDistanceSlider.getValue()));
     }
 
-    void updateSimulation() {
-        // Set simulation parameters - convert micrometers to meters
-        doubleSlitSimulation.setWavelength(wavelengthSlider.getValue() * 1e-9); // nm to m
-        doubleSlitSimulation.setSlitProperties(
-            separationSlider.getValue() * 1e-6, // μm to m
-            widthSlider.getValue() * 1e-6       // μm to m
-        );
-        doubleSlitSimulation.setScreenDistance(screenDistanceSlider.getValue()); // already in meters
-        
-        doubleSlitSimulation.calculateInterferencePattern();
-        
+    /**
+     * Updates the simulation by calculating the interference pattern based on the current
+     * values of the sliders and rendering the results on the display canvases.
+     * 
+     * The method performs the following steps:
+     * 1. Calculates the interference pattern using the double slit simulation parameters:
+     *    - Separation between the slits (converted from μm to meters).
+     *    - Width of the slits (converted from μm to meters).
+     *    - Wavelength of the light (converted from nm to meters).
+     *    - Distance to the screen.
+     * 2. Draws the calculated interference pattern on the light canvas display.
+     * 3. Updates the explanation canvas with relevant details based on the current slider values.
+     */
+    private void updateSimulation() {
         // Get the interference pattern and draw it
-        List<Double> pattern = doubleSlitSimulation.getInterferencePattern();
+        List<Double> pattern = doubleSlitSimulation.calculateInterferencePattern(
+        separationSlider.getValue(),
+        widthSlider.getValue(),
+        wavelengthSlider.getValue(),
+        screenDistanceSlider.getValue());
+
         lightCanvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
         
         // Draw the explanation canvas
