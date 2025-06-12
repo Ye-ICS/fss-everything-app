@@ -20,6 +20,7 @@ public class TimeslotsController {
     private static List<Date> dates = new ArrayList<>();
     private List<Timeslot> times = new ArrayList<>();
     
+    
 
     static void timeslotController(List<Date> date) {
         dates = date;
