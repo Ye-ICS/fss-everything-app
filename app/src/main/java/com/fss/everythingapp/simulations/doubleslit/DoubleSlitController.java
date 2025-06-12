@@ -4,6 +4,7 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
@@ -20,6 +21,9 @@ public class DoubleSlitController{
     @FXML private Label separationLabel;
     @FXML private Label widthLabel;
     @FXML private Label screenDistanceLabel;
+    
+    @FXML private Button backButton;
+    @FXML private Button resetButton;
     
     private DoubleSlit doubleSlitSimulation;
     private LightCanvas lightCanvasDisplay;
@@ -62,6 +66,23 @@ public class DoubleSlitController{
         widthSlider.setValue(0);
         screenDistanceSlider.setValue(0);
         updateSimulation();
+    }
+
+    /**
+     * Handles the back button action to return to the simulations menu.
+     * This method attempts to load the SimulationsMenu.fxml file and set it as the new root
+     * of the current scene. (Credit to Maxim)
+     */
+    @FXML
+    private void back() {
+        try {
+            javafx.scene.Scene scene = backButton.getScene();
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml")
+            );
+            javafx.scene.Parent menuRoot = loader.load();
+            scene.setRoot(menuRoot);
+        } catch (Exception ex) {}
     }
     
     private void setupSliders() {
@@ -121,11 +142,7 @@ public class DoubleSlitController{
      */
     private void updateSimulation() {
         // Get the interference pattern and draw it
-        List<Double> pattern = doubleSlitSimulation.calculateInterferencePattern(
-        separationSlider.getValue(),
-        widthSlider.getValue(),
-        wavelengthSlider.getValue(),
-        screenDistanceSlider.getValue());
+        List<Double> pattern = doubleSlitSimulation.calculateInterferencePattern(separationSlider.getValue(), widthSlider.getValue(), wavelengthSlider.getValue(), screenDistanceSlider.getValue());
 
         lightCanvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
         
