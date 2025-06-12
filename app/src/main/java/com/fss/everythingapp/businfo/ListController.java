@@ -37,7 +37,7 @@ public class ListController {
 
     private ArrayList<String> routeIds;
 
-    private OdkInfoUtils busInfo;
+    private GtfsStaticReader busInfo;
 
     @FXML
     private void quit(ActionEvent actionEvent) {
@@ -96,7 +96,7 @@ public class ListController {
         Thread initThread = new Thread(() -> {
             try {
                 if (routeIds == null) {
-                    busInfo = new OdkInfoUtils();
+                    busInfo = new GtfsStaticReader();
                     routeIds = busInfo.getRouteIds();
                     buttons = new ArrayList<>();
                     for (String routeId : routeIds) {

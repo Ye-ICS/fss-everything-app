@@ -9,15 +9,15 @@ import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 import com.google.transit.realtime.GtfsRealtime.TripUpdate;
 
 
-public class GtfsReaderExampleMain {
+public class GtfsRealtimeReader {
   private int first;
   private int tracker;
-  public ArrayList<RealStop> getUpdate(String id) throws Exception {
+  public ArrayList<RealtimeStop> getUpdate(String id) throws Exception {
     first = 0;
     tracker = 0;
     int innerTracker = 0;
     
-    ArrayList<RealStop> stops = new ArrayList<RealStop>();
+    ArrayList<RealtimeStop> stops = new ArrayList<RealtimeStop>();
   
     
     
@@ -49,10 +49,10 @@ public class GtfsReaderExampleMain {
             delay = stopTimeUpdate.getDeparture().getDelay();
           }
           if(tracker == 1){
-            stops.add(innerTracker, new RealStop(stopNum, stopId, arrivalTime, delay));
+            stops.add(innerTracker, new RealtimeStop(stopNum, stopId, arrivalTime, delay));
             innerTracker++;
           }
-          stops.add(new RealStop(stopNum, stopId, arrivalTime, delay));
+          stops.add(new RealtimeStop(stopNum, stopId, arrivalTime, delay));
 
         }
         tracker++;

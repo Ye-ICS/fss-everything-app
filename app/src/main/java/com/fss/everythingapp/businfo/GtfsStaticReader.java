@@ -11,15 +11,15 @@ import org.onebusaway.gtfs.model.Stop;
 import org.onebusaway.gtfs.model.StopTime;
 import org.onebusaway.gtfs.serialization.GtfsReader;
 
-public class OdkInfoUtils {
+public class GtfsStaticReader {
 
     private GtfsReader reader;
     private GtfsDaoImpl store;
 
-    public OdkInfoUtils() {
+    public GtfsStaticReader() {
         try {
             reader = new GtfsReader();
-            reader.setInputLocation(new File(OdkInfoUtils.class.getResource("gtfs.zip").toURI()));
+            reader.setInputLocation(new File(GtfsStaticReader.class.getResource("gtfs.zip").toURI()));
             store = new GtfsDaoImpl();
             reader.setEntityStore(store);
             reader.run();

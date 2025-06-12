@@ -37,11 +37,11 @@ public class InfoController {
 
     ArrayList<Button> buttons;
 
-    OdkInfoUtils busInfo;
+    GtfsStaticReader busInfo;
 
-    ArrayList<RealStop> stops;
+    ArrayList<RealtimeStop> stops;
 
-    GtfsReaderExampleMain reader;
+    GtfsRealtimeReader reader;
 
     Thread updateThread;
 
@@ -98,7 +98,7 @@ public class InfoController {
                 while (true) {
                     stops = reader.getUpdate(routeId);
                     buttons.clear();
-                    for (RealStop stop : stops) {
+                    for (RealtimeStop stop : stops) {
                         Button button = new Button();
                         String text = busInfo.getStopById(stop.id).getName() + " - Arrival: "
                                 + timeToString(busInfo.getStopTimeById(stop.id) + stop.delay);
@@ -127,7 +127,7 @@ public class InfoController {
 
         Thread initThread = new Thread(() -> {
             try {
-                reader = new GtfsReaderExampleMain();
+                reader = new GtfsRealtimeReader();
                 stops = reader.getUpdate(routeId);
                 buttons = new ArrayList<Button>();
                 startUpdates();
