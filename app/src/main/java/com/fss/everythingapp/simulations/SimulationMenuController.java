@@ -40,8 +40,8 @@ public class SimulationMenuController {
 
     @FXML
     private void openMomentum(ActionEvent actionEvent) throws IOException {
-        Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("../simulations/momentum.fxml"));
-        rootContainer.getScene().setRoot(simulationsLayout);
+        com.fss.everythingapp.simulations.momentum.MomentumRoot momentumRoot = new com.fss.everythingapp.simulations.momentum.MomentumRoot();
+        rootContainer.getScene().setRoot(momentumRoot.getRootNode());
     }
 
     @FXML

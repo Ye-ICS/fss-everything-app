@@ -1,6 +1,7 @@
 package com.fss.everythingapp.simulations.photoelectriceffect;
 
 import javafx.scene.Parent;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -12,7 +13,7 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 
-public class PhotoelectricRoot extends BorderPane {
+public class PhotoelectricRoot extends SplitPane {
     private PhotoelectricSimulation simulation;
     private Pane simPane;
     private Text instructionText;
