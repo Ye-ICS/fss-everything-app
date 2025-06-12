@@ -18,6 +18,7 @@ public class TimeslotsController {
     private static List<Date> dates = new ArrayList<>();
     private List<Timeslot> times = new ArrayList<>();
     
+    
 
     static void timeslotController(List<Date> date) {
         dates = date;
@@ -61,7 +62,7 @@ public class TimeslotsController {
 
     @FXML
     private void enterBtnPressed() {
-        //StudentServices.update(dates);
+        
         
 
         // send updated info to student services
