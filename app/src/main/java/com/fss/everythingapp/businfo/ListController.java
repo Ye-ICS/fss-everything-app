@@ -80,9 +80,9 @@ public class ListController {
     }
 
     @FXML
-    private void debug(ActionEvent actionEvent) {
+    private void debug(ActionEvent actionEvent){
 
-    }
+    } 
 
     public void launchInfo(String routeId) {
         try {
