@@ -23,7 +23,7 @@ public class MainMenuController {
     @FXML
     private void openBuses(ActionEvent actionEvent) throws IOException {
         try {
-            FXMLLoader mainListLoader = new FXMLLoader(getClass().getResource("../businfo/List.fxml"));
+            FXMLLoader mainListLoader = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/businfo/List.fxml"));
             ListController listController = new ListController();
             mainListLoader.setController(listController);
             Parent mainListLayout = mainListLoader.load();
