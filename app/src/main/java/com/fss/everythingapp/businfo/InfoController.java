@@ -1,5 +1,7 @@
 package com.fss.everythingapp.businfo;
 
+import java.util.ArrayList;
+
 import java.text.SimpleDateFormat;
 
 import javafx.event.ActionEvent;
@@ -9,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -25,17 +26,15 @@ public class InfoController {
     ListView<Button> listView;
 
     @FXML
-    ToolBar busInfo1;
-
-    @FXML
-    ToolBar busInfo2;
-
-    @FXML
     ProgressIndicator progressIndicator;
 
     ListController listController;
 
     String routeId;
+
+    ArrayList<Button> buttons;
+
+    OdkInfoUtils busInfo;
 
     @FXML
     private void quit(ActionEvent actionEvent) {
@@ -56,7 +55,15 @@ public class InfoController {
 
         Thread initThread = new Thread(() -> {
             try {
-
+                GtfsReaderExampleMain reader = new GtfsReaderExampleMain();
+                ArrayList<RealStop> stops = reader.getUpdate(routeId);
+                buttons = new ArrayList<Button>();
+                for(RealStop stop : stops){
+                    Button button = new Button(busInfo.getStopById(stop.id).getName());
+                    buttons.add(button);
+                    listView.getItems().add(button);
+                }
+                progressIndicator.setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
