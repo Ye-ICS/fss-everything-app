@@ -1,7 +1,6 @@
 package com.fss.everythingapp.businfo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -97,24 +96,20 @@ public class InfoController {
         updateThread = new Thread(() -> {
             try {
                 while (true) {
-                    ArrayList<RealStop> newList = reader.getUpdate(routeId);
-                    if (newList != stops) {
-                        Collections.copy(stops, newList);
-                        newList.clear();
-                        buttons.clear();
-                        for (RealStop stop : stops) {
-                            Button button = new Button();
-                            String text = busInfo.getStopById(stop.id).getName() + " - Arrival: "
-                                    + timeToString(busInfo.getStopTimeById(stop.id) + stop.delay);
-                            if (stop.delay != 0) {
-                                button.setText("! " + text);
-                            } else {
-                                button.setText(text);
-                            }
-                            buttons.add(button);
+                    stops = reader.getUpdate(routeId);
+                    buttons.clear();
+                    for (RealStop stop : stops) {
+                        Button button = new Button();
+                        String text = busInfo.getStopById(stop.id).getName() + " - Arrival: "
+                                + timeToString(busInfo.getStopTimeById(stop.id) + stop.delay);
+                        if (stop.delay != 0) {
+                            button.setText("! " + text);
+                        } else {
+                            button.setText(text);
                         }
-                        updateSearchBackground();
+                        buttons.add(button);
                     }
+                    updateSearchBackground();
                     Thread.sleep(60000);
                 }
 
