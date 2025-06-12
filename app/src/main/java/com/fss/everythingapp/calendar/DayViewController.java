@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class MonthViewController {
+public class DayViewController {
 
     @FXML
     private Button exitButton;
@@ -36,10 +36,10 @@ public class MonthViewController {
     }
 
     @FXML
-    void setDayView(ActionEvent event) throws IOException {
-        Parent dayView = (Parent) FXMLLoader
-                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/DayView.fxml"));
-        rootContainer.getScene().setRoot(dayView);
+    void setMonthView(ActionEvent event) throws IOException {
+        Parent monthView = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
+        rootContainer.getScene().setRoot(monthView);
     }
 
     @FXML
