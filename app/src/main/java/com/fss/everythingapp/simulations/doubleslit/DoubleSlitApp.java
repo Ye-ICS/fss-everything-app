@@ -10,7 +10,6 @@ public class DoubleSlitApp extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DoubleSlitSimulation.fxml"));
         Parent root = loader.load();
         
