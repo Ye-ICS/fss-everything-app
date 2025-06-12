@@ -49,9 +49,19 @@ public class ListController {
     }
 
     @FXML
-    private void debug(ActionEvent actionEvent) {
+    private void debug(ActionEvent actionEvent){
+         try{
+            GtfsReaderExampleMain reader = new GtfsReaderExampleMain();
+            ArrayList<RealStop> stops = reader.getUpdate("15");
+            for(int i = 0; i < stops.size(); i++){
+                System.out.println(stops.get(i).num);
+            }
 
-    }
+        }
+        catch(Exception e){
+
+        }
+    } 
 
     public void init() {
         System.out.println("ListController initializing...");
