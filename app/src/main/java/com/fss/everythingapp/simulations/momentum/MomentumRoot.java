@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.ScrollPane;
+import javafx.beans.InvalidationListener;
 
 public class MomentumRoot extends SplitPane {
     public MomentumRoot() {
@@ -31,6 +32,18 @@ public class MomentumRoot extends SplitPane {
         simulation.setControlPanel(controls);
         simulation.setupPuckDrag(p1, p1);
         simulation.setupPuckDrag(p2, p2);
+
+        // --- Add resize listeners to update simulation bounds dynamically ---
+        InvalidationListener resizeListener = observable -> {
+            double newWidth = simPane.getWidth();
+            double newHeight = simPane.getHeight();
+            if (newWidth > 0 && newHeight > 0) {
+                simulation.setWidth(newWidth);
+                simulation.setHeight(newHeight);
+            }
+        };
+        simPane.widthProperty().addListener(resizeListener);
+        simPane.heightProperty().addListener(resizeListener);
 
         // Set up split pane
         this.getItems().addAll(simPane, scrollPane);
