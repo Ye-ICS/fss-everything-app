@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.nio.file.Files;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -14,13 +15,7 @@ public class GeneralInfo {
 
 
     public static void main () throws IOException{
-        String filePath = "UserInfo.txt";
-
-    File file = new File("UserInfo.txt");
-
-                 List<String> lines = Files.readAllLines(Paths.get(filePath));
-        
-
+            FileWriter writer = new FileWriter("UserInfo.txt");
     }
 
     static public String name;
@@ -36,6 +31,7 @@ public class GeneralInfo {
     static private boolean obesityFat;
     public static int bodyFat;
     public static boolean isPhysicallyActive = false; //true means person is active, false is opposite
+    public static Object writer;
 
 
 
