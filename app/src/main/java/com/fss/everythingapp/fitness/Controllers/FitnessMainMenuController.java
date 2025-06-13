@@ -2,6 +2,7 @@ package com.fss.everythingapp.fitness.Controllers;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.app.App;
 import com.fss.everythingapp.fitness.GeneralInfo;
 import com.fss.everythingapp.fitness.Workout;
 
@@ -19,7 +20,11 @@ public class FitnessMainMenuController {
 
     @FXML
     void exitFitnessApp(ActionEvent event) {
-        App.backToMainMenu;
+        App.backToMainMenu();
+    }
+    
+    void saveInfo (ActionEvent event) throws IOException {
+        GeneralInfo.writeToFile();
     }
 
     @FXML
