@@ -22,19 +22,16 @@ public class LightCanvas {
     
     /**
      * Draws an interference pattern on the canvas based on the given parameters.
-     * The pattern is represented as a series of horizontal bars, where each bar's color
-     * and intensity correspond to the calculated interference pattern.
+     * The pattern is represented as a series of horizontal bars, where each bar's color and intensity correspond to the calculated interference pattern.
      *
      * @param pattern A list of intensity values representing the interference pattern.
      *                Each value corresponds to a point in the pattern.
      * @param wavelength The wavelength of the light used to generate the interference pattern.
      *                   This value determines the color of the pattern.
      * @param screenDistance The distance between the screen and the slits. Must be greater than 0.
-     *                        If the value is less than or equal to 0, a message will be displayed
-     *                        instead of the pattern.
+     *                        If the value is less than or equal to 0, a message will be displayed instead of the pattern.
      * @param slitWidth The width of the slits used to generate the interference pattern.
-     *                  Must be greater than 0. If the value is less than or equal to 0, a message
-     *                  will be displayed instead of the pattern.
+     *                  Must be greater than 0. If the value is less than or equal to 0, a message will be displayed instead of the pattern.
      */
     void drawInterferencePattern(List<Double> pattern, double wavelength, double screenDistance, double slitWidth) {
         double canvasWidth = canvas.getWidth();

@@ -30,8 +30,7 @@ public class DoubleSlitController{
     private ExplanationCanvas explanationCanvasDisplay;
     
     /**
-     * Initializes the DoubleSlitController by setting up the simulation components,
-     * configuring the sliders, and updating the simulation display.
+     * Initializes the DoubleSlitController by setting up the simulation components, configuring the sliders, and updating the simulation display.
      * This method is automatically called after the FXML file has been loaded.
      * It performs the following tasks:
      * - Initializes the DoubleSlit simulation object.
@@ -70,8 +69,7 @@ public class DoubleSlitController{
 
     /**
      * Handles the back button action to return to the simulations menu.
-     * This method attempts to load the SimulationsMenu.fxml file and set it as the new root
-     * of the current scene. (Credit to Maxim)
+     * This method attempts to load the SimulationsMenu.fxml file and set it as the new root of the current scene. (Credit to Maxim)
      */
     @FXML
     private void back() {
@@ -133,10 +131,10 @@ public class DoubleSlitController{
      * 
      * The method performs the following steps:
      * 1. Calculates the interference pattern using the double slit simulation parameters:
-     *    - Separation between the slits (converted from μm to meters).
-     *    - Width of the slits (converted from μm to meters).
-     *    - Wavelength of the light (converted from nm to meters).
-     *    - Distance to the screen.
+     *    - Separation between the slits (μm).
+     *    - Width of the slits (μm).
+     *    - Wavelength of the light (nm).
+     *    - Distance to the screen (m).
      * 2. Draws the calculated interference pattern on the light canvas display.
      * 3. Updates the explanation canvas with relevant details based on the current slider values.
      */
@@ -144,6 +142,7 @@ public class DoubleSlitController{
         // Get the interference pattern and draw it
         List<Double> pattern = doubleSlitSimulation.calculateInterferencePattern(separationSlider.getValue(), widthSlider.getValue(), wavelengthSlider.getValue(), screenDistanceSlider.getValue());
 
+        // Draw the lightCanvasDisplay canvas
         lightCanvasDisplay.drawInterferencePattern(pattern, wavelengthSlider.getValue(), screenDistanceSlider.getValue(), widthSlider.getValue());
         
         // Draw the explanation canvas

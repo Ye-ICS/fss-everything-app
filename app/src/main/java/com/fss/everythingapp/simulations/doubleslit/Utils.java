@@ -1,7 +1,6 @@
 package com.fss.everythingapp.simulations.doubleslit;
 
 import java.util.List;
-
 import javafx.scene.paint.Color;
 
 public class Utils {

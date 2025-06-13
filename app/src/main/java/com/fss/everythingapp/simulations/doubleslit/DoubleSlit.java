@@ -25,7 +25,7 @@ public class DoubleSlit {
      * - The interference pattern is calculated for 500 evenly spaced points across the screen.
      * - The intensity at each point is determined using the `calculateIntensity` method.
      *
-     * - Ensure the `calculateIntensity` method is implemented to compute the intensity at a given position.
+     * - Ensures the `calculateIntensity` method is implemented to compute the intensity at a given position.
      * - The method clears any existing interference pattern before calculating a new one.
      */
     List<Double> calculateInterferencePattern(double separation, double width, double wavelength, double distance) {
@@ -55,7 +55,7 @@ public class DoubleSlit {
      * Calculates the intensity of the double slit interference pattern at a given point y on the screen.
      * This method combines single slit diffraction and double slit interference effects.
      * wavelength is getting converted in nanometers, slit width and separation are in micrometers.
-     * @param y position on the screen 
+     * @param currentPosition position on the screen 
      * @return intensity at the given position
      */
     private double calculateIntensity(double currentPosition) {
