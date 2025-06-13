@@ -91,7 +91,7 @@ public class SigninginController {
         GeneralInfo.isFemale = femaleRadio.isSelected();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenuFitness.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/Fitness/fxml/MainMenuFitness.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -104,11 +104,14 @@ public class SigninginController {
 
     private boolean isInputValid() {
     try {
+        String name = nameField.getText();
         int age = Integer.parseInt(ageField.getText());
         int height = Integer.parseInt(heightField.getText());
         int weight = Integer.parseInt(weightField.getText());
         double bodyFat = Double.parseDouble(bodyFatField.getText());
 
+
+        if (name.isEmpty()) return false;
         if (genderToggle.getSelectedToggle() == null) return false;
         if (age < 1 || age > 119) return false;
         if (height < 50 || height > 300) return false;      // Height in cm
