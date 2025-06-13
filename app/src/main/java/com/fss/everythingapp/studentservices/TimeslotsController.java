@@ -13,7 +13,9 @@ import javafx.scene.control.ChoiceBox;
 public class TimeslotsController {
     private static int date;
     private static String timeslot;
+    @FXML
     private static ChoiceBox<Integer> dateBox = new ChoiceBox<>();
+    @FXML
     private static ChoiceBox<String> timeBox = new ChoiceBox<>();
     private static List<Date> dates = new ArrayList<>();
     private List<Timeslot> times = new ArrayList<>();
@@ -22,7 +24,6 @@ public class TimeslotsController {
         dates = date;
     }
 
-    @FXML
     void initialize() {
         dateBox.setItems(dateNums());
     }
