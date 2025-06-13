@@ -54,7 +54,7 @@ public class WorkoutMenuController {
     @FXML
     void backToMM(ActionEvent event) {
                 try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/app/fxml/MainMenuFitness.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/Fitness/fxml/MainMenuFitness.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
