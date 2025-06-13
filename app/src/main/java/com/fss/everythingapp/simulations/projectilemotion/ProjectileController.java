@@ -116,7 +116,7 @@ public class ProjectileController {
             ballSize = ballSlider.getValue();
             height = (9 * heightSlider.getValue()) + ballSize;
             drawProjectile(XOffset, YOffset - height);
-    });
+        });
 
         velocityVectors.setOnAction(e -> {
             drawProjectile(XOffset, YOffset-height);
