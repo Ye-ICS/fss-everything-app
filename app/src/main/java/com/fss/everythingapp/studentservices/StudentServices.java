@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 class StudentServices {
-    ArrayList<Counsellor> counsellors = new ArrayList<>(4);
+    ArrayList<Counsellor> counsellors = new ArrayList<>();
     SSCalendar calendar;
     int id;
 
     private ArrayList<Counsellor> fillCounsellors() {
-        for (int i = 0; i < counsellors.size(); i++) {
+        for (int i = 0; i < 4; i++) {
             Counsellor counsellor = new Counsellor(i);
             counsellors.add(counsellor);
         }
