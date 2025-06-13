@@ -16,16 +16,11 @@ class StudentServices {
         return counsellors;
     }
 
-    // placeholder method for data being used by the app
-
     public void programRunner() {
         counsellors = fillCounsellors();
         id = AppointmentController.grade - 9;
         calendar = counsellors.get(id).getCalendar();
         TimeslotsController.timeslotController(calendar.getAvailableDates());
-        
-        // happens later in the program
-
     }
 
     void update(List<Date> dates) {

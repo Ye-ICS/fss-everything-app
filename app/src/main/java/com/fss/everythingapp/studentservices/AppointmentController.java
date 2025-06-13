@@ -61,7 +61,7 @@ public class AppointmentController {
     }
 
     @FXML
-    private void onExitBtnPressed(){
+    private void onExitBtnPressed() {
         App.backToMainMenu();
     }
 }

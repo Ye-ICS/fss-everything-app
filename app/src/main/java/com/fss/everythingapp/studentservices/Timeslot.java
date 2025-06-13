@@ -1,17 +1,16 @@
 package com.fss.everythingapp.studentservices;
 
 public class Timeslot {
-    boolean available = true;
-    double startTime;
-    double endTime;
+    private boolean available = true;
 
-    Timeslot(Double startTime, Double endTime) {
-        this.startTime = startTime;
-        this.endTime = endTime;
+    Timeslot(boolean available) {
+        this.available = available;
     }
 
     boolean setAvailable() {
         available = false;
         return available;
     }
+
+    boolean getAvailable() {return this.available;}
 }
