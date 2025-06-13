@@ -1,7 +1,8 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
@@ -43,16 +44,16 @@ public class CreateEventController {
     private TextField startMinField;
 
     @FXML
-    void createEvent(ActionEvent event) throws IOException {
+    void createEvent(ActionEvent event) throws IOException, ParseException {
         String eventName = eventNameField.getText();
 
-        LocalDate localStartDate = startDatePicker.getValue();
-        String startDate = localStartDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        startDate = startDate.concat("/" + startHourField.getText() + ":" + startMinField.getText());
+        String startDateString = startDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        startDateString = startDateString.concat("T" + startHourField.getText() + ":" + startMinField.getText());
+        LocalDateTime startDate = LocalDateTime.parse(startDateString);
 
-        LocalDate localEndDate = startDatePicker.getValue();
-        String endDate = localEndDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        endDate = endDate.concat("/" + endHourField.getText() + ":" + endMinField.getText());
+        String endDateString = endDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        endDateString = endDateString.concat("T" + endHourField.getText() + ":" + endMinField.getText());
+        LocalDateTime endDate = LocalDateTime.parse(endDateString);
 
         EventManager eventMan = new EventManager(eventName, startDate, endDate);
 

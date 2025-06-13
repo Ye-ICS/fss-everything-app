@@ -60,6 +60,11 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#createDate" text="Create">
                <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#loadDates" text="Load">
+               <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Button>
