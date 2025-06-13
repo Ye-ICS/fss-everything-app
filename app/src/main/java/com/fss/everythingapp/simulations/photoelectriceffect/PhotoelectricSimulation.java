@@ -118,19 +118,20 @@ public class PhotoelectricSimulation {
         }
     }
     
+    /**
+     * Start the simulation timer, dt is the time delta in seconds per frame.
+     */
     public void start() {
         if (isRunning) return;
         
         timer = new AnimationTimer() {
             private long lastUpdate = -1;
             private long lastPhotonEmission = 0;
-            
             @Override
             public void handle(long now) {
                 if (lastUpdate > 0) {
                     double dt = (now - lastUpdate) / 1e9;
-                    update(dt);
-                    
+                    update(dt);                    
                     // Emit photons based on intensity
                     if (shouldEmitPhoton(now, lastPhotonEmission)) {
                         emitPhoton();
@@ -146,6 +147,9 @@ public class PhotoelectricSimulation {
         System.out.println("Photoelectric simulation started");
     }
     
+    /**
+     * Stop the simulation timer and reset state.
+     */
     public void stop() {
         if (timer != null) {
             timer.stop();
@@ -154,6 +158,10 @@ public class PhotoelectricSimulation {
         System.out.println("Photoelectric simulation stopped");
     }
     
+    /**
+     * Reset the simulation state, clearing photons and electrons.
+     * Stops the timer if running.
+     */
     public void reset() {
         stop();
         photons.clear();
@@ -182,6 +190,13 @@ public class PhotoelectricSimulation {
         totalPhotonsEmitted++;
     }
     
+    /**
+     * Update the simulation state for a given time step.
+     * This updates photon positions, checks for collisions with electrons,
+     * and handles electron ejection.
+     * 
+     * @param dt Time delta in seconds
+     */
     public void update(double dt) {
         dt *= animationSpeed; // Scale time step by animation speed
         // Update photon positions
@@ -250,6 +265,7 @@ public class PhotoelectricSimulation {
     
     /**
      * Check for collisions between photons and electrons
+     * @param photon The photon to check for collisions with electrons
      */
     private void checkPhotonElectronCollisions(Photon photon) {
         for (Electron electron : electrons) {
@@ -310,67 +326,131 @@ public class PhotoelectricSimulation {
     }
     
     // Getters and setters
+
+    /**
+     * Getter for work function (in eV).
+     */
     public double getWorkFunction() {
         return workFunction;
     }
     
+    /**
+     * Setter for work function (in eV).
+     * @param workFunction The new work function value
+     */
     public void setWorkFunction(double workFunction) {
         this.workFunction = workFunction;
     }
     
+    /**
+     * Getter for photon energy (in eV).
+     */
     public double getPhotonEnergy() {
         return photonEnergy;
     }
     
+    /**
+     * Setter for photon energy (in eV).
+     * @param photonEnergy The new photon energy value
+     */
     public void setPhotonEnergy(double photonEnergy) {
         this.photonEnergy = photonEnergy;
     }
     
+    /**
+     * Getter for light intensity (photons per second).
+     */
     public double getIntensity() {
         return intensity;
     }
     
+    /**
+     * Setter for light intensity (photons per second).
+     * @param intensity The new intensity value
+     */
     public void setIntensity(double intensity) {
         this.intensity = intensity;
     }
     
+    /**
+     * Returns the list of photons currently in the simulation.
+     * @return List of Photon objects
+     */
     public List<Photon> getPhotons() {
         return photons;
     }
     
+    /**
+     * Returns the list of electrons currently in the simulation.
+     * @return List of Electron objects
+     */
     public List<Electron> getElectrons() {
         return electrons;
     }
     
+    /**
+     * Returns the metal surface rectangle.
+     * @return Rectangle representing the metal surface
+     */
     public Rectangle getMetalSurface() {
         return metalSurface;
     }
     
+    /**
+     * Returns total photons emitted during the simulation.
+     * @return Total number of photons emitted
+     */
     public int getTotalPhotonsEmitted() {
         return totalPhotonsEmitted;
     }
     
+    /**
+     * Returns total electrons ejected during the simulation.
+     * @return Total number of electrons ejected
+     */
     public int getTotalElectronsEjected() {
         return totalElectronsEjected;
     }
     
+    /**
+     * Returns the quantum efficiency of the simulation.
+     * Quantum efficiency = (Total Electrons Ejected) / (Total Photons Emitted)
+     * @return Quantum efficiency as a double
+     */
     public double getQuantumEfficiency() {
         if (totalPhotonsEmitted == 0) return 0;
         return (double) totalElectronsEjected / totalPhotonsEmitted;
     }
     
+    /**
+     * Returns the width of the simulation area.
+     * @return Width in pixels
+     */
     public double getWidth() {
         return width;
     }
     
+    /**
+     * Returns the height of the simulation area.
+     * @return Height in pixels
+     */
     public double getHeight() {
         return height;
     }
     
+    /**
+     * Returns the current animation speed multiplier.
+     * @return Animation speed as a double
+     */
     public double getAnimationSpeed() {
         return animationSpeed;
     }
 
+    /**
+     * Sets the animation speed multiplier.
+     * This affects how fast the simulation updates.
+     * @param animationSpeed The new animation speed multiplier
+     */
     public void setAnimationSpeed(double animationSpeed) {
         this.animationSpeed = animationSpeed;
     }

@@ -16,8 +16,11 @@ import javafx.scene.Parent;
  * Sets up the UI layout with simulation pane on the left and controls on the right.
  */
 public class PhotoelectricMainApp extends Application {
-    
-    // New static method to get the simulation UI as a Parent
+
+    /**
+     * Returns the simulation UI as a Parent node for embedding.
+     * @return Parent node containing the simulation UI.
+     */
     public static Parent getSimulationRoot() {
         BorderPane root = new BorderPane();
 
@@ -48,6 +51,10 @@ public class PhotoelectricMainApp extends Application {
         return root;
     }
 
+    /**
+     * JavaFX entry point. Sets up and shows the main simulation window.
+     * @param primaryStage The primary stage for this application.
+     */
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(getSimulationRoot(), 900, 600);
@@ -56,7 +63,11 @@ public class PhotoelectricMainApp extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
     }
-    
+
+    /**
+     * Main method to launch the JavaFX application.
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         launch(args);
     }
