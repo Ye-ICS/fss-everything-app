@@ -15,8 +15,11 @@ import javafx.scene.control.ChoiceBox;
 public class TimeslotsController {
     private static int date;
     private static String timeslot;
+    @FXML
     private static ChoiceBox<Integer> dateBox = new ChoiceBox<>();
+    @FXML
     private static ChoiceBox<String> timeBox = new ChoiceBox<>();
+    
     private static List<Date> dates = new ArrayList<>();
     private List<Timeslot> times = new ArrayList<>();
 
@@ -63,7 +66,13 @@ public class TimeslotsController {
         timeslot = timeBox.getValue();
         String selection = timeslot.substring(0, 1);
         int choice = Integer.parseInt(selection);
-        times.get(choice).setAvailable();
+
+        if (times.get(choice).getAvailable() == false) {
+            //say something like time unavailable
+        } else {
+            times.get(choice).setAvailable();
+        }
+
         dates.get(date).updateTimes(times);
     }
 
