@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21.0.7" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
             <Label text="Choose a Date" />
             <ChoiceBox fx:id="dateBox" />
-            <Button mnemonicParsing="false" onAction="#onEnterBtnPressed1" text="Enter Date" />
+            <Button mnemonicParsing="false" onAction="#enterBtnPressed1" text="Enter Date" />
             <Separator />
             <Label text="Choose a Timeslot" />
             <ChoiceBox fx:id="timeBox" />

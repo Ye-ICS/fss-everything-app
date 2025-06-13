@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.fss.everythingapp.app.App;
 
-import com.fss.everythingapp.app.App;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,9 +14,11 @@ public class TimeslotsController {
     private static int date;
     private static String timeslot;
     @FXML
-    private static ChoiceBox<Integer> dateBox = new ChoiceBox<>();
+    private ChoiceBox<Integer> dateBox = new ChoiceBox<>();
     @FXML
-    private static ChoiceBox<String> timeBox = new ChoiceBox<>();
+    private ChoiceBox<String> timeBox = new ChoiceBox<>();
+
+    ObservableList<Integer> dateNums = FXCollections.observableArrayList();
     
     private static List<Date> dates = new ArrayList<>();
     private List<Timeslot> times = new ArrayList<>();
@@ -27,16 +27,15 @@ public class TimeslotsController {
         dates = date;
     }
 
-    void initialize() {
-        dateBox.setItems(dateNums());
+     public void initialize() {
+        dateNums();
+        dateBox.setItems(dateNums);
     }
 
-    private ObservableList<Integer> dateNums() {
-        ObservableList<Integer> dateNums = FXCollections.observableArrayList();
+    private void dateNums() {
         for (int i = 0; i < 30; i++) {
             dateNums.add(i + 1);
         }
-        return dateNums;
     }
 
     private ObservableList<String> timeFiller() {
@@ -73,6 +72,8 @@ public class TimeslotsController {
         }
 
         dates.get(date).updateTimes(times);
+
+        System.out.println("It Works!!!");
     }
 
     @FXML
