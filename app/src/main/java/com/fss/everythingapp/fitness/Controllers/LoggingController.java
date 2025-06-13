@@ -29,6 +29,12 @@ public class LoggingController {
     private TextField coloriesBurnt;
 
     @FXML
+    private TextField fullBodyExTxt;
+
+    @FXML
+    private TextField compExTxt;
+
+    @FXML
     private TextField fatsEaten;
 
     @FXML
