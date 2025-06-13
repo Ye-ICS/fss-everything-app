@@ -1,7 +1,6 @@
 package com.fss.everythingapp.studentservices;
 
 import java.io.IOException;
-import java.util.Observable;
 
 import com.fss.everythingapp.app.App;
 
@@ -65,7 +64,4 @@ public class AppointmentController {
     private void onExitBtnPressed(){
         App.backToMainMenu();
     }
-
-    
-
 }
