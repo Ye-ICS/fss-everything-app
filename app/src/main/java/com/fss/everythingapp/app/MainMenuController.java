@@ -2,7 +2,7 @@ package com.fss.everythingapp.app;
 
 import java.io.IOException;
 
-import com.fss.everythingapp.studentservices.AppointmentController;
+import com.fss.everythingapp.studentServices.AppointmentController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +37,13 @@ public class MainMenuController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void openSimulations(ActionEvent actionEvent) throws IOException {
+            Parent simulationsLayout = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/simulations/SimulationsMenu.fxml"));
+            rootContainer.getScene().setRoot(simulationsLayout);
+
     }
 
     @FXML
