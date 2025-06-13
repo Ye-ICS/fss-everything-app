@@ -1,34 +1,35 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class TaskManager extends DateManager {
-    String taskName;
-    String dueDate;
+    private String taskName;
+    private LocalDateTime dueDate;
 
-    // For some reason task isnt recognized
-    // ArrayList<Task> taskList = new ArrayList();
-    TaskManager(String taskName, String dueDate) throws FileNotFoundException {
+    TaskManager() {
+    }
+
+    TaskManager(String taskName, LocalDateTime dueDate) {
         this.taskName = taskName;
         this.dueDate = dueDate;
 
         saveTask(taskName, dueDate);
     }
 
-    TaskManager() { // Blank constructor
+    TaskManager(ArrayList<TaskManager> taskList) { // Blank constructor
     }
 
     @Override
     protected ArrayList loadDates() { // Loads all tasks
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<TaskManager> taskList = new ArrayList<TaskManager>();
         Scanner scanner;
 
         try {
@@ -41,32 +42,23 @@ public class TaskManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            Task loadedTask;
+            TaskManager loadedTask = new TaskManager(taskList);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            taskName = parts[1];
+            loadedTask.taskName = parts[1];
 
-            if (parts[0].charAt(0) == 'T') { // If the current event is a task
-                String dueDate = parts[2];
-
-                String[] dueDateParts = dueDate.split("/");
-                dueYear = Integer.parseInt(dueDateParts[0]);
-                dueMonth = Integer.parseInt(dueDateParts[1]);
-                dueDay = Integer.parseInt(dueDateParts[2]);
-                String[] dueTimeParts = (dueDateParts[3]).split(":");
-                dueHour = Integer.parseInt(dueTimeParts[0]);
-                dueMins = Integer.parseInt(dueTimeParts[1]);
-
+            if (parts[0].charAt(0) == 'T') {
+                loadedTask.dueDate = LocalDateTime.parse(parts[2]);
             }
 
-            // taskList.add(loadedTask);
+            taskList.add(loadedTask);
         }
         scanner.close();
         return taskList;
     }
 
-    void saveTask(String taskName, String dueDate) {
+    void saveTask(String taskName, LocalDateTime dueDate) {
         PrintWriter writer;
         try {
             writer = new PrintWriter(new FileWriter(
@@ -77,16 +69,11 @@ public class TaskManager extends DateManager {
             e.printStackTrace();
             return;
         }
-        writer.println();
         writer.print("T," + taskName + "," + dueDate);
         writer.close();
     }
 
     static void selectEvent() { // Displays event information
     }
-
-    // private static ArrayList<Task> loadTasks() {
-    // // load tasks from DateList using fileReader
-    // }
 
 }

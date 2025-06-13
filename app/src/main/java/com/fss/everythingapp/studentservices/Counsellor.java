@@ -1,28 +1,19 @@
 package com.fss.everythingapp.studentservices;
 
-import java.util.ArrayList;
 
 class Counsellor {
-    private String name;
-    private String email;
-    private String calendar; //replace with proper variable when time comes
-    ArrayList<Date> dates = new ArrayList(30);
+    private int id;
 
-    Counsellor(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    
-    
-    
-
-    String getName() {
-        return this.name;
-    }
-    String getCalendar() {
-        return this.calendar;
+    Counsellor(int id) {
+        this.id = id;
     }
     
+    private SSCalendar calendar = CalendarAPI.getCounsellorCalendar(id);
 
+    SSCalendar getCalendar() {return this.calendar;}
+
+    void updateCalendar(SSCalendar calendar) {
+        this.calendar = calendar;
+    }
+    
 }
