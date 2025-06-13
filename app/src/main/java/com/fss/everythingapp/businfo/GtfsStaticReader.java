@@ -28,10 +28,6 @@ public class GtfsStaticReader {
         }
     }
 
-    public String getColour(String routeId){
-        return getRouteById(routeId).getColor();
-    }
-
     public Route getRouteById(String routeId) {
         for (Route route : store.getAllRoutes()) {
             if (route.getId().getId().equals(routeId)) {
@@ -56,7 +52,7 @@ public class GtfsStaticReader {
                 return stopTime.getArrivalTime();
             }
         }
-        return -1; // Return -1 if no StopTime found for the given stopId
+        return -1;
     }
 
     public ArrayList<String> getRouteNames() {

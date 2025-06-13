@@ -41,8 +41,6 @@ public class InfoController {
 
     ArrayList<RealtimeStop> stops;
 
-    GtfsRealtimeReader reader;
-
     Thread updateThread;
 
     @FXML
@@ -96,7 +94,11 @@ public class InfoController {
         updateThread = new Thread(() -> {
             try {
                 while (true) {
-                    stops = reader.getUpdate(routeId);
+                    stops = GtfsRealtimeReader.getUpdate(routeId);
+                    if (stops == null) {
+                        Thread.sleep(60000);
+                        continue;
+                    }
                     buttons.clear();
                     for (RealtimeStop stop : stops) {
                         Button button = new Button();
@@ -113,11 +115,14 @@ public class InfoController {
                     Thread.sleep(60000);
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (InterruptedException e) {
+                return;
             }
         });
         updateThread.start();
+        rootContainer.getScene().getWindow().setOnCloseRequest(event -> {
+            updateThread.interrupt();
+        });
     }
 
     public void init() {
@@ -127,8 +132,7 @@ public class InfoController {
 
         Thread initThread = new Thread(() -> {
             try {
-                reader = new GtfsRealtimeReader();
-                stops = reader.getUpdate(routeId);
+                stops = GtfsRealtimeReader.getUpdate(routeId);
                 buttons = new ArrayList<Button>();
                 startUpdates();
             } catch (Exception e) {
@@ -145,5 +149,4 @@ public class InfoController {
         int minutes = (time % 3600) / 60;
         return String.format("%02d:%02d", hours, minutes);
     }
-
 }
