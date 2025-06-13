@@ -65,46 +65,47 @@ public class Simulation {
         return null;
     }
 
-/**
- * Starts the simulation by initializing and running an AnimationTimer.
- * This timer continuously calls the update method with the time delta (dt)
- * between frames, allowing for smooth, frame-rate-independent animation.
- */
-public void start() {
-    // If the simulation is already running, do nothing
-    if (isRunning)
-        return;
+    /**
+     * Starts the simulation by creating an animation timer that runs continuously.
+     * This approach maintains frame-rate independence while being easier to
+     * understand
+     * than the original implementation.
+     */
+    public void start() {
+        // Don't start if already running
+        if (isRunning)
+            return;
+        timer = new AnimationTimer() {
+            // Stores the timestamp from the previous frame (in nanoseconds)
+            private long previousFrameTime = 0;
 
-    // Create a new AnimationTimer instance
-    timer = new AnimationTimer() {
-        // Stores the timestamp of the last frame in nanoseconds
-        private long lastUpdate = -1;
-
-        /**
-         * This method is called approximately 60 times per second.
-         * 'now' is the timestamp of the current frame in nanoseconds.
-         */
-        @Override
-        public void handle(long now) {
-            // Only run update logic if we have a previous timestamp
-            if (lastUpdate > 0) {
-                // Calculate the time difference in seconds between frames
-                double dt = (now - lastUpdate) / 1e9;
-                // Update the simulation using the time delta
-                update(dt);
+            /**
+             * Called automatically by JavaFX for each frame.
+             * 
+             * @param currentFrameTime - current time in nanoseconds since program start
+             */
+            @Override
+            public void handle(long currentFrameTime) {
+                // Skip the first frame since we don't have a previous time to compare
+                if (previousFrameTime == 0) {
+                    previousFrameTime = currentFrameTime;
+                    return;
+                }
+                // Calculate time elapsed since last frame
+                long nanosecondsSinceLastFrame = currentFrameTime - previousFrameTime;
+                // Convert nanoseconds to seconds for physics calculations
+                double deltaTimeInSeconds = nanosecondsSinceLastFrame / 1_000_000_000.0;// (1 billion nanoseconds = 1
+                                                                                        // second)
+                // Remember this frame's time for next calculation
+                previousFrameTime = currentFrameTime;
+                // Update the simulation physics with the time delta
+                update(deltaTimeInSeconds);
             }
-            // Store the current time for the next frame
-            lastUpdate = now;
-        }
-    };
-
-    // Start the timer to begin calling handle() every frame
-    timer.start();
-
-    // Mark the simulation as running
-    isRunning = true;
-}
-
+        };
+        // Start the animation timer
+        timer.start();
+        isRunning = true;
+    }
 
     public void stop() {
         if (timer != null)
@@ -112,8 +113,21 @@ public void start() {
         isRunning = false;
     }
 
-    public void reset() {
-        stop();
+    public void reset(Puck puck1, Puck puck2, int collisionCount) {
+        // Reset puck positions to default locations
+        puck1.setPosition(new Vector2D(200, 300));
+        puck1.setVelocity(new Vector2D(230, 100));
+        puck2.setPosition(new Vector2D(400, 300));
+        puck2.setVelocity(new Vector2D(-370, 200));
+
+        // Reset collision counter and simulation state
+        controlPanel.resetCollisionCount();
+         // Clear any displayed momentum vectors
+        this.getVectorGroup().getChildren().clear();
+        // Update UI to reflect new velocities
+        if (controlPanel != null) {
+            controlPanel.updateVelocityFields();
+        }
     }
 
     /**
@@ -179,13 +193,13 @@ public void start() {
         for (Puck puck : pucks) {
             Vector2D pos = puck.getPosition();
             Vector2D momentum = puck.getVelocity().multiply(puck.getMass());
-            double scale = Math.min(0.15, 25.0 / puck.getMass());
+            double scale = 0.05;
 
             // Main momentum vector
             Line vectorLine = new Line(pos.x, pos.y,
                     pos.x + momentum.x * scale, pos.y + momentum.y * scale);
             vectorLine.setStroke(Color.GREEN);
-            vectorLine.setStrokeWidth(2);
+            vectorLine.setStrokeWidth(3);
             vectorGroup.getChildren().add(vectorLine);
 
             if (showComponents) {

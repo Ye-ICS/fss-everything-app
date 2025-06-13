@@ -384,21 +384,7 @@ public class ControlPanel extends VBox {
         Button resetButton = new Button("Reset");
         resetButton.setStyle("-fx-background-color: #ff9800; -fx-text-fill: white;");
         resetButton.setOnAction(e -> {
-            // Reset puck positions to default locations
-            puck1.setPosition(new Vector2D(200, 300));
-            puck1.setVelocity(new Vector2D(230, 100));
-            puck2.setPosition(new Vector2D(400, 300));
-            puck2.setVelocity(new Vector2D(-370, 200));
-            
-            // Reset collision counter and simulation state
-            collisionCount = 0;
-            simulation.reset();
-            
-            // Clear any displayed momentum vectors
-            simulation.getVectorGroup().getChildren().clear();
-            
-            // Update UI to reflect new velocities
-            updateVelocityFields();
+            simulation.reset(puck1, puck2, collisionCount);          // Reset simulation state
         });
 
         buttonBox.getChildren().addAll(startBtn, stopBtn, resetButton);
@@ -529,7 +515,7 @@ public class ControlPanel extends VBox {
      * Updates both pucks' velocity input fields to reflect their current velocities.
      * Useful after programmatic velocity changes or resets.
      */
-    private void updateVelocityFields() {
+    void updateVelocityFields() {
         updatePuck1VelocityFields();
         updatePuck2VelocityFields();
     }
@@ -730,4 +716,10 @@ public class ControlPanel extends VBox {
     public boolean isShowMomentumComponents() {
         return showMomentumComponentsCheck.isSelected();
     }
+
+    // In your ControlPanel class, you need:
+    public void resetCollisionCount() {
+        this.collisionCount = 0;  // Reset the actual field
+        collisionCountLabel.setText("Collisions: 0"); // Update the label display
+        }
 }
