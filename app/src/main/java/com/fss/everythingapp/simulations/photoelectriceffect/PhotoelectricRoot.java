@@ -1,7 +1,6 @@
 package com.fss.everythingapp.simulations.photoelectriceffect;
 
 import javafx.scene.Parent;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
