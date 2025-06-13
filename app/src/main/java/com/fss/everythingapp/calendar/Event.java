@@ -25,8 +25,13 @@ public class Event extends Date {
         eventList = new ArrayList<Event>();
         Scanner scanner;
 
-        // while (scanner.hasNextLine()) {
-        // Event loadedEvent = new Event();
+        try {
+            scanner = new Scanner(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return eventList;
+        }
 
         while (scanner.hasNextLine()) {
             Event loadedEvent = new Event(eventList);

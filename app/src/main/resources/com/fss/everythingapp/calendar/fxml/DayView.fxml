@@ -83,6 +83,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </Button>
+            <Button fx:id="showDates" mnemonicParsing="false" text="ShowDates" />
          </children>
       </HBox>
    </children>

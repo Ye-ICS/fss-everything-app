@@ -1,6 +1,9 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,5 +50,23 @@ public class DayViewController {
         Parent weekView = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/WeekView.fxml"));
         rootContainer.getScene().setRoot(weekView);
+    }
+
+    void showDates(ActionEvent event) throws IOException, ParseException {
+
+        // String taskName = taskNameField.getText();
+
+        // String dueDateString =
+        // dueDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" +
+        // dueMinField.getText());
+        // LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
+        // System.out.println(dueDate);
+
+        // TaskManager taskMan = new TaskManager(taskName, dueDate);
+
+        // Parent openCalendar = (Parent) FXMLLoader
+        // .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
+        // rootContainer.getScene().setRoot(openCalendar);
     }
 }

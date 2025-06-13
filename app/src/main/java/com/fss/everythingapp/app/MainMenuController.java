@@ -2,7 +2,7 @@ package com.fss.everythingapp.app;
 
 import java.io.IOException;
 
-import com.fss.everythingapp.studentservices.AppointmentController;
+//import com.fss.everythingapp.studentservices.AppointmentController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,9 +18,10 @@ public class MainMenuController {
     @FXML
     private void openStudentServices(ActionEvent actionEvent) throws IOException {
         try {
-            FXMLLoader appointmentLayout = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/studentservicesappointment/fxml/AppointmentLayout.fxml"));
-            AppointmentController appointmentController = new AppointmentController();
-            appointmentLayout.setController(appointmentController);
+            FXMLLoader appointmentLayout = new FXMLLoader(getClass()
+                    .getResource("/com/fss/everythingapp/studentservicesappointment/fxml/AppointmentLayout.fxml"));
+            // AppointmentController appointmentController = new AppointmentController();
+            // appointmentLayout.setController(appointmentController);
             Parent show = appointmentLayout.load();
             rootContainer.getScene().setRoot(show);
 
@@ -41,7 +42,8 @@ public class MainMenuController {
 
     @FXML
     private void openCalendar(ActionEvent actionEvent) throws IOException {
-        Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
+        Parent monthView = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(monthView);
     }
 }

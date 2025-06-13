@@ -11,13 +11,17 @@ import java.util.Scanner;
 public class Task extends Date {
     protected int[] dueDateInfo;
 
+    String taskName;
+
     ArrayList<Task> taskList;
 
     Task(char paramType, LocalDateTime paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
 
     }
 
-    Task(ArrayList<Task> taskList) {
+    Task(ArrayList<Task> taskList, String taskName) {
+        this.taskList = taskList;
+        this.taskName = taskName;
     }
 
     @Override
@@ -34,7 +38,7 @@ public class Task extends Date {
             return taskList;
         }
         while (scanner.hasNextLine()) {
-            Task loadedTask = new Task(taskList);
+            Task loadedTask = new Task(taskList, taskName);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
