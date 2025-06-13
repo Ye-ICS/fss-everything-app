@@ -8,14 +8,63 @@ import java.nio.file.Files;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 public class GeneralInfo {
-    Scanner scanner = new Scanner("UserInfo.txt");
 
 
     public static void main () throws IOException{
-            FileWriter writer = new FileWriter("UserInfo.txt");
+         PrintWriter writer = new PrintWriter(new FileWriter("UserInfo.txt"));
+            writer.println();
+            writer.print(name);
+            writer.println();
+            writer.print(age);
+            writer.println();
+            writer.print(height);
+            writer.println();
+            writer.print(weight);
+            writer.println();
+            writer.print(bodyfat);
+            writer.println();
+            writer.print(isMale);
+            writer.println();
+            writer.print(isFemale);
+            writer.println();
+            writer.print(isPhysicallyActive);
+            writer.println();
+            writer.println();
+            writer.println();
+            writer.print(SleepSchedule.hoursSlept);
+            writer.println();
+            writer.print(SleepSchedule.timeWentToSleep);
+            writer.println();
+            writer.print(SleepSchedule.wokeUpTime);
+            writer.println();
+            writer.print(SleepSchedule.hoursSleptTarget);
+            writer.println();
+            writer.println();
+            writer.println();
+            writer.print(Diet.caloriesEaten);
+            writer.println();
+            writer.print(Diet.calorieTarget);
+            writer.println();
+            writer.print(Diet.proteinEaten);
+            writer.println();
+            writer.print(Diet.carbsEaten);
+            writer.println();
+            writer.print(Diet.fatsEaten);
+            writer.println();
+            writer.print(Diet.proteinTarget);
+            writer.println();
+            writer.print(Diet.carbsTarget);
+            writer.println();
+            writer.print(Diet.fatsTarget);
+            writer.println();
+            writer.print(Diet.caloriesEaten);
+            writer.println();
+            writer.print(Diet.basalMetabolicRate);
+            
     }
 
     static public String name;
@@ -29,9 +78,11 @@ public class GeneralInfo {
     private boolean athleteFat;
     private boolean acceptableFat;
     static private boolean obesityFat;
-    public static int bodyFat;
     public static boolean isPhysicallyActive = false; //true means person is active, false is opposite
     public static Object writer;
+
+
+    
 
 
 
