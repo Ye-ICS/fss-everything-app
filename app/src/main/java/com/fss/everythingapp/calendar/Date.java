@@ -3,14 +3,11 @@ package com.fss.everythingapp.calendar;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DateManager {
-
+public class Date {
     protected String dateName;
     protected char dateType;
 
@@ -18,17 +15,22 @@ public class DateManager {
     protected int[] startDateInfo;
     protected int[] endDateInfo;
 
-    private ArrayList<DateManager> dateList;
+    private ArrayList<Date> dateList;
 
-    DateManager() {
-        loadDates();
+    Date() { // Not sure why we need this, but our code is broken without it ¯\_(ツ)_/¯
     }
 
-    DateManager(ArrayList<DateManager> dateList) { // Blank constructor
+    Date(char paramType, String paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
+
     }
 
-    protected ArrayList loadDates() { // Loads all dates
-        dateList = new ArrayList<DateManager>();
+    Date(ArrayList<Date> dateList) { // Blank constructor
+    }
+
+    // loads all dates with a specific parameter
+    protected ArrayList loadAptDates(char paramType, String paramDate) {
+        ArrayList<Date> dateList = new ArrayList<Date>();
+        String[] paramParts = paramDate.split("/");
         Scanner scanner;
 
         try {
@@ -40,12 +42,10 @@ public class DateManager {
         }
 
         while (scanner.hasNextLine()) {
-
-            DateManager loadedDate = new DateManager(dateList);
+            Date loadedDate = new Date(dateList);
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            dateType = parts[0].charAt(0);
             dateName = parts[1];
 
             if (dateType == 'T') { // If the current date is a task
@@ -60,6 +60,14 @@ public class DateManager {
                 dueDateInfo[3] = Integer.parseInt(dueTimeParts[0]);
                 dueDateInfo[4] = Integer.parseInt(dueTimeParts[1]);
 
+                if (paramType == 'M' && Integer.parseInt(paramParts[0]) == dueDateInfo[0]
+                        && Integer.parseInt(paramParts[1]) == dueDateInfo[1]) {
+                    dateList.add(loadedDate);
+                } else if (paramType == 'D' && Integer.parseInt(paramParts[0]) == dueDateInfo[0]
+                        && Integer.parseInt(paramParts[1]) == dueDateInfo[1]
+                        && Integer.parseInt(paramParts[1]) == dueDateInfo[2]) {
+                    dateList.add(loadedDate);
+                }
             } else { // If the current date is an event
                 String startDate = parts[2];
                 String endDate = parts[3];
@@ -82,14 +90,25 @@ public class DateManager {
                 endDateInfo[3] = Integer.parseInt(endTimeParts[0]);
                 endDateInfo[4] = Integer.parseInt(endTimeParts[1]);
 
+                if (paramType == 'M'
+                        && (Integer.parseInt(paramParts[0]) <= startDateInfo[0]
+                                && Integer.parseInt(paramParts[0]) >= endDateInfo[0])
+                        && (Integer.parseInt(paramParts[1]) <= startDateInfo[1]
+                                && Integer.parseInt(paramParts[1]) >= endDateInfo[1])) {
+                    dateList.add(loadedDate);
+                } else if (paramType == 'D'
+                        && (Integer.parseInt(paramParts[0]) <= startDateInfo[0]
+                                && Integer.parseInt(paramParts[0]) >= endDateInfo[0])
+                        && (Integer.parseInt(paramParts[1]) <= startDateInfo[1]
+                                && Integer.parseInt(paramParts[1]) >= endDateInfo[1])
+                        && (Integer.parseInt(paramParts[2]) <= startDateInfo[2]
+                                && Integer.parseInt(paramParts[2]) >= endDateInfo[2])) {
+                    dateList.add(loadedDate);
+                }
             }
-            dateList.add(loadedDate);
         }
         scanner.close();
         return dateList;
-    }
-
-    void shareDate() { // User can share dates to other users
     }
 
     String getDateName() {
@@ -112,7 +131,8 @@ public class DateManager {
         return this.endDateInfo;
     }
 
-    ArrayList<DateManager> getDateList() {
+    ArrayList<Date> getDateList() {
         return this.dateList;
     }
+
 }
