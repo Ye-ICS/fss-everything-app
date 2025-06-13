@@ -2,7 +2,7 @@ package com.fss.everythingapp.app;
 
 import java.io.IOException;
 
-import com.fss.everythingapp.studentServices.AppointmentController;
+import com.fss.everythingapp.studentservices.AppointmentController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +22,7 @@ public class MainMenuController {
             AppointmentController appointmentController = new AppointmentController();
             appointmentLayout.setController(appointmentController);
             Parent show = appointmentLayout.load();
+            appointmentController.init();
             rootContainer.getScene().setRoot(show);
 
         } catch (Exception e) {
