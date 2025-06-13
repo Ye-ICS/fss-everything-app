@@ -71,11 +71,6 @@ public class ListController {
         search.start();
     }
 
-    @FXML
-    private void debug(ActionEvent actionEvent){
-
-    } 
-
     public void launchInfo(String routeId) {
         try {
             FXMLLoader infoLoader = new FXMLLoader(getClass().getResource("Info.fxml"));
