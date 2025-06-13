@@ -63,12 +63,4 @@ public class PhotoelectricMainApp extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
     }
-
-    /**
-     * Main method to launch the JavaFX application.
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

@@ -40,7 +40,7 @@ public class PhotoelectricRoot extends BorderPane {
         titleText.setFont(Font.font("System", FontWeight.BOLD, 16));
         titleText.setFill(Color.DARKBLUE);
 
-        instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
+        instructionText = new Text(20, 50, "Photons (colored smaller circles) travel from the top of the screen and interact with electrons on the metal surface.");
         instructionText.setFont(Font.font("System", 12));
         instructionText.setFill(Color.DARKBLUE);
 
