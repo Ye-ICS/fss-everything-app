@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,12 +48,11 @@ public class WeekViewController {
 
     @FXML
     void loadDates(ActionEvent event) {
-        System.out.println("started");
         DateManager dateLoader = new DateManager();
-        System.out.println("loaded");
 
         Circle icon = new Circle();
         icon.setRadius(10);
+        icon.setStrokeWidth(2.0);
 
         for (int i = 0; i < dateLoader.getDateList().size(); i++) {
 
@@ -59,9 +60,10 @@ public class WeekViewController {
 
             HBox dateBox = new HBox();
             dateListPane.setContent(dateBox);
+            dateBox.setAlignment(Pos.CENTER_LEFT);
 
             Label dateNameLabel = new Label();
-            dateNameLabel.setPrefWidth(170);
+            dateNameLabel.setPrefWidth(175);
             dateNameLabel.setText(loadedDate.getDateName());
 
             if (loadedDate.getDateType() == 'T') {
@@ -70,18 +72,21 @@ public class WeekViewController {
                 LocalDateTime dueDate = loadedDate.getDueDate();
                 Label dueDateLabel = new Label();
                 dueDateLabel.setText(dueDate.toString());
-                dateBox.getChildren().addAll(dateNameLabel, dueDateLabel);
+
+                dateBox.getChildren().addAll(icon, dateNameLabel, dueDateLabel);
+                HBox.setMargin(dateNameLabel, new Insets(0, 10, 0, 10));
             } else {
-                icon.setFill(Color.BLUE);
+                icon.setFill(Color.CORNFLOWERBLUE);
 
                 LocalDateTime startDate = loadedDate.getStartDate();
                 Label startDateLabel = new Label();
                 startDateLabel.setText(startDate.toString());
 
-                dateBox.getChildren().addAll(dateNameLabel, startDateLabel);
+                dateBox.getChildren().addAll(icon, dateNameLabel, startDateLabel);
+                HBox.setMargin(dateNameLabel, new Insets(0, 10, 0, 10));
             }
         }
-        System.out.println("done");
+        HBox.setMargin(icon, new Insets(2, 5, 0, 5));
     }
 
     @FXML
