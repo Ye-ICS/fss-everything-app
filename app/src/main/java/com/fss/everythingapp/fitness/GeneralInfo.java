@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import java.nio.file.Files;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,31 +43,42 @@ public class GeneralInfo {
             writer.println();
             writer.print(SleepSchedule.wokeUpTime);
             writer.println();
-            writer.print(SleepSchedule.hoursSleptTarget);
-            writer.println();
             writer.println();
             writer.println();
             writer.print(Diet.caloriesEaten);
-            writer.println();
-            writer.print(Diet.calorieTarget);
             writer.println();
             writer.print(Diet.proteinEaten);
             writer.println();
             writer.print(Diet.carbsEaten);
             writer.println();
             writer.print(Diet.fatsEaten);
-            writer.println();
-            writer.print(Diet.proteinTarget);
-            writer.println();
-            writer.print(Diet.carbsTarget);
-            writer.println();
-            writer.print(Diet.fatsTarget);
-            writer.println();
-            writer.print(Diet.caloriesEaten);
-            writer.println();
-            writer.print(Diet.basalMetabolicRate);
             writer.close();
             
+    }
+
+    public static void readFromFile () throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("UserInfo.txt"));
+        String blank;
+        blank = scanner.nextLine();
+        name = scanner.nextLine();
+        age =  Integer.parseInt(scanner.nextLine());
+        height = Double.parseDouble(scanner.nextLine());
+        weight = Double.parseDouble(scanner.nextLine());
+        bodyfat = Double.parseDouble(scanner.nextLine());
+        isMale = Boolean.parseBoolean(scanner.nextLine());
+        isFemale = Boolean.parseBoolean(scanner.nextLine());
+        isPhysicallyActive = Boolean.parseBoolean(scanner.nextLine());
+        blank = scanner.nextLine();
+        blank = scanner.nextLine();
+        SleepSchedule.hoursSlept = Double.parseDouble(scanner.nextLine());
+        SleepSchedule.timeWentToSleep = Double.parseDouble(scanner.nextLine());
+        SleepSchedule.wokeUpTime = Double.parseDouble(scanner.nextLine());
+        blank = scanner.nextLine();
+        blank = scanner.nextLine();
+        Diet.caloriesEaten = Double.parseDouble(scanner.nextLine());
+        Diet.proteinEaten = Double.parseDouble(scanner.nextLine());
+        Diet.carbsEaten = Double.parseDouble(scanner.nextLine());
+        Diet.fatsEaten = Double.parseDouble(scanner.nextLine());
     }
 
     static public String name;
@@ -80,7 +93,6 @@ public class GeneralInfo {
     private boolean acceptableFat;
     static private boolean obesityFat;
     public static boolean isPhysicallyActive = false; //true means person is active, false is opposite
-    public static Object writer;
 
 
     
