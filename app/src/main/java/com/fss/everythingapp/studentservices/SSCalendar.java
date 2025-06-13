@@ -1,4 +1,4 @@
-package com.fss.everythingapp.studentServices;
+package com.fss.everythingapp.studentservices;
 
 import java.util.ArrayList;
 
