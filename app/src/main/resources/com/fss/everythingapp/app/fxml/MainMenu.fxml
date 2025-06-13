@@ -49,6 +49,7 @@
                         <Font size="30.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#saveInfo" prefHeight="25.0" prefWidth="184.0" text="Save Info (Recommended)" />
                </children>
             </VBox>
          </children>

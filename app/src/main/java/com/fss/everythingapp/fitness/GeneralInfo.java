@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 public class GeneralInfo {
 
 
-    public static void main () throws IOException{
+    public static void writeToFile () throws IOException{
          PrintWriter writer = new PrintWriter(new FileWriter("UserInfo.txt"));
             writer.println();
             writer.print(name);
@@ -64,6 +64,7 @@ public class GeneralInfo {
             writer.print(Diet.caloriesEaten);
             writer.println();
             writer.print(Diet.basalMetabolicRate);
+            writer.close();
             
     }
 

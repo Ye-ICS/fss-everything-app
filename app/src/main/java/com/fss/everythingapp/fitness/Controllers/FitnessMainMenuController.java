@@ -16,6 +16,12 @@ import javafx.stage.Stage;
 
 public class FitnessMainMenuController {
 
+
+    @FXML
+    void saveInfo (ActionEvent event) throws IOException {
+        GeneralInfo.writeToFile();
+    }
+
     @FXML
     void openDietMenu(ActionEvent event) {
     if (checkIfPreferencesSelected() == false) {
