@@ -2,6 +2,7 @@ package com.fss.everythingapp.simulations;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.app.App;
 import com.fss.everythingapp.app.MainMenuController;
 import com.fss.everythingapp.simulations.doubleslit.DoubleSlitController;
 import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
@@ -52,13 +53,7 @@ public class SimulationMenuController {
 
     @FXML
     private void back(ActionEvent actionEvent) throws IOException {
-        Parent mainMenuLayout;
-       
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
-        MainMenuController controller = new MainMenuController();
-        fxmlLoader.setController(controller);
-        mainMenuLayout = fxmlLoader.load();
-        rootContainer.getScene().setRoot(mainMenuLayout);
+        App.backToMainMenu();
     }
 
     
