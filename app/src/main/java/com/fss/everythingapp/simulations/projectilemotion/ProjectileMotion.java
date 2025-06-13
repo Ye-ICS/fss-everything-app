@@ -1,12 +1,8 @@
 package com.fss.everythingapp.simulations.projectilemotion;
 
-import java.util.List;
-
-import com.fss.everythingapp.simulations.KinematicObject;
 import com.fss.everythingapp.simulations.Vector2D;
 
 public class ProjectileMotion {
-    List<KinematicObject> projectiles;
     static private double v0;
     static private double angle;
     static private double height;
@@ -57,12 +53,6 @@ public class ProjectileMotion {
         double vx = speed * Math.cos(Math.toRadians(angle)); 
         return new Vector2D(vx,vy);
     }
-    
-   
-
-    double calculateMaxHeight(KinematicObject projectile) {
-       return -1;
-    }
 
     public void setInitialVelocity(double v0){
         this.v0 = v0;
@@ -75,13 +65,6 @@ public class ProjectileMotion {
     }
     public void setAcceleration(double acceleration){
         this.acceleration = acceleration;
-    }
-
-    double calculateRange(KinematicObject projectile) {
-        double x;
-        x = v0*Math.cos(angle)*time;
-        //System.out.println(x);
-        return x;
     }
 
 }
