@@ -1,4 +1,4 @@
-package com.fss.everythingapp.studentservices;
+package com.fss.everythingapp.studentServices;
 
 public class Timeslot {
     private boolean available = true;
