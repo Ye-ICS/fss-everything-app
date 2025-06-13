@@ -1,5 +1,8 @@
 package com.fss.everythingapp.simulations.momentum;
 import java.io.File;
+
+import com.fss.everythingapp.app.App;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -361,37 +364,44 @@ public class ControlPanel extends VBox {
      * @return The next available row number
      */
     private int setupControlButtons(GridPane grid, int row) {
-        HBox buttonBox = new HBox(10);
-        buttonBox.setAlignment(Pos.CENTER_LEFT);
-        
-        // ===== START BUTTON =====
-        Button startBtn = new Button("Start");
-        startBtn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
-        startBtn.setOnAction(e -> {
-            simulation.start();
-            startDataUpdates();               // Begin real-time data monitoring
-        });
-        
-        // ===== STOP BUTTON =====
-        Button stopBtn = new Button("Stop");
-        stopBtn.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
-        stopBtn.setOnAction(e -> {
-            simulation.stop();
-            stopDataUpdates();                // Stop real-time data monitoring
-        });
-        
-        // ===== RESET BUTTON =====
-        Button resetButton = new Button("Reset");
-        resetButton.setStyle("-fx-background-color: #ff9800; -fx-text-fill: white;");
-        resetButton.setOnAction(e -> {
-            simulation.reset(puck1, puck2, collisionCount);          // Reset simulation state
-        });
+    HBox buttonBox = new HBox(10);
+    buttonBox.setAlignment(Pos.CENTER_LEFT);
 
-        buttonBox.getChildren().addAll(startBtn, stopBtn, resetButton);
-        grid.add(buttonBox, 0, row, 3, 1);
-        return row + 1;
-    }
+    // ===== START BUTTON =====
+    Button startBtn = new Button("Start");
+    startBtn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+    startBtn.setOnAction(e -> {
+        simulation.start();
+        startDataUpdates();
+    });
 
+    // ===== STOP BUTTON =====
+    Button stopBtn = new Button("Stop");
+    stopBtn.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
+    stopBtn.setOnAction(e -> {
+        simulation.stop();
+        stopDataUpdates();
+    });
+
+    // ===== RESET BUTTON =====
+    Button resetButton = new Button("Reset");
+    resetButton.setStyle("-fx-background-color: #ff9800; -fx-text-fill: white;");
+    resetButton.setOnAction(e -> {
+        simulation.reset(puck1, puck2, collisionCount);
+    });
+
+    // ===== EXIT BUTTON =====
+    Button exitButton = new Button("Exit");
+    exitButton.setStyle("-fx-background-color: #607D8B; -fx-text-fill: white;");
+    exitButton.setOnAction(e -> {
+        // Return to the simulations menu
+        App.backToMainMenu();
+    });
+
+    buttonBox.getChildren().addAll(startBtn, stopBtn, resetButton, exitButton);
+    grid.add(buttonBox, 0, row, 3, 1);
+    return row + 1;
+}
     /**
      * Sets up image upload controls for customizing puck appearance.
      * 
