@@ -43,8 +43,8 @@ public class DoubleSlit {
         
         // Loop through each point on the screen
         for (int i = 0; i < numPoints; i++) {
-            double y = startY + i * step; // Current position on the screen
-            double intensity = calculateIntensity(y); // Calculate intensity at this position
+            double currentPosition = startY + i * step; // Current position on the screen
+            double intensity = calculateIntensity(currentPosition); // Calculate intensity at this position
             interferencePattern.add(intensity); // Add intensity to the pattern list
         }
 
@@ -55,12 +55,12 @@ public class DoubleSlit {
      * Calculates the intensity of the double slit interference pattern at a given point y on the screen.
      * This method combines single slit diffraction and double slit interference effects.
      * wavelength is getting converted in nanometers, slit width and separation are in micrometers.
-     * @param y position on the screen (distance from the center)
+     * @param y position on the screen 
      * @return intensity at the given position
      */
-    private double calculateIntensity(double y) {
+    private double calculateIntensity(double currentPosition) {
         // Small angle approximation: sin(θ) ≈ y / L, where L is the screen distance
-        double sinTheta = y / screenDistance;
+        double sinTheta = currentPosition / screenDistance;
         
         // Single slit diffraction factor:
         // beta = π * slitWidth * sin(θ) / wavelength

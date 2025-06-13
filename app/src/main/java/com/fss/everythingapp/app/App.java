@@ -17,6 +17,12 @@ import java.io.IOException;
 import java.net.URL;
 
 public class App extends Application {
+    private static App singleton;
+
+    private Stage stage;
+    private Parent mainMenuView;
+
+
     public static void main(String[] args) {
         System.out.println("App starting...");
         launch(args);
@@ -24,22 +30,43 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Example.fxml"));
+        if (singleton == null) {
+            singleton = this;
+            this.stage = stage;
+            mainMenuView = loadMainMenu();
+        }
+
+        Scene scene = new Scene(mainMenuView);
+        stage.setScene(scene);
+
+        stage.setTitle("FSS App");
+        stage.show();
+    }
+
+    /**
+     * Returns back to main menu page.
+     */
+    public static void backToMainMenu() {
+        if (singleton == null) {
+            System.err.println("WTF: App singleton is null, cannot return to main menu.");
+            return;
+        }
+
+        singleton.stage.getScene().setRoot(singleton.mainMenuView);
+    }
+
+    private Parent loadMainMenu() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/MainMenu.fxml"));
         MainMenuController controller = new MainMenuController();
         fxmlLoader.setController(controller);
         Parent view = null;
         
         try {
             view = fxmlLoader.load();
+            return view;
         } catch (IOException e) {
             e.printStackTrace();
-            view = new Label("A fatal error has occurred.");
+            return new Label("A fatal error has occurred.");
         }
-
-        Scene scene = new Scene(view);
-        stage.setScene(scene);
-
-        stage.setTitle("FSS App");
-        stage.show();
     }
 }

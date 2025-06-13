@@ -13,11 +13,19 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 
+/**
+ * Root node for the photoelectric effect simulation.
+ * Contains the simulation pane, control panel, and manages dynamic updates.
+ */
 public class PhotoelectricRoot extends BorderPane {
     private PhotoelectricSimulation simulation;
     private Pane simPane;
     private Text instructionText;
 
+    /**
+     * Constructs the root node for the photoelectric simulation.
+     * Sets up the simulation pane, control panel, and listeners.
+     */
     public PhotoelectricRoot() {
         // Create simulation
         simulation = new PhotoelectricSimulation(600, 600);
@@ -33,7 +41,7 @@ public class PhotoelectricRoot extends BorderPane {
         titleText.setFont(Font.font("System", FontWeight.BOLD, 16));
         titleText.setFill(Color.DARKBLUE);
 
-        instructionText = new Text(20, 50, "Photons (colored circles) travel from left to right and interact with electrons on the metal surface");
+        instructionText = new Text(20, 50, "Photons (colored smaller circles) travel from the top of the screen and interact with electrons on the metal surface.");
         instructionText.setFont(Font.font("System", 12));
         instructionText.setFill(Color.DARKBLUE);
 
@@ -44,11 +52,15 @@ public class PhotoelectricRoot extends BorderPane {
         PhotoelectricControlPanel controls = new PhotoelectricControlPanel(simulation);
         setRight(controls);
 
-        // --- Call the setup methods here ---
+        // Set up listeners for resizing and dynamic elements
         setupResizeListeners();
         setupDynamicElements();
     }
 
+    /**
+     * Sets up listeners to handle resizing of the simulation pane.
+     * Updates simulation dimensions and instruction text position.
+     */
     private void setupResizeListeners() {
         InvalidationListener resizeListener = observable -> {
             double newWidth = simPane.getWidth();
@@ -73,6 +85,9 @@ public class PhotoelectricRoot extends BorderPane {
         simPane.heightProperty().addListener(resizeListener);
     }
 
+    /**
+     * Sets up a timeline to periodically update the visual elements (photons/electrons).
+     */
     private void setupDynamicElements() {
         Timeline elementUpdateTimeline = new Timeline(
             new KeyFrame(
@@ -84,6 +99,10 @@ public class PhotoelectricRoot extends BorderPane {
         elementUpdateTimeline.play();
     }
 
+    /**
+     * Updates the simulation pane to reflect the current state of photons and electrons.
+     * Removes inactive elements and adds new ones as needed.
+     */
     private void updateVisualElements() {
         var currentPhotons = simulation.getPhotons();
         var currentElectrons = simulation.getElectrons();
@@ -121,6 +140,10 @@ public class PhotoelectricRoot extends BorderPane {
         }
     }
 
+    /**
+     * Returns the root node for embedding in a scene.
+     * @return This BorderPane instance.
+     */
     public Parent getRootNode() {
         return this;
     }
