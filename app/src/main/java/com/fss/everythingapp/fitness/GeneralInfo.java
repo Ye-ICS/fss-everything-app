@@ -1,17 +1,11 @@
 package com.fss.everythingapp.fitness;
 
-import java.util.List;
-import java.util.Scanner;
-
-import java.nio.file.Files;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class GeneralInfo {
 
@@ -56,7 +50,7 @@ public class GeneralInfo {
             
     }
 
-    public static void readFromFile () throws FileNotFoundException {
+    public static void readFromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("UserInfo.txt"));
         String blank;
         blank = scanner.nextLine();

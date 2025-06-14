@@ -8,9 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class MainMenuController {
 
@@ -53,5 +52,10 @@ public class MainMenuController {
     private void openCalendar(ActionEvent actionEvent) throws IOException {
         Parent monthView = (Parent) FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(monthView);
+    }
+
+    @FXML
+    private void openSimulations(ActionEvent actionEvent) {
+
     }
 }

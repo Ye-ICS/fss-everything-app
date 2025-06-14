@@ -1,8 +1,7 @@
 package com.fss.everythingapp.fitness.Controllers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import com.fss.everythingapp.fitness.GeneralInfo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +18,9 @@ public class NotSignedInController {
     private Button signInButton;
 
     @FXML
-    private void signIn (ActionEvent actionEvent) {
-        //readFromFile();
-        if (GeneralInfo.name.isEmpty()) {
+    private void signIn (ActionEvent actionEvent) throws FileNotFoundException {
+        //GeneralInfo.readFromFile();
+        if (1 == 1) {
             try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/fss/everythingapp/Fitness/fxml/SigningIn.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

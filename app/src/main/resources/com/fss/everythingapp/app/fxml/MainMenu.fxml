@@ -7,38 +7,26 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" stylesheets="@/com/fss/everythingapp/css/menu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" stylesheets="@/com/fss/everythingapp/css/menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#openPreferenceMenu" prefHeight="36.0" prefWidth="105.0" text="Preferences" />
-            <Button mnemonicParsing="false" onAction="#openDietMenu" prefHeight="47.0" prefWidth="219.0" text="Diet">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Button>
-            <Button layoutX="68.0" layoutY="271.0" mnemonicParsing="false" onAction="#openWorkoutMenu" prefHeight="47.0" prefWidth="219.0" text="Workout">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Button>
-            <Button layoutX="68.0" layoutY="204.0" mnemonicParsing="false" onAction="#openSleepMenu" prefHeight="47.0" prefWidth="219.0" text="Sleep">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Button>
-            <VBox alignment="CENTER" spacing="20.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#openLogRecords" prefHeight="25.0" prefWidth="84.0" text="Log" />
-      
-                  <Button mnemonicParsing="false" onAction="#openLogMenu" prefHeight="62.0" prefWidth="172.0" text="+">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#saveInfo" prefHeight="25.0" prefWidth="184.0" text="Save Info (Recommended)" />
-               </children>
-            </VBox>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+               <content>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefWrapLength="0.0" vgap="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#openStudentServices" styleClass="material-button" text="Student&#10;Services" textAlignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#openCalendar" styleClass="material-button" text="Calendar" textAlignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#openBuses" styleClass="material-button" text="Buses" textAlignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#openSimulations" styleClass="material-button" text="Simulations" textAlignment="CENTER" />
+                        <Button layoutX="237.0" layoutY="81.0" mnemonicParsing="false" onAction="#openFitnessApp" styleClass="material-button" text="Fitness" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
    </center>
