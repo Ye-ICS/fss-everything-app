@@ -1,7 +1,9 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.fss.everythingapp.app.App;
 
@@ -12,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -22,16 +25,20 @@ import javafx.scene.shape.Circle;
 public class WeekViewController {
 
     @FXML
-    private Button createDateButton;
+    private Button loadButton;
 
     @FXML
     private ScrollPane dateListPane;
 
     @FXML
-    private Button exitButton;
+    private DatePicker datePicker;
 
     @FXML
     private VBox rootContainer;
+
+    public void initialize() {
+        loadButton.fire();
+    }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
@@ -45,8 +52,7 @@ public class WeekViewController {
         App.backToMainMenu();
     }
 
-    @FXML
-    void loadDates(ActionEvent event) {
+    private void fillDatePane() {
         DateManager dateLoader = new DateManager();
 
         Circle icon = new Circle();
@@ -86,6 +92,32 @@ public class WeekViewController {
             }
         }
         HBox.setMargin(icon, new Insets(2, 5, 0, 5));
+    }
+
+    private void fillCalendar() {
+        LocalDate paramDate;
+        try {
+            paramDate = LocalDate.parse(datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            paramDate = LocalDate.now();
+        }
+        Date dateLoader = new Date('W', paramDate);
+
+        for (int i = 0; i < dateLoader.getDateList().size(); i++) {
+            Date loadedDate = dateLoader.getDateList().get(i);
+
+            // To Do:
+            // Populate GridPane with dates recieved
+
+        }
+    }
+
+    @FXML
+    void loadDates(ActionEvent event) {
+        fillDatePane();
+        // fillCalendar();
+        // ^ uncomment when method is complete
     }
 
     @FXML

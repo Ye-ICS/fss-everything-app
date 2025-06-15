@@ -5,27 +5,20 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EventManager extends DateManager {
     ArrayList<Event> events = new ArrayList<Event>();
-    private String eventName;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
 
+    
     EventManager() {
         loadDates();
     }
 
     EventManager(String eventName, LocalDateTime startDate, LocalDateTime endDate) {
-        this.eventName = eventName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-
-        saveEvent(eventName, startDate, endDate);
+        saveEvent(dateName, startDate, endDate);
     }
 
     EventManager(ArrayList<EventManager> eventList) { // Blank constructor

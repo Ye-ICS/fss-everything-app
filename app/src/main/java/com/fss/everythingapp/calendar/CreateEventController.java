@@ -55,6 +55,7 @@ public class CreateEventController {
         endDateString = endDateString.concat("T" + endHourField.getText() + ":" + endMinField.getText());
         LocalDateTime endDate = LocalDateTime.parse(endDateString);
 
+        @SuppressWarnings("unused")
         EventManager eventMan = new EventManager(eventName, startDate, endDate);
 
         Parent openCalendar = (Parent) FXMLLoader

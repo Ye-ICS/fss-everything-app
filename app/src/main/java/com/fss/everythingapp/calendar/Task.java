@@ -3,24 +3,27 @@ package com.fss.everythingapp.calendar;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Task extends Date {
 
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
-    Task(char paramType, LocalDateTime paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
-
+    Task(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear & Year
+        loadAptDates(paramType, paramDate);
     }
 
     Task(ArrayList<Task> taskList) {
     }
 
     @Override
-    protected ArrayList loadAptDates(char paramType, LocalDateTime paramDate) {
+    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
         // loads all dates with a specific parameter
         taskList = new ArrayList<Task>();
         Scanner scanner;
@@ -39,17 +42,25 @@ public class Task extends Date {
             String[] parts = line.split(",");
             loadedTask.dateName = parts[1];
 
+            TemporalField weekOfYear = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            int paramWeek = paramDate.get(weekOfYear);
+
             if (parts[0].charAt(0) == 'T') { // If the current date is a task
                 loadedTask.dueDate = LocalDateTime.parse(parts[2]);
 
+                int dueWeek = loadedTask.dueDate.get(weekOfYear);
+
                 if (paramType == 'M'
                         && paramDate.getYear() == loadedTask.dueDate.getYear()
-                        && paramDate.getMonth() == loadedTask.dueDate.getMonth()) {
+                        && paramDate.getMonthValue() == loadedTask.dueDate.getMonthValue()) {
+                    taskList.add(loadedTask);
+                } else if (paramType == 'W'
+                        && paramDate.getYear() == loadedTask.dueDate.getYear()
+                        && paramWeek == dueWeek) {
                     taskList.add(loadedTask);
                 } else if (paramType == 'D'
                         && paramDate.getYear() == loadedTask.dueDate.getYear()
-                        && paramDate.getMonth() == loadedTask.dueDate.getMonth()
-                        && paramDate.getDayOfMonth() == loadedTask.dueDate.getDayOfMonth()) {
+                        && paramDate.getDayOfYear() == loadedTask.dueDate.getDayOfYear()) {
                     taskList.add(loadedTask);
                 }
             }
