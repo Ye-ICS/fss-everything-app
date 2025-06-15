@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.control.ScrollPane;
+
 public class DateManager {
 
     protected String dateName;
@@ -18,7 +20,10 @@ public class DateManager {
 
     private ArrayList<DateManager> dateList;
 
-    DateManager() {
+    DateManager() { // Superclass constructor
+    }
+
+    DateManager(ScrollPane dateListPane) {
         loadDates();
     }
 

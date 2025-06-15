@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskManager extends DateManager {
+    ArrayList<TaskManager> taskList;
 
     TaskManager() {
     }
@@ -23,7 +24,7 @@ public class TaskManager extends DateManager {
 
     @Override
     protected ArrayList loadDates() { // Loads all tasks
-        ArrayList<TaskManager> taskList = new ArrayList<TaskManager>();
+        taskList = new ArrayList<TaskManager>();
         Scanner scanner;
 
         try {
@@ -63,7 +64,7 @@ public class TaskManager extends DateManager {
             e.printStackTrace();
             return;
         }
-        writer.print("T," + taskName + "," + dueDate);
+        writer.println("T," + taskName + "," + dueDate);
         writer.close();
     }
 

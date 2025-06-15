@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EventManager extends DateManager {
-    ArrayList<Event> events = new ArrayList<Event>();
+    ArrayList<EventManager> eventList;
 
     EventManager() {
         loadDates();
@@ -25,7 +25,7 @@ public class EventManager extends DateManager {
 
     @Override
     protected ArrayList loadDates() { // Loads all events
-        ArrayList<EventManager> eventList = new ArrayList<EventManager>();
+        eventList = new ArrayList<EventManager>();
         Scanner scanner;
 
         try {
@@ -66,7 +66,7 @@ public class EventManager extends DateManager {
             e.printStackTrace();
             return;
         }
-        writer.print("E," + eventName + "," + startDate + "," + endDate);
+        writer.println("E," + eventName + "," + startDate + "," + endDate);
         writer.close();
     }
 

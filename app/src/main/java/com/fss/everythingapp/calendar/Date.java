@@ -21,7 +21,7 @@ public class Date {
 
     private ArrayList<Date> dateList;
 
-    Date() { // Not sure why we need this, but our code is broken without it ¯\_(ツ)_/¯
+    Date() { // Superclass constructor
     }
 
     Date(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear & Year

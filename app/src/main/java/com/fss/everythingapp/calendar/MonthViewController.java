@@ -17,6 +17,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -53,23 +56,30 @@ public class MonthViewController {
     }
 
     private void fillDatePane() {
-        DateManager dateLoader = new DateManager();
+        DateManager dateLoader = new DateManager(dateListPane);
 
-        Circle icon = new Circle();
-        icon.setRadius(10);
-        icon.setStrokeWidth(2.0);
+        VBox dateListBox = new VBox();
+        dateListPane.setContent(dateListBox);
 
         for (int i = 0; i < dateLoader.getDateList().size(); i++) {
 
-            DateManager loadedDate = dateLoader.getDateList().get(i);
-
             HBox dateBox = new HBox();
-            dateListPane.setContent(dateBox);
             dateBox.setAlignment(Pos.CENTER_LEFT);
+            dateBox.setPrefWidth(335);
+            dateListBox.getChildren().addAll(dateBox);
+            VBox.setMargin(dateBox, new Insets(1, 0, 1, 0));
+
+            Circle icon = new Circle();
+            icon.setRadius(10);
+            icon.setStrokeWidth(2.0);
+            HBox.setMargin(icon, new Insets(1, 5, 1, 5));
+
+            DateManager loadedDate = dateLoader.getDateList().get(i);
 
             Label dateNameLabel = new Label();
             dateNameLabel.setPrefWidth(175);
             dateNameLabel.setText(loadedDate.getDateName());
+            HBox.setMargin(dateNameLabel, new Insets(0, 10, 0, 10));
 
             if (loadedDate.getDateType() == 'T') {
                 icon.setFill(Color.RED);
@@ -79,7 +89,6 @@ public class MonthViewController {
                 dueDateLabel.setText(dueDate.toString());
 
                 dateBox.getChildren().addAll(icon, dateNameLabel, dueDateLabel);
-                HBox.setMargin(dateNameLabel, new Insets(0, 10, 0, 10));
             } else {
                 icon.setFill(Color.CORNFLOWERBLUE);
 
@@ -88,10 +97,14 @@ public class MonthViewController {
                 startDateLabel.setText(startDate.toString());
 
                 dateBox.getChildren().addAll(icon, dateNameLabel, startDateLabel);
-                HBox.setMargin(dateNameLabel, new Insets(0, 10, 0, 10));
             }
+
+            if (i % 2 != 0) {
+                dateBox.setBackground(
+                        new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+            }
+
         }
-        HBox.setMargin(icon, new Insets(2, 5, 0, 5));
     }
 
     private void fillCalendar() {
