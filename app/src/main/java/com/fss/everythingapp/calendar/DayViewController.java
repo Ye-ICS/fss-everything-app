@@ -2,6 +2,8 @@ package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
 
+import com.fss.everythingapp.app.App;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,11 +30,8 @@ public class DayViewController {
     }
 
     @FXML
-    void exit(ActionEvent event) throws IOException {
-        Parent mainMenu = (Parent) FXMLLoader
-                .load(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
-
-        rootContainer.getScene().setRoot(mainMenu);
+    private void exit(ActionEvent actionEvent) throws IOException {
+        App.backToMainMenu();
     }
 
     @FXML

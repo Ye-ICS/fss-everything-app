@@ -68,7 +68,30 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="0.0" prefWidth="28.0" text="0:00" />
+            <Label alignment="CENTER" text="0:00" />
+            <Label alignment="CENTER" text="1:00" GridPane.rowIndex="1" />
+            <Label text="2:00" GridPane.rowIndex="2" />
+            <Label text="3:00" GridPane.rowIndex="3" />
+            <Label text="4:00" GridPane.rowIndex="4" />
+            <Label text="5:00" GridPane.rowIndex="5" />
+            <Label text="6:00" GridPane.rowIndex="6" />
+            <Label text="7:00" GridPane.rowIndex="7" />
+            <Label text="8:00" GridPane.rowIndex="8" />
+            <Label text="9:00" GridPane.rowIndex="9" />
+            <Label text="10:00" GridPane.rowIndex="10" />
+            <Label text="11:00" GridPane.rowIndex="11" />
+            <Label text="12:00" GridPane.rowIndex="12" />
+            <Label text="13:00" GridPane.rowIndex="13" />
+            <Label text="14:00" GridPane.rowIndex="14" />
+            <Label text="15:00" GridPane.rowIndex="15" />
+            <Label text="16:00" GridPane.rowIndex="16" />
+            <Label text="17:00" GridPane.rowIndex="17" />
+            <Label text="18:00" GridPane.rowIndex="18" />
+            <Label text="19:00" GridPane.rowIndex="19" />
+            <Label text="20:00" GridPane.rowIndex="20" />
+            <Label text="21:00" GridPane.rowIndex="21" />
+            <Label text="22:00" GridPane.rowIndex="22" />
+            <Label text="23:00" GridPane.rowIndex="23" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">

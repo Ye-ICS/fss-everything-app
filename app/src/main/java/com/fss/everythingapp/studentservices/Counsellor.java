@@ -1,4 +1,4 @@
-package com.fss.everythingapp.studentservices;
+package com.fss.everythingapp.studentServices;
 
 
 class Counsellor {
