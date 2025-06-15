@@ -12,13 +12,12 @@ import java.util.Scanner;
 public class EventManager extends DateManager {
     ArrayList<Event> events = new ArrayList<Event>();
 
-    
     EventManager() {
         loadDates();
     }
 
     EventManager(String eventName, LocalDateTime startDate, LocalDateTime endDate) {
-        saveEvent(dateName, startDate, endDate);
+        saveEvent(eventName, startDate, endDate);
     }
 
     EventManager(ArrayList<EventManager> eventList) { // Blank constructor
