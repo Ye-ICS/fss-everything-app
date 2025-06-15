@@ -1,7 +1,8 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
@@ -34,12 +35,13 @@ public class CreateTaskController {
     private TextField taskNameField;
 
     @FXML
-    void createTask(ActionEvent event) throws IOException {
+    void createTask(ActionEvent event) throws IOException, ParseException {
         String taskName = taskNameField.getText();
 
-        LocalDate localDueDate = dueDatePicker.getValue();
-        String dueDate = localDueDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        dueDate = dueDate.concat("/" + dueHourField.getText() + ":" + dueMinField.getText());
+        String dueDateString = dueDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
+        LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
+        System.out.println(dueDate);
 
         TaskManager taskMan = new TaskManager(taskName, dueDate);
 

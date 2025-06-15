@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.CreateEventController">
+<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.CreateEventController">
    <children>
       <Label alignment="CENTER" text="Create New Event">
          <VBox.margin>
@@ -24,12 +24,14 @@
             <Insets bottom="20.0" left="35.0" right="35.0" />
          </VBox.margin>
       </TextField>
-      <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="125.0" promptText="Start Date">
+      <Label text="Start Date" />
+      <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="125.0" promptText="yyyy-mm-dd">
          <VBox.margin>
             <Insets bottom="15.0" />
          </VBox.margin>
       </DatePicker>
-      <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="125.0" promptText="End Date">
+      <Label text="End Date" />
+      <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="125.0" promptText="yyyy-mm-dd">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
