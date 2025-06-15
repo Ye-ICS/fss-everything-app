@@ -103,7 +103,6 @@ public class WeekViewController {
                 dateBox.setBackground(
                         new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
             }
-
         }
     }
 

@@ -39,7 +39,33 @@ public class CreateTaskController {
         String taskName = taskNameField.getText();
 
         String dueDateString = dueDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
+
+        if (dueHourField.getText().length() != 2 || dueMinField.getText().length() != 2) {
+            dueDateString = dueDateString.concat("T");
+
+            if (dueHourField.getText().length() < 2) {
+                dueDateString = dueDateString.concat("0" + dueHourField.getText());
+            } else if (dueHourField.getText().length() > 2) {
+                dueDateString = dueDateString.concat(dueHourField.getText().substring(0, 2));
+            } else {
+                dueDateString = dueDateString.concat(dueHourField.getText());
+            }
+
+            dueDateString = dueDateString.concat(":");
+
+            if (dueMinField.getText().length() < 2) {
+                dueDateString = dueDateString.concat(dueMinField.getText() + "0");
+            } else if (dueMinField.getText().length() > 2) {
+                dueDateString = dueDateString.concat(dueMinField.getText().substring(0, 2));
+            } else {
+                dueDateString = dueDateString.concat(dueMinField.getText());
+            }
+
+            System.out.println(dueDateString);
+        } else {
+            dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
+        }
+
         LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
 
         @SuppressWarnings("unused")

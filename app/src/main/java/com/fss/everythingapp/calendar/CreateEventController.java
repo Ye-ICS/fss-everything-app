@@ -48,11 +48,59 @@ public class CreateEventController {
         String eventName = eventNameField.getText();
 
         String startDateString = startDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        startDateString = startDateString.concat("T" + startHourField.getText() + ":" + startMinField.getText());
+
+        if (startHourField.getText().length() != 2 || startMinField.getText().length() != 2) {
+            startDateString = startDateString.concat("T");
+
+            if (startHourField.getText().length() < 2) {
+                startDateString = startDateString.concat("0" + startHourField.getText());
+            } else if (startHourField.getText().length() > 2) {
+                startDateString = startDateString.concat(startHourField.getText().substring(0, 2));
+            } else {
+                startDateString = startDateString.concat(startHourField.getText());
+            }
+
+            startDateString = startDateString.concat(":");
+
+            if (startMinField.getText().length() < 2) {
+                startDateString = startDateString.concat(startMinField.getText() + "0");
+            } else if (startMinField.getText().length() > 2) {
+                startDateString = startDateString.concat(startMinField.getText().substring(0, 2));
+            } else {
+                startDateString = startDateString.concat(startMinField.getText());
+            }
+        } else {
+            startDateString = startDateString.concat("T" + startHourField.getText() + ":" + startMinField.getText());
+        }
+
         LocalDateTime startDate = LocalDateTime.parse(startDateString);
 
         String endDateString = endDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        endDateString = endDateString.concat("T" + endHourField.getText() + ":" + endMinField.getText());
+
+        if (endHourField.getText().length() != 2 || endMinField.getText().length() != 2) {
+            endDateString = endDateString.concat("T");
+
+            if (endHourField.getText().length() < 2) {
+                endDateString = endDateString.concat("0" + endHourField.getText());
+            } else if (endHourField.getText().length() > 2) {
+                endDateString = endDateString.concat(endHourField.getText().substring(0, 2));
+            } else {
+                endDateString = endDateString.concat(endHourField.getText());
+            }
+
+            endDateString = endDateString.concat(":");
+
+            if (endMinField.getText().length() < 2) {
+                endDateString = endDateString.concat(endMinField.getText() + "0");
+            } else if (endMinField.getText().length() > 2) {
+                endDateString = endDateString.concat(endMinField.getText().substring(0, 2));
+            } else {
+                endDateString = endDateString.concat(endMinField.getText());
+            }
+        } else {
+            endDateString = endDateString.concat("T" + endHourField.getText() + ":" + endMinField.getText());
+        }
+
         LocalDateTime endDate = LocalDateTime.parse(endDateString);
 
         @SuppressWarnings("unused")
