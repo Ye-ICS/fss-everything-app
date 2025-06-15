@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.CreateEventController">
+<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.CreateEventController">
    <children>
       <Label alignment="CENTER" text="Create New Event">
          <VBox.margin>
@@ -67,7 +67,7 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="335.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#cancel" text="Cancel">
+            <Button mnemonicParsing="false" onAction="#back" text="Back">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
@@ -78,6 +78,10 @@
                </HBox.margin>
             </Button>
          </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
       </HBox>
+      <Button mnemonicParsing="false" onAction="#cancel" text="Cancel" />
    </children>
 </VBox>

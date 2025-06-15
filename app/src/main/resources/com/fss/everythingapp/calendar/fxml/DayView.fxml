@@ -14,7 +14,7 @@
    <children>
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">
          <children>
-            <Button mnemonicParsing="false" text="Day">
+            <Button mnemonicParsing="false" onAction="#setMonthView" text="Month">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -24,7 +24,7 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#setMonthView" text="Month">
+            <Button mnemonicParsing="false" text="Day">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -96,7 +96,7 @@
       </GridPane>
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">
          <children>
-            <Button mnemonicParsing="false" onAction="#exit" text="Exit">
+            <Button mnemonicParsing="false" onAction="#back" text="Back">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>

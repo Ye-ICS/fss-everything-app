@@ -51,7 +51,7 @@ public class MonthViewController {
     }
 
     @FXML
-    private void exit(ActionEvent actionEvent) throws IOException {
+    private void back(ActionEvent actionEvent) throws IOException {
         App.backToMainMenu();
     }
 

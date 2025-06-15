@@ -43,7 +43,7 @@ public class DayViewController {
     }
 
     @FXML
-    private void exit(ActionEvent actionEvent) throws IOException {
+    private void back(ActionEvent actionEvent) throws IOException {
         App.backToMainMenu();
     }
 

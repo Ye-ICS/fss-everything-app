@@ -51,6 +51,13 @@ public class CreateTaskController {
     }
 
     @FXML
+    void back(ActionEvent event) throws IOException {
+        Parent home = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateDate.fxml"));
+        rootContainer.getScene().setRoot(home);
+    }
+
+    @FXML
     void cancel(ActionEvent event) throws IOException {
         Parent home = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
