@@ -1,7 +1,9 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.fss.everythingapp.app.App;
 
@@ -11,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -24,7 +28,17 @@ public class MonthViewController {
     private VBox rootContainer;
 
     @FXML
+    private Button loadButton;
+
+    @FXML
     private ScrollPane dateListPane;
+
+    @FXML
+    private DatePicker datePicker;
+
+    public void initialize() {
+        loadButton.fire();
+    }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
@@ -38,8 +52,7 @@ public class MonthViewController {
         App.backToMainMenu();
     }
 
-    @FXML
-    void loadDates(ActionEvent event) {
+    private void fillDatePane() {
         DateManager dateLoader = new DateManager();
 
         Circle icon = new Circle();
@@ -79,6 +92,32 @@ public class MonthViewController {
             }
         }
         HBox.setMargin(icon, new Insets(2, 5, 0, 5));
+    }
+
+    private void fillCalendar() {
+        LocalDate paramDate;
+        try {
+            paramDate = LocalDate.parse(datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            paramDate = LocalDate.now();
+        }
+        Date dateLoader = new Date('M', paramDate);
+
+        for (int i = 0; i < dateLoader.getDateList().size(); i++) {
+            Date loadedDate = dateLoader.getDateList().get(i);
+
+            // To Do:
+            // Populate GridPane with dates recieved
+
+        }
+    }
+
+    @FXML
+    void loadDates(ActionEvent event) {
+        fillDatePane();
+        // fillCalendar();
+        // ^ uncomment this when method is complete
     }
 
     @FXML

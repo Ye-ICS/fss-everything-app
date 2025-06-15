@@ -3,24 +3,27 @@ package com.fss.everythingapp.calendar;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Event extends Date {
 
     private ArrayList<Event> eventList;
 
-    Event(char paramType, LocalDateTime paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
-
+    Event(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear & Year
+        loadAptDates(paramType, paramDate);
     }
 
     Event(ArrayList<Event> eventList) { // Blank constructor
     }
 
     @Override
-    protected ArrayList loadAptDates(char paramType, LocalDateTime paramDate) {
+    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
         // loads all dates with a specific parameter
         eventList = new ArrayList<Event>();
         Scanner scanner;
@@ -40,23 +43,33 @@ public class Event extends Date {
             String[] parts = line.split(",");
             loadedEvent.dateName = parts[1];
 
+            TemporalField weekOfYear = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            int paramWeek = paramDate.get(weekOfYear);
+
             if (parts[0].charAt(0) == 'E') { // If the current date is an event
                 loadedEvent.startDate = LocalDateTime.parse(parts[2]);
                 loadedEvent.endDate = LocalDateTime.parse(parts[3]);
 
+                int startWeek = loadedEvent.dueDate.get(weekOfYear);
+                int endWeek = loadedEvent.dueDate.get(weekOfYear);
+
                 if (paramType == 'M'
-                        && paramDate.getYear() <= loadedEvent.startDate.getYear()
+                        && paramDate.getYear() >= loadedEvent.startDate.getYear()
                         && paramDate.getYear() <= loadedEvent.endDate.getYear()
                         && paramDate.getMonthValue() >= loadedEvent.startDate.getMonthValue()
-                        && paramDate.getMonthValue() >= loadedEvent.endDate.getMonthValue()) {
+                        && paramDate.getMonthValue() <= loadedEvent.endDate.getMonthValue()) {
+                    eventList.add(loadedEvent);
+                } else if (paramType == 'W'
+                        && paramDate.getYear() >= loadedEvent.startDate.getYear()
+                        && paramDate.getYear() <= loadedEvent.endDate.getYear()
+                        && paramWeek >= startWeek
+                        && paramWeek <= endWeek) {
                     eventList.add(loadedEvent);
                 } else if (paramType == 'D'
-                        && paramDate.getYear() <= loadedEvent.startDate.getYear()
+                        && paramDate.getYear() >= loadedEvent.startDate.getYear()
                         && paramDate.getYear() <= loadedEvent.endDate.getYear()
-                        && paramDate.getMonthValue() >= loadedEvent.startDate.getMonthValue()
-                        && paramDate.getMonthValue() >= loadedEvent.endDate.getMonthValue()
-                        && paramDate.getDayOfMonth() <= loadedEvent.startDate.getDayOfMonth()
-                        && paramDate.getDayOfMonth() <= loadedEvent.endDate.getDayOfMonth()) {
+                        && paramDate.getDayOfYear() >= loadedEvent.startDate.getDayOfYear()
+                        && paramDate.getDayOfYear() <= loadedEvent.endDate.getDayOfYear()) {
                     eventList.add(loadedEvent);
                 }
             }

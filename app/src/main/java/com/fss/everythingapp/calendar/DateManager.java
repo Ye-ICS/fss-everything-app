@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,7 +46,6 @@ public class DateManager {
             loadedDate.dateType = parts[0].charAt(0);
             loadedDate.dateName = parts[1];
 
-            System.out.println("dateType = " + loadedDate.dateType);
             if (loadedDate.dateType == 'T') {
                 loadedDate.dueDate = LocalDateTime.parse(parts[2]);
             } else {
@@ -56,7 +54,6 @@ public class DateManager {
 
             }
             dateList.add(loadedDate);
-            System.out.println(dateList.size());
         }
         scanner.close();
         return dateList;

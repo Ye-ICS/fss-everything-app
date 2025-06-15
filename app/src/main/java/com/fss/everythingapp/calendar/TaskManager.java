@@ -6,21 +6,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskManager extends DateManager {
-    private String taskName;
-    private LocalDateTime dueDate;
 
     TaskManager() {
     }
 
     TaskManager(String taskName, LocalDateTime dueDate) {
-        this.taskName = taskName;
-        this.dueDate = dueDate;
-
         saveTask(taskName, dueDate);
     }
 
@@ -46,7 +40,7 @@ public class TaskManager extends DateManager {
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            loadedTask.taskName = parts[1];
+            loadedTask.dateName = parts[1];
 
             if (parts[0].charAt(0) == 'T') {
                 loadedTask.dueDate = LocalDateTime.parse(parts[2]);
@@ -71,9 +65,6 @@ public class TaskManager extends DateManager {
         }
         writer.print("T," + taskName + "," + dueDate);
         writer.close();
-    }
-
-    static void selectEvent() { // Displays event information
     }
 
 }

@@ -41,8 +41,8 @@ public class CreateTaskController {
         String dueDateString = dueDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
         LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
-        System.out.println(dueDate);
 
+        @SuppressWarnings("unused")
         TaskManager taskMan = new TaskManager(taskName, dueDate);
 
         Parent openCalendar = (Parent) FXMLLoader

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.MonthViewController">
+<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.MonthViewController">
    <children>
       <HBox alignment="CENTER" minHeight="30.0" prefHeight="30.0" prefWidth="335.0" style="-fx-background-color: LIGHTGREY;">
          <children>
@@ -69,7 +69,7 @@
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#loadDates" text="Load">
+            <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadDates" text="Load">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
