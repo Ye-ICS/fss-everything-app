@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootContainer" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label text="Student Services Apointments" BorderPane.alignment="CENTER">
          <font>
@@ -29,7 +29,7 @@
             <SplitPane dividerPositions="0.4178082191780822" maxWidth="-Infinity" translateX="120.0">
               <items>
                   <TextField promptText="Name" />
-                  <ChoiceBox />
+                  <ChoiceBox fx:id="gradeBox" />
               </items>
             </SplitPane>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterBtnPressed" text="Enter" textAlignment="CENTER" />
