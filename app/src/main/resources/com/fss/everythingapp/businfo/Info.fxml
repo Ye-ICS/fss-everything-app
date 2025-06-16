@@ -15,7 +15,7 @@
          <bottom>
             <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
-                <Button mnemonicParsing="false" onAction="#quit" text="Exit" />
+                <Button mnemonicParsing="false" onAction="#quit" text="Back" />
               </items>
             </ToolBar>
          </bottom>
