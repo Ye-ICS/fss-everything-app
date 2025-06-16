@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Choose a Date" />
+            <ChoiceBox fx:id="dateBox" />
+            <Button mnemonicParsing="false" onAction="#enterBtnPressed1" text="Enter Date" />
+            <Separator />
+            <Label text="Choose a Timeslot" />
+            <ChoiceBox fx:id="timeBox" />
+            <Button mnemonicParsing="false" onAction="#enterBtnPressed2" text="Enter Time" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <ButtonBar BorderPane.alignment="CENTER">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#onExitBtnPressed" text="Exit" />
+        </buttons>
+      </ButtonBar>
+   </bottom>
+</BorderPane>
