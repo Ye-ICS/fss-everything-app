@@ -160,7 +160,8 @@ public class MonthViewController {
         int daysInMonth = 31; // temp
         Label[] dateLabels = new Label[daysInMonth];
         for (int i = 0; i < daysInMonth; i++) {
-            dateLabels[i].setText(date + "");
+            dateLabels[i].setText(date + i + "");
+            // add dateLabels[i] to gridpane
         }
     }
 

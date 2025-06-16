@@ -127,10 +127,7 @@ public class WeekViewController {
     }
 
     @FXML
-    void loadDates(ActionEvent event) {
-        fillDatePane();
-        // fillCalendar();
-        // ^ uncomment when method is complete
+    void loadDateLabels(ActionEvent event) {
         LocalDate currentDate = LocalDate.now();
         System.out.println("Current Date: " + currentDate);
 
@@ -228,6 +225,14 @@ public class WeekViewController {
                 dateVBox[i].getChildren().add(dateLabel[i]);
             }
         }
+    }
+
+    @FXML
+    void loadDates(ActionEvent event) {
+        fillDatePane();
+        // fillCalendar();
+        // ^ uncomment when method is complete
+
     }
 
     @FXML

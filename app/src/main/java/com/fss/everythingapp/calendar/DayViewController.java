@@ -62,13 +62,13 @@ public class DayViewController {
 
         // for (int i = 0; i < dateLoader.getDateList().size(); i++) {
         // Date loadedDate = dateLoader.getDateList().get(i);
-
+        // }
         // // To Do:
         // // Populate GridPane with dates recieved
 
         // }
 
-        // ^ uncomment this when method is complete
+        // //^ uncomment this when method is complete
 
     }
 
