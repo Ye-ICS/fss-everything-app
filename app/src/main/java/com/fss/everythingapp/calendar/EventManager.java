@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javafx.scene.control.ScrollPane;
+
 public class EventManager extends DateManager {
     ArrayList<Event> eventList;
 
-    EventManager() {
+    EventManager(ScrollPane dateListPane) {
         loadDates();
     }
 
