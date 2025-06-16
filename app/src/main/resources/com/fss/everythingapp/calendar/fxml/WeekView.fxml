@@ -56,7 +56,7 @@
             <Point3D />
          </rotationAxis>
       </GridPane>
-      <ScrollPane fx:id="dateListPane" prefHeight="250.0" prefWidth="335.0" />
+      <ScrollPane fx:id="dateListPane" hbarPolicy="NEVER" prefHeight="250.0" prefWidth="335.0" />
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">
          <children>
             <Button mnemonicParsing="false" onAction="#back" text="Back">

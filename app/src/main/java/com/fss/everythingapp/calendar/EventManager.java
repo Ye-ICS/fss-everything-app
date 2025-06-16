@@ -1,23 +1,21 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class EventManager extends DateManager {
-    ArrayList<EventManager> eventList;
+    ArrayList<Event> eventList;
 
     EventManager() {
         loadDates();
-    }
-
-    EventManager(String eventName, LocalDateTime startDate, LocalDateTime endDate) {
-        saveEvent(eventName, startDate, endDate);
     }
 
     EventManager(ArrayList<EventManager> eventList) { // Blank constructor
@@ -25,7 +23,7 @@ public class EventManager extends DateManager {
 
     @Override
     protected ArrayList loadDates() { // Loads all events
-        eventList = new ArrayList<EventManager>();
+        eventList = new ArrayList<Event>();
         Scanner scanner;
 
         try {
@@ -38,7 +36,7 @@ public class EventManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            EventManager loadedEvent = new EventManager(eventList);
+            Event loadedEvent = new Event();
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
@@ -55,21 +53,63 @@ public class EventManager extends DateManager {
         return eventList;
     }
 
-    protected void saveEvent(String eventName, LocalDateTime startDate, LocalDateTime endDate) {
-        PrintWriter writer;
+    // @Override
+    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
+        // loads all dates with a specific parameter
+        eventList = new ArrayList<Event>();
+        Scanner scanner;
+
         try {
-            writer = new PrintWriter(new FileWriter(
-                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
-            // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive -
-            // Limestone DSB/Documents/testFile.txt"), true));
+            scanner = new Scanner(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return;
+            return eventList;
         }
-        writer.println("E," + eventName + "," + startDate + "," + endDate);
-        writer.close();
+
+        while (scanner.hasNextLine()) {
+            Event loadedEvent = new Event();
+
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+            loadedEvent.dateName = parts[1];
+
+            TemporalField weekOfYear = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            int paramWeek = paramDate.get(weekOfYear);
+
+            if (parts[0].charAt(0) == 'E') { // If the current date is an event
+                loadedEvent.startDate = LocalDateTime.parse(parts[2]);
+                loadedEvent.endDate = LocalDateTime.parse(parts[3]);
+
+                int startWeek = loadedEvent.dueDate.get(weekOfYear);
+                int endWeek = loadedEvent.dueDate.get(weekOfYear);
+
+                if (paramType == 'M'
+                        && paramDate.getYear() >= loadedEvent.startDate.getYear()
+                        && paramDate.getYear() <= loadedEvent.endDate.getYear()
+                        && paramDate.getMonthValue() >= loadedEvent.startDate.getMonthValue()
+                        && paramDate.getMonthValue() <= loadedEvent.endDate.getMonthValue()) {
+                    eventList.add(loadedEvent);
+                } else if (paramType == 'W'
+                        && paramDate.getYear() >= loadedEvent.startDate.getYear()
+                        && paramDate.getYear() <= loadedEvent.endDate.getYear()
+                        && paramWeek >= startWeek
+                        && paramWeek <= endWeek) {
+                    eventList.add(loadedEvent);
+                } else if (paramType == 'D'
+                        && paramDate.getYear() >= loadedEvent.startDate.getYear()
+                        && paramDate.getYear() <= loadedEvent.endDate.getYear()
+                        && paramDate.getDayOfYear() >= loadedEvent.startDate.getDayOfYear()
+                        && paramDate.getDayOfYear() <= loadedEvent.endDate.getDayOfYear()) {
+                    eventList.add(loadedEvent);
+                }
+            }
+        }
+        scanner.close();
+        return eventList;
     }
 
-    static void selectEvent() { // Displays event information
+    ArrayList<Event> getEventList() {
+        return this.eventList;
     }
 }

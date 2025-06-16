@@ -60,8 +60,6 @@ public class CreateTaskController {
             } else {
                 dueDateString = dueDateString.concat(dueMinField.getText());
             }
-
-            System.out.println(dueDateString);
         } else {
             dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
         }
@@ -69,7 +67,7 @@ public class CreateTaskController {
         LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
 
         @SuppressWarnings("unused")
-        TaskManager taskMan = new TaskManager(taskName, dueDate);
+        Task saveTask = new Task(taskName, dueDate);
 
         Parent openCalendar = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));

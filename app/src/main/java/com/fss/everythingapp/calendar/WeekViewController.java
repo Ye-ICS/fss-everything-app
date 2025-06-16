@@ -74,7 +74,7 @@ public class WeekViewController {
             icon.setStrokeWidth(2.0);
             HBox.setMargin(icon, new Insets(1, 5, 1, 5));
 
-            DateManager loadedDate = dateLoader.getDateList().get(i);
+            Date loadedDate = dateLoader.getDateList().get(i);
 
             Label dateNameLabel = new Label();
             dateNameLabel.setPrefWidth(175);
@@ -114,7 +114,7 @@ public class WeekViewController {
             e.printStackTrace();
             paramDate = LocalDate.now();
         }
-        Date dateLoader = new Date('W', paramDate);
+        DateManager dateLoader = new DateManager('W', paramDate);
 
         for (int i = 0; i < dateLoader.getDateList().size(); i++) {
             Date loadedDate = dateLoader.getDateList().get(i);

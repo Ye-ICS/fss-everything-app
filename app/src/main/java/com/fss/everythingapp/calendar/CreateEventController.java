@@ -104,7 +104,7 @@ public class CreateEventController {
         LocalDateTime endDate = LocalDateTime.parse(endDateString);
 
         @SuppressWarnings("unused")
-        EventManager eventMan = new EventManager(eventName, startDate, endDate);
+        Event saveEvent = new Event(eventName, startDate, endDate);
 
         Parent openCalendar = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
