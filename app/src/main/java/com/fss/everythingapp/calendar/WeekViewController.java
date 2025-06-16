@@ -123,7 +123,10 @@ public class WeekViewController {
 
         for (int i = 0; i < dateLoader.getDateList().size(); i++) {
             Date loadedDate = dateLoader.getDateList().get(i);
+            Label label = new Label();
 
+            label.setText(loadedDate.dateName);
+            CalendarGridPane.getChildren().add(label);
             // To Do:
             // Populate GridPane with dates recieved
 
