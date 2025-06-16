@@ -40,15 +40,46 @@ public class CreateTaskController {
         String taskName = taskNameField.getText();
 
         String dueDateString = dueDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
-        LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
-        System.out.println(dueDate);
 
-        TaskManager taskMan = new TaskManager(taskName, dueDate);
+        if (dueHourField.getText().length() != 2 || dueMinField.getText().length() != 2) {
+            dueDateString = dueDateString.concat("T");
+
+            if (dueHourField.getText().length() < 2) {
+                dueDateString = dueDateString.concat("0" + dueHourField.getText());
+            } else if (dueHourField.getText().length() > 2) {
+                dueDateString = dueDateString.concat(dueHourField.getText().substring(0, 2));
+            } else {
+                dueDateString = dueDateString.concat(dueHourField.getText());
+            }
+
+            dueDateString = dueDateString.concat(":");
+
+            if (dueMinField.getText().length() < 2) {
+                dueDateString = dueDateString.concat(dueMinField.getText() + "0");
+            } else if (dueMinField.getText().length() > 2) {
+                dueDateString = dueDateString.concat(dueMinField.getText().substring(0, 2));
+            } else {
+                dueDateString = dueDateString.concat(dueMinField.getText());
+            }
+        } else {
+            dueDateString = dueDateString.concat("T" + dueHourField.getText() + ":" + dueMinField.getText());
+        }
+
+        LocalDateTime dueDate = LocalDateTime.parse(dueDateString);
+
+        @SuppressWarnings("unused")
+        Task saveTask = new Task(taskName, dueDate);
 
         Parent openCalendar = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(openCalendar);
+    }
+
+    @FXML
+    void back(ActionEvent event) throws IOException {
+        Parent home = (Parent) FXMLLoader
+                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/CreateDate.fxml"));
+        rootContainer.getScene().setRoot(home);
     }
 
     @FXML

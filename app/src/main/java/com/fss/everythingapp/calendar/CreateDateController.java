@@ -28,7 +28,7 @@ public class CreateDateController {
     }
 
     @FXML
-    void cancel(ActionEvent event) throws IOException {
+    void back(ActionEvent event) throws IOException {
         Parent home = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(home);

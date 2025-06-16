@@ -1,69 +1,30 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Task extends Date {
-    protected int[] dueDateInfo;
-
-    String taskName;
-
-    ArrayList<Task> taskList;
-
-    Task(char paramType, LocalDateTime paramDate) { // 'M' = Month & Year | 'D' = Day, Month & Year
-
+    Task() {
     }
 
-    Task(ArrayList<Task> taskList, String taskName) {
-        this.taskList = taskList;
-        this.taskName = taskName;
+    Task(String taskName, LocalDateTime dueDate) {
+        saveTask(taskName, dueDate);
     }
 
-    @Override
-    protected ArrayList loadAptDates(char paramType, LocalDateTime paramDate) {
-        // loads all dates with a specific parameter
-        taskList = new ArrayList<Task>();
-        Scanner scanner;
-
+    private void saveTask(String taskName, LocalDateTime dueDate) {
+        PrintWriter writer;
         try {
-            scanner = new Scanner(
-                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
+            writer = new PrintWriter(new FileWriter(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return taskList;
+            return;
         }
-        while (scanner.hasNextLine()) {
-            Task loadedTask = new Task(taskList, taskName);
-
-            String line = scanner.nextLine();
-            String[] parts = line.split(",");
-            loadedTask.dateName = parts[1];
-
-            if (parts[0].charAt(0) == 'T') { // If the current date is a task
-                loadedTask.dueDate = LocalDateTime.parse(parts[2]);
-
-                if (paramType == 'M'
-                        && paramDate.getYear() == loadedTask.dueDate.getYear()
-                        && paramDate.getMonth() == loadedTask.dueDate.getMonth()) {
-                    taskList.add(loadedTask);
-                } else if (paramType == 'D'
-                        && paramDate.getYear() == loadedTask.dueDate.getYear()
-                        && paramDate.getMonth() == loadedTask.dueDate.getMonth()
-                        && paramDate.getDayOfMonth() == loadedTask.dueDate.getDayOfMonth()) {
-                    taskList.add(loadedTask);
-                }
-            }
-        }
-        scanner.close();
-        return taskList;
-    }
-
-    ArrayList<Task> getTaskList() {
-        return this.taskList;
+        writer.println("T," + taskName + "," + dueDate);
+        writer.close();
     }
 }

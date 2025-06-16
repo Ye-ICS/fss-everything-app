@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="rootContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.DayViewController">
+<VBox fx:id="rootContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.DayViewController">
    <children>
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">
          <children>
-            <Button mnemonicParsing="false" text="Day">
+            <Button mnemonicParsing="false" onAction="#setMonthView" text="Month">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -24,7 +24,7 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#setMonthView" text="Month">
+            <Button mnemonicParsing="false" text="Day">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -68,17 +68,45 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="0.0" prefWidth="28.0" text="0:00" />
+            <Label alignment="CENTER" text="0:00" />
+            <Label alignment="CENTER" text="1:00" GridPane.rowIndex="1" />
+            <Label text="2:00" GridPane.rowIndex="2" />
+            <Label text="3:00" GridPane.rowIndex="3" />
+            <Label text="4:00" GridPane.rowIndex="4" />
+            <Label text="5:00" GridPane.rowIndex="5" />
+            <Label text="6:00" GridPane.rowIndex="6" />
+            <Label text="7:00" GridPane.rowIndex="7" />
+            <Label text="8:00" GridPane.rowIndex="8" />
+            <Label text="9:00" GridPane.rowIndex="9" />
+            <Label text="10:00" GridPane.rowIndex="10" />
+            <Label text="11:00" GridPane.rowIndex="11" />
+            <Label text="12:00" GridPane.rowIndex="12" />
+            <Label text="13:00" GridPane.rowIndex="13" />
+            <Label text="14:00" GridPane.rowIndex="14" />
+            <Label text="15:00" GridPane.rowIndex="15" />
+            <Label text="16:00" GridPane.rowIndex="16" />
+            <Label text="17:00" GridPane.rowIndex="17" />
+            <Label text="18:00" GridPane.rowIndex="18" />
+            <Label text="19:00" GridPane.rowIndex="19" />
+            <Label text="20:00" GridPane.rowIndex="20" />
+            <Label text="21:00" GridPane.rowIndex="21" />
+            <Label text="22:00" GridPane.rowIndex="22" />
+            <Label text="23:00" GridPane.rowIndex="23" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">
          <children>
-            <Button mnemonicParsing="false" onAction="#exit" text="Exit">
+            <Button mnemonicParsing="false" onAction="#back" text="Back">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
             <Button mnemonicParsing="false" onAction="#createDate" text="Create">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadDates" text="Load">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

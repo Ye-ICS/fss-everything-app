@@ -1,15 +1,17 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import com.fss.everythingapp.app.App;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.VBox;
 
 public class DayViewController {
@@ -18,10 +20,20 @@ public class DayViewController {
     private Button exitButton;
 
     @FXML
+    private Button loadButton;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
     private Button createDateButton;
 
     @FXML
     private VBox rootContainer;
+
+    public void initialize() {
+        loadButton.fire();
+    }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
@@ -31,11 +43,31 @@ public class DayViewController {
     }
 
     @FXML
-    void exit(ActionEvent event) throws IOException {
-        Parent mainMenu = (Parent) FXMLLoader
-                .load(getClass().getResource("/com/fss/everythingapp/app/fxml/Example.fxml"));
+    private void back(ActionEvent actionEvent) throws IOException {
+        App.backToMainMenu();
+    }
 
-        rootContainer.getScene().setRoot(mainMenu);
+    @FXML
+    void loadDates(ActionEvent event) {
+        // LocalDate paramDate;
+        // try {
+        // paramDate =
+        // LocalDate.parse(datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // paramDate = LocalDate.now();
+        // }
+        // Date dateLoader = new Date('D', paramDate);
+
+        // for (int i = 0; i < dateLoader.getDateList().size(); i++) {
+        // Date loadedDate = dateLoader.getDateList().get(i);
+
+        // // To Do:
+        // // Populate GridPane with dates recieved
+
+        // }
+
+        // ^ uncomment this when method is complete
     }
 
     @FXML
