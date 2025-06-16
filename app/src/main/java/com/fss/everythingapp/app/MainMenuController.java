@@ -2,7 +2,7 @@ package com.fss.everythingapp.app;
 
 import java.io.IOException;
 
-import com.fss.everythingapp.studentServices.AppointmentController;
+//import com.fss.everythingapp.studentServices.AppointmentController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,11 +41,6 @@ public class MainMenuController {
     }
 
     @FXML
-    private void openCalendar(ActionEvent actionEvent) throws IOException {
-        Parent monthView = (Parent) FXMLLoader
-                .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
-        rootContainer.getScene().setRoot(monthView);
-    }
 
     private void openSimulations(ActionEvent actionEvent) throws IOException {
         Parent simulationsLayout = (Parent) FXMLLoader

@@ -84,7 +84,7 @@ public class DayViewController {
         rootContainer.getScene().setRoot(weekView);
     }
 
-    void showDates(ActionEvent event) throws IOException, ParseException {
+    void showDates(ActionEvent event) throws IOException {
 
         // String taskName = taskNameField.getText();
 
