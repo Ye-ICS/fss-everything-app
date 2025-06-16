@@ -1,6 +1,7 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -130,6 +131,103 @@ public class WeekViewController {
         fillDatePane();
         // fillCalendar();
         // ^ uncomment when method is complete
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("Current Date: " + currentDate);
+
+        LocalDate today = LocalDate.now();
+
+        DayOfWeek dayOfWeek = today.getDayOfWeek();
+        int dayOfWeekNum = dayOfWeek.getValue(); // monday is 1, sunday is 7
+
+        // dont know if this works
+        String dateString = today + "";
+
+        int date = Integer.parseInt(dateString);
+
+        // could use case statements
+        // what if its first of the month
+        // have to add dateVBox to gridpane
+        Label[] dateLabel = new Label[7];
+        VBox[] dateVBox = new VBox[7];
+        if (dayOfWeekNum == 1) {
+            // new Label for date and add it to gridpane
+            dateLabel[0].setText(date + "");
+            dateLabel[1].setText(date + 1 + "");
+            dateLabel[2].setText(date + 2 + "");
+            dateLabel[3].setText(date + 3 + "");
+            dateLabel[4].setText(date + 4 + "");
+            dateLabel[5].setText(date + 5 + "");
+            dateLabel[6].setText(date + 6 + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        } else if (dayOfWeekNum == 2) {
+            dateLabel[0].setText(date - 1 + "");
+            dateLabel[1].setText(date + "");
+            dateLabel[2].setText(date + 1 + "");
+            dateLabel[3].setText(date + 2 + "");
+            dateLabel[4].setText(date + 3 + "");
+            dateLabel[5].setText(date + 4 + "");
+            dateLabel[6].setText(date + 5 + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        } else if (dayOfWeekNum == 3) {
+            dateLabel[0].setText(date - 2 + "");
+            dateLabel[1].setText(date - 1 + "");
+            dateLabel[2].setText(date + "");
+            dateLabel[3].setText(date + 1 + "");
+            dateLabel[4].setText(date + 2 + "");
+            dateLabel[5].setText(date + 3 + "");
+            dateLabel[6].setText(date + 4 + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        } else if (dayOfWeekNum == 4) {
+            dateLabel[0].setText(date - 3 + "");
+            dateLabel[1].setText(date - 2 + "");
+            dateLabel[2].setText(date - 1 + "");
+            dateLabel[3].setText(date + "");
+            dateLabel[4].setText(date + 1 + "");
+            dateLabel[5].setText(date + 2 + "");
+            dateLabel[6].setText(date + 3 + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        } else if (dayOfWeekNum == 5) {
+            dateLabel[0].setText(date - 4 + "");
+            dateLabel[1].setText(date - 3 + "");
+            dateLabel[2].setText(date - 2 + "");
+            dateLabel[3].setText(date - 1 + "");
+            dateLabel[4].setText(date + "");
+            dateLabel[5].setText(date + 1 + "");
+            dateLabel[6].setText(date + 2 + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        } else if (dayOfWeekNum == 6) {
+            dateLabel[0].setText(date - 5 + "");
+            dateLabel[1].setText(date - 4 + "");
+            dateLabel[2].setText(date - 3 + "");
+            dateLabel[3].setText(date - 2 + "");
+            dateLabel[4].setText(date - 1 + "");
+            dateLabel[5].setText(date + "");
+            dateLabel[6].setText(date + 1 + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        } else {
+            dateLabel[0].setText(date - 6 + "");
+            dateLabel[1].setText(date - 5 + "");
+            dateLabel[2].setText(date - 4 + "");
+            dateLabel[3].setText(date - 3 + "");
+            dateLabel[4].setText(date - 2 + "");
+            dateLabel[5].setText(date - 1 + "");
+            dateLabel[6].setText(date + "");
+            for (int i = 0; i < 7; i++) {
+                dateVBox[i].getChildren().add(dateLabel[i]);
+            }
+        }
     }
 
     @FXML

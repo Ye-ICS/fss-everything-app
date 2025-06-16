@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.WeekViewController">
+<VBox fx:id="rootContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fss.everythingapp.calendar.WeekViewController">
    <children>
       <HBox alignment="CENTER" minHeight="30.0" prefWidth="335.0" style="-fx-background-color: LIGHTGREY;">
          <children>
@@ -55,6 +55,15 @@
          <rotationAxis>
             <Point3D />
          </rotationAxis>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="6" />
+         </children>
       </GridPane>
       <ScrollPane fx:id="dateListPane" hbarPolicy="NEVER" prefHeight="250.0" prefWidth="335.0" />
       <HBox alignment="CENTER" minHeight="30.0" style="-fx-background-color: LIGHTGREY;">

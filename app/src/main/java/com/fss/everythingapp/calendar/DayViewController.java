@@ -1,6 +1,7 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -68,6 +69,7 @@ public class DayViewController {
         // }
 
         // ^ uncomment this when method is complete
+
     }
 
     @FXML
