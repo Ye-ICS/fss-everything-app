@@ -21,6 +21,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,6 +40,9 @@ public class WeekViewController {
 
     @FXML
     private VBox rootContainer;
+
+    @FXML
+    private GridPane CalendarGridPane;
 
     public void initialize() {
         loadButton.fire();
@@ -141,11 +145,12 @@ public class WeekViewController {
 
         int date = Integer.parseInt(dateString);
 
-        // could use case statements
+        // could use switch case statements
         // what if its first of the month
         // have to add dateVBox to gridpane
         Label[] dateLabel = new Label[7];
         VBox[] dateVBox = new VBox[7];
+
         if (dayOfWeekNum == 1) {
             // new Label for date and add it to gridpane
             dateLabel[0].setText(date + "");
@@ -225,6 +230,7 @@ public class WeekViewController {
                 dateVBox[i].getChildren().add(dateLabel[i]);
             }
         }
+        CalendarGridPane.getChildren().addAll(dateVBox);
     }
 
     @FXML
