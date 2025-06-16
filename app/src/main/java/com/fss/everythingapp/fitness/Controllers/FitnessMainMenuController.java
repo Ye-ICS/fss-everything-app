@@ -19,8 +19,9 @@ public class FitnessMainMenuController {
 
 
     @FXML
-    void exitFitnessApp(ActionEvent event) {
+    void exitFitnessApp(ActionEvent event) throws IOException {
         App.backToMainMenu();
+        GeneralInfo.writeToFile();
     }
     
     void saveInfo (ActionEvent event) throws IOException {
