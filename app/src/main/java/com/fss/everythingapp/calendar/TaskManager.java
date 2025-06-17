@@ -1,35 +1,33 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
+import javafx.scene.control.ScrollPane;
+
 public class TaskManager extends DateManager {
-    String taskName;
-    String dueDate;
+    ArrayList<Task> taskList;
 
-    TaskManager() {
-        loadDates();
+    TaskManager(ScrollPane dateListPane) {
     }
 
-    TaskManager(String taskName, String dueDate) {
-        this.taskName = taskName;
-        this.dueDate = dueDate;
-
-        saveTask(taskName, dueDate);
-    }
-
-    TaskManager(ArrayList<TaskManager> taskList) { // Blank constructor
+    TaskManager(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear & // Year
+        loadAptDates(paramType, paramDate);
     }
 
     @Override
     protected ArrayList loadDates() { // Loads all tasks
-        ArrayList<TaskManager> taskList = new ArrayList<TaskManager>();
+        taskList = new ArrayList<Task>();
         Scanner scanner;
 
         try {
@@ -42,24 +40,14 @@ public class TaskManager extends DateManager {
 
         while (scanner.hasNextLine()) {
 
-            TaskManager loadedTask = new TaskManager(taskList);
+            Task loadedTask = new Task();
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            taskName = parts[1];
+            loadedTask.dateName = parts[1];
 
-            if (parts[0].charAt(0) == 'T') { // If the current event is a task
-                String dueDate = parts[2];
-
-                String[] dueDateParts = dueDate.split("/");
-                dueDateInfo = new int[5];
-                dueDateInfo[0] = Integer.parseInt(dueDateParts[0]);
-                dueDateInfo[1] = Integer.parseInt(dueDateParts[1]);
-                dueDateInfo[2] = Integer.parseInt(dueDateParts[2]);
-                String[] dueTimeParts = (dueDateParts[3]).split(":");
-                dueDateInfo[3] = Integer.parseInt(dueTimeParts[0]);
-                dueDateInfo[4] = Integer.parseInt(dueTimeParts[1]);
-
+            if (parts[0].charAt(0) == 'T') {
+                loadedTask.dueDate = LocalDateTime.parse(parts[2]);
             }
 
             taskList.add(loadedTask);
@@ -68,23 +56,54 @@ public class TaskManager extends DateManager {
         return taskList;
     }
 
-    void saveTask(String taskName, String dueDate) {
-        PrintWriter writer;
+    @Override
+    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
+        // loads all dates with a specific parameter
+        taskList = new ArrayList<Task>();
+        Scanner scanner;
+
         try {
-            writer = new PrintWriter(new FileWriter(
-                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()), true));
-            // writer = new PrintWriter(new FileWriter(new File("C:/Users/gd1kt07/OneDrive -
-            // Limestone DSB/Documents/testFile.txt"), true));
+            scanner = new Scanner(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return;
+            return taskList;
         }
-        writer.println();
-        writer.print("T," + taskName + "," + dueDate);
-        writer.close();
+        while (scanner.hasNextLine()) {
+            Task loadedTask = new Task();
+
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+            loadedTask.dateName = parts[1];
+
+            TemporalField weekOfYear = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            int paramWeek = paramDate.get(weekOfYear);
+
+            if (parts[0].charAt(0) == 'T') { // If the current date is a task
+                loadedTask.dueDate = LocalDateTime.parse(parts[2]);
+
+                int dueWeek = loadedTask.dueDate.get(weekOfYear);
+
+                if (paramType == 'M'
+                        && paramDate.getYear() == loadedTask.dueDate.getYear()
+                        && paramDate.getMonthValue() == loadedTask.dueDate.getMonthValue()) {
+                    taskList.add(loadedTask);
+                } else if (paramType == 'W'
+                        && paramDate.getYear() == loadedTask.dueDate.getYear()
+                        && paramWeek == dueWeek) {
+                    taskList.add(loadedTask);
+                } else if (paramType == 'D'
+                        && paramDate.getYear() == loadedTask.dueDate.getYear()
+                        && paramDate.getDayOfYear() == loadedTask.dueDate.getDayOfYear()) {
+                    taskList.add(loadedTask);
+                }
+            }
+        }
+        scanner.close();
+        return taskList;
     }
 
-    static void selectEvent() { // Displays event information
+    ArrayList<Task> getTaskList() {
+        return this.taskList;
     }
-
 }
