@@ -110,8 +110,8 @@ public class DateManager {
                 loadedDate.startDate = LocalDateTime.parse(parts[2]);
                 loadedDate.endDate = LocalDateTime.parse(parts[3]);
 
-                int startWeek = loadedDate.dueDate.get(weekOfYear);
-                int endWeek = loadedDate.dueDate.get(weekOfYear);
+                int startWeek = loadedDate.startDate.get(weekOfYear);
+                int endWeek = loadedDate.endDate.get(weekOfYear);
 
                 if (paramType == 'M'
                         && paramDate.getYear() >= loadedDate.startDate.getYear()
