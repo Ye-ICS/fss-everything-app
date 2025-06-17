@@ -42,7 +42,7 @@ public class MonthViewController {
     private DatePicker datePicker;
 
     @FXML
-    private GridPane CalendarGridPane;
+    private GridPane calendarGridPane;
 
     public void initialize() {
         loadButton.fire();
@@ -127,6 +127,10 @@ public class MonthViewController {
 
             // To Do:
             // Populate GridPane with dates recieved
+            Label label = new Label();
+
+            label.setText(loadedDate.dateName);
+            calendarGridPane.getChildren().add(label);
 
         }
     }
@@ -166,9 +170,8 @@ public class MonthViewController {
         int num = 1;
         for (int i = temp; i < daysInMonth; i++) {
             dateLabels[i].setText(date + num + "");
-            CalendarGridPane.getChildren().add(dateLabels[i]);
+            calendarGridPane.getChildren().add(dateLabels[i]);
             num++;
-            // add dateLabels[i] to gridpane
         }
     }
 
