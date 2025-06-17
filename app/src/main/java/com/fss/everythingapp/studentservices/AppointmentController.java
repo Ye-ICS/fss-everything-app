@@ -1,58 +1,70 @@
-// package com.fss.everythingapp.studentServices;
+package com.fss.everythingapp.studentservices;
 
-// import java.io.IOException;
+import java.io.IOException;
 
-// import com.fss.everythingapp.app.App;
+import com.fss.everythingapp.app.App;
 
-// import javafx.fxml.FXML;
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.control.ChoiceBox;
-// import javafx.scene.control.TextField;
-// import javafx.scene.layout.BorderPane;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
-// public class AppointmentController {
-// @FXML
-// static String name;
-// static int grade;
-// private BorderPane rootcontainer;
+public class AppointmentController {
+    static String name;
+    static int grade;
+    @FXML
+    BorderPane rootContainer;
+    private TextField nameField;
+    @FXML
+    private ChoiceBox<Integer> gradeBox;
+    StudentServices studentServices = new StudentServices();
 
-// @FXML
-// private void enterBtnPressed() throws IOException {
-// // aquire name and grade
-// name = getName();
-// grade = getGrade();
+    public void init() {
+        nameField = new TextField();
+        ObservableList<Integer> grades = FXCollections.observableArrayList(9, 10, 11, 12);
+        gradeBox.setItems(grades);
+    }
 
-// StudentServices studentServices = new StudentServices();
-// studentServices.programRunner();
+    @FXML
+    private void enterBtnPressed(ActionEvent actionEvent) throws IOException {
+        // aquire name and grade
+        name = getName();
+        grade = getGrade();
 
-// // load to the next layout
-// FXMLLoader timeslotsLayout = new FXMLLoader(
-// getClass().getResource("/com/fss/everthingapp/studentservicesappointment/fxml/TimeslotsLayout.fxml"));
-// TimeslotsController timeslotsController = new TimeslotsController();
-// timeslotsLayout.setController(timeslotsController);
-// Parent show = timeslotsLayout.load();
-// rootcontainer.getScene().setRoot(show);
-// }
+        studentServices.programRunner();
 
-// @FXML
-// private String getName() {
-// TextField nameField = new TextField();
-// name = nameField.getText();
-// return name;
-// }
+        // load to the next layout
+        try {
+            FXMLLoader timeslotsLayout = new FXMLLoader(getClass().getResource("/com/fss/everythingapp/studentservicesappointment/fxml/TimeslotsLayout.fxml"));
+            TimeslotsController timeslotsController = new TimeslotsController();
+            timeslotsLayout.setController(timeslotsController);
+            Parent show = timeslotsLayout.load();
+            timeslotsController.initialize();
+            rootContainer.getScene().setRoot(show);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private String getName() {
+        name = nameField.getText();
+        return name;
+    }
 
-// @FXML
-// private int getGrade() {
-// ChoiceBox<Integer> gradeBox = new ChoiceBox<>();
-// gradeBox.getItems().addAll(9, 10, 11, 12);
-// grade = gradeBox.getValue();
-// return grade;
-// }
+    @FXML
+    private int getGrade() {
+        grade = gradeBox.getValue();
+        return grade;
+    }
 
-// @FXML
-// private void onExitBtnPressed(){
-// App.backToMainMenu();
-// }
-
-// }
+    @FXML
+    private void onExitBtnPressed() {
+        App.backToMainMenu();
+    }
+}

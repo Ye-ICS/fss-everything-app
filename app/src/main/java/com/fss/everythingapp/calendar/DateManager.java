@@ -62,8 +62,11 @@ public class DateManager {
     }
 
     protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
-        ArrayList<Date> dateList = new ArrayList<Date>();
+        dateList = new ArrayList<Date>();
         Scanner scanner;
+
+        System.out.println(paramType);
+        System.out.println(paramDate.toString());
 
         try {
             scanner = new Scanner(
@@ -93,6 +96,7 @@ public class DateManager {
                         && paramDate.getYear() == loadedDate.dueDate.getYear()
                         && paramDate.getMonthValue() == loadedDate.dueDate.getMonthValue()) {
                     dateList.add(loadedDate);
+                    System.out.println(loadedDate.toString());
                 } else if (paramType == 'W'
                         && paramDate.getYear() == loadedDate.dueDate.getYear()
                         && paramWeek == dueWeek) {

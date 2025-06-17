@@ -1,4 +1,4 @@
-package com.fss.everythingapp.studentServices;
+package com.fss.everythingapp.studentservices;
 
 // THIS IS MOSTLY AI GENERATED
 
@@ -43,10 +43,10 @@ public class CalendarAPI {
 
                 for (double j = 0; j < 8; j++) {
                     if (random.nextDouble() < 0.6) {
-                        Timeslot timeslot = new Timeslot(j + 9 - (j * 0.5), j + 9.5 - (j * 0.5));
+                        Timeslot timeslot = new Timeslot(true);
                         timeslots.add(timeslot);
                     } else {
-                        Timeslot timeslot = new Timeslot(null, null);
+                        Timeslot timeslot = new Timeslot(false);
                         timeslots.add(timeslot);
                     }
                 }

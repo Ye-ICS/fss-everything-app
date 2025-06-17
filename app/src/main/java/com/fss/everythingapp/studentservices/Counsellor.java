@@ -1,18 +1,18 @@
-// package com.fss.everythingapp.studentServices;
+package com.fss.everythingapp.studentservices;
 
-// class Counsellor {
-// private int id;
 
-// Counsellor(int id) {
-// this.id = id;
-// }
+class Counsellor {
+    private int id;
+    private SSCalendar calendar = CalendarAPI.getCounsellorCalendar(id);
 
-// private SSCalendar calendar = CalendarAPI.getCounsellorCalendar(id);
+    Counsellor(int id) {
+        this.id = id;
+    }
+    
+    SSCalendar getCalendar() {return this.calendar;}
 
-// SSCalendar getCalendar() {return this.calendar;}
-
-// void updateCalendar(SSCalendar calendar) {
-// this.calendar = calendar;
-// }
-
-// }
+    void updateCalendar(SSCalendar calendar) {
+        this.calendar = calendar;
+    }
+    
+}

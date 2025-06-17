@@ -13,14 +13,15 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javafx.scene.control.ScrollPane;
+
 public class TaskManager extends DateManager {
     ArrayList<Task> taskList;
 
-    TaskManager() {
+    TaskManager(ScrollPane dateListPane) {
     }
 
-    TaskManager(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear &
-                                                       // Year
+    TaskManager(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear & // Year
         loadAptDates(paramType, paramDate);
     }
 

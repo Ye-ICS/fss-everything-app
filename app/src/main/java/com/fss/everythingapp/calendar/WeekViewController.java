@@ -44,9 +44,9 @@ public class WeekViewController {
     @FXML
     private GridPane CalendarGridPane;
 
-    public void initialize() {
-        loadButton.fire();
-    }
+    // public void initialize() {
+    //     loadButton.fire();
+    // }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
@@ -129,22 +129,19 @@ public class WeekViewController {
             CalendarGridPane.getChildren().add(label);
             // To Do:
             // Populate GridPane with dates recieved
-
         }
     }
 
     @FXML
-    void loadDateLabels(ActionEvent event) {
+    void loadDateLabels() {
         LocalDate currentDate = LocalDate.now();
         System.out.println("Current Date: " + currentDate);
 
-        LocalDate today = LocalDate.now();
-
-        DayOfWeek dayOfWeek = today.getDayOfWeek();
+        DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
         int dayOfWeekNum = dayOfWeek.getValue(); // monday is 1, sunday is 7
 
         // dont know if this works
-        String dateString = today + "";
+        String dateString = currentDate + "";
 
         int date = Integer.parseInt(dateString);
 
@@ -239,9 +236,8 @@ public class WeekViewController {
     @FXML
     void loadDates(ActionEvent event) {
         fillDatePane();
-        // fillCalendar();
-        // ^ uncomment when method is complete
-
+        fillCalendar();
+        loadDateLabels();
     }
 
     @FXML

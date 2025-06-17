@@ -10,6 +10,9 @@ public class Date {
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
 
+    Date() {
+    }
+
     String getDateName() {
         return this.dateName;
     }
