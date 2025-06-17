@@ -21,6 +21,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,6 +40,9 @@ public class MonthViewController {
 
     @FXML
     private DatePicker datePicker;
+
+    @FXML
+    private GridPane CalendarGridPane;
 
     public void initialize() {
         loadButton.fire();
@@ -161,6 +165,7 @@ public class MonthViewController {
         Label[] dateLabels = new Label[daysInMonth];
         for (int i = 0; i < daysInMonth; i++) {
             dateLabels[i].setText(date + i + "");
+            CalendarGridPane.getChildren().add(dateLabels[i]);
             // add dateLabels[i] to gridpane
         }
     }
