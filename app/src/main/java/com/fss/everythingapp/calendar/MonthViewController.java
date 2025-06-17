@@ -152,31 +152,27 @@ public class MonthViewController {
         // dont know if this works
         String dateString = today + "";
 
+        // String[] parts = line.split(",");
+
         int date = Integer.parseInt(dateString);
         int temp = date % 7; // what day of week was 1st of month
 
         String[] dayOfWeekStringArray = new String[] { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
         String firstDayOfWeek = dayOfWeekStringArray[temp];
         // could use case statements
-        if (dayOfWeekNum == 1) {
-            // MONDAY
-            // calculate what first day of month is
-            int daysInMonth = 31; // temp
-            Label[] dateLabels = new Label[daysInMonth];
-            int num = 1;
-            for (int i = temp; i < daysInMonth; i++) {
-                dateLabels[i].setText(date + num + "");
-                calendarGridPane.getChildren().add(dateLabels[i]);
-                num++;
-            }
-        }
+        int offSetX;
+        int offSetY;
+        // MONDAY
+        // calculate what first day of month is
+        offSetX = dayOfWeekNum - 1;
         // find out how many days are in this month
         int daysInMonth = 31; // temp
         Label[] dateLabels = new Label[daysInMonth];
         int num = 1;
         for (int i = temp; i < daysInMonth; i++) {
             dateLabels[i].setText(date + num + "");
-            calendarGridPane.getChildren().add(dateLabels[i]);
+            calendarGridPane.getChildren().add(offSetX, dateLabels[i]);
+            offSetX++;
             num++;
         }
     }
