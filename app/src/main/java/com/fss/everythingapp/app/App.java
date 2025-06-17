@@ -3,7 +3,7 @@
  */
 package com.fss.everythingapp.app;
 
-import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
+//import com.fss.everythingapp.simulations.projectilemotion.ProjectileController;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -21,7 +21,6 @@ public class App extends Application {
 
     private Stage stage;
     private Parent mainMenuView;
-
 
     public static void main(String[] args) {
         System.out.println("App starting...");
@@ -60,7 +59,7 @@ public class App extends Application {
         MainMenuController controller = new MainMenuController();
         fxmlLoader.setController(controller);
         Parent view = null;
-        
+
         try {
             view = fxmlLoader.load();
             return view;

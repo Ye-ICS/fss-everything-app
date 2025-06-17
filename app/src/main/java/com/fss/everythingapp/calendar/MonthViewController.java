@@ -1,6 +1,7 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -38,6 +40,9 @@ public class MonthViewController {
 
     @FXML
     private DatePicker datePicker;
+
+    @FXML
+    private GridPane calendarGridPane;
 
     public void initialize() {
         loadButton.fire();
@@ -122,6 +127,10 @@ public class MonthViewController {
 
             // To Do:
             // Populate GridPane with dates recieved
+            Label label = new Label();
+
+            label.setText(loadedDate.dateName);
+            calendarGridPane.getChildren().add(label);
 
         }
     }
@@ -131,6 +140,39 @@ public class MonthViewController {
         fillDatePane();
         // fillCalendar();
         // ^ uncomment this when method is complete
+
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("Current Date: " + currentDate);
+
+        LocalDate today = LocalDate.now();
+
+        DayOfWeek dayOfWeek = today.getDayOfWeek();
+        int dayOfWeekNum = dayOfWeek.getValue(); // monday is 1, sunday is 7
+
+        // dont know if this works
+        String dateString = today + "";
+
+        // String[] parts = line.split(",");
+
+        int date = Integer.parseInt(dateString);
+        int temp = date % 7; // what day of week was 1st of month
+
+        String[] dayOfWeekStringArray = new String[] { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+        String firstDayOfWeek = dayOfWeekStringArray[temp];
+        // could use case statements
+        if (dayOfWeekNum == 1) {
+            // MONDAY
+            // calculate what first day of month is
+        }
+        // find out how many days are in this month
+        int daysInMonth = 31; // temp
+        Label[] dateLabels = new Label[daysInMonth];
+        int num = 1;
+        for (int i = temp; i < daysInMonth; i++) {
+            dateLabels[i].setText(date + num + "");
+            calendarGridPane.getChildren().add(dateLabels[i]);
+            num++;
+        }
     }
 
     @FXML
@@ -145,5 +187,9 @@ public class MonthViewController {
         Parent weekView = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/WeekView.fxml"));
         rootContainer.getScene().setRoot(weekView);
+    }
+
+    void showTasks() {
+
     }
 }
