@@ -163,9 +163,11 @@ public class MonthViewController {
         // find out how many days are in this month
         int daysInMonth = 31; // temp
         Label[] dateLabels = new Label[daysInMonth];
-        for (int i = 0; i < daysInMonth; i++) {
-            dateLabels[i].setText(date + i + "");
+        int num = 1;
+        for (int i = temp; i < daysInMonth; i++) {
+            dateLabels[i].setText(date + num + "");
             CalendarGridPane.getChildren().add(dateLabels[i]);
+            num++;
             // add dateLabels[i] to gridpane
         }
     }
