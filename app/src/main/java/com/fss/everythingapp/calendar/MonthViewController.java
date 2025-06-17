@@ -44,9 +44,9 @@ public class MonthViewController {
     @FXML
     private GridPane calendarGridPane;
 
-    public void initialize() {
-        loadButton.fire();
-    }
+    // public void initialize() {
+    //     loadButton.fire();
+    // }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
@@ -138,7 +138,7 @@ public class MonthViewController {
     @FXML
     void loadDates(ActionEvent event) {
         fillDatePane();
-        // fillCalendar();
+        fillCalendar();
         // ^ uncomment this when method is complete
 
         LocalDate currentDate = LocalDate.now();

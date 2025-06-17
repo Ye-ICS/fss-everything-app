@@ -32,9 +32,9 @@ public class DayViewController {
     @FXML
     private VBox rootContainer;
 
-    public void initialize() {
-        loadButton.fire();
-    }
+    // public void initialize() {
+    // loadButton.fire();
+    // }
 
     @FXML
     void createDate(ActionEvent event) throws IOException {
