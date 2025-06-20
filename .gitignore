@@ -5,4 +5,5 @@
 build
 bin
 .vscode
-app/src/main/resources/com/fss/everythingapp/calendar/DateList.txt
+app/src/main/java/com/fss/everythingapp/fitness/UserInfo.txt
+app/src/main/java/com/fss/everythingapp/fitness/UserInfo.txt
