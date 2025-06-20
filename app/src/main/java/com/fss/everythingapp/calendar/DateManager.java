@@ -41,20 +41,20 @@ public class DateManager {
 
         while (scanner.hasNextLine()) {
 
-            Date loadedDate = new Date();
-
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            loadedDate.dateType = parts[0].charAt(0);
-            loadedDate.dateName = parts[1];
-
-            if (loadedDate.dateType == 'T') {
+            char dateType = parts[0].charAt(0);
+            
+            Date loadedDate;
+            if (dateType == 'T') {
+                loadedDate = new Task();
                 loadedDate.dueDate = LocalDateTime.parse(parts[2]);
             } else {
+                loadedDate = new Event();
                 loadedDate.startDate = LocalDateTime.parse(parts[2]);
                 loadedDate.endDate = LocalDateTime.parse(parts[3]);
-
             }
+            loadedDate.dateName = parts[1];
             dateList.add(loadedDate);
         }
         scanner.close();
