@@ -1,34 +1,34 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
+import javafx.scene.control.ScrollPane;
+
 public class DateManager {
+    private ArrayList<Date> dateList;
 
-    protected String dateName;
-    protected char dateType;
+    DateManager() { // Superclass constructor
+    }
 
-    protected int[] dueDateInfo;
-    protected int[] startDateInfo;
-    protected int[] endDateInfo;
+    DateManager(char paramType, LocalDate paramDate) {
+        loadAptDates(paramType, paramDate);
+    }
 
-    private ArrayList<DateManager> dateList;
-
-    DateManager() {
+    DateManager(ScrollPane dateListPane) {
         loadDates();
     }
 
-    DateManager(ArrayList<DateManager> dateList) { // Blank constructor
-    }
-
     protected ArrayList loadDates() { // Loads all dates
-        dateList = new ArrayList<DateManager>();
+        dateList = new ArrayList<Date>();
         Scanner scanner;
 
         try {
@@ -41,46 +41,18 @@ public class DateManager {
 
         while (scanner.hasNextLine()) {
 
-            DateManager loadedDate = new DateManager(dateList);
+            Date loadedDate = new Date();
 
             String line = scanner.nextLine();
             String[] parts = line.split(",");
-            dateType = parts[0].charAt(0);
-            dateName = parts[1];
+            loadedDate.dateType = parts[0].charAt(0);
+            loadedDate.dateName = parts[1];
 
-            if (dateType == 'T') { // If the current date is a task
-                String dueDate = parts[2];
-
-                String[] dueDateParts = dueDate.split("/");
-                dueDateInfo = new int[5];
-                dueDateInfo[0] = Integer.parseInt(dueDateParts[0]);
-                dueDateInfo[1] = Integer.parseInt(dueDateParts[1]);
-                dueDateInfo[2] = Integer.parseInt(dueDateParts[2]);
-                String[] dueTimeParts = (dueDateParts[3]).split(":");
-                dueDateInfo[3] = Integer.parseInt(dueTimeParts[0]);
-                dueDateInfo[4] = Integer.parseInt(dueTimeParts[1]);
-
-            } else { // If the current date is an event
-                String startDate = parts[2];
-                String endDate = parts[3];
-
-                startDateInfo = new int[5];
-                endDateInfo = new int[5];
-                String[] startDateParts = startDate.split("/");
-                startDateInfo[0] = Integer.parseInt(startDateParts[0]);
-                startDateInfo[1] = Integer.parseInt(startDateParts[1]);
-                startDateInfo[2] = Integer.parseInt(startDateParts[2]);
-                String[] startTimeParts = (startDateParts[3]).split(":");
-                startDateInfo[3] = Integer.parseInt(startTimeParts[0]);
-                startDateInfo[4] = Integer.parseInt(startTimeParts[1]);
-
-                String[] endDateParts = endDate.split("/");
-                endDateInfo[0] = Integer.parseInt(endDateParts[0]);
-                endDateInfo[1] = Integer.parseInt(endDateParts[1]);
-                endDateInfo[2] = Integer.parseInt(endDateParts[2]);
-                String[] endTimeParts = (endDateParts[3]).split(":");
-                endDateInfo[3] = Integer.parseInt(endTimeParts[0]);
-                endDateInfo[4] = Integer.parseInt(endTimeParts[1]);
+            if (loadedDate.dateType == 'T') {
+                loadedDate.dueDate = LocalDateTime.parse(parts[2]);
+            } else {
+                loadedDate.startDate = LocalDateTime.parse(parts[2]);
+                loadedDate.endDate = LocalDateTime.parse(parts[3]);
 
             }
             dateList.add(loadedDate);
@@ -89,30 +61,84 @@ public class DateManager {
         return dateList;
     }
 
-    void shareDate() { // User can share dates to other users
+    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
+        dateList = new ArrayList<Date>();
+        Scanner scanner;
+
+        System.out.println(paramType);
+        System.out.println(paramDate.toString());
+
+        try {
+            scanner = new Scanner(
+                    new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return dateList;
+        }
+
+        while (scanner.hasNextLine()) {
+            Date loadedDate = new Date();
+
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+            loadedDate.dateType = parts[0].charAt(0);
+            loadedDate.dateName = parts[1];
+
+            TemporalField weekOfYear = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            int paramWeek = paramDate.get(weekOfYear);
+
+            if (loadedDate.dateType == 'T') { // If the current date is a task
+                loadedDate.dueDate = LocalDateTime.parse(parts[2]);
+
+                int dueWeek = loadedDate.dueDate.get(weekOfYear);
+
+                if (paramType == 'M'
+                        && paramDate.getYear() == loadedDate.dueDate.getYear()
+                        && paramDate.getMonthValue() == loadedDate.dueDate.getMonthValue()) {
+                    dateList.add(loadedDate);
+                    System.out.println(loadedDate.toString());
+                } else if (paramType == 'W'
+                        && paramDate.getYear() == loadedDate.dueDate.getYear()
+                        && paramWeek == dueWeek) {
+                    dateList.add(loadedDate);
+                } else if (paramType == 'D'
+                        && paramDate.getYear() == loadedDate.dueDate.getYear()
+                        && paramDate.getDayOfYear() == loadedDate.dueDate.getDayOfYear()) {
+                    dateList.add(loadedDate);
+                }
+            } else { // If the current date is an event
+                loadedDate.startDate = LocalDateTime.parse(parts[2]);
+                loadedDate.endDate = LocalDateTime.parse(parts[3]);
+
+                int startWeek = loadedDate.startDate.get(weekOfYear);
+                int endWeek = loadedDate.endDate.get(weekOfYear);
+
+                if (paramType == 'M'
+                        && paramDate.getYear() >= loadedDate.startDate.getYear()
+                        && paramDate.getYear() <= loadedDate.endDate.getYear()
+                        && paramDate.getMonthValue() >= loadedDate.startDate.getMonthValue()
+                        && paramDate.getMonthValue() <= loadedDate.endDate.getMonthValue()) {
+                    dateList.add(loadedDate);
+                } else if (paramType == 'W'
+                        && paramDate.getYear() >= loadedDate.startDate.getYear()
+                        && paramDate.getYear() <= loadedDate.endDate.getYear()
+                        && paramWeek >= startWeek
+                        && paramWeek <= endWeek) {
+                    dateList.add(loadedDate);
+                } else if (paramType == 'D'
+                        && paramDate.getYear() >= loadedDate.startDate.getYear()
+                        && paramDate.getYear() <= loadedDate.endDate.getYear()
+                        && paramDate.getDayOfYear() >= loadedDate.startDate.getDayOfYear()
+                        && paramDate.getDayOfYear() <= loadedDate.endDate.getDayOfYear()) {
+                    dateList.add(loadedDate);
+                }
+            }
+        }
+        scanner.close();
+        return dateList;
     }
 
-    String getDateName() {
-        return this.dateName;
-    }
-
-    char getDateType() {
-        return this.dateType;
-    }
-
-    int[] getDueDateInfo() {
-        return this.dueDateInfo;
-    }
-
-    int[] getStartDateInfo() {
-        return this.startDateInfo;
-    }
-
-    int[] getEndDateInfo() {
-        return this.endDateInfo;
-    }
-
-    ArrayList<DateManager> getDateList() {
+    ArrayList<Date> getDateList() {
         return this.dateList;
     }
 }

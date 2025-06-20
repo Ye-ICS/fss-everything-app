@@ -4,11 +4,6 @@
 # Ignore Gradle build output directory
 build
 bin
-.vscode/settings.json
 .vscode
-app/src/main/java/com/fss/everythingapp/calendar/DateList.txt
-app/src/main/java/com/fss/everythingapp/calendar/UserList.txt
-app/src/main/resources/com/fss/everythingapp/fitness/UserInfo.txt
-app/UserInfo.txt
 app/src/main/java/com/fss/everythingapp/fitness/UserInfo.txt
 app/src/main/java/com/fss/everythingapp/fitness/UserInfo.txt

@@ -6,8 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class CreateDateController {
@@ -30,7 +28,7 @@ public class CreateDateController {
     }
 
     @FXML
-    void cancel(ActionEvent event) throws IOException {
+    void back(ActionEvent event) throws IOException {
         Parent home = (Parent) FXMLLoader
                 .load(getClass().getResource("/com/fss/everythingapp/calendar/fxml/MonthView.fxml"));
         rootContainer.getScene().setRoot(home);
