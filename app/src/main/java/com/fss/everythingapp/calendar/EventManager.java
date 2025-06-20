@@ -14,18 +14,17 @@ import java.util.Scanner;
 import javafx.scene.control.ScrollPane;
 
 public class EventManager extends DateManager {
-    ArrayList<Event> eventList;
 
     EventManager(ScrollPane dateListPane) {
         loadDates();
     }
 
-    EventManager(ArrayList<EventManager> eventList) { // Blank constructor
+    EventManager(ArrayList<EventManager> dateList) { // Blank constructor
     }
 
     @Override
-    protected ArrayList loadDates() { // Loads all events
-        eventList = new ArrayList<Event>();
+    protected ArrayList<Date> loadDates() { // Loads all events
+        dateList = new ArrayList<Date>();
         Scanner scanner;
 
         try {
@@ -33,7 +32,7 @@ public class EventManager extends DateManager {
                     new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return eventList;
+            return dateList;
         }
 
         while (scanner.hasNextLine()) {
@@ -49,16 +48,16 @@ public class EventManager extends DateManager {
                 loadedEvent.endDate = LocalDateTime.parse(parts[3]);
 
             }
-            eventList.add(loadedEvent);
+            dateList.add(loadedEvent);
         }
         scanner.close();
-        return eventList;
+        return dateList;
     }
 
     // @Override
-    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
+    protected ArrayList<Date> loadAptDates(char paramType, LocalDate paramDate) {
         // loads all dates with a specific parameter
-        eventList = new ArrayList<Event>();
+        dateList = new ArrayList<Date>();
         Scanner scanner;
 
         try {
@@ -66,7 +65,7 @@ public class EventManager extends DateManager {
                     new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return eventList;
+            return dateList;
         }
 
         while (scanner.hasNextLine()) {
@@ -91,27 +90,23 @@ public class EventManager extends DateManager {
                         && paramDate.getYear() <= loadedEvent.endDate.getYear()
                         && paramDate.getMonthValue() >= loadedEvent.startDate.getMonthValue()
                         && paramDate.getMonthValue() <= loadedEvent.endDate.getMonthValue()) {
-                    eventList.add(loadedEvent);
+                    dateList.add(loadedEvent);
                 } else if (paramType == 'W'
                         && paramDate.getYear() >= loadedEvent.startDate.getYear()
                         && paramDate.getYear() <= loadedEvent.endDate.getYear()
                         && paramWeek >= startWeek
                         && paramWeek <= endWeek) {
-                    eventList.add(loadedEvent);
+                    dateList.add(loadedEvent);
                 } else if (paramType == 'D'
                         && paramDate.getYear() >= loadedEvent.startDate.getYear()
                         && paramDate.getYear() <= loadedEvent.endDate.getYear()
                         && paramDate.getDayOfYear() >= loadedEvent.startDate.getDayOfYear()
                         && paramDate.getDayOfYear() <= loadedEvent.endDate.getDayOfYear()) {
-                    eventList.add(loadedEvent);
+                    dateList.add(loadedEvent);
                 }
             }
         }
         scanner.close();
-        return eventList;
-    }
-
-    ArrayList<Event> getEventList() {
-        return this.eventList;
+        return dateList;
     }
 }

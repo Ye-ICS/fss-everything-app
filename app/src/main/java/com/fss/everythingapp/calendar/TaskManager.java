@@ -1,9 +1,7 @@
 package com.fss.everythingapp.calendar;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,21 +11,18 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
-import javafx.scene.control.ScrollPane;
-
 public class TaskManager extends DateManager {
-    ArrayList<Task> taskList;
-
-    TaskManager(ScrollPane dateListPane) {
+    TaskManager() {
     }
 
-    TaskManager(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear & // Year
+    TaskManager(char paramType, LocalDate paramDate) { // 'M' = Month & Year | 'W' = Week & Year | 'D' = DayOfYear &
+                                                       // Year
         loadAptDates(paramType, paramDate);
     }
 
     @Override
-    protected ArrayList loadDates() { // Loads all tasks
-        taskList = new ArrayList<Task>();
+    protected ArrayList<Date> loadDates() { // Loads all tasks
+        dateList = new ArrayList<Date>();
         Scanner scanner;
 
         try {
@@ -35,7 +30,7 @@ public class TaskManager extends DateManager {
                     new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return taskList;
+            return dateList;
         }
 
         while (scanner.hasNextLine()) {
@@ -50,16 +45,16 @@ public class TaskManager extends DateManager {
                 loadedTask.dueDate = LocalDateTime.parse(parts[2]);
             }
 
-            taskList.add(loadedTask);
+            dateList.add(loadedTask);
         }
         scanner.close();
-        return taskList;
+        return dateList;
     }
 
     @Override
-    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
+    protected ArrayList<Date> loadAptDates(char paramType, LocalDate paramDate) {
         // loads all dates with a specific parameter
-        taskList = new ArrayList<Task>();
+        dateList = new ArrayList<Date>();
         Scanner scanner;
 
         try {
@@ -67,7 +62,7 @@ public class TaskManager extends DateManager {
                     new File(getClass().getResource("/com/fss/everythingapp/calendar/DateList.txt").toURI()));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return taskList;
+            return dateList;
         }
         while (scanner.hasNextLine()) {
             Task loadedTask = new Task();
@@ -87,23 +82,19 @@ public class TaskManager extends DateManager {
                 if (paramType == 'M'
                         && paramDate.getYear() == loadedTask.dueDate.getYear()
                         && paramDate.getMonthValue() == loadedTask.dueDate.getMonthValue()) {
-                    taskList.add(loadedTask);
+                    dateList.add(loadedTask);
                 } else if (paramType == 'W'
                         && paramDate.getYear() == loadedTask.dueDate.getYear()
                         && paramWeek == dueWeek) {
-                    taskList.add(loadedTask);
+                    dateList.add(loadedTask);
                 } else if (paramType == 'D'
                         && paramDate.getYear() == loadedTask.dueDate.getYear()
                         && paramDate.getDayOfYear() == loadedTask.dueDate.getDayOfYear()) {
-                    taskList.add(loadedTask);
+                    dateList.add(loadedTask);
                 }
             }
         }
         scanner.close();
-        return taskList;
-    }
-
-    ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return dateList;
     }
 }
