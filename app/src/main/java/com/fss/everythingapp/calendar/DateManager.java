@@ -14,7 +14,7 @@ import java.util.Scanner;
 import javafx.scene.control.ScrollPane;
 
 public class DateManager {
-    private ArrayList<Date> dateList;
+    protected ArrayList<Date> dateList;
 
     DateManager() { // Superclass constructor
     }
@@ -27,7 +27,7 @@ public class DateManager {
         loadDates();
     }
 
-    protected ArrayList loadDates() { // Loads all dates
+    protected ArrayList<Date> loadDates() { // Loads all dates
         dateList = new ArrayList<Date>();
         Scanner scanner;
 
@@ -61,7 +61,7 @@ public class DateManager {
         return dateList;
     }
 
-    protected ArrayList loadAptDates(char paramType, LocalDate paramDate) {
+    protected ArrayList<Date> loadAptDates(char paramType, LocalDate paramDate) {
         dateList = new ArrayList<Date>();
         Scanner scanner;
 
